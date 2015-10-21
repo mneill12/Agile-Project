@@ -1,0 +1,92 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Common", "Core.Common\Core.Common.csproj", "{F6BCFF98-A714-4B7B-978F-23D812D1744A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Common.Contracts", "Core.Common.Contracts\Core.Common.Contracts.csproj", "{5F9B5530-F150-4BF0-9D07-0AD8A4C6EF7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Common.UI", "Core.Common.UI\Core.Common.UI.csproj", "{5DF27A6C-2466-4BAA-B379-90D3D60AD5BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Common.ServiceModel", "Core.Common.ServiceModel\Core.Common.ServiceModel.csproj", "{73FBE0BF-9DB9-498E-8AEF-68210104D0C1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E5A60479-EAF8-45F0-932A-2C6F8435AAA4}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{75B4091E-6830-4729-AA85-9D1C6A00E9E2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business", "Business", "{AFF45DC3-06E4-47A6-AEEC-82218F1B8556}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{FDE5AEB5-3891-4B2C-9EAD-1564D1562F79}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D15D505E-91DC-48F8-A124-88D1DE9AB75A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSC3045.Agile.Business.Entities", "CSC3045.Agile.Business.Entities\CSC3045.Agile.Business.Entities.csproj", "{02FDF132-B361-49FD-A988-D8A234DD98AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSC3045.Agile.Client.Entities", "CSC3045.Agile.Client.Entities\CSC3045.Agile.Client.Entities.csproj", "{98F36136-C738-4BC9-B9E9-58CF1463E9C1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{20CE1526-DE3D-43B3-8AD6-464564D0B6CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSC3045.Agile.Data", "CSC3045.Agile.Data\CSC3045.Agile.Data.csproj", "{C48A9C38-6A69-4656-9D0E-1894B1CE487C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSC3045.Agile.Data.Contracts", "CSC3045.Agile.Data.Contracts\CSC3045.Agile.Data.Contracts.csproj", "{EFD9FF88-099E-417B-A39A-1A358B9008CB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F6BCFF98-A714-4B7B-978F-23D812D1744A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6BCFF98-A714-4B7B-978F-23D812D1744A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6BCFF98-A714-4B7B-978F-23D812D1744A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6BCFF98-A714-4B7B-978F-23D812D1744A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F9B5530-F150-4BF0-9D07-0AD8A4C6EF7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F9B5530-F150-4BF0-9D07-0AD8A4C6EF7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F9B5530-F150-4BF0-9D07-0AD8A4C6EF7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F9B5530-F150-4BF0-9D07-0AD8A4C6EF7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DF27A6C-2466-4BAA-B379-90D3D60AD5BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DF27A6C-2466-4BAA-B379-90D3D60AD5BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DF27A6C-2466-4BAA-B379-90D3D60AD5BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DF27A6C-2466-4BAA-B379-90D3D60AD5BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73FBE0BF-9DB9-498E-8AEF-68210104D0C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73FBE0BF-9DB9-498E-8AEF-68210104D0C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73FBE0BF-9DB9-498E-8AEF-68210104D0C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73FBE0BF-9DB9-498E-8AEF-68210104D0C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02FDF132-B361-49FD-A988-D8A234DD98AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02FDF132-B361-49FD-A988-D8A234DD98AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02FDF132-B361-49FD-A988-D8A234DD98AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02FDF132-B361-49FD-A988-D8A234DD98AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98F36136-C738-4BC9-B9E9-58CF1463E9C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98F36136-C738-4BC9-B9E9-58CF1463E9C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98F36136-C738-4BC9-B9E9-58CF1463E9C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98F36136-C738-4BC9-B9E9-58CF1463E9C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C48A9C38-6A69-4656-9D0E-1894B1CE487C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C48A9C38-6A69-4656-9D0E-1894B1CE487C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C48A9C38-6A69-4656-9D0E-1894B1CE487C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C48A9C38-6A69-4656-9D0E-1894B1CE487C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFD9FF88-099E-417B-A39A-1A358B9008CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFD9FF88-099E-417B-A39A-1A358B9008CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFD9FF88-099E-417B-A39A-1A358B9008CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFD9FF88-099E-417B-A39A-1A358B9008CB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F6BCFF98-A714-4B7B-978F-23D812D1744A} = {75B4091E-6830-4729-AA85-9D1C6A00E9E2}
+		{5F9B5530-F150-4BF0-9D07-0AD8A4C6EF7D} = {75B4091E-6830-4729-AA85-9D1C6A00E9E2}
+		{5DF27A6C-2466-4BAA-B379-90D3D60AD5BA} = {75B4091E-6830-4729-AA85-9D1C6A00E9E2}
+		{73FBE0BF-9DB9-498E-8AEF-68210104D0C1} = {75B4091E-6830-4729-AA85-9D1C6A00E9E2}
+		{E5A60479-EAF8-45F0-932A-2C6F8435AAA4} = {75B4091E-6830-4729-AA85-9D1C6A00E9E2}
+		{02FDF132-B361-49FD-A988-D8A234DD98AA} = {AFF45DC3-06E4-47A6-AEEC-82218F1B8556}
+		{98F36136-C738-4BC9-B9E9-58CF1463E9C1} = {FDE5AEB5-3891-4B2C-9EAD-1564D1562F79}
+		{C48A9C38-6A69-4656-9D0E-1894B1CE487C} = {20CE1526-DE3D-43B3-8AD6-464564D0B6CF}
+		{EFD9FF88-099E-417B-A39A-1A358B9008CB} = {20CE1526-DE3D-43B3-8AD6-464564D0B6CF}
+	EndGlobalSection
+EndGlobal
