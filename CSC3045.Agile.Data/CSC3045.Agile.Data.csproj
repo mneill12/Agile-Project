@@ -57,6 +57,7 @@
     <Compile Include="Data Repositories\ProjectRepository.cs" />
     <Compile Include="Data Repositories\SprintRepository.cs" />
     <Compile Include="DataRepositoryBase.cs" />
+    <Compile Include="DataRepositoryFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
