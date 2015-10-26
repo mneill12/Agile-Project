@@ -4,8 +4,20 @@
         Title="JELLO - Client Desktop" Height="800" Width="1200" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid  Height="800" Width="1200" Background="Black">
-            <TextBlock Text="Welcome to JELLO" TextAlignment="Center" Foreground="White" FontSize="40" Height="600" Width="400"></TextBlock>
+            <TextBlock Text="Welcome to JELLO" TextAlignment="Center" Foreground="White" FontSize="60" Height="100" Width="1200" Margin="0,95,0,605"></TextBlock>
             <Grid Width="500"  Background="White" Margin="650,200,75,100">
+                
+                <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="Register" TextAlignment="Center" Foreground="Black" FontSize="40" Height="100" Width="500" Padding="20" />
+
+                </Grid>
+
+                <Grid>
+
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition></ColumnDefinition>
@@ -15,23 +27,29 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                
-                <TextBlock Grid.Row="0" Margin="5" Text="Name: " FontSize="20" />
-                <TextBox Grid.Row="0" Margin="5" Grid.Column="1" FontSize="20"/>
 
-                <TextBlock Grid.Row="1" Margin="5" Text="Email: " FontSize="20" />
+                <TextBlock Grid.Row="1" Margin="5" Text="Name: " FontSize="20" />
                 <TextBox Grid.Row="1" Margin="5" Grid.Column="1" FontSize="20"/>
 
-                <TextBlock Grid.Row="2" Margin="5" Text="Password: " FontSize="20" />
+                <TextBlock Grid.Row="2" Margin="5" Text="Email: " FontSize="20" />
                 <TextBox Grid.Row="2" Margin="5" Grid.Column="1" FontSize="20"/>
 
-                <TextBlock Grid.Row="3" Margin="5" Text="Confirm Password: " FontSize="20" />
+                <TextBlock Grid.Row="3" Margin="5" Text="Password: " FontSize="20" />
                 <TextBox Grid.Row="3" Margin="5" Grid.Column="1" FontSize="20"/>
 
+                <TextBlock Grid.Row="4" Margin="5" Text="Confirm Password: " FontSize="20" />
+                <TextBox Grid.Row="4" Margin="5" Grid.Column="1" FontSize="20"/>
+
+                </Grid>
+
             </Grid>
-            <Grid Width="500" Background="Orange" Margin="75,200,650,100">
+           
+            <Grid Width="500" Background="DeepSkyBlue" Margin="75,200,650,100">
+                <TextBlock Text="Login" TextAlignment="Center" Foreground="White" FontSize="40" Height="100" Width="500" Padding="20" Margin="0,0,0,430"></TextBlock>
             </Grid>
+            
         </Grid>
     </Grid>
 </Window>
