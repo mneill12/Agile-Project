@@ -6,16 +6,29 @@
         <Grid  Height="800" Width="1200" Background="Black">
             <TextBlock Text="Welcome to JELLO" TextAlignment="Center" Foreground="White" FontSize="40" Height="600" Width="400"></TextBlock>
             <Grid Width="500"  Background="White" Margin="650,200,75,100">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
-
-
-
                 </Grid.RowDefinitions>
+                
+                <TextBlock Grid.Row="0" Margin="5" Text="Name: " FontSize="20" />
+                <TextBox Grid.Row="0" Margin="5" Grid.Column="1" FontSize="20"/>
+
+                <TextBlock Grid.Row="1" Margin="5" Text="Email: " FontSize="20" />
+                <TextBox Grid.Row="1" Margin="5" Grid.Column="1" FontSize="20"/>
+
+                <TextBlock Grid.Row="2" Margin="5" Text="Password: " FontSize="20" />
+                <TextBox Grid.Row="2" Margin="5" Grid.Column="1" FontSize="20"/>
+
+                <TextBlock Grid.Row="3" Margin="5" Text="Confirm Password: " FontSize="20" />
+                <TextBox Grid.Row="3" Margin="5" Grid.Column="1" FontSize="20"/>
+
             </Grid>
             <Grid Width="500" Background="Orange" Margin="75,200,650,100">
             </Grid>
