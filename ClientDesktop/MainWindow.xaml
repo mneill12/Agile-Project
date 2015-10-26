@@ -6,7 +6,6 @@
         <Grid  Height="800" Width="1200" Background="Black">
             <TextBlock Text="Welcome to JELLO" TextAlignment="Center" Foreground="White" FontSize="60" Height="100" Width="1200" Margin="0,95,0,605"></TextBlock>
             <Grid Width="500"  Background="White" Margin="650,200,75,100">
-                <TextBlock Text="Register" TextAlignment="Center" Foreground="Black" FontSize="40" Height="100" Width="500" Padding="20"></TextBlock>
                 <Grid.RowDefinitions>
 
                     <RowDefinition Height="Auto" />
@@ -17,10 +16,11 @@
 
 
                 </Grid.RowDefinitions>
+                <Button Height="100" Width="500" Padding="20" Margin="0,400,0,0" Background="DeepSkyBlue" Foreground="White" FontSize="40">Register</Button>
             </Grid>
            
             <Grid Width="500" Background="DeepSkyBlue" Margin="75,200,650,100">
-                <TextBlock Text="Login" TextAlignment="Center" Foreground="White" FontSize="40" Height="100" Width="500" Padding="20" Margin="0,0,0,430"></TextBlock>
+                <Button Height="100" Width="500" Padding="20" Margin="0,400,0,0" Background="White" Foreground="Black" FontSize="40">Login</Button>
             </Grid>
             
         </Grid>
