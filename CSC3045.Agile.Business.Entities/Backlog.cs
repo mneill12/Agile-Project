@@ -18,6 +18,9 @@ namespace CSC3045.Agile.Business.Entities
         [DataMember]
         public int UserStoryId { get; set; }
 
+        [DataMember]
+        public int SprintId { get; set; }
+
         #region IIdentifiableEntity members
 
         public int EntityId

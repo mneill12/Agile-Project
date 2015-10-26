@@ -17,10 +17,16 @@ namespace CSC3045.Agile.Business.Entities
         public string LoginEmail { get; set; }
 
         [DataMember]
+        public string Password { get; set; }
+
+        [DataMember]
         public string FirstName { get; set; }
 
         [DataMember]
         public string LastName { get; set; }
+
+        [DataMember]
+        public HashSet<UserRole> UserRoles { get; set; }
 
         #region IIdentifiableEntity members
 
