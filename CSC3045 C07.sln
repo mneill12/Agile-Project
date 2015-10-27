@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Common", "Core.Common\Core.Common.csproj", "{F6BCFF98-A714-4B7B-978F-23D812D1744A}"
 EndProject
@@ -50,6 +50,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{38B89835-4EEA-4DD3-88D1-FD8F319FE0CC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientDesktop", "ClientDesktop\ClientDesktop.csproj", "{CDE115CE-B6DC-4F4D-B79B-8E4CF68FE379}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSC3045.Agile.ServiceHost.Tests", "CSC3045.ServiceHost.Tests\CSC3045.Agile.ServiceHost.Tests.csproj", "{0D24F154-DA87-4D8B-90D1-2AC80F635DF1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServiceHost", "ServiceHost", "{B2FE7650-046E-42E2-84A4-D267EB52C545}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSC3045.Agile.ServiceHost.Console", "CSC3045.Agile.ServiceHost.Console\CSC3045.Agile.ServiceHost.Console.csproj", "{62D689B1-C173-4630-8C56-083F1F493D45}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -129,6 +135,14 @@ Global
 		{CDE115CE-B6DC-4F4D-B79B-8E4CF68FE379}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CDE115CE-B6DC-4F4D-B79B-8E4CF68FE379}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CDE115CE-B6DC-4F4D-B79B-8E4CF68FE379}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D24F154-DA87-4D8B-90D1-2AC80F635DF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D24F154-DA87-4D8B-90D1-2AC80F635DF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D24F154-DA87-4D8B-90D1-2AC80F635DF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D24F154-DA87-4D8B-90D1-2AC80F635DF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62D689B1-C173-4630-8C56-083F1F493D45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62D689B1-C173-4630-8C56-083F1F493D45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62D689B1-C173-4630-8C56-083F1F493D45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62D689B1-C173-4630-8C56-083F1F493D45}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -152,5 +166,7 @@ Global
 		{6DEBE16D-B737-472E-9C90-BF53C6D248F1} = {D15D505E-91DC-48F8-A124-88D1DE9AB75A}
 		{48572DE1-9B8D-4B4D-AD1F-2F6BA03F4AD3} = {D15D505E-91DC-48F8-A124-88D1DE9AB75A}
 		{CDE115CE-B6DC-4F4D-B79B-8E4CF68FE379} = {38B89835-4EEA-4DD3-88D1-FD8F319FE0CC}
+		{0D24F154-DA87-4D8B-90D1-2AC80F635DF1} = {D15D505E-91DC-48F8-A124-88D1DE9AB75A}
+		{62D689B1-C173-4630-8C56-083F1F493D45} = {B2FE7650-046E-42E2-84A4-D267EB52C545}
 	EndGlobalSection
 EndGlobal
