@@ -1,12 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.ServiceModel;
 using System.Threading.Tasks;
+using CSC3045.Agile.Client.Entities;
+using Core.Common.Contracts;
+using Core.Common.Exceptions;
 
-namespace CSC3045.Agile.Client.Contracts.Service_Contracts
+namespace CSC3045.Agile.Client.Contracts
 {
-    class IAccountService
+    [ServiceContract]
+    public interface IAccountService : IServiceContract
     {
+        [OperationContract]
+        [FaultContract(typeof(NotFoundException))]
+        Account GetAccountInfo(string loginEmail);
+
+        [OperationContract]
+        [TransactionFlow(TransactionFlowOption.Allowed)]
+        void UpdateAccountInfo(Account account);
+
     }
 }

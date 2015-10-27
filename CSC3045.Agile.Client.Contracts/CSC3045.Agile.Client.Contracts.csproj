@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>6d0a76b5-8951-4f26-aa64-8295560277a1</ProjectGuid>
+    <ProjectGuid>{6D0A76B5-8951-4F26-AA64-8295560277A1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CSC3045.Agile.Client.Contracts</RootNamespace>
@@ -30,24 +30,41 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System"/>
-    
-    <Reference Include="System.Core"/>
-    <Reference Include="System.Xml.Linq"/>
-    <Reference Include="System.Data.DataSetExtensions"/>
-    
-    
-    <Reference Include="Microsoft.CSharp"/>
-    
-    <Reference Include="System.Data"/>
-    
-    <Reference Include="System.Net.Http"/>
-    
-    <Reference Include="System.Xml"/>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service Contracts\IAccountService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data Contracts\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core.Common.Contracts\Core.Common.Contracts.csproj">
+      <Project>{5F9B5530-F150-4BF0-9D07-0AD8A4C6EF7D}</Project>
+      <Name>Core.Common.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.Common.ServiceModel\Core.Common.ServiceModel.csproj">
+      <Project>{73FBE0BF-9DB9-498E-8AEF-68210104D0C1}</Project>
+      <Name>Core.Common.ServiceModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.Common\Core.Common.csproj">
+      <Project>{F6BCFF98-A714-4B7B-978F-23D812D1744A}</Project>
+      <Name>Core.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSC3045.Agile.Client.Entities\CSC3045.Agile.Client.Entities.csproj">
+      <Project>{98F36136-C738-4BC9-B9E9-58CF1463E9C1}</Project>
+      <Name>CSC3045.Agile.Client.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -57,5 +74,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-
- </Project>
+</Project>
