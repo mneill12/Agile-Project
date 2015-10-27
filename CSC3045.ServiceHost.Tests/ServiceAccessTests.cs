@@ -5,11 +5,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CSC3045.Agile.ServiceHost.Tests
 {
+    // Requires service host to be running
     [TestClass]
     public class ServiceAccessTests
     {
        [TestMethod]
-        public void test_account_manager_as_service()
+        public void test_account_service_access()
         {
             ChannelFactory<IAccountService> channelFactory =
                 new ChannelFactory<IAccountService>("");
