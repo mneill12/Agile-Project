@@ -10,10 +10,10 @@ using Core.Common.Core;
 namespace CSC3045.Agile.Business.Entities
 {
     [DataContract]
-    public class Task : EntityBase, IIdentifiableEntity
+    public class StoryTask : EntityBase, IIdentifiableEntity
     {
         [DataMember]
-        public int TaskId { get; set; }
+        public int StoryTaskId { get; set; }
 
         [DataMember]
         public int UserStoryId { get; set; }
@@ -43,8 +43,8 @@ namespace CSC3045.Agile.Business.Entities
 
         public int EntityId
         {
-            get { return TaskId; }
-            set { TaskId = value; }
+            get { return StoryTaskId; }
+            set { StoryTaskId = value; }
         }
 
         #endregion

@@ -54,10 +54,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Repository Interfaces\IPlanningPokerStoryRepository.cs" />
+    <Compile Include="Repository Interfaces\IPlanningPokerSessionRepository.cs" />
+    <Compile Include="Repository Interfaces\IBurndownPointRepository.cs" />
+    <Compile Include="Repository Interfaces\IAcceptanceCriteriaRepository.cs" />
     <Compile Include="Repository Interfaces\IBacklogRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository Interfaces\IAccountRepository.cs" />
     <Compile Include="Repository Interfaces\IProjectRepository.cs" />
+    <Compile Include="Repository Interfaces\IUserStoryRepository.cs" />
+    <Compile Include="Repository Interfaces\IUserRoleRepository.cs" />
+    <Compile Include="Repository Interfaces\IStoryStatusRepository.cs" />
+    <Compile Include="Repository Interfaces\IStoryTaskRepository.cs" />
     <Compile Include="Repository Interfaces\ISprintRepository.cs" />
   </ItemGroup>
   <ItemGroup>

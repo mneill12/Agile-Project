@@ -32,7 +32,7 @@ namespace CSC3045.Agile.Business.Entities
         public StoryStatus Status { get; set; }
 
         [DataMember]
-        public HashSet<Task> AssociatedTasks { get; set; }
+        public HashSet<StoryTask> AssociatedTasks { get; set; }
 
         [DataMember]
         public HashSet<AcceptanceCriteria> AcceptanceCriteriaSet { get; set; }
