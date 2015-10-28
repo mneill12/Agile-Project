@@ -10,72 +10,57 @@ namespace CSC3045.Agile.Client.Entities
 {
     public class AcceptanceCriteria : ObjectBase
     {
-        int _UserRoleId;
-        string _UserRoleName;
-        int _PermissionLevel;
+        int _AcceptanceCriteriaId;
+        string _Criteria;
+        bool _IsSatisfied;
 
-        public int UserRoleId
+        public int AcceptanceCriteriaId
         {
             get
             {
-                return _UserRoleId;
+                return _AcceptanceCriteriaId;
             }
             set
             {
-                if (_UserRoleId != value)
+                if (_AcceptanceCriteriaId != value)
                 {
-                    _UserRoleId = value;
-                    OnPropertyChanged(() => UserRoleId);
+                    _AcceptanceCriteriaId = value;
+                    OnPropertyChanged(() => AcceptanceCriteriaId);
                 }
             }
         }
 
-        public String UserRoleName
+        public String Criteria
         {
             get
             {
-                return _UserRoleName;
+                return _Criteria;
             }
             set
             {
-                if (_UserRoleName != value)
+                if (_Criteria != value)
                 {
-                    _UserRoleName = value;
-                    OnPropertyChanged(() => UserRoleName);
+                    _Criteria = value;
+                    OnPropertyChanged(() => Criteria);
                 }
             }
         }
 
-        public int PermissionLevel
+        public Boolean IsSatisfied
         {
             get
             {
-                return _PermissionLevel;
+                return _IsSatisfied;
             }
             set
             {
-                if (_PermissionLevel != value)
+                if (_IsSatisfied != value)
                 {
-                    _PermissionLevel = value;
-                    OnPropertyChanged(() => PermissionLevel);
+                    _IsSatisfied = value;
+                    OnPropertyChanged(() => IsSatisfied);
                 }
             }
         }
 
-        class UserRoleValidator : AbstractValidator<UserRole>
-        {
-            public UserRoleValidator()
-            {
-                RuleFor(obj => obj.UserRoleId).NotEmpty();
-                RuleFor(obj => obj.UserRoleName).NotEmpty();
-                RuleFor(obj => obj.PermissionLevel).GreaterThanOrEqualTo(0);
-               
-            }
-        }
-
-        protected override IValidator GetValidator()
-        {
-            return new UserRoleValidator();
-        }
     }
 }

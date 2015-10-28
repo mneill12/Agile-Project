@@ -57,9 +57,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AcceptanceCriteria.cs" />
     <Compile Include="Account.cs" />
+    <Compile Include="PlanningPokerStory.cs" />
+    <Compile Include="PlanningPokerSession.cs" />
+    <Compile Include="BurndownPoint.cs" />
+    <Compile Include="Backlog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Project.cs" />
     <Compile Include="Sprint.cs" />
+    <Compile Include="StoryStatus.cs" />
+    <Compile Include="StoryTask.cs" />
+    <Compile Include="UserRole.cs" />
+    <Compile Include="UserStory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core.Common.Contracts\Core.Common.Contracts.csproj">

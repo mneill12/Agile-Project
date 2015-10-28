@@ -10,72 +10,40 @@ namespace CSC3045.Agile.Client.Entities
 {
     public class StoryStatus : ObjectBase
     {
-        int _UserRoleId;
-        string _UserRoleName;
-        int _PermissionLevel;
+        int _StoryStatusId;
+        string _StoryStatusName;
+      
 
-        public int UserRoleId
+        public int StoryStatusId
         {
             get
             {
-                return _UserRoleId;
+                return _StoryStatusId;
             }
             set
             {
-                if (_UserRoleId != value)
+                if (_StoryStatusId != value)
                 {
-                    _UserRoleId = value;
-                    OnPropertyChanged(() => UserRoleId);
+                    _StoryStatusId = value;
+                    OnPropertyChanged(() => StoryStatusId);
                 }
             }
         }
 
-        public String UserRoleName
+        public String StoryStatusName
         {
             get
             {
-                return _UserRoleName;
+                return _StoryStatusName;
             }
             set
             {
-                if (_UserRoleName != value)
+                if (_StoryStatusName != value)
                 {
-                    _UserRoleName = value;
-                    OnPropertyChanged(() => UserRoleName);
+                    _StoryStatusName = value;
+                    OnPropertyChanged(() => StoryStatusName);
                 }
             }
-        }
-
-        public int PermissionLevel
-        {
-            get
-            {
-                return _PermissionLevel;
-            }
-            set
-            {
-                if (_PermissionLevel != value)
-                {
-                    _PermissionLevel = value;
-                    OnPropertyChanged(() => PermissionLevel);
-                }
-            }
-        }
-
-        class UserRoleValidator : AbstractValidator<UserRole>
-        {
-            public UserRoleValidator()
-            {
-                RuleFor(obj => obj.UserRoleId).NotEmpty();
-                RuleFor(obj => obj.UserRoleName).NotEmpty();
-                RuleFor(obj => obj.PermissionLevel).GreaterThanOrEqualTo(0);
-               
-            }
-        }
-
-        protected override IValidator GetValidator()
-        {
-            return new UserRoleValidator();
         }
     }
 }

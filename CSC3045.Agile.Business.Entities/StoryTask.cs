@@ -31,10 +31,10 @@ namespace CSC3045.Agile.Business.Entities
         public int Hours { get; set; }
 
         [DataMember]
-        public StoryStatus Status { get; set; }
+        public StoryStatus CurrentStatus { get; set; }
 
         [DataMember]
-        public Boolean Blocked { get; set; }
+        public Boolean IsBlocked { get; set; }
 
         [DataMember]
         public String UserNotea { get; set; }

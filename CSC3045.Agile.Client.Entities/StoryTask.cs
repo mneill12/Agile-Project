@@ -10,72 +10,160 @@ namespace CSC3045.Agile.Client.Entities
 {
     public class StoryTask : ObjectBase
     {
-        int _UserRoleId;
-        string _UserRoleName;
-        int _PermissionLevel;
+        int _StoryTaskId;
+        int _UserStoryId;
+        Account _Owner;
+        string _Title;
+        string _Description;
+        int _Hours;
+        StoryStatus _CurrentStatus;
+        bool _IsBlocked;
+        string _UserNotes;
 
-        public int UserRoleId
+        public int StoryTaskId
         {
             get
             {
-                return _UserRoleId;
+                return _StoryTaskId;
             }
             set
             {
-                if (_UserRoleId != value)
+                if (_StoryTaskId != value)
                 {
-                    _UserRoleId = value;
-                    OnPropertyChanged(() => UserRoleId);
+                    _StoryTaskId = value;
+                    OnPropertyChanged(() => StoryTaskId);
                 }
             }
         }
 
-        public String UserRoleName
+        public int UserStoryId
         {
             get
             {
-                return _UserRoleName;
+                return _UserStoryId;
             }
             set
             {
-                if (_UserRoleName != value)
+                if (_UserStoryId != value)
                 {
-                    _UserRoleName = value;
-                    OnPropertyChanged(() => UserRoleName);
+                    _UserStoryId = value;
+                    OnPropertyChanged(() => UserStoryId);
                 }
             }
         }
 
-        public int PermissionLevel
+        public Account Owner
         {
             get
             {
-                return _PermissionLevel;
+                return _Owner;
             }
             set
             {
-                if (_PermissionLevel != value)
+                if (_Owner != value)
                 {
-                    _PermissionLevel = value;
-                    OnPropertyChanged(() => PermissionLevel);
+                    _Owner = value;
+                    OnPropertyChanged(() => Owner);
                 }
             }
         }
 
-        class UserRoleValidator : AbstractValidator<UserRole>
+        public String Title
         {
-            public UserRoleValidator()
+            get
             {
-                RuleFor(obj => obj.UserRoleId).NotEmpty();
-                RuleFor(obj => obj.UserRoleName).NotEmpty();
-                RuleFor(obj => obj.PermissionLevel).GreaterThanOrEqualTo(0);
-               
+                return _Title;
+            }
+            set
+            {
+                if (_Title != value)
+                {
+                    _Title = value;
+                    OnPropertyChanged(() => Title);
+                }
             }
         }
 
-        protected override IValidator GetValidator()
+
+        public String Description
         {
-            return new UserRoleValidator();
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                if (_Description != value)
+                {
+                    _Description = value;
+                    OnPropertyChanged(() => Description);
+                }
+            }
         }
+
+        public int Hours
+        {
+            get
+            {
+                return _Hours;
+            }
+            set
+            {
+                if (_Hours != value)
+                {
+                    _Hours = value;
+                    OnPropertyChanged(() => Hours);
+                }
+            }
+        }
+
+        public StoryStatus CurrentStatus
+        {
+            get
+            {
+                return _CurrentStatus;
+            }
+            set
+            {
+                if (_CurrentStatus != value)
+                {
+                    _CurrentStatus = value;
+                    OnPropertyChanged(() => CurrentStatus);
+                }
+            }
+        }
+
+        public Boolean IsBlocked
+        {
+            get
+            {
+                return _IsBlocked;
+            }
+            set
+            {
+                if (_IsBlocked != value)
+                {
+                    _IsBlocked = value;
+                    OnPropertyChanged(() => IsBlocked);
+                }
+            }
+        }
+
+        public String UserNotes
+        {
+            get
+            {
+                return _UserNotes;
+            }
+            set
+            {
+                if (_UserNotes != value)
+                {
+                    _UserNotes = value;
+                    OnPropertyChanged(() => UserNotes);
+                }
+            }
+        }
+
     }
 }

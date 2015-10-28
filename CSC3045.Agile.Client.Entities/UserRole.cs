@@ -61,21 +61,5 @@ namespace CSC3045.Agile.Client.Entities
                 }
             }
         }
-
-        class UserRoleValidator : AbstractValidator<UserRole>
-        {
-            public UserRoleValidator()
-            {
-                RuleFor(obj => obj.UserRoleId).NotEmpty();
-                RuleFor(obj => obj.UserRoleName).NotEmpty();
-                RuleFor(obj => obj.PermissionLevel).GreaterThanOrEqualTo(0);
-               
-            }
-        }
-
-        protected override IValidator GetValidator()
-        {
-            return new UserRoleValidator();
-        }
     }
 }

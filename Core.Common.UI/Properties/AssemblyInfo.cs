@@ -36,5 +36,5 @@ using System.Windows.Markup;
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
 
-[assembly: XmlnsDefinition("http://www.PluralSight.com/Core", "Core.Common.UI.Core")]
-[assembly: XmlnsDefinition("http://www.PluralSight.com/Core", "Core.Common.UI.Controls")]
+[assembly: XmlnsDefinition("CSC3045AgileCore", "Core.Common.UI.Core")]
+[assembly: XmlnsDefinition("CSC3045AgileCore", "Core.Common.UI.Controls")]

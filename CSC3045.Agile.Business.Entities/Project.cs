@@ -16,7 +16,7 @@ namespace CSC3045.Agile.Business.Entities
         public int ProjectId { get; set; }
 
         [DataMember]
-        public int BacklogId { get; set; }
+        public Backlog Backlog { get; set; }
 
         [DataMember]
         public int ProjectManagerId { get; set; }

@@ -12,36 +12,30 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Core.Common.Core;
+using MahApps.Metro.Controls;
+using System.Diagnostics;
+using ClientDesktop.ViewModels;
 
 namespace ClientDesktop
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Mainwindow wraps all the MVVM architecture
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
-        internal event EventHandler LoginSuccessful;
-
         public MainWindow()
         {
             InitializeComponent();
+
+            // Set datacontext, always obtained from MEF using resolve dependencies. Datacontext only needs to be set explicitly once.
+            login.DataContext = ObjectBase.Container.GetExportedValue<LoginRegisterViewModel>();
         }
 
-        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
-            if (false)
-            {
-                //Close login
-                LoginSuccessful(this, null);
-                Close();
-            }
-            else
-            {
-                //Alert user login has failed
-                MessageBox.Show("Failed login");
-            }
+            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+            e.Handled = true;
         }
-
     }
 }
-

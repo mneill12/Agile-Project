@@ -121,13 +121,13 @@ namespace CSC3045.Agile.Client.Entities
         {
             get
             {
-                return _Status;
+                return _CurrentStatus;
             }
             set
             {
-                if (_Status != value)
+                if (_CurrentStatus != value)
                 {
-                    _Status = value;
+                    _CurrentStatus = value;
                     OnPropertyChanged(() => CurrentStatus);
                 }
             }
@@ -149,36 +149,22 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public ISet<AcceptanceCriteria> Status
+        public ISet<AcceptanceCriteria> AcceptanceCriteria
         {
             get
             {
-                return _Status;
+                return _AcceptanceCriteria;
             }
             set
             {
-                if (_Status != value)
+                if (_AcceptanceCriteria != value)
                 {
-                    _Status = value;
-                    OnPropertyChanged(() => Status);
+                    _AcceptanceCriteria = value;
+                    OnPropertyChanged(() => AcceptanceCriteria);
                 }
             }
         }
 
-        class UserRoleValidator : AbstractValidator<UserRole>
-        {
-            public UserRoleValidator()
-            {
-                RuleFor(obj => obj.UserRoleId).NotEmpty();
-                RuleFor(obj => obj.UserRoleName).NotEmpty();
-                RuleFor(obj => obj.PermissionLevel).GreaterThanOrEqualTo(0);
-               
-            }
-        }
-
-        protected override IValidator GetValidator()
-        {
-            return new UserRoleValidator();
-        }
+     
     }
 }

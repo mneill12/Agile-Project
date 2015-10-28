@@ -10,6 +10,7 @@ using Core.Common.Contracts;
 
 namespace CSC3045.Agile.Data
 {
+    // ORM Rules
     public class CSC3045AgileContext : DbContext
     {
         public CSC3045AgileContext()

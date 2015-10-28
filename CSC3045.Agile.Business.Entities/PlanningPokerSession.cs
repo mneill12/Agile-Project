@@ -19,7 +19,7 @@ namespace CSC3045.Agile.Business.Entities
         public DateTime StartTime { get; set; }
 
         [DataMember]
-        public HashSet<int> InvitedAccountIdSet { get; set; }
+        public ISet<Account> InvitedAccountSet { get; set; }
 
         #region IIdentifiableEntity members
 

@@ -1,33 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
+using System.ComponentModel.Composition.Hosting;
+using System.ComponentModel.Composition.Primitives;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Reflection;
 using System.Windows;
+using CSC3045.Agile.Client.Bootstrapper;
+using Core.Common.Core;
 
 namespace ClientDesktop
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
-        private MainWindow login = new MainWindow();
-        private Dashboard dashboard = new Dashboard();
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
 
-        private void Application_Startup(object sender, StartupEventArgs e){
-             Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
-             Application.Current.MainWindow = login;
-
-             login.LoginSuccessful += dashboard.StartupLoginWindow;
-             login.Show();
-
+            ObjectBase.Container = MEFLoader.Init(new List<ComposablePartCatalog>()
+            {
+                new AssemblyCatalog(Assembly.GetExecutingAssembly())
+            });
+        }
+		
     }
-
-
-
-
-}
 
 }
