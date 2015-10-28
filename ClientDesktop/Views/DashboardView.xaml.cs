@@ -10,24 +10,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Core.Common.UI.Core;
 
-namespace ClientDesktop
+namespace ClientDesktop.Views
 {
     /// <summary>
-    /// Interaction logic for Dashboard.xaml
+    /// Interaction logic for DashboardView.xaml
     /// </summary>
-    public partial class Dashboard : Window
+    public partial class DashboardView : UserControlViewBase
     {
-        public Dashboard()
+        public DashboardView()
         {
             InitializeComponent();
-        }
-
-        internal void StartupLoginWindow(object sender, EventArgs e)
-        {
-            Application.Current.MainWindow = this;
-            Show();
         }
     }
 }
