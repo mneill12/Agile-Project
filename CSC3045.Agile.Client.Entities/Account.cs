@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Core.Common.Core;
+using CSC3045.Agile.Client.Entities;
 
 namespace CSC3045.Agile.Client.Entities
 {
@@ -9,8 +10,10 @@ namespace CSC3045.Agile.Client.Entities
     {
         int _AccountId;
         string _LoginEmail;
+        string _Password;
         string _FirstName;
         string _LastName;
+        ISet<UserRole> _UserRoles;
 
         public int AccountId
         {
@@ -34,6 +37,19 @@ namespace CSC3045.Agile.Client.Entities
                 {
                     _LoginEmail = value;
                     OnPropertyChanged(() => LoginEmail);
+                }
+            }
+        }
+
+        public string Password
+        {
+            get { return _Password; }
+            set
+            {
+                if (_Password != value)
+                {
+                    _Password = value;
+                    OnPropertyChanged(() => Password);
                 }
             }
         }
@@ -63,5 +79,19 @@ namespace CSC3045.Agile.Client.Entities
                 }
             }
         }
+
+        public ISet<UserRole> UserRoles
+        {
+            get { return _UserRoles; }
+            set
+            {
+                if (_UserRoles != value)
+                {
+                    _UserRoles = value;
+                    OnPropertyChanged(() => UserRoles);
+                }
+            }
+        }
+
     }
 }

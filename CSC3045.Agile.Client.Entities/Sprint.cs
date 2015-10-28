@@ -8,7 +8,7 @@ using FluentValidation;
 
 namespace CSC3045.Agile.Client.Entities
 {
-    public class Sprint : ObjectBase
+    public class UserRole : ObjectBase
     {
 
         int _SprintId;
@@ -148,7 +148,7 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        class SprintValidator : AbstractValidator<Sprint>
+        class SprintValidator : AbstractValidator<UserRole>
         {
             public SprintValidator()
             {

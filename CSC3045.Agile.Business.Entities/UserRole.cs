@@ -19,6 +19,8 @@ namespace CSC3045.Agile.Business.Entities
         [DataMember]
         public int PermissionLevel { get; set; }
 
+        public virtual ISet<Account> Accounts { get; set; }
+
         #region IIdentifiableEntity members
 
         public int EntityId

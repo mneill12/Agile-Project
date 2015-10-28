@@ -32,10 +32,10 @@ namespace CSC3045.Agile.Business.Entities
         public StoryStatus Status { get; set; }
 
         [DataMember]
-        public HashSet<StoryTask> AssociatedTasks { get; set; }
+        public ISet<StoryTask> AssociatedTasks { get; set; }
 
         [DataMember]
-        public HashSet<AcceptanceCriteria> AcceptanceCriteriaSet { get; set; }
+        public ISet<AcceptanceCriteria> AcceptanceCriteria { get; set; }
 
         #region IIdentifiableEntity members
 

@@ -52,7 +52,17 @@ namespace CSC3045.Agile.Data
             modelBuilder.Ignore<ExtensionDataObject>();
             modelBuilder.Ignore<IIdentifiableEntity>();
 
-            modelBuilder.Entity<Account>().HasKey<int>(e => e.AccountId).Ignore(e => e.EntityId);
+            modelBuilder.Entity<Account>()
+                .HasKey<int>(e => e.AccountId).Ignore(e => e.EntityId)
+                .HasMany(x => x.UserRoles)
+                .WithMany(x => x.Accounts)
+                .Map(x =>
+                {
+                    x.ToTable("AccountUserRole");
+                    x.MapLeftKey("AccountId");
+                    x.MapRightKey("UserRoleId");
+                });
+
             modelBuilder.Entity<Backlog>().HasKey<int>(e => e.BacklogId).Ignore(e => e.EntityId);
             modelBuilder.Entity<Project>().HasKey<int>(e => e.ProjectId).Ignore(e => e.EntityId);
             modelBuilder.Entity<Sprint>().HasKey<int>(e => e.SprintId).Ignore(e => e.EntityId);
