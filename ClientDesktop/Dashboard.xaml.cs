@@ -23,5 +23,11 @@ namespace ClientDesktop
         {
             InitializeComponent();
         }
+
+        internal void StartupLoginWindow(object sender, EventArgs e)
+        {
+            Application.Current.MainWindow = this;
+            Show();
+        }
     }
 }
