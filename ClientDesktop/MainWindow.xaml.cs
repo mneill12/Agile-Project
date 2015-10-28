@@ -20,9 +20,28 @@ namespace ClientDesktop
     /// </summary>
     public partial class MainWindow : Window
     {
+        internal event EventHandler LoginSuccessful;
+
         public MainWindow()
         {
             InitializeComponent();
         }
+
+        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (false)
+            {
+                //Close login
+                LoginSuccessful(this, null);
+                Close();
+            }
+            else
+            {
+                //Alert user login has failed
+                MessageBox.Show("Failed login");
+            }
+        }
+
     }
 }
+
