@@ -30,6 +30,9 @@ namespace CSC3045.Agile.Business.Entities
         [DataMember]
         public DateTime ProjectDeadline { get; set; }
 
+        [DataMember]
+        public ISet<UserStory> AssociatedUserStories { get; set; }
+
         #region IIdentifiableEntity members
 
         public int EntityId

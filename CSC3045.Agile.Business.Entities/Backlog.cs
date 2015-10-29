@@ -19,7 +19,7 @@ namespace CSC3045.Agile.Business.Entities
         public int SprintId { get; set; }
 
         [DataMember]
-        public ISet<int> AssociatedUserStoryIdSet { get; set; }
+        public ISet<UserStory> AssociatedUserStories { get; set; }
 
         #region IIdentifiableEntity members
 

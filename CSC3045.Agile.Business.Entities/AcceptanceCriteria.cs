@@ -23,6 +23,8 @@ namespace CSC3045.Agile.Business.Entities
 
         #region IIdentifiableEntity members
 
+        public ISet<UserStory> AssociatedUserStories { get; set; }
+
         public int EntityId
         {
             get { return AcceptanceCriteriaId; }

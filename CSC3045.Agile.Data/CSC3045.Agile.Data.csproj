@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CSC3045AgileContext.cs" />
+    <Compile Include="CSC3045AgileCustomDatabaseInitialiser.cs" />
     <Compile Include="Data Repositories\AccountRepository.cs" />
     <Compile Include="Data Repositories\AcceptanceCriteriaRepository.cs" />
     <Compile Include="Data Repositories\PlanningPokerStoryRepository.cs" />

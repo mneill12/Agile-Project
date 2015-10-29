@@ -37,6 +37,9 @@ namespace CSC3045.Agile.Business.Entities
         [DataMember]
         public ISet<AcceptanceCriteria> AcceptanceCriteria { get; set; }
 
+        [DataMember]
+        public ISet<Backlog> AssociatedBacklogs { get; set; }
+
         #region IIdentifiableEntity members
 
         public int EntityId

@@ -39,6 +39,8 @@ namespace CSC3045.Agile.Business.Entities
         [DataMember]
         public String UserNotea { get; set; }
 
+        public virtual ISet<UserStory> AssociatedUserStories { get; set; }
+
         #region IIdentifiableEntity members
 
         public int EntityId
