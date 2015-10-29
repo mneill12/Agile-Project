@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:v="clr-namespace:ClientDesktop.Views"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        Title="JELLO - Client Desktop" Height="600" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background="White" Foreground="Black">
+        Title="JELLO - Client Desktop" Height="960" Width="1280" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background="White" Foreground="Black">
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             <Button Content="settings" />

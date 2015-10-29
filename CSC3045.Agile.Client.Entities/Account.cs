@@ -40,6 +40,19 @@ namespace CSC3045.Agile.Client.Entities
                 }
             }
         }
+    
+        public string Password
+        {
+            get { return _Password; }
+            set
+            {
+                if (_Password != value)
+                {
+                    _Password = value;
+                    OnPropertyChanged(() => Password);
+                }
+            }
+        }
 
         public string Password
         {

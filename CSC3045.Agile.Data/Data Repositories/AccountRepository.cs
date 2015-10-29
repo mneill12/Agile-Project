@@ -57,6 +57,16 @@ namespace CSC3045.Agile.Data.Data_Repositories
                     select a).FirstOrDefault();
             }
         }
+		
+		public Account GetByLogin(string login, string password)
+        {
+            using (CSC3045AgileContext entityContext = new CSC3045AgileContext())
+            {
+                return (from a in entityContext.AccountSet
+                        where (a.LoginEmail == login) && (a.Password == password)
+                        select a).FirstOrDefault();
+            }
+        }
 
         // Gets all accounts plus associated userroles
         public ICollection<Account> GetAccountsWithChildren()

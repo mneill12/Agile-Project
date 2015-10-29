@@ -14,9 +14,14 @@ namespace CSC3045.Agile.Client.Proxies
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class AccountClient : ClientBase<IAccountService>, IAccountService
     {
-        public Account GetAccountInfo(string loginEmail)
+        public Account GetAccountInfo(string loginEmail, string password)
         {
-            return Channel.GetAccountInfo(loginEmail);
+            return Channel.GetAccountInfo(loginEmail, password);
+        }
+
+        public Account RegisterAccount(Account account)
+        {
+            return Channel.RegisterAccount(account);
         }
 
         public void UpdateAccountInfo(Account account)
