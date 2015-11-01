@@ -15,25 +15,25 @@ namespace CSC3045.Agile.Data.Data_Repositories
     // PlanningPokerSession LINQ Entity Queries
     public class PlanningPokerSessionRepository : DataRepositoryBase<PlanningPokerSession>
     {
-        protected override PlanningPokerSession AddEntity(CSC3045AgileContext entityContext, PlanningPokerSession entity)
+        protected override PlanningPokerSession AddEntity(Csc3045AgileContext entityContext, PlanningPokerSession entity)
         {
             return entityContext.PlanningPokerSessionSet.Add(entity);
         }
 
-        protected override PlanningPokerSession UpdateEntity(CSC3045AgileContext entityContext, PlanningPokerSession entity)
+        protected override PlanningPokerSession UpdateEntity(Csc3045AgileContext entityContext, PlanningPokerSession entity)
         {
             return (from e in entityContext.PlanningPokerSessionSet
                     where e.PlanningPokerSessionId == entity.PlanningPokerSessionId
                 select e).FirstOrDefault();
         }
 
-        protected override IEnumerable<PlanningPokerSession> GetEntities(CSC3045AgileContext entityContext)
+        protected override IEnumerable<PlanningPokerSession> GetEntities(Csc3045AgileContext entityContext)
         {
             return from e in entityContext.PlanningPokerSessionSet
                    select e;
         }
 
-        protected override PlanningPokerSession GetEntity(CSC3045AgileContext entityContext, int id)
+        protected override PlanningPokerSession GetEntity(Csc3045AgileContext entityContext, int id)
         {
             var query = (from e in entityContext.PlanningPokerSessionSet
                          where e.PlanningPokerSessionId == id

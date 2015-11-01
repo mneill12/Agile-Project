@@ -15,25 +15,25 @@ namespace CSC3045.Agile.Data.Data_Repositories
     // AcceptanceCriteria LINQ Entity Queries
     public class AcceptanceCriteriaRepository : DataRepositoryBase<AcceptanceCriteria>
     {
-        protected override AcceptanceCriteria AddEntity(CSC3045AgileContext entityContext, AcceptanceCriteria entity)
+        protected override AcceptanceCriteria AddEntity(Csc3045AgileContext entityContext, AcceptanceCriteria entity)
         {
             return entityContext.AcceptanceCriteriaSet.Add(entity);
         }
 
-        protected override AcceptanceCriteria UpdateEntity(CSC3045AgileContext entityContext, AcceptanceCriteria entity)
+        protected override AcceptanceCriteria UpdateEntity(Csc3045AgileContext entityContext, AcceptanceCriteria entity)
         {
             return (from e in entityContext.AcceptanceCriteriaSet
                 where e.AcceptanceCriteriaId == entity.AcceptanceCriteriaId
                 select e).FirstOrDefault();
         }
 
-        protected override IEnumerable<AcceptanceCriteria> GetEntities(CSC3045AgileContext entityContext)
+        protected override IEnumerable<AcceptanceCriteria> GetEntities(Csc3045AgileContext entityContext)
         {
             return from e in entityContext.AcceptanceCriteriaSet
                    select e;
         }
 
-        protected override AcceptanceCriteria GetEntity(CSC3045AgileContext entityContext, int id)
+        protected override AcceptanceCriteria GetEntity(Csc3045AgileContext entityContext, int id)
         {
             var query = (from e in entityContext.AcceptanceCriteriaSet
                          where e.AcceptanceCriteriaId == id

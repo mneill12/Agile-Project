@@ -16,7 +16,10 @@ namespace CSC3045.Agile.Business.Entities
         public int AcceptanceCriteriaId { get; set; }
 
         [DataMember]
-        public String Criteria { get; set; }
+        public String Scenario { get; set; }
+
+        [DataMember]
+        public ISet<String> Criteria { get; set; }
 
         [DataMember]
         public Boolean IsSatisfied { get; set; }

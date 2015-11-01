@@ -15,25 +15,25 @@ namespace CSC3045.Agile.Data.Data_Repositories
     // Backlog LINQ Entity Queries
     public class BacklogRepository : DataRepositoryBase<Backlog>
     {
-        protected override Backlog AddEntity(CSC3045AgileContext entityContext, Backlog entity)
+        protected override Backlog AddEntity(Csc3045AgileContext entityContext, Backlog entity)
         {
             return entityContext.BacklogSet.Add(entity);
         }
 
-        protected override Backlog UpdateEntity(CSC3045AgileContext entityContext, Backlog entity)
+        protected override Backlog UpdateEntity(Csc3045AgileContext entityContext, Backlog entity)
         {
             return (from e in entityContext.BacklogSet
                 where e.BacklogId == entity.BacklogId
                 select e).FirstOrDefault();
         }
 
-        protected override IEnumerable<Backlog> GetEntities(CSC3045AgileContext entityContext)
+        protected override IEnumerable<Backlog> GetEntities(Csc3045AgileContext entityContext)
         {
             return from e in entityContext.BacklogSet
                    select e;
         }
 
-        protected override Backlog GetEntity(CSC3045AgileContext entityContext, int id)
+        protected override Backlog GetEntity(Csc3045AgileContext entityContext, int id)
         {
             var query = (from e in entityContext.BacklogSet
                          where e.BacklogId == id

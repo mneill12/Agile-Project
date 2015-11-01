@@ -10,37 +10,54 @@ namespace CSC3045.Agile.Client.Entities
 {
     public class AcceptanceCriteria : ObjectBase
     {
-        int _AcceptanceCriteriaId;
-        string _Criteria;
-        bool _IsSatisfied;
+        int _acceptanceCriteriaId;
+        private string _scenario;
+        ISet<String> _criteria;
+        bool _isSatisfied;
 
         public int AcceptanceCriteriaId
         {
             get
             {
-                return _AcceptanceCriteriaId;
+                return _acceptanceCriteriaId;
             }
             set
             {
-                if (_AcceptanceCriteriaId != value)
+                if (_acceptanceCriteriaId != value)
                 {
-                    _AcceptanceCriteriaId = value;
+                    _acceptanceCriteriaId = value;
                     OnPropertyChanged(() => AcceptanceCriteriaId);
                 }
             }
         }
 
-        public String Criteria
+        public String Scenario
         {
             get
             {
-                return _Criteria;
+                return _scenario;
             }
             set
             {
-                if (_Criteria != value)
+                if (_scenario != value)
                 {
-                    _Criteria = value;
+                    _scenario = value;
+                    OnPropertyChanged(() => Scenario);
+                }
+            }
+        }
+
+        public ISet<String> Criteria
+        {
+            get
+            {
+                return _criteria;
+            }
+            set
+            {
+                if (_criteria != value)
+                {
+                    _criteria = value;
                     OnPropertyChanged(() => Criteria);
                 }
             }
@@ -50,13 +67,13 @@ namespace CSC3045.Agile.Client.Entities
         {
             get
             {
-                return _IsSatisfied;
+                return _isSatisfied;
             }
             set
             {
-                if (_IsSatisfied != value)
+                if (_isSatisfied != value)
                 {
-                    _IsSatisfied = value;
+                    _isSatisfied = value;
                     OnPropertyChanged(() => IsSatisfied);
                 }
             }

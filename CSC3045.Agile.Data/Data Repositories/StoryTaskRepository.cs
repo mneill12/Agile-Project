@@ -15,25 +15,25 @@ namespace CSC3045.Agile.Data.Data_Repositories
     // StoryTask LINQ Entity Queries
     public class StoryTaskRepository : DataRepositoryBase<StoryTask>
     {
-        protected override StoryTask AddEntity(CSC3045AgileContext entityContext, StoryTask entity)
+        protected override StoryTask AddEntity(Csc3045AgileContext entityContext, StoryTask entity)
         {
             return entityContext.StoryTaskSet.Add(entity);
         }
 
-        protected override StoryTask UpdateEntity(CSC3045AgileContext entityContext, StoryTask entity)
+        protected override StoryTask UpdateEntity(Csc3045AgileContext entityContext, StoryTask entity)
         {
             return (from e in entityContext.StoryTaskSet
                     where e.StoryTaskId == entity.StoryTaskId
                     select e).FirstOrDefault();
         }
 
-        protected override IEnumerable<StoryTask> GetEntities(CSC3045AgileContext entityContext)
+        protected override IEnumerable<StoryTask> GetEntities(Csc3045AgileContext entityContext)
         {
             return from e in entityContext.StoryTaskSet
                    select e;
         }
 
-        protected override StoryTask GetEntity(CSC3045AgileContext entityContext, int id)
+        protected override StoryTask GetEntity(Csc3045AgileContext entityContext, int id)
         {
             var query = (from e in entityContext.StoryTaskSet
                          where e.StoryTaskId == id

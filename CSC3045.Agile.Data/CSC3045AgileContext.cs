@@ -11,14 +11,13 @@ using Core.Common.Contracts;
 namespace CSC3045.Agile.Data
 {
     // ORM Rules
-    public class CSC3045AgileContext : DbContext
+    public class Csc3045AgileContext : DbContext
     {
-        public CSC3045AgileContext()
-            : base("name=CSC3045AgileDb")
+        public Csc3045AgileContext()
+            : base("name=CSC3045_Agile_CF")
         {
 
-            Database.SetInitializer<CSC3045AgileContext>(new CSC3045AgileCustomDatabaseInitialiser());
-            Database.Initialize(force: true);
+            Database.SetInitializer<Csc3045AgileContext>(new Csc3045AgileCustomDatabaseInitialiser());
         }
 
         public DbSet<Account> AccountSet { get; set; }
@@ -56,31 +55,13 @@ namespace CSC3045.Agile.Data
             modelBuilder.Ignore<IIdentifiableEntity>();
 
             modelBuilder.Entity<Account>()
-                .HasKey<int>(e => e.AccountId).Ignore(e => e.EntityId)
-                .HasMany(x => x.UserRoles)
-                .WithMany(x => x.Accounts)
-                .Map(x =>
-                {
-                    x.ToTable("AccountUserRole");
-                    x.MapLeftKey("AccountId");
-                    x.MapRightKey("UserRoleId");
-                });
+                .HasKey<int>(e => e.AccountId).Ignore(e => e.EntityId);
 
             modelBuilder.Entity<Backlog>()
-                .HasKey<int>(e => e.BacklogId).Ignore(e => e.EntityId)
-                .HasMany(x => x.AssociatedUserStories)
-                .WithMany(x => x.AssociatedBacklogs)
-                .Map(x =>
-                    {
-                        x.ToTable("BacklogUserStories");
-                        x.MapLeftKey("BacklogId");
-                        x.MapRightKey("UserStoryId");
-                    }
-                );
+                .HasKey<int>(e => e.BacklogId).Ignore(e => e.EntityId);
 
             modelBuilder.Entity<Project>()
-                .HasKey<int>(e => e.ProjectId).Ignore(e => e.EntityId)
-                .HasMany(x => x.AssociatedUserStories);
+                .HasKey<int>(e => e.ProjectId).Ignore(e => e.EntityId);
                
             modelBuilder.Entity<Sprint>()
                 .HasKey<int>(e => e.SprintId).Ignore(e => e.EntityId);
@@ -92,16 +73,7 @@ namespace CSC3045.Agile.Data
                 .HasKey<int>(e => e.BurndownPointId).Ignore(e => e.EntityId);
 
             modelBuilder.Entity<PlanningPokerSession>()
-                .HasKey<int>(e => e.PlanningPokerSessionId).Ignore(e => e.EntityId)
-                .HasMany(x => x.InvitedAccountSet)
-                .WithMany(x => x.PlanningPokerSessions)
-                .Map(x =>
-                    {
-                        x.ToTable("PokerSessionUsers");
-                        x.MapLeftKey("PlanningPokerSessionId");
-                        x.MapRightKey("AccountId");
-                    }
-                );
+                .HasKey<int>(e => e.PlanningPokerSessionId).Ignore(e => e.EntityId);
 
             modelBuilder.Entity<PlanningPokerStory>()
                 .HasKey<int>(e => e.PlanningPokerStoryId).Ignore(e => e.EntityId);
@@ -110,42 +82,16 @@ namespace CSC3045.Agile.Data
                 .HasKey<int>(e => e.StoryStatusId).Ignore(e => e.EntityId);
 
             modelBuilder.Entity<StoryTask>()
-                .HasKey<int>(e => e.StoryTaskId).Ignore(e => e.EntityId)
-                .HasOptional(x => x.Owner);
+                .HasKey<int>(e => e.StoryTaskId).Ignore(e => e.EntityId);
 
             modelBuilder.Entity<UserRole>()
-                .HasKey<int>(e => e.UserRoleId).Ignore(e => e.EntityId)
-                .HasMany(x => x.Accounts)
-                .WithMany(x => x.UserRoles)
-                .Map(x =>
-                {
-                    x.ToTable("AccountUserRoles");
-                    x.MapLeftKey("AccountId");
-                    x.MapRightKey("UserRoleId");
-                });
+                .HasKey<int>(e => e.UserRoleId).Ignore(e => e.EntityId);
 
             modelBuilder.Entity<UserStory>()
-                .HasKey<int>(e => e.UserStoryId).Ignore(e => e.EntityId)
-                .HasMany(x => x.AssociatedTasks)
-                .WithMany(x => x.AssociatedUserStories)
-                .Map(x =>
-                {
-                    x.ToTable("UserStoryTasks");
-                    x.MapLeftKey("UserStoryId");
-                    x.MapRightKey("StoryTaskId");
-                });
+                .HasKey<int>(e => e.UserStoryId).Ignore(e => e.EntityId);
 
             modelBuilder.Entity<UserStory>()
-               .HasKey<int>(e => e.UserStoryId).Ignore(e => e.EntityId)
-               .HasMany(x => x.AcceptanceCriteria)
-               .WithMany(x => x.AssociatedUserStories)
-               .Map(x =>
-               {
-                   x.ToTable("UserStoryAcceptanceCriteria");
-                   x.MapLeftKey("UserStoryId");
-                   x.MapRightKey("AcceptanceCriteriaId");
-               });
-                
+                .HasKey<int>(e => e.UserStoryId).Ignore(e => e.EntityId);
 
         }
     }

@@ -15,25 +15,25 @@ namespace CSC3045.Agile.Data.Data_Repositories
     // UserRole LINQ Entity Queries
     public class UserRoleRepository : DataRepositoryBase<UserRole>
     {
-        protected override UserRole AddEntity(CSC3045AgileContext entityContext, UserRole entity)
+        protected override UserRole AddEntity(Csc3045AgileContext entityContext, UserRole entity)
         {
             return entityContext.UserRoleSet.Add(entity);
         }
 
-        protected override UserRole UpdateEntity(CSC3045AgileContext entityContext, UserRole entity)
+        protected override UserRole UpdateEntity(Csc3045AgileContext entityContext, UserRole entity)
         {
             return (from e in entityContext.UserRoleSet
                     where e.UserRoleId == entity.UserRoleId
                     select e).FirstOrDefault();
         }
 
-        protected override IEnumerable<UserRole> GetEntities(CSC3045AgileContext entityContext)
+        protected override IEnumerable<UserRole> GetEntities(Csc3045AgileContext entityContext)
         {
             return from e in entityContext.UserRoleSet
                    select e;
         }
 
-        protected override UserRole GetEntity(CSC3045AgileContext entityContext, int id)
+        protected override UserRole GetEntity(Csc3045AgileContext entityContext, int id)
         {
             var query = (from e in entityContext.UserRoleSet
                          where e.UserRoleId == id

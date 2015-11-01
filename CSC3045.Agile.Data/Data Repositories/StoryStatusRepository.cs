@@ -15,25 +15,25 @@ namespace CSC3045.Agile.Data.Data_Repositories
     // StoryStatus LINQ Entity Queries
     public class StoryStatusRepository : DataRepositoryBase<StoryStatus>
     {
-        protected override StoryStatus AddEntity(CSC3045AgileContext entityContext, StoryStatus entity)
+        protected override StoryStatus AddEntity(Csc3045AgileContext entityContext, StoryStatus entity)
         {
             return entityContext.StoryStatusSet.Add(entity);
         }
 
-        protected override StoryStatus UpdateEntity(CSC3045AgileContext entityContext, StoryStatus entity)
+        protected override StoryStatus UpdateEntity(Csc3045AgileContext entityContext, StoryStatus entity)
         {
             return (from e in entityContext.StoryStatusSet
                     where e.StoryStatusId == entity.StoryStatusId
                     select e).FirstOrDefault();
         }
 
-        protected override IEnumerable<StoryStatus> GetEntities(CSC3045AgileContext entityContext)
+        protected override IEnumerable<StoryStatus> GetEntities(Csc3045AgileContext entityContext)
         {
             return from e in entityContext.StoryStatusSet
                    select e;
         }
 
-        protected override StoryStatus GetEntity(CSC3045AgileContext entityContext, int id)
+        protected override StoryStatus GetEntity(Csc3045AgileContext entityContext, int id)
         {
             var query = (from e in entityContext.StoryStatusSet
                          where e.StoryStatusId == id

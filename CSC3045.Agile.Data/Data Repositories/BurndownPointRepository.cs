@@ -15,25 +15,25 @@ namespace CSC3045.Agile.Data.Data_Repositories
     // BurndownPoint LINQ Entity Queries
     public class BurndownPointRepository : DataRepositoryBase<BurndownPoint>
     {
-        protected override BurndownPoint AddEntity(CSC3045AgileContext entityContext, BurndownPoint entity)
+        protected override BurndownPoint AddEntity(Csc3045AgileContext entityContext, BurndownPoint entity)
         {
             return entityContext.BurndownPointSet.Add(entity);
         }
 
-        protected override BurndownPoint UpdateEntity(CSC3045AgileContext entityContext, BurndownPoint entity)
+        protected override BurndownPoint UpdateEntity(Csc3045AgileContext entityContext, BurndownPoint entity)
         {
             return (from e in entityContext.BurndownPointSet
                     where e.BurndownPointId == entity.BurndownPointId
                 select e).FirstOrDefault();
         }
 
-        protected override IEnumerable<BurndownPoint> GetEntities(CSC3045AgileContext entityContext)
+        protected override IEnumerable<BurndownPoint> GetEntities(Csc3045AgileContext entityContext)
         {
             return from e in entityContext.BurndownPointSet
                    select e;
         }
 
-        protected override BurndownPoint GetEntity(CSC3045AgileContext entityContext, int id)
+        protected override BurndownPoint GetEntity(Csc3045AgileContext entityContext, int id)
         {
             var query = (from e in entityContext.BurndownPointSet
                          where e.BurndownPointId == id

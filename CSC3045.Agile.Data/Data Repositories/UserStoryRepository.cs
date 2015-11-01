@@ -15,25 +15,25 @@ namespace CSC3045.Agile.Data.Data_Repositories
     // UserStory LINQ Entity Queries
     public class UserStoryRepository : DataRepositoryBase<UserStory>
     {
-        protected override UserStory AddEntity(CSC3045AgileContext entityContext, UserStory entity)
+        protected override UserStory AddEntity(Csc3045AgileContext entityContext, UserStory entity)
         {
             return entityContext.UserStorySet.Add(entity);
         }
 
-        protected override UserStory UpdateEntity(CSC3045AgileContext entityContext, UserStory entity)
+        protected override UserStory UpdateEntity(Csc3045AgileContext entityContext, UserStory entity)
         {
             return (from e in entityContext.UserStorySet
                     where e.UserStoryId == entity.UserStoryId
                     select e).FirstOrDefault();
         }
 
-        protected override IEnumerable<UserStory> GetEntities(CSC3045AgileContext entityContext)
+        protected override IEnumerable<UserStory> GetEntities(Csc3045AgileContext entityContext)
         {
             return from e in entityContext.UserStorySet
                    select e;
         }
 
-        protected override UserStory GetEntity(CSC3045AgileContext entityContext, int id)
+        protected override UserStory GetEntity(Csc3045AgileContext entityContext, int id)
         {
             var query = (from e in entityContext.UserStorySet
                          where e.UserStoryId == id
