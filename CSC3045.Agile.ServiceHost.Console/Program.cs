@@ -41,8 +41,8 @@ namespace CSC3045.Agile.ServiceHost.Console
 
                 RunDatabaseTests();
 
-                System.Console.ReadLine();
-                System.Console.ReadLine();
+                System.Console.WriteLine();
+                System.Console.WriteLine();
                 System.Console.WriteLine("Database tests complete!");
                 System.Console.WriteLine("Press [Enter] to exit.");
                 System.Console.ReadLine();
