@@ -66,6 +66,9 @@ namespace CSC3045.Agile.Data
             modelBuilder.Entity<Sprint>()
                 .HasKey<int>(e => e.SprintId).Ignore(e => e.EntityId);
 
+            modelBuilder.Entity<Criteria>()
+                .HasKey<int>(e => e.CriteriaId).Ignore(e => e.EntityId);
+
             modelBuilder.Entity<AcceptanceCriteria>()
                 .HasKey<int>(e => e.AcceptanceCriteriaId).Ignore(e => e.EntityId);
 

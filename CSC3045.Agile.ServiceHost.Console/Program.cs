@@ -40,6 +40,12 @@ namespace CSC3045.Agile.ServiceHost.Console
 
                 RunDatabaseTests();
 
+                System.Console.ReadLine();
+                System.Console.ReadLine();
+                System.Console.WriteLine("Database tests complete!");
+                System.Console.WriteLine("Press [Enter] to exit.");
+                System.Console.ReadLine();
+
             }
             catch (Exception e)
             {
@@ -100,7 +106,7 @@ namespace CSC3045.Agile.ServiceHost.Console
             using (var db = new Csc3045AgileContext())
             {
 
-                DbSet userStorySet = db.UserStorySet;
+                ICollection<UserStory> userStorySet = GetUserStories();
 
                 foreach (UserStory userStoryTest in userStorySet)
                 {
@@ -110,32 +116,39 @@ namespace CSC3045.Agile.ServiceHost.Console
                     System.Console.WriteLine(
                         "=============================================================================================");
                     System.Console.WriteLine("Story Number: " + userStoryTest.StoryNumber);
-                    System.Console.WriteLine("Title: " + userStoryTest.Title);
                     System.Console.WriteLine("Description: " + userStoryTest.Description);
                     System.Console.WriteLine("Story Points: " + userStoryTest.StoryPoints);
                     System.Console.WriteLine("Status: " + userStoryTest.Status.StoryStatusName);
-                    System.Console.WriteLine("Tasks: " + userStoryTest.AssociatedTasks);
+                    System.Console.WriteLine();
+                    System.Console.WriteLine("\t Tasks: ");
+                    System.Console.WriteLine();
 
+                    System.Console.WriteLine("\t ===============================================");
                     foreach (StoryTask tsk in userStoryTest.AssociatedTasks)
                     {
-                        System.Console.WriteLine("\t ===============================================");
                         System.Console.WriteLine("\t Title: " + tsk.Title);
                         System.Console.WriteLine("\t Description: " + tsk.Description);
-                        System.Console.WriteLine("\t Status: " + tsk.CurrentStatus.StoryStatusName);
                         System.Console.WriteLine("\t Hours: " + tsk.Hours);
                         System.Console.WriteLine("\t Blocked Status: " + tsk.IsBlocked);
+                        // System.Console.WriteLine("\t Status: " + tsk.CurrentStatus.StoryStatusName);
+                        System.Console.WriteLine("\t ===============================================");
                     }
 
-                    System.Console.WriteLine("Acceptance Critera: ");
+                    System.Console.WriteLine();
+                    System.Console.WriteLine("\t Acceptance Critera: ");
+                    System.Console.WriteLine();
 
                     foreach (AcceptanceCriteria ac in userStoryTest.AcceptanceCriteria)
                     {
                         System.Console.WriteLine("\t ===============================================");
                         System.Console.WriteLine("\t Scenario: " + ac.Scenario);
 
-                        foreach (String cri in ac.Criteria)
+                        System.Console.WriteLine("\t ===============================================");
+                        foreach (Criteria cri in ac.Criteria)
                         {
-                            System.Console.WriteLine(cri);
+                            System.Console.WriteLine("\t " + cri.CriteriaType);
+                            System.Console.WriteLine("\t " + cri.CriteriaOutline);
+                            System.Console.WriteLine("\t ===============================================");
                         }
 
                         System.Console.WriteLine("\t Satisfied?: " + ac.IsSatisfied);
@@ -146,11 +159,16 @@ namespace CSC3045.Agile.ServiceHost.Console
 
         }
 
-        static ICollection<UserStory> getUserStories()
+        // Eager loading query to load associated entities when retrieving user stories
+        // @todo : move to user story repo if/when CF DB works on all machines
+        static ICollection<UserStory> GetUserStories()
         {
             using (var db = new Csc3045AgileContext())
             {
-                return db.UserStorySet.Include(s => s.Status).ToList();
+                return db.UserStorySet
+                    .Include(s => s.Status)
+                    .Include(s => s.AssociatedTasks.Select(p => p.CurrentStatus))
+                    .Include(s => s.AcceptanceCriteria.Select(p => p.Criteria)).ToList();
             }
         } 
 

@@ -17,15 +17,14 @@ namespace CSC3045.Agile.Data
             IList<Account> defaultAccounts = new List<Account>();
 
             var developerUserRoleSet = new HashSet<UserRole>();
-            developerUserRoleSet.Add(new UserRole() {UserRoleId = 1, UserRoleName = "Developer", PermissionLevel = 0});
+            developerUserRoleSet.Add(new UserRole() {UserRoleName = "Developer", PermissionLevel = 0});
 
             var developerUserRoleSetWithScrumMaster = new HashSet<UserRole>();
-            developerUserRoleSetWithScrumMaster.Add(new UserRole() {UserRoleId = 1, UserRoleName = "Developer", PermissionLevel = 0});
-            developerUserRoleSetWithScrumMaster.Add(new UserRole() {UserRoleId = 1, UserRoleName = "Scrum Master", PermissionLevel = 1});
+            developerUserRoleSetWithScrumMaster.Add(new UserRole() {UserRoleName = "Developer", PermissionLevel = 0});
+            developerUserRoleSetWithScrumMaster.Add(new UserRole() {UserRoleName = "Scrum Master", PermissionLevel = 1});
 
             defaultAccounts.Add(new Account()
             {
-                AccountId = 1,
                 LoginEmail = "jflyn07n@qub.ac.uk",
                 Password = "4nt1t7!",
                 FirstName = "Joe",
@@ -34,8 +33,7 @@ namespace CSC3045.Agile.Data
             });
 
             defaultAccounts.Add(new Account()
-            {
-                AccountId = 2, 
+            { 
                 LoginEmail = "zeadie01@qub.ac.uk", 
                 Password = "4nt1t7!", 
                 FirstName = "Zarah", 
@@ -44,7 +42,6 @@ namespace CSC3045.Agile.Data
             });
             defaultAccounts.Add(new Account()
             {
-                AccountId = 3,
                 LoginEmail = "rmeharg01@qub.ac.uk",
                 Password = "4nt1t7!",
                 FirstName = "Ryan",
@@ -53,7 +50,6 @@ namespace CSC3045.Agile.Data
             });
             defaultAccounts.Add(new Account()
             {
-                AccountId = 4,
                 LoginEmail = "nreid11@qub.ac.uk",
                 Password = "4nt1t7!",
                 FirstName = "Niall",
@@ -62,7 +58,6 @@ namespace CSC3045.Agile.Data
             });
             defaultAccounts.Add(new Account()
             {
-                AccountId = 5,
                 LoginEmail = "zshen01@qub.ac.uk",
                 Password = "4nt1t7!",
                 FirstName = "Gary (Zidong)",
@@ -71,7 +66,6 @@ namespace CSC3045.Agile.Data
             });
             defaultAccounts.Add(new Account()
             {
-                AccountId = 6,
                 LoginEmail = "mmcann71@qub.ac.uk",
                 Password = "4nt1t7!",
                 FirstName = "Martin",
@@ -80,7 +74,6 @@ namespace CSC3045.Agile.Data
             });
             defaultAccounts.Add(new Account()
             {
-                AccountId = 7,
                 LoginEmail = "mneil12@qub.ac.uk",
                 Password = "4nt1t7!",
                 FirstName = "Matthew",
@@ -99,14 +92,12 @@ namespace CSC3045.Agile.Data
            
             defaultRoles.Add(new UserRole()
             {
-                UserRoleId = 3, 
                 UserRoleName = "Project Manager", 
                 PermissionLevel = 2
             });
 
             defaultRoles.Add(new UserRole()
             {
-                UserRoleId = 4, 
                 UserRoleName = "Product Owner", 
                 PermissionLevel = 3
             });
@@ -120,10 +111,8 @@ namespace CSC3045.Agile.Data
             UserStory defaultUserStory = new UserStory()
 
             {
-                UserStoryId = 0,
                 Status = new StoryStatus()
                 {
-                    StoryStatusId  = 0, 
                     StoryStatusName = "Ready for Development"
                 },
                 Description = "As a user of the scrum client program I can register so that I can connect to the scrum management server",
@@ -133,13 +122,12 @@ namespace CSC3045.Agile.Data
                 {
                     new AcceptanceCriteria()
                     {
-                        AcceptanceCriteriaId = 0,
                         Scenario = "An unregistered user can open the client executable, start to create an account with their email address and password and have it verified as acceptable.",
-                        Criteria = new HashSet<String>()
+                        Criteria = new HashSet<Criteria>()
                              {
-                                 "GIVEN The user is not already registered and the user has the client application",
-                                 "WHEN The user opens the client application and starts the registration process",
-                                 "THEN The user can create an account successfully"
+                                 new Criteria() {CriteriaType =  "GIVEN", CriteriaOutline = "The user is not already registered and the user has the client application" } ,
+                                 new Criteria() {CriteriaType =  "WHEN", CriteriaOutline = "The user opens the client application and starts the registration process" },
+                                 new Criteria() {CriteriaType =  "THEN", CriteriaOutline = "The user can create an account successfully" }
                              },
                         IsSatisfied = false
                     }
@@ -148,7 +136,6 @@ namespace CSC3045.Agile.Data
                 {
                     new StoryTask()
                     {
-                        StoryTaskId = 0,
                         Title = "TSK-001",
                         Description = "Setup database for server application, to include user management tables.",
                         Hours = 6,
@@ -157,7 +144,6 @@ namespace CSC3045.Agile.Data
                     },
                     new StoryTask()
                     {
-                        StoryTaskId = 1,
                         Title = "TSK-002",
                         Description = "Develop server application to accept client connections for user management.",
                         Hours = 8,
@@ -166,7 +152,6 @@ namespace CSC3045.Agile.Data
                     },
                     new StoryTask()
                     {
-                        StoryTaskId = 2,
                         Title = "TSK-003",
                         Description = "Develop client application to make connection to server and call database CRUD methods.",
                         Hours = 4,
@@ -175,7 +160,6 @@ namespace CSC3045.Agile.Data
                     },
                     new StoryTask()
                     {
-                        StoryTaskId = 3,
                         Title = "TSK-004",
                         Description = "Develop encryption strategy and methods to obfuscate usernames and encrypt passwords.",
                         Hours = 9,
@@ -184,7 +168,6 @@ namespace CSC3045.Agile.Data
                     },
                     new StoryTask()
                     {
-                        StoryTaskId = 4,
                         Title = "TSK-005",
                         Description = "Develop UI Registration Screen",
                         Hours = 12,
@@ -193,7 +176,6 @@ namespace CSC3045.Agile.Data
                     },
                     new StoryTask()
                     {
-                        StoryTaskId = 4,
                         Title = "TSK-006",
                         Description = "Create unit and integration tests for user management operations.",
                         Hours = 14,

@@ -17,9 +17,6 @@ namespace CSC3045.Agile.Business.Entities
         public String StoryNumber { get; set; }
 
         [DataMember]
-        public String Title { get; set; }
-
-        [DataMember]
         public String Description { get; set; }
 
         [DataMember]
@@ -29,16 +26,13 @@ namespace CSC3045.Agile.Business.Entities
         public String UserNotes { get; set; }
 
         [DataMember]
-        public virtual StoryStatus Status { get; set; }
+        public StoryStatus Status { get; set; }
 
         [DataMember]
-        public virtual ISet<AcceptanceCriteria> AcceptanceCriteria { get; set; }
+        public ISet<StoryTask> AssociatedTasks { get; set; }
 
         [DataMember]
-        public ISet<Backlog> AssociatedBacklogs { get; set; }
-
-        [DataMember]
-        public virtual ICollection<StoryTask> AssociatedTasks { get; set; }  
+        public ISet<AcceptanceCriteria> AcceptanceCriteria { get; set; }
 
         #region IIdentifiableEntity members
 

@@ -19,7 +19,7 @@ namespace CSC3045.Agile.Business.Entities
         public int UserStoryId { get; set; }
 
         [DataMember]
-        public virtual Account Owner { get; set; }
+        public Account Owner { get; set; }
 
         [DataMember]
         public String Title { get; set; }
@@ -31,7 +31,7 @@ namespace CSC3045.Agile.Business.Entities
         public int Hours { get; set; }
 
         [DataMember]
-        public virtual StoryStatus CurrentStatus { get; set; }
+        public StoryStatus CurrentStatus { get; set; }
 
         [DataMember]
         public Boolean IsBlocked { get; set; }

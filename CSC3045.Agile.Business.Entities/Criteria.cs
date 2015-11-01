@@ -10,28 +10,23 @@ using Core.Common.Core;
 namespace CSC3045.Agile.Business.Entities
 {
     [DataContract]
-    public class AcceptanceCriteria : EntityBase, IIdentifiableEntity
+    public class Criteria : EntityBase, IIdentifiableEntity
     {
         [DataMember]
-        public int AcceptanceCriteriaId { get; set; }
+        public int CriteriaId { get; set; }
 
         [DataMember]
-        public String Scenario { get; set; }
+        public String CriteriaType { get; set; }
 
         [DataMember]
-        public ISet<Criteria> Criteria { get; set; }
-
-        [DataMember]
-        public Boolean IsSatisfied { get; set; }
+        public String CriteriaOutline { get; set; }
 
         #region IIdentifiableEntity members
 
-        public ISet<UserStory> AssociatedUserStories { get; set; }
-
         public int EntityId
         {
-            get { return AcceptanceCriteriaId; }
-            set { AcceptanceCriteriaId = value; }
+            get { return CriteriaId; }
+            set { CriteriaId = value; }
         }
 
         #endregion
