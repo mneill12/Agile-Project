@@ -41,7 +41,7 @@ namespace CSC3045.Agile.Data.Data_Repositories
             }
         }
 
-        public ICollection<Account> GetAccounts()
+        public IEnumerable<Account> GetAccounts()
         {
             using (var db = new Csc3045AgileContext())
             {
@@ -85,7 +85,7 @@ namespace CSC3045.Agile.Data.Data_Repositories
         }
 
         // Gets accounts that have a particular user-role attached
-        public ICollection<Account> GetByUserRole(UserRole role)
+        public IEnumerable<Account> GetByUserRole(UserRole role)
         {
             using (var db = new Csc3045AgileContext())
             {

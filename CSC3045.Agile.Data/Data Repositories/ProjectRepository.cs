@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.Data.Entity.Migrations;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
-using Core.Common.Data;
 using CSC3045.Agile.Business.Entities;
 using CSC3045.Agile.Data.Contracts.Repository_Interfaces;
+using System.Data.Entity;
 
 namespace CSC3045.Agile.Data.Data_Repositories
 {
@@ -56,25 +50,25 @@ namespace CSC3045.Agile.Data.Data_Repositories
 
         public IEnumerable<Project> GetManagedProjectsByAccount(int projectManagerId)
         {
-            using(Csc3045AgileContext entityContext = new Csc3045AgileContext())
+            using(var entityContext = new Csc3045AgileContext())
             {
-                var query = (from p in entityContext.ProjectSet
-                             where p.ProjectManager.AccountId == projectManagerId
-                             select p);
-
-                return query.AsEnumerable<Project>();
+                return entityContext.ProjectSet
+                    .Include(a => a.ProjectManager)
+                    .Include(a => a.ProductOwner)
+                    .Where(a => a.ProjectManager.AccountId == projectManagerId)
+                    .ToList();
             }
         }
 
         public IEnumerable<Project> GetOwnedProjectsByAccount(int productOwnerId)
         {
-            using (Csc3045AgileContext entityContext = new Csc3045AgileContext())
+            using (var entityContext = new Csc3045AgileContext())
             {
-                var query = (from p in entityContext.ProjectSet
-                             where p.ProductOwner.AccountId == productOwnerId
-                             select p);
-
-                return query.AsEnumerable<Project>();
+                return entityContext.ProjectSet
+                    .Include(a => a.ProjectManager)
+                    .Include(a => a.ProductOwner)
+                    .Where(a => a.ProductOwner.AccountId == productOwnerId)
+                    .ToList();
             }
         }
     }

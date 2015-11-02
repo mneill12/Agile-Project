@@ -54,13 +54,13 @@ namespace CSC3045.Agile.Business.Services
          * Get all accounts, along with associated user roles
          * @return accounts - A collection of Account objects, with user roles
          */
-        public ICollection<Account> GetAllAccounts()
+        public IEnumerable<Account> GetAllAccounts()
         {
             return ExecuteFaultHandledOperation(() =>
             {
                 IAccountRepository accountRepository = _DataRepositoryFactory.GetDataRepository<IAccountRepository>();
 
-                ICollection<Account> accounts = accountRepository.GetAccounts();
+                IEnumerable<Account> accounts = accountRepository.GetAccounts();
                 if (accounts == null)
                 {
                     NotFoundException ex = new NotFoundException("Error retrieving Accounts from database");

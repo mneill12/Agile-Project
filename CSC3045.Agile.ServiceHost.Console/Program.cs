@@ -89,7 +89,7 @@ namespace CSC3045.Agile.ServiceHost.Console
             {
 
                 ICollection<UserStory> userStorySet = GetUserStories();
-                ICollection<Account> accountSet = GetAccounts(true);
+                IEnumerable<Account> accountSet = GetAccounts(true);
 
                 foreach (UserStory userStoryTest in userStorySet)
                 {
@@ -202,7 +202,7 @@ namespace CSC3045.Agile.ServiceHost.Console
 
         // Eager loading query to load associated entities when retrieving Accounts
         // @todo : move to account repo if/when CF DB works on all machines
-        static ICollection<Account> GetAccounts(bool withChildren)
+        static IEnumerable<Account> GetAccounts(bool withChildren)
         {
             AccountService service = new AccountService();
 

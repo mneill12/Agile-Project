@@ -35,22 +35,6 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public int UserStoryId
-        {
-            get
-            {
-                return _UserStoryId;
-            }
-            set
-            {
-                if (_UserStoryId != value)
-                {
-                    _UserStoryId = value;
-                    OnPropertyChanged(() => UserStoryId);
-                }
-            }
-        }
-
         public Account Owner
         {
             get
