@@ -55,8 +55,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CSC3045AgileContext.cs" />
+    <Compile Include="CSC3045AgileCustomDatabaseInitialiser.cs" />
     <Compile Include="Data Repositories\AccountRepository.cs" />
+    <Compile Include="Data Repositories\AcceptanceCriteriaRepository.cs" />
+    <Compile Include="Data Repositories\PlanningPokerStoryRepository.cs" />
+    <Compile Include="Data Repositories\PlanningPokerSessionRepository.cs" />
     <Compile Include="Data Repositories\BacklogRepository.cs" />
+    <Compile Include="Data Repositories\BurndownPointRepository.cs" />
+    <Compile Include="Data Repositories\UserStoryRepository.cs" />
+    <Compile Include="Data Repositories\UserRoleRepository.cs" />
+    <Compile Include="Data Repositories\StoryTaskRepository.cs" />
+    <Compile Include="Data Repositories\StoryStatusRepository.cs" />
     <Compile Include="Data Repositories\ProjectRepository.cs" />
     <Compile Include="Data Repositories\SprintRepository.cs" />
     <Compile Include="DataRepositoryBase.cs" />

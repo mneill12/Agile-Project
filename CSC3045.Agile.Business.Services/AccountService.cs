@@ -34,6 +34,40 @@ namespace CSC3045.Agile.Business.Services
 
         #region IAccountService operations
 
+        public ICollection<Account> GetAllAccounts()
+        {
+            return ExecuteFaultHandledOperation(() =>
+            {
+                IAccountRepository accountRepository = _DataRepositoryFactory.GetDataRepository<IAccountRepository>();
+
+                ICollection<Account> accountsWithChildren = accountRepository.GetAllAccounts();
+                if (accountsWithChildren == null)
+                {
+                    NotFoundException ex = new NotFoundException("Error retrieving Accounts from database");
+                    throw new FaultException<NotFoundException>(ex, ex.Message);
+                }
+
+                return accountsWithChildren;
+            });
+        }
+
+        public ICollection<Account> GetAllAccountsWithChildren()
+        {
+            return ExecuteFaultHandledOperation(() =>
+            {
+                IAccountRepository accountRepository = _DataRepositoryFactory.GetDataRepository<IAccountRepository>();
+
+                ICollection<Account> accountsWithChildren = accountRepository.GetAccountsWithChildren();
+                if (accountsWithChildren == null)
+                {
+                    NotFoundException ex = new NotFoundException("Error retrieving Accounts from database");
+                    throw new FaultException<NotFoundException>(ex, ex.Message);
+                }
+
+                return accountsWithChildren;
+            });
+        }
+
         public Account GetAccountInfo(string loginEmail)
         {
             return ExecuteFaultHandledOperation(() =>
