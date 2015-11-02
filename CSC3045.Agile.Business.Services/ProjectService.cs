@@ -86,7 +86,9 @@ namespace CSC3045.Agile.Business.Services
         {
             IProjectRepository projectRepository = _DataRepositoryFactory.GetDataRepository<IProjectRepository>();
 
-            return projectRepository.GetProjectsByAccount(accountId);
+            IEnumerable<Project> projects = projectRepository.GetProjectsByAccount(accountId);
+
+            return projects;
         }
 
         #endregion

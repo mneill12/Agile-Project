@@ -65,5 +65,40 @@ namespace CSC3045.Agile.Business.Services.Tests
 
             Assert.IsTrue(projects == projectsToGet);
         }
+
+        [TestMethod]
+        public void test_get_projects_by_account()
+        {
+            
+
+            ISet<Account> associatedAccounts1 = new HashSet<Account>()
+            {
+                new Account() {AccountId=100},
+                new Account() {AccountId=101},
+                new Account() {AccountId=102}
+            };
+
+            ISet<Account> associatedAccounts2 = new HashSet<Account>()
+            {
+                new Account() {AccountId=200},
+                new Account() {AccountId=201},
+                new Account() {AccountId=202}
+            };
+
+            IEnumerable<Project> projectsToGet = new List<Project>()
+            {
+                new Project() { ProjectId = 1, ProductOwnerId = 1, ProjectManagerId = 12, ProjectName = "testproject1", AssociatedUsers = associatedAccounts1 },
+                new Project() { ProjectId = 2, ProductOwnerId = 2, ProjectManagerId = 12, ProjectName = "testproject2", AssociatedUsers = associatedAccounts2 }
+            };
+
+            Mock<IDataRepositoryFactory> mockDataRepositoryFactory = new Mock<IDataRepositoryFactory>();
+            mockDataRepositoryFactory.Setup(mock => mock.GetDataRepository<IProjectRepository>().GetProjectsByAccount(200)).Returns(projectsToGet);
+
+            ProjectService service = new ProjectService(mockDataRepositoryFactory.Object);
+
+            IEnumerable<Project> projects = service.GetProjectsByAccount(200);
+
+            Assert.IsTrue(projects == projectsToGet);
+        }
     }
 }

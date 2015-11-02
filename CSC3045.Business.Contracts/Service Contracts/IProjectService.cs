@@ -32,6 +32,6 @@ namespace CSC3045.Agile.Business.Contracts.Service_Contracts
 
         [OperationContract]
         [FaultContract(typeof(NotFoundException))]
-        IEnumerable<Project> GetProjectsByAccount(int accountId)
+        IEnumerable<Project> GetProjectsByAccount(int accountId);
     }
 }

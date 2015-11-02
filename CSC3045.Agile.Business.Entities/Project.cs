@@ -33,6 +33,9 @@ namespace CSC3045.Agile.Business.Entities
         [DataMember]
         public ISet<UserStory> AssociatedUserStories { get; set; }
 
+        [DataMember]
+        public ISet<Account> AssociatedUsers { get; set; }
+
         #region IIdentifiableEntity members
 
         public int EntityId
