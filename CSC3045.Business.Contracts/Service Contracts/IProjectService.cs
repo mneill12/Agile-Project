@@ -29,5 +29,9 @@ namespace CSC3045.Agile.Business.Contracts.Service_Contracts
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
         void UpdateProjectInfo(Project project);
+
+        [OperationContract]
+        [FaultContract(typeof(NotFoundException))]
+        IEnumerable<Project> GetProjectsByAccount(int accountId)
     }
 }

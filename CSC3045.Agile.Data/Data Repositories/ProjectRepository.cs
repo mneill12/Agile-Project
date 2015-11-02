@@ -77,5 +77,16 @@ namespace CSC3045.Agile.Data.Data_Repositories
                 return query.AsEnumerable<Project>();
             }
         }
+
+
+        public IEnumerable<Project> GetProjectsByAccount(int accountId)
+        {
+            /*using(CSC3045AgileContext entityContext = new CSC3045AgileContext())
+            {
+                
+            }*/
+
+            throw new NotImplementedException();
+        }
     }
 }

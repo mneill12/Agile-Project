@@ -14,5 +14,6 @@ namespace CSC3045.Agile.Data.Contracts.Repository_Interfaces
         Project GetByProjectId(int projectId);
         IEnumerable<Project> GetManagedProjectsByAccount(int projectManagerId);
         IEnumerable<Project> GetOwnedProjectsByAccount(int productOwnderId);
+        IEnumerable<Project> GetProjectsByAccount(int accountId);
     }
 }
