@@ -60,7 +60,7 @@ namespace CSC3045.Agile.Data.Data_Repositories
 		
 		public Account GetByLogin(string login, string password)
         {
-            using (CSC3045AgileContext entityContext = new CSC3045AgileContext())
+            using (Csc3045AgileContext entityContext = new Csc3045AgileContext())
             {
                 return (from a in entityContext.AccountSet
                         where (a.LoginEmail == login) && (a.Password == password)

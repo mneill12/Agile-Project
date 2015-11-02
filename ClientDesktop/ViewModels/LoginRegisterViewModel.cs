@@ -134,7 +134,7 @@ namespace ClientDesktop.ViewModels
                 {
                     WithClient<IAccountService>(_ServiceFactory.CreateClient<IAccountService>(), accountClient =>
                     {
-                        Account myAccount = accountClient.GetAccountInfo(_LoginEmail, passwordBox.Password);
+                        Account myAccount = accountClient.GetAccountInfoWithPassword(_LoginEmail, passwordBox.Password);
                     });
                 }
                 catch (FaultException ex)

@@ -101,7 +101,7 @@ namespace CSC3045.Agile.Business.Services
             });
         }
 
-        public Account GetAccountInfo(string loginEmail, string password)
+        public Account GetAccountInfoWithPassword(string loginEmail, string password)
         {
             return ExecuteFaultHandledOperation(() =>
             {
@@ -122,12 +122,13 @@ namespace CSC3045.Agile.Business.Services
         {
             if (!IsAccountAlreadyCreated(account.LoginEmail))
             {
-                ExecuteFaultHandledOperation(() =>
+                return ExecuteFaultHandledOperation(() =>
                 {
                     IAccountRepository accountRepository = _DataRepositoryFactory.GetDataRepository<IAccountRepository>();
 
                     return accountRepository.Add(account);
                 });
+
             }
 
             return null;

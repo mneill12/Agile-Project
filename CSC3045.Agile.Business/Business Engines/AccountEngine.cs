@@ -2,6 +2,7 @@
 using System.ComponentModel.Composition;
 using Core.Common.Contracts;
 using CSC3045.Agile.Business.Common;
+using CSC3045.Agile.Business.Entities;
 using CSC3045.Agile.Data.Contracts.Repository_Interfaces;
 
 namespace CSC3045.Agile.Business.Business_Engines
@@ -24,7 +25,7 @@ namespace CSC3045.Agile.Business.Business_Engines
 
             IAccountRepository accountRepository = _DataRepositoryFactory.GetDataRepository<IAccountRepository>();
 
-            if (accountRepository != null)
+            if (accountRepository.GetByLogin(loginEmail) != null)
                 exists = true;
 
             return exists;

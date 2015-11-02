@@ -17,6 +17,10 @@ namespace CSC3045.Agile.Business.Contracts
 
         [OperationContract]
         [FaultContract(typeof(NotFoundException))]
+        Account GetAccountInfoWithPassword(string loginEmail, string password);
+
+        [OperationContract]
+        [FaultContract(typeof(NotFoundException))]
         [TransactionFlow(TransactionFlowOption.Allowed)]
         Account RegisterAccount(Account account);
 
