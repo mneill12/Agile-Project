@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -56,5 +57,25 @@ namespace CSC3045.Agile.Data.Data_Repositories
                     select a).FirstOrDefault();
             }
         }
+
+        // Gets all accounts plus associated userroles
+        public ICollection<Account> GetAccountsWithChildren()
+        {
+            using (var db = new Csc3045AgileContext())
+            {
+                return db.AccountSet
+                    .Include(a => a.UserRoles)
+                    .ToList();
+            }
+        }
+
+        // Gets all accounts plus associated userroles
+        public ICollection<Account> GetAllAccounts()
+        {
+            using (var db = new Csc3045AgileContext())
+            {
+                return db.AccountSet.ToList();
+            }
+        } 
     }
 }

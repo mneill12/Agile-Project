@@ -1,13 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using Core.Common.Core;
 using CSC3045.Agile.Business.Bootstrapper;
 using CSC3045.Agile.Business.Entities;
 using CSC3045.Agile.Business.Services;
 using System.Data.Entity;
+using System.Data.Entity.Core.EntityClient;
 using System.Linq;
+using System.Reflection;
 using System.Security.Principal;
+using Core.Common.Contracts;
+using Core.Common.Extensions;
 using CSC3045.Agile.Data;
+using CSC3045.Agile.Data.Contracts;
+using CSC3045.Agile.Data.Contracts.Repository_Interfaces;
+
 
 namespace CSC3045.Agile.ServiceHost.Console
 {
@@ -15,6 +23,7 @@ namespace CSC3045.Agile.ServiceHost.Console
     {
         static void Main(string[] args)
         {
+
             // Init MEF to use DI with engines/repositories
             ObjectBase.Container = MEFLoader.Init();
 
@@ -26,12 +35,13 @@ namespace CSC3045.Agile.ServiceHost.Console
             System.Console.WriteLine("Initialising CodeFirst Database");
             try
             {
-               
-                System.Console.WriteLine("Successfully created database.");
-                System.Console.WriteLine("Server: (localDb)\v11.0");
-                System.Console.WriteLine("Database: CSC3045_Agile_CF");
-                System.Console.WriteLine("");
-                
+                using (var context = new Csc3045AgileContext())
+                {
+                    System.Console.WriteLine("Successfully created database.");
+                    System.Console.WriteLine("Server:\t" + context.Database.Connection.DataSource);
+                    System.Console.WriteLine("");
+                }
+
                 RunDatabaseTests();
 
                 System.Console.WriteLine();
@@ -80,7 +90,7 @@ namespace CSC3045.Agile.ServiceHost.Console
             {
 
                 ICollection<UserStory> userStorySet = GetUserStories();
-                ICollection<Account> accountSet = GetAccounts();
+                ICollection<Account> accountSet = GetAccounts(true);
 
                 foreach (UserStory userStoryTest in userStorySet)
                 {
@@ -181,6 +191,7 @@ namespace CSC3045.Agile.ServiceHost.Console
         // @todo : move to user story repo if/when CF DB works on all machines
         static ICollection<UserStory> GetUserStories()
         {
+
             using (var db = new Csc3045AgileContext())
             {
                 return db.UserStorySet
@@ -192,14 +203,16 @@ namespace CSC3045.Agile.ServiceHost.Console
 
         // Eager loading query to load associated entities when retrieving Accounts
         // @todo : move to account repo if/when CF DB works on all machines
-        static ICollection<Account> GetAccounts()
+        static ICollection<Account> GetAccounts(bool withChildren)
         {
-            using (var db = new Csc3045AgileContext())
+            AccountService service = new AccountService();
+
+            if (withChildren)
             {
-                return db.AccountSet
-                    .Include(a => a.UserRoles)
-                    .ToList();
+                return service.GetAllAccountsWithChildren();
             }
+
+            return service.GetAllAccounts();
         } 
 
     }

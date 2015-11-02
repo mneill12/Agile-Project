@@ -14,7 +14,7 @@ namespace CSC3045.Agile.Data
     public class Csc3045AgileContext : DbContext
     {
         public Csc3045AgileContext()
-            : base("name=CSC3045_Agile_CF")
+            : base("CSC3045GeneratedDB")
         {
 
             Database.SetInitializer<Csc3045AgileContext>(new Csc3045AgileCustomDatabaseInitialiser());
