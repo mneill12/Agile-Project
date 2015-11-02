@@ -38,7 +38,9 @@ namespace CSC3045.Agile.ServiceHost.Console
                 using (var context = new Csc3045AgileContext())
                 {
                     System.Console.WriteLine("Successfully created database.");
-                    System.Console.WriteLine("Server:\t" + context.Database.Connection.DataSource);
+                    System.Console.WriteLine("");
+                    System.Console.WriteLine("Server:\t\t" + context.Database.Connection.DataSource);
+                    System.Console.WriteLine("Database:\tCSC3045GeneratedDB");
                     System.Console.WriteLine("");
                 }
 
