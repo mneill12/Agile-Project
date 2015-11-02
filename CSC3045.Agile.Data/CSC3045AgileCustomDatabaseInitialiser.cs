@@ -102,7 +102,6 @@ namespace CSC3045.Agile.Data
                 PermissionLevel = 3
             });
 
-
             foreach (UserRole usr in defaultRoles) 
             { 
                 context.UserRoleSet.Add(usr);
@@ -139,7 +138,7 @@ namespace CSC3045.Agile.Data
                         Title = "TSK-001",
                         Description = "Setup database for server application, to include user management tables.",
                         Hours = 6,
-                        CurrentStatus = context.StoryStatusSet.Find(0),
+                        CurrentStatus = new StoryStatus() {   StoryStatusName = "To-Do" },
                         IsBlocked = false,
                     },
                     new StoryTask()
@@ -147,7 +146,7 @@ namespace CSC3045.Agile.Data
                         Title = "TSK-002",
                         Description = "Develop server application to accept client connections for user management.",
                         Hours = 8,
-                        CurrentStatus = context.StoryStatusSet.Find(0),
+                        CurrentStatus = new StoryStatus() {   StoryStatusName = "BA-QA" },
                         IsBlocked = false,
                     },
                     new StoryTask()
@@ -155,7 +154,7 @@ namespace CSC3045.Agile.Data
                         Title = "TSK-003",
                         Description = "Develop client application to make connection to server and call database CRUD methods.",
                         Hours = 4,
-                        CurrentStatus = context.StoryStatusSet.Find(0),
+                        CurrentStatus = new StoryStatus() {   StoryStatusName = "Tech QA" },
                         IsBlocked = false,
                     },
                     new StoryTask()
@@ -163,7 +162,7 @@ namespace CSC3045.Agile.Data
                         Title = "TSK-004",
                         Description = "Develop encryption strategy and methods to obfuscate usernames and encrypt passwords.",
                         Hours = 9,
-                        CurrentStatus = context.StoryStatusSet.Find(0),
+                        CurrentStatus = new StoryStatus() {   StoryStatusName = "Done" },
                         IsBlocked = false,
                     },
                     new StoryTask()
@@ -171,7 +170,7 @@ namespace CSC3045.Agile.Data
                         Title = "TSK-005",
                         Description = "Develop UI Registration Screen",
                         Hours = 12,
-                        CurrentStatus = context.StoryStatusSet.Find(0),
+                        CurrentStatus = new StoryStatus() {   StoryStatusName = "User Acceptance Testing" },
                         IsBlocked = false,
                     },
                     new StoryTask()
@@ -179,7 +178,7 @@ namespace CSC3045.Agile.Data
                         Title = "TSK-006",
                         Description = "Create unit and integration tests for user management operations.",
                         Hours = 14,
-                        CurrentStatus = context.StoryStatusSet.Find(0),
+                        CurrentStatus = new StoryStatus() {   StoryStatusName = "Done" },
                         IsBlocked = false,
                     }
                 }

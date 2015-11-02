@@ -34,40 +34,31 @@ namespace CSC3045.Agile.Business.Services
 
         #region IAccountService operations
 
+        /**
+         * Get all accounts, along with associated user roles
+         * @return accounts - A collection of Account objects, with user roles
+         */
         public ICollection<Account> GetAllAccounts()
         {
             return ExecuteFaultHandledOperation(() =>
             {
                 IAccountRepository accountRepository = _DataRepositoryFactory.GetDataRepository<IAccountRepository>();
 
-                ICollection<Account> accountsWithChildren = accountRepository.GetAllAccounts();
-                if (accountsWithChildren == null)
+                ICollection<Account> accounts = accountRepository.GetAccounts();
+                if (accounts == null)
                 {
                     NotFoundException ex = new NotFoundException("Error retrieving Accounts from database");
                     throw new FaultException<NotFoundException>(ex, ex.Message);
                 }
 
-                return accountsWithChildren;
+                return accounts;
             });
         }
 
-        public ICollection<Account> GetAllAccountsWithChildren()
-        {
-            return ExecuteFaultHandledOperation(() =>
-            {
-                IAccountRepository accountRepository = _DataRepositoryFactory.GetDataRepository<IAccountRepository>();
-
-                ICollection<Account> accountsWithChildren = accountRepository.GetAccountsWithChildren();
-                if (accountsWithChildren == null)
-                {
-                    NotFoundException ex = new NotFoundException("Error retrieving Accounts from database");
-                    throw new FaultException<NotFoundException>(ex, ex.Message);
-                }
-
-                return accountsWithChildren;
-            });
-        }
-
+        /**
+         * Get a single account by login (email address)
+         * @parameter loginEmail - the email to retrieve account for
+         */
         public Account GetAccountInfo(string loginEmail)
         {
             return ExecuteFaultHandledOperation(() =>
@@ -85,6 +76,10 @@ namespace CSC3045.Agile.Business.Services
             });
         }
 
+        /**
+         * Update an account
+         * @parameter account - the updated account object to store
+         */
         [OperationBehavior(TransactionScopeRequired = true)]
         public void UpdateAccountInfo(Account account)
         {

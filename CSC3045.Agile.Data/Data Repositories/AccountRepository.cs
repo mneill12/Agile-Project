@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
@@ -14,7 +15,7 @@ using CSC3045.Agile.Data.Contracts.Repository_Interfaces;
 namespace CSC3045.Agile.Data.Data_Repositories
 {
     // Account LINQ Entity Queries, using MEF for DI with the client using the IAccountRepository
-    [Export(typeof(IAccountRepository))]
+    [Export(typeof (IAccountRepository))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class AccountRepository : DataRepositoryBase<Account>, IAccountRepository
     {
@@ -32,34 +33,15 @@ namespace CSC3045.Agile.Data.Data_Repositories
 
         protected override IEnumerable<Account> GetEntities(Csc3045AgileContext entityContext)
         {
-            return from e in entityContext.AccountSet
-                select e;
-        }
-
-        protected override Account GetEntity(Csc3045AgileContext entityContext, int id)
-        {
-            var query = (from e in entityContext.AccountSet
-                where e.AccountId == id
-                select e);
-
-            var results = query.FirstOrDefault();
-
-            return results;
-        }
-
-        // Gets account based on e-mail address instead of Account Id
-        public Account GetByLogin(string login)
-        {
-            using (Csc3045AgileContext entityContext = new Csc3045AgileContext())
+            using (var db = new Csc3045AgileContext())
             {
-                return (from a in entityContext.AccountSet
-                    where a.LoginEmail == login
-                    select a).FirstOrDefault();
+                return db.AccountSet
+                    .Include(a => a.UserRoles)
+                    .ToList();
             }
         }
 
-        // Gets all accounts plus associated userroles
-        public ICollection<Account> GetAccountsWithChildren()
+        protected ICollection<Account> GetAccounts()
         {
             using (var db = new Csc3045AgileContext())
             {
@@ -69,13 +51,39 @@ namespace CSC3045.Agile.Data.Data_Repositories
             }
         }
 
-        // Gets all accounts plus associated userroles
-        public ICollection<Account> GetAllAccounts()
+        protected override Account GetEntity(Csc3045AgileContext entityContext, int id)
         {
             using (var db = new Csc3045AgileContext())
             {
-                return db.AccountSet.ToList();
+                return db.AccountSet
+                    .Include(a => a.UserRoles)
+                    .FirstOrDefault(a => a.AccountId == id);
             }
-        } 
+
+        }
+
+        // Gets account based on e-mail address instead of Account Id
+        public Account GetByLogin(string login)
+        {
+            using (var db = new Csc3045AgileContext())
+            {
+                return db.AccountSet
+                    .Include(a => a.UserRoles)
+                    .FirstOrDefault(a => a.LoginEmail == login);
+            }
+
+        }
+
+        // Gets accounts that have a particular user-role attached
+        public ICollection<Account> GetByUserRole(UserRole role)
+        {
+            using (var db = new Csc3045AgileContext())
+            {
+                return db.AccountSet
+                    .Include(a => a.UserRoles)
+                    .Where(a => a.UserRoles.Contains(role))
+                    .ToList();
+            }
+        }
     }
 }

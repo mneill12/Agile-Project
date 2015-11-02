@@ -129,18 +129,18 @@ namespace CSC3045.Agile.ServiceHost.Console
                             System.Console.WriteLine("\tDescription:\t" + tsk.Description);
                             System.Console.WriteLine("\tHours:\t" + tsk.Hours);
                             System.Console.WriteLine("\tBlocked Status:\t" + tsk.IsBlocked);
-                            //System.Console.WriteLine("\t Status: " + tsk.CurrentStatus.StoryStatusName);
-                            System.Console.WriteLine("\t ===============================================");
+                            System.Console.WriteLine("\tStatus: " + tsk.CurrentStatus.StoryStatusName);
+                            System.Console.WriteLine("\t===============================================");
                         }
 
                         System.Console.WriteLine();
-                        System.Console.WriteLine("\t Acceptance Critera: ");
+                        System.Console.WriteLine("\tAcceptance Critera: ");
                         System.Console.WriteLine();
 
                         foreach (AcceptanceCriteria ac in userStoryTest.AcceptanceCriteria)
                         {
                             System.Console.WriteLine();
-                            System.Console.WriteLine("\t Scenario:\t" + ac.Scenario);
+                            System.Console.WriteLine("\tScenario:\t" + ac.Scenario);
 
                             System.Console.WriteLine();
                             foreach (Criteria cri in ac.Criteria)
