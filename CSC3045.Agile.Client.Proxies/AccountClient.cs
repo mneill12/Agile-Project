@@ -19,6 +19,16 @@ namespace CSC3045.Agile.Client.Proxies
             return Channel.GetAccountInfo(loginEmail);
         }
 
+        public Account GetAccountInfoWithPassword(string loginEmail, string password)
+        {
+            return Channel.GetAccountInfoWithPassword(loginEmail, password);
+        }
+
+        public Account RegisterAccount(Account account)
+        {
+            return Channel.RegisterAccount(account);
+        }
+
         public void UpdateAccountInfo(Account account)
         {
             Channel.UpdateAccountInfo(account);

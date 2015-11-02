@@ -2,6 +2,7 @@
 using System.ComponentModel.Composition;
 using Core.Common.Contracts;
 using CSC3045.Agile.Business.Common;
+using CSC3045.Agile.Business.Entities;
 using CSC3045.Agile.Data.Contracts.Repository_Interfaces;
 
 namespace CSC3045.Agile.Business.Business_Engines
@@ -18,15 +19,15 @@ namespace CSC3045.Agile.Business.Business_Engines
 
         IDataRepositoryFactory _DataRepositoryFactory;
 
-        // TODO: Not sure if this needs to be in a business engine, depends what services will use it.
-        public bool IsAccountAlreadyCreated(String loginEmail)
+        public bool IsAccountAlreadyCreated(string loginEmail)
         {
-            throw new NotImplementedException();
-
             bool exists = false;
 
             IAccountRepository accountRepository = _DataRepositoryFactory.GetDataRepository<IAccountRepository>();
-            
+
+            if (accountRepository.GetByLogin(loginEmail) != null)
+                exists = true;
+
             return exists;
         }
     }

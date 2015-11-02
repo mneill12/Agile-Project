@@ -39,17 +39,10 @@ namespace CSC3045.Agile.ServiceHost.Console
                 {
                     System.Console.WriteLine("Successfully created database.");
                     System.Console.WriteLine("");
-                    System.Console.WriteLine("Server:\t\t" + context.Database.Connection.DataSource);
+                    System.Console.WriteLine("Data Source:\t" + context.Database.Connection.DataSource);
                     System.Console.WriteLine("Database:\tCSC3045GeneratedDB");
                     System.Console.WriteLine("");
                 }
-
-                RunDatabaseTests();
-
-                System.Console.WriteLine();
-                System.Console.WriteLine("Database tests complete!");
-                System.Console.WriteLine("Press [Enter] to exit.");
-                System.Console.ReadLine();
 
             }
             catch (Exception e)
@@ -57,9 +50,11 @@ namespace CSC3045.Agile.ServiceHost.Console
                 System.Console.WriteLine("Error: {0}", e.Message);
                 System.Console.WriteLine("Error: {0}", e.InnerException);
                 System.Console.WriteLine("");
-                System.Console.WriteLine("Press [Enter] to exit.");
-                System.Console.ReadLine();
+
             }
+
+            System.Console.WriteLine("Press [Enter] to exit.");
+            System.Console.ReadLine();
 
             StopService(hostAccountManager, "AccountManager");
         }
@@ -86,9 +81,10 @@ namespace CSC3045.Agile.ServiceHost.Console
             System.Console.WriteLine("Service {0} stopped.", serviceDescription);
         }
 
+        //TODO: Move account and userrole repository tests out of servicehost
         static void RunDatabaseTests()
         {
-            using (var db = new Csc3045AgileContext())
+            using (new Csc3045AgileContext())
             {
 
                 ICollection<UserStory> userStorySet = GetUserStories();

@@ -61,6 +61,10 @@
       <Project>{F6BCFF98-A714-4B7B-978F-23D812D1744A}</Project>
       <Name>Core.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CSC3045.Agile.Business.Common\CSC3045.Agile.Business.Common.csproj">
+      <Project>{7D783F9A-F128-4C31-B021-F1B512A8432E}</Project>
+      <Name>CSC3045.Agile.Business.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CSC3045.Agile.Business.Entities\CSC3045.Agile.Business.Entities.csproj">
       <Project>{02FDF132-B361-49FD-A988-D8A234DD98AA}</Project>
       <Name>CSC3045.Agile.Business.Entities</Name>
