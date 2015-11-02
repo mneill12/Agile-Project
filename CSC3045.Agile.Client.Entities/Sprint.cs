@@ -12,9 +12,9 @@ namespace CSC3045.Agile.Client.Entities
     {
 
         int _SprintId;
-        int _ProjectId;
+        Project _Project;
         int _ScrumMasterId;
-        int _BacklogId;
+        Backlog _Backlog;
         int _SprintNumber;
         String _SprintName;
         DateTime _StartDate;
@@ -36,18 +36,18 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public int ProjectId
+        public Project Project
         {
             get
             {
-                return _ProjectId;
+                return _Project;
             }
             set
             {
-                if (_ProjectId != value)
+                if (_Project != value)
                 {
-                    _ProjectId = value;
-                    OnPropertyChanged(() => ProjectId);
+                    _Project = value;
+                    OnPropertyChanged(() => Project);
                 }
             }
         }
@@ -68,18 +68,18 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public int BacklogId
+        public Backlog Backlog
         {
             get
             {
-                return _BacklogId;
+                return _Backlog;
             }
             set
             {
-                if (_BacklogId != value)
+                if (_Backlog != value)
                 {
-                    _BacklogId = value;
-                    OnPropertyChanged(() => BacklogId);
+                    _Backlog = value;
+                    OnPropertyChanged(() => Backlog);
                 }
             }
         }
@@ -146,24 +146,6 @@ namespace CSC3045.Agile.Client.Entities
                     OnPropertyChanged(() => EndDate);
                 }
             }
-        }
-
-        class SprintValidator : AbstractValidator<Sprint>
-        {
-            public SprintValidator()
-            {
-                RuleFor(obj => obj.ProjectId).NotEmpty();
-                RuleFor(obj => obj.BacklogId).NotEmpty();
-                RuleFor(obj => obj.SprintNumber).GreaterThanOrEqualTo(0);
-                RuleFor(obj => obj.SprintName).NotEmpty();
-                RuleFor(obj => obj.StartDate).NotNull();
-                RuleFor(obj => obj.EndDate).NotNull();
-            }
-        }
-
-        protected override IValidator GetValidator()
-        {
-            return new SprintValidator();
         }
     }
 }

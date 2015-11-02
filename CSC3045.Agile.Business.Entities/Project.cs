@@ -16,7 +16,7 @@ namespace CSC3045.Agile.Business.Entities
         public int ProjectId { get; set; }
 
         [DataMember]
-        public int BacklogId { get; set; }
+        public Backlog Backlog { get; set; }
 
         [DataMember]
         public int ProjectManagerId { get; set; }
@@ -26,6 +26,12 @@ namespace CSC3045.Agile.Business.Entities
 
         [DataMember]
         public String ProjectName { get; set; }
+
+        [DataMember]
+        public DateTime ProjectDeadline { get; set; }
+
+        [DataMember]
+        public ISet<UserStory> AssociatedUserStories { get; set; }
 
         #region IIdentifiableEntity members
 
