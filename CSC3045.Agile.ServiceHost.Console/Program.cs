@@ -23,25 +23,17 @@ namespace CSC3045.Agile.ServiceHost.Console
 
             System.ServiceModel.ServiceHost hostAccountManager = new System.ServiceModel.ServiceHost(typeof(AccountService));
             StartService(hostAccountManager, "AccountManager");
-
-            System.Console.WriteLine("");
-            System.Console.WriteLine("Press [Enter] to initialize database.");
-            System.Console.ReadLine();
-
             System.Console.WriteLine("Initialising CodeFirst Database");
             try
             {
-                InitDb();
+               
                 System.Console.WriteLine("Successfully created database.");
                 System.Console.WriteLine("Server: (localDb)\v11.0");
                 System.Console.WriteLine("Database: CSC3045_Agile_CF");
                 System.Console.WriteLine("");
-                System.Console.WriteLine("Press [Enter] to run database test.");
-                System.Console.ReadLine();
-
+                
                 RunDatabaseTests();
 
-                System.Console.WriteLine();
                 System.Console.WriteLine();
                 System.Console.WriteLine("Database tests complete!");
                 System.Console.WriteLine("Press [Enter] to exit.");
@@ -82,26 +74,6 @@ namespace CSC3045.Agile.ServiceHost.Console
             System.Console.WriteLine("Service {0} stopped.", serviceDescription);
         }
 
-        static void InitDb()
-        {
-            using (var db = new Csc3045AgileContext())
-            {
-                var testAccount = new Account();
-
-                testAccount.AccountId = 99999;
-                testAccount.LoginEmail = "default@email.com";
-                testAccount.FirstName = "Default";
-                testAccount.LastName = "User";
-
-                db.AccountSet.Add(testAccount);
-                db.SaveChanges();
-
-                db.AccountSet.Remove(testAccount);
-                db.SaveChanges();
-
-            } 
-        }
-
         static void RunDatabaseTests()
         {
             using (var db = new Csc3045AgileContext())
@@ -112,79 +84,93 @@ namespace CSC3045.Agile.ServiceHost.Console
 
                 foreach (UserStory userStoryTest in userStorySet)
                 {
-           
-                    System.Console.WriteLine(
-                        "Testing populated UserStory returns associated tasks and acceptance criteria with one DB call");
-                    System.Console.WriteLine(
-                        "=============================================================================================");
-                    System.Console.WriteLine("Story Number:\t" + userStoryTest.StoryNumber);
-                    System.Console.WriteLine("Description:'t" + userStoryTest.Description);
-                    System.Console.WriteLine("Story Points:\t" + userStoryTest.StoryPoints);
-                    System.Console.WriteLine("Status:\t" + userStoryTest.Status.StoryStatusName);
-                    System.Console.WriteLine();
-                    System.Console.WriteLine("\t Tasks:");
-                    System.Console.WriteLine();
-
-                    System.Console.WriteLine("\t===============================================");
-                    foreach (StoryTask tsk in userStoryTest.AssociatedTasks)
-                    {
-                        System.Console.WriteLine("\tTitle:\t" + tsk.Title);
-                        System.Console.WriteLine("\tDescription:\t" + tsk.Description);
-                        System.Console.WriteLine("\tHours:\t" + tsk.Hours);
-                        System.Console.WriteLine("\tBlocked Status:\t" + tsk.IsBlocked);
-                        // System.Console.WriteLine("\t Status: " + tsk.CurrentStatus.StoryStatusName);
-                        System.Console.WriteLine("\t ===============================================");
-                    }
-
-                    System.Console.WriteLine();
-                    System.Console.WriteLine("\t Acceptance Critera: ");
-                    System.Console.WriteLine();
-
-                    foreach (AcceptanceCriteria ac in userStoryTest.AcceptanceCriteria)
-                    {
-                        System.Console.WriteLine();
-                        System.Console.WriteLine("\t Scenario:\t" + ac.Scenario);
-
-                        System.Console.WriteLine();
-                        foreach (Criteria cri in ac.Criteria)
-                        {
-                            System.Console.WriteLine("\t " + cri.CriteriaType);
-                            System.Console.WriteLine("\t " + cri.CriteriaOutline);
-                            System.Console.WriteLine();
-                        }
-
-                        System.Console.WriteLine("\t Satisfied?:\t" + ac.IsSatisfied);
-                    }
+                    System.Console.WriteLine("Default user story: \t\t\t\t\t\t" + userStoryTest.StoryNumber);
+                    System.Console.WriteLine("Associated Task Count: \t\t\t\t\t\t" + userStoryTest.AssociatedTasks.Count());
+                    System.Console.WriteLine("Associated Acceptance Criteria Count: \t\t\t\t" + userStoryTest.AcceptanceCriteria.Count());
                 }
 
                 System.Console.WriteLine();
-                System.Console.WriteLine(
-                        "=============================================================================================");
-                System.Console.WriteLine(
-                        "Testing retrieving Account entities also retrieves associated User Roles for each account");
-                System.Console.WriteLine(
-                        "=============================================================================================");
-                System.Console.WriteLine();
-
-                foreach (Account account in accountSet)
+                System.Console.WriteLine("Database checks complete, view complete data? \t\t\t[y = Yes, n = No]");
+                var input = System.Console.ReadLine();
+                if (null != input && input.Contains("y"))
                 {
-                    System.Console.WriteLine("Full Name: \t\t\t" + account.FirstName + " " + account.LastName);
-                    System.Console.WriteLine("Login Email:\t\t\t" + account.LoginEmail);
-                    System.Console.WriteLine("Password:\t\t\t" + account.Password);
-                    System.Console.WriteLine();
-                    System.Console.WriteLine("\tUser Roles:");
-                    System.Console.WriteLine();
-                    foreach (UserRole role in account.UserRoles)
+
+                    foreach (UserStory userStoryTest in userStorySet)
                     {
 
-                        System.Console.WriteLine("\tRole:\t\t\t\t" + role.UserRoleName);
-                        System.Console.WriteLine("\tPermission Level:\t\t" + role.PermissionLevel);
+                        System.Console.WriteLine(
+                            "Testing populated UserStory returns associated tasks and acceptance criteria with one DB call");
+                        System.Console.WriteLine(
+                            "=============================================================================================");
+                        System.Console.WriteLine("Story Number:\t" + userStoryTest.StoryNumber);
+                        System.Console.WriteLine("Description:'t" + userStoryTest.Description);
+                        System.Console.WriteLine("Story Points:\t" + userStoryTest.StoryPoints);
+                        System.Console.WriteLine("Status:\t" + userStoryTest.Status.StoryStatusName);
                         System.Console.WriteLine();
+                        System.Console.WriteLine("\t Tasks:");
+                        System.Console.WriteLine();
+
+                        System.Console.WriteLine("\t===============================================");
+                        foreach (StoryTask tsk in userStoryTest.AssociatedTasks)
+                        {
+                            System.Console.WriteLine("\tTitle:\t" + tsk.Title);
+                            System.Console.WriteLine("\tDescription:\t" + tsk.Description);
+                            System.Console.WriteLine("\tHours:\t" + tsk.Hours);
+                            System.Console.WriteLine("\tBlocked Status:\t" + tsk.IsBlocked);
+                            //System.Console.WriteLine("\t Status: " + tsk.CurrentStatus.StoryStatusName);
+                            System.Console.WriteLine("\t ===============================================");
+                        }
+
+                        System.Console.WriteLine();
+                        System.Console.WriteLine("\t Acceptance Critera: ");
+                        System.Console.WriteLine();
+
+                        foreach (AcceptanceCriteria ac in userStoryTest.AcceptanceCriteria)
+                        {
+                            System.Console.WriteLine();
+                            System.Console.WriteLine("\t Scenario:\t" + ac.Scenario);
+
+                            System.Console.WriteLine();
+                            foreach (Criteria cri in ac.Criteria)
+                            {
+                                System.Console.WriteLine("\t " + cri.CriteriaType);
+                                System.Console.WriteLine("\t " + cri.CriteriaOutline);
+                                System.Console.WriteLine();
+                            }
+
+                            System.Console.WriteLine("\t Satisfied?:\t" + ac.IsSatisfied);
+                        }
                     }
 
                     System.Console.WriteLine();
+                    System.Console.WriteLine(
+                        "=============================================================================================");
+                    System.Console.WriteLine(
+                        "Testing retrieving Account entities also retrieves associated User Roles for each account");
+                    System.Console.WriteLine(
+                        "=============================================================================================");
+                    System.Console.WriteLine();
 
-                    
+                    foreach (Account account in accountSet)
+                    {
+                        System.Console.WriteLine("Full Name: \t\t\t" + account.FirstName + " " + account.LastName);
+                        System.Console.WriteLine("Login Email:\t\t\t" + account.LoginEmail);
+                        System.Console.WriteLine("Password:\t\t\t" + account.Password);
+                        System.Console.WriteLine();
+                        System.Console.WriteLine("\tUser Roles:");
+                        System.Console.WriteLine();
+                        foreach (UserRole role in account.UserRoles)
+                        {
+
+                            System.Console.WriteLine("\tRole:\t\t\t\t" + role.UserRoleName);
+                            System.Console.WriteLine("\tPermission Level:\t\t" + role.PermissionLevel);
+                            System.Console.WriteLine();
+                        }
+
+                        System.Console.WriteLine();
+
+
+                    }
                 }
 
             }
