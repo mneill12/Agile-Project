@@ -8,12 +8,12 @@ namespace CSC3045.Agile.Client.Entities
 {
     public class Account : ObjectBase
     {
-        int _AccountId;
-        string _LoginEmail;
-        string _Password;
-        string _FirstName;
-        string _LastName;
-        ISet<UserRole> _UserRoles;
+        private int _AccountId;
+        private string _LoginEmail;
+        private string _Password;
+        private string _FirstName;
+        private string _LastName;
+        private ISet<UserRole> _UserRoles;
 
         public int AccountId
         {

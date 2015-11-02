@@ -9,12 +9,10 @@ namespace CSC3045.Agile.Client.Entities
 {
     public class BurndownPoint : ObjectBase
     {
-        int _BurndownPointId;
-        int _ProjectId;
-        int _SprintId;
-        DateTime _BurndownPointDate;
-        int _PointsRemaining;
-        int _HoursRemaining;
+        private int _BurndownPointId;
+        private DateTime _BurndownPointDate;
+        private int _PointsRemaining;
+        private int _HoursRemaining;
 
         public int BurndownPointId
         {
@@ -25,32 +23,6 @@ namespace CSC3045.Agile.Client.Entities
                 {
                     _BurndownPointId = value;
                     OnPropertyChanged(() => BurndownPointId);
-                }
-            }
-        }
-
-        public int ProjectId
-        {
-            get { return _ProjectId; }
-            set
-            {
-                if (_ProjectId != value)
-                {
-                    _ProjectId = value;
-                    OnPropertyChanged(() => ProjectId);
-                }
-            }
-        }
-
-        public int SprintId
-        {
-            get { return _SprintId; }
-            set
-            {
-                if (_SprintId != value)
-                {
-                    _SprintId = value;
-                    OnPropertyChanged(() => SprintId);
                 }
             }
         }

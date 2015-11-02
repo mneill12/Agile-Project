@@ -39,8 +39,9 @@ namespace CSC3045.Agile.ServiceHost.Console
                 {
                     System.Console.WriteLine("Successfully created database.");
                     System.Console.WriteLine("");
-                    System.Console.WriteLine("Data Source:\t" + context.Database.Connection.DataSource);
-                    System.Console.WriteLine("Database:\tCSC3045GeneratedDB");
+                    System.Console.WriteLine("Data Source:\t\t" + context.Database.Connection.DataSource);
+                    System.Console.WriteLine("Database:\t\tCSC3045GeneratedDB");
+                    System.Console.WriteLine("Connection String:\t" + context.Database.Connection.ConnectionString);
                     System.Console.WriteLine("");
                 }
 
@@ -207,7 +208,7 @@ namespace CSC3045.Agile.ServiceHost.Console
 
             if (withChildren)
             {
-                return service.GetAllAccountsWithChildren();
+                return service.GetAllAccounts();
             }
 
             return service.GetAllAccounts();

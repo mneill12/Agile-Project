@@ -10,7 +10,7 @@ using Core.Common.Core;
 namespace CSC3045.Agile.Business.Entities
 {
     [DataContract]
-    public class Project : EntityBase, IIdentifiableEntity, IAccountOwnedEntity
+    public class Project : EntityBase, IIdentifiableEntity
     {
         [DataMember]
         public int ProjectId { get; set; }
@@ -19,10 +19,10 @@ namespace CSC3045.Agile.Business.Entities
         public Backlog Backlog { get; set; }
 
         [DataMember]
-        public int ProjectManagerId { get; set; }
+        public Account ProjectManager { get; set; }
 
         [DataMember]
-        public int ProductOwnerId { get; set; }
+        public Account ProductOwner { get; set; }
 
         [DataMember]
         public String ProjectName { get; set; }
@@ -31,7 +31,7 @@ namespace CSC3045.Agile.Business.Entities
         public DateTime ProjectDeadline { get; set; }
 
         [DataMember]
-        public ISet<UserStory> AssociatedUserStories { get; set; }
+        public ISet<Sprint> Sprints { get; set; } 
 
         #region IIdentifiableEntity members
 
@@ -43,13 +43,5 @@ namespace CSC3045.Agile.Business.Entities
 
         #endregion
 
-        #region IAccountOwnedEntity members
-
-        int IAccountOwnedEntity.OwnerAccountId
-        {
-            get { return ProjectManagerId; }
-        }
-
-        #endregion
     }
 }

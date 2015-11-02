@@ -10,26 +10,20 @@ using Core.Common.Core;
 namespace CSC3045.Agile.Business.Entities
 {
     [DataContract]
-    public class BurndownPoint : EntityBase, IIdentifiableEntity
+    public class CurrentStatus : EntityBase, IIdentifiableEntity
     {
         [DataMember]
-        public int BurndownPointId { get; set; }
+        public int StoryStatusId { get; set; }
 
         [DataMember]
-        public DateTime BurndownPointDate { get; set; }
-
-        [DataMember]
-        public int PointsRemaining { get; set; }
-
-        [DataMember]
-        public int HoursRemaining { get; set; }
+        public String StoryStatusName { get; set; }
 
         #region IIdentifiableEntity members
 
         public int EntityId
         {
-            get { return BurndownPointId; }
-            set { BurndownPointId = value; }
+            get { return StoryStatusId; }
+            set { StoryStatusId = value; }
         }
 
         #endregion

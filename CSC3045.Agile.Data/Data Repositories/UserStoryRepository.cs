@@ -49,21 +49,41 @@ namespace CSC3045.Agile.Data.Data_Repositories
             return results;
         }
 
-        protected IEnumerable<UserStory> GetEntitiesWithChildren(Csc3045AgileContext entityContext)
+        protected ICollection<UserStory> GetUserStories()
         {
-            return entityContext.UserStorySet
-                .Include(s => s.Status)
-                .Include(s => s.AssociatedTasks.Select(p => p.CurrentStatus))
-                .Include(s => s.AcceptanceCriteria.Select(p => p.Criteria)).ToList();
+            using (var entityContext = new Csc3045AgileContext())
+            {
+                return entityContext.UserStorySet
+                    .Include(s => s.Status)
+                    .Include(s => s.AssociatedTasks.Select(p => p.CurrentStatus))
+                    .Include(s => s.AcceptanceCriteria.Select(p => p.Criteria)).ToList();
+            }
         }
 
-        protected UserStory GetEntityWithChildren(Csc3045AgileContext entityContext, int id)
+        protected UserStory GetUserStoryById(int id)
         {
-            return entityContext.UserStorySet
-                .Include(s => s.Status)
-                .Include(s => s.AssociatedTasks.Select(p => p.CurrentStatus))
-                .Include(s => s.AcceptanceCriteria.Select(p => p.Criteria))
-                .FirstOrDefault(s => s.UserStoryId == id);
+            using (var entityContext = new Csc3045AgileContext())
+            {
+                return entityContext.UserStorySet
+                    .Include(s => s.Status)
+                    .Include(s => s.AssociatedTasks.Select(p => p.CurrentStatus))
+                    .Include(s => s.AcceptanceCriteria.Select(p => p.Criteria))
+                    .FirstOrDefault(s => s.UserStoryId == id);
+            }
         }
+
+        protected ICollection<UserStory> GetUserStoriesByStatus(CurrentStatus status)
+        {
+            using (var entityContext = new Csc3045AgileContext())
+            {
+                return entityContext.UserStorySet
+                    .Include(s => s.Status)
+                    .Include(s => s.AssociatedTasks.Select(p => p.CurrentStatus))
+                    .Include(s => s.AcceptanceCriteria.Select(p => p.Criteria))
+                    .Where(s => s.Status == status)
+                    .ToList();
+            }
+        }
+
     }
 }

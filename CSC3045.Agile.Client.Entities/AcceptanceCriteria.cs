@@ -10,10 +10,10 @@ namespace CSC3045.Agile.Client.Entities
 {
     public class AcceptanceCriteria : ObjectBase
     {
-        int _acceptanceCriteriaId;
+        private int _acceptanceCriteriaId;
         private string _scenario;
-        ISet<String> _criteria;
-        bool _isSatisfied;
+        private ISet<Criteria> _criteria;
+        private bool _isSatisfied;
 
         public int AcceptanceCriteriaId
         {
@@ -47,7 +47,7 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public ISet<String> Criteria
+        public ISet<Criteria> Criteria
         {
             get
             {

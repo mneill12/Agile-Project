@@ -28,8 +28,6 @@ namespace CSC3045.Agile.Business.Entities
         [DataMember]
         public ISet<UserRole> UserRoles { get; set; }
 
-        public virtual ISet<PlanningPokerSession> PlanningPokerSessions { get; set; }
-
         #region IIdentifiableEntity members
 
         public int EntityId

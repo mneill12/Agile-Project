@@ -10,9 +10,9 @@ namespace CSC3045.Agile.Client.Entities
 {
     public class UserRole : ObjectBase
     {
-        int _UserRoleId;
-        string _UserRoleName;
-        int _PermissionLevel;
+        private int _UserRoleId;
+        private string _UserRoleName;
+        private int _PermissionLevel;
 
         public int UserRoleId
         {

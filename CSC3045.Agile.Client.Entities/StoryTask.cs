@@ -10,15 +10,14 @@ namespace CSC3045.Agile.Client.Entities
 {
     public class StoryTask : ObjectBase
     {
-        int _StoryTaskId;
-        int _UserStoryId;
-        Account _Owner;
-        string _Title;
-        string _Description;
-        int _Hours;
-        StoryStatus _CurrentStatus;
-        bool _IsBlocked;
-        string _UserNotes;
+        private int _StoryTaskId;
+        private Account _Owner;
+        private string _Title;
+        private string _Description;
+        private int _Hours;
+        private CurrentStatus _CurrentStatus;
+        private bool _IsBlocked;
+        private string _UserNotes;
 
         public int StoryTaskId
         {
@@ -117,7 +116,7 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public StoryStatus CurrentStatus
+        public CurrentStatus CurrentStatus
         {
             get
             {

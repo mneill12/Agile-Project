@@ -34,9 +34,7 @@ namespace CSC3045.Agile.Data
 
         public DbSet<PlanningPokerSession> PlanningPokerSessionSet { get; set; }
 
-        public DbSet<PlanningPokerStory> PlanningPokerStorySet { get; set; }
-
-        public DbSet<StoryStatus> StoryStatusSet { get; set; }
+        public DbSet<CurrentStatus> StoryStatusSet { get; set; }
 
         public DbSet<StoryTask> StoryTaskSet { get; set; }
 
@@ -78,10 +76,7 @@ namespace CSC3045.Agile.Data
             modelBuilder.Entity<PlanningPokerSession>()
                 .HasKey<int>(e => e.PlanningPokerSessionId).Ignore(e => e.EntityId);
 
-            modelBuilder.Entity<PlanningPokerStory>()
-                .HasKey<int>(e => e.PlanningPokerStoryId).Ignore(e => e.EntityId);
-
-            modelBuilder.Entity<StoryStatus>()
+            modelBuilder.Entity<CurrentStatus>()
                 .HasKey<int>(e => e.StoryStatusId).Ignore(e => e.EntityId);
 
             modelBuilder.Entity<StoryTask>()

@@ -59,7 +59,7 @@ namespace CSC3045.Agile.Data.Data_Repositories
             using(Csc3045AgileContext entityContext = new Csc3045AgileContext())
             {
                 var query = (from p in entityContext.ProjectSet
-                             where p.ProjectManagerId == projectManagerId
+                             where p.ProjectManager.AccountId == projectManagerId
                              select p);
 
                 return query.AsEnumerable<Project>();
@@ -71,7 +71,7 @@ namespace CSC3045.Agile.Data.Data_Repositories
             using (Csc3045AgileContext entityContext = new Csc3045AgileContext())
             {
                 var query = (from p in entityContext.ProjectSet
-                             where p.ProductOwnerId == productOwnerId
+                             where p.ProductOwner.AccountId == productOwnerId
                              select p);
 
                 return query.AsEnumerable<Project>();

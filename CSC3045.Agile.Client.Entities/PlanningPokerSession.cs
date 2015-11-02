@@ -9,9 +9,10 @@ namespace CSC3045.Agile.Client.Entities
 {
     public class PlanningPokerSession : ObjectBase
     {
-        int _PlanningPokerSessionId;
-        DateTime _StartTime;
-        ISet<Account> _InvitedAccountSet;
+        private int _PlanningPokerSessionId;
+        private DateTime _StartTime;
+        private ISet<Account> _InvitedAccountSet;
+        private ISet<UserStory> _UserStories; 
 
         public int PlanningPokerSessionId
         {
@@ -48,6 +49,19 @@ namespace CSC3045.Agile.Client.Entities
                 {
                     _InvitedAccountSet = value;
                     OnPropertyChanged(() => InvitedAccountSet);
+                }
+            }
+        }
+
+        public ISet<UserStory> UserStories
+        {
+            get { return _UserStories; }
+            set
+            {
+                if (_UserStories != value)
+                {
+                    _UserStories = value;
+                    OnPropertyChanged(() => UserStories);
                 }
             }
         }

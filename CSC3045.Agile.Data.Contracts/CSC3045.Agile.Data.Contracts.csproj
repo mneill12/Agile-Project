@@ -54,7 +54,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Repository Interfaces\IPlanningPokerStoryRepository.cs" />
     <Compile Include="Repository Interfaces\IPlanningPokerSessionRepository.cs" />
     <Compile Include="Repository Interfaces\IBurndownPointRepository.cs" />
     <Compile Include="Repository Interfaces\IAcceptanceCriteriaRepository.cs" />

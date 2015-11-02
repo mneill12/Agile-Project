@@ -11,14 +11,13 @@ namespace CSC3045.Agile.Client.Entities
     public class Sprint : ObjectBase
     {
 
-        int _SprintId;
-        Project _Project;
-        int _ScrumMasterId;
-        Backlog _Backlog;
-        int _SprintNumber;
-        String _SprintName;
-        DateTime _StartDate;
-        DateTime _EndDate;
+        private int _SprintId;
+        private Account _ScrumMaster;
+        private Backlog _Backlog;
+        private int _SprintNumber;
+        private String _SprintName;
+        private DateTime _StartDate;
+        private DateTime _EndDate;
 
         public int SprintId
         {
@@ -36,34 +35,15 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public Project Project
+        public Account ScrumMaster
         {
-            get
-            {
-                return _Project;
-            }
+            get { return _ScrumMaster; }
             set
             {
-                if (_Project != value)
+                if (_ScrumMaster != value)
                 {
-                    _Project = value;
-                    OnPropertyChanged(() => Project);
-                }
-            }
-        }
-
-        public int ScrumMasterId
-        {
-            get
-            {
-                return _ScrumMasterId;
-            }
-            set
-            {
-                if (_ScrumMasterId != value)
-                {
-                    _ScrumMasterId = value;
-                    OnPropertyChanged(() => ScrumMasterId);
+                    _ScrumMaster = value;
+                    OnPropertyChanged(() => ScrumMaster);
                 }
             }
         }

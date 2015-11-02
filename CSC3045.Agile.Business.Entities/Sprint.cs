@@ -11,16 +11,13 @@ using Core.Common.Core;
 namespace CSC3045.Agile.Business.Entities
 {
     [DataContract]
-    public class Sprint : EntityBase, IIdentifiableEntity, IAccountOwnedEntity
+    public class Sprint : EntityBase, IIdentifiableEntity
     {
         [DataMember]
         public int SprintId { get; set; }
 
         [DataMember]
-        public Project Project { get; set; }
-
-        [DataMember]
-        public int ScrumMasterId { get; set; }
+        public Account ScrumMaster { get; set; }
 
         [DataMember]
         public Backlog Backlog { get; set; }
@@ -36,15 +33,6 @@ namespace CSC3045.Agile.Business.Entities
 
         [DataMember]
         public DateTime EndDate { get; set; }
-
-        #region IIdentifiableEntity members
-
-        int IAccountOwnedEntity.OwnerAccountId
-        {
-            get { return ScrumMasterId; }
-        }
-
-        #endregion
 
         #region IIdentifiableEntity members
 
