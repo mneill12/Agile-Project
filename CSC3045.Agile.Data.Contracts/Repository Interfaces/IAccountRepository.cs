@@ -14,5 +14,6 @@ namespace CSC3045.Agile.Data.Contracts.Repository_Interfaces
         Account GetByLogin(string login);
         ICollection<Account> GetByUserRole(UserRole role);
         ICollection<Account> GetAccounts();
+		Account GetByLogin(string login, string password);
     }
 }

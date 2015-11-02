@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:ClientDesktop.Views"
              xmlns:core="CSC3045AgileCore">
     <Grid>
-        <Grid Width="800" Background="LightSlateGray" Margin="0,0,0,0" Grid.ColumnSpan="2">
+        <Grid Width="1280" Height="960" Background="LightSlateGray" Margin="0,0,0,0" Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
@@ -33,21 +33,21 @@
                         <RowDefinition Height="1*"></RowDefinition>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" Margin="10,10,10,0" Text="Username:" FontSize="15"></TextBlock>
-                    <TextBox Grid.Row="0" Margin="10,20,10,0" Name="UsernameLoginTxt" Height="20"></TextBox>
+                    <TextBlock Grid.Row="0" Margin="10,10,10,0" Text="Email:" FontSize="15"></TextBlock>
+                    <TextBox Grid.Row="0" Margin="10,20,10,0" Name="EmailLoginTxt" Height="20" Text="{Binding LoginEmail}"></TextBox>
 
                     <TextBlock Grid.Row="1" Margin="10,10,10,0" Text="Password:" FontSize="15"></TextBlock>
-                    <TextBox Grid.Row="1" Margin="10,20,10,0" Name="PasswordLoginTxt" Height="20"></TextBox>
+                    <PasswordBox Grid.Row="1" Margin="10,20,10,0" Name="LoginPasswordBox" Height="20"></PasswordBox>
 
-                    <Button Grid.Row="2" Height="50" Width="350" Margin="0,0,0,0" Padding="10" Background="White" Foreground="Black" FontSize="15" Click="LoginButton_Click">Login</Button>
+                    <Button Grid.Row="2" Height="50" Width="350" Margin="0,0,0,0" Padding="10" Background="White" Foreground="Black" FontSize="15" Command="{Binding AccountLogin}" CommandParameter="{Binding ElementName=LoginPasswordBox}">Login</Button>
 
                     <Border 
                             Grid.Row="2"
                             Margin="0,65,0,0" 
-                            Height="5" 
+                            Height="10" 
                             VerticalAlignment="Top" 
                             BorderBrush="LightSlateGray" 
-                            BorderThickness="5" />
+                            BorderThickness="10" />
 
                     <TextBlock Grid.Row="3" Margin="10,10,10,0" Text="Work Offline" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Center" />
                     <Button Grid.Row="3" Height="20" Width="100" Margin="210,60,0,0" Padding="0" Background="White" Foreground="Black" FontSize="10">Choose XML file</Button>
@@ -63,27 +63,35 @@
                         <RowDefinition Height="1*"></RowDefinition>
                         <RowDefinition Height="1*"></RowDefinition>
                         <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" Margin="10,10,10,0" Text="Name:" FontSize="15" />
-                    <TextBox Grid.Row="0" Margin="10,30,10,0" Name="NameRegTxt" Height="20" />
+                    <TextBlock Grid.Row="0" Margin="10,10,10,0" Text="First Name:" FontSize="15" />
+                    <TextBox Grid.Row="0" Margin="10,30,10,0" Name="FirstNameRegTxt" Height="20" Text="{Binding RegisterFirstName}"/>
 
-                    <TextBlock Grid.Row="1" Margin="10,10,10,0" Text="Email Address:" FontSize="15" />
-                    <TextBox Grid.Row="1" Margin="10,30,10,0" Name="EmailAddressRegTxt" Height="20" />
+                    <TextBlock Grid.Row="1" Margin="10,10,10,0" Text="Last Name:" FontSize="15" />
+                    <TextBox Grid.Row="1" Margin="10,30,10,0" Name="LastNameRegTxt" Height="20" Text="{Binding RegisterLastName}"/>
 
-                    <TextBlock Grid.Row="2" Margin="10,10,10,0" Text="Create New Password:" FontSize="15" />
-                    <TextBox Grid.Row="2" Margin="10,30,10,0" Name="PasswordRegTxt" Height="20" />
+                    <TextBlock Grid.Row="2" Margin="10,10,10,0" Text="Email Address:" FontSize="15" />
+                    <TextBox Grid.Row="2" Margin="10,30,10,0" Name="EmailAddressRegTxt" Height="20" Text="{Binding RegisterEmail}"/>
 
-                    <TextBlock Grid.Row="3" Margin="10,10,10,0" Text="Confirm Password:" FontSize="15" />
-                    <TextBox Grid.Row="3" Margin="10,30,10,0" Name="ConfirmPasswordRegTxt" Height="20" />
+                    <TextBlock Grid.Row="3" Margin="10,10,10,0" Text="Confirm Email Address:" FontSize="15" />
+                    <TextBox Grid.Row="3" Margin="10,30,10,0" Name="ConfirmEmailAddressRegTxt" Height="20" Text="{Binding RegisterConfirmEmail}"/>
 
-                    <TextBlock Grid.Row="4" Margin="10,10,10,0" Text="Register as a" FontSize="15" />
-                    <CheckBox Grid.Row="4" Margin="10,45,0,0" Content="Product Owner"></CheckBox>
-                    <CheckBox Grid.Row="4" Margin="130,45,0,0" Content="Scrummaster"></CheckBox>
-                    <CheckBox Grid.Row="4" Margin="240,45,0,0" Content="Developer"></CheckBox>
+                    <TextBlock Grid.Row="4" Margin="10,10,10,0" Text="Create New Password:" FontSize="15" />
+                    <PasswordBox Grid.Row="4" Margin="10,30,10,0" Name="PasswordRegBox" Height="20" />
 
-                    <Button Grid.Row="5" Height="50" Width="350" Margin="0,20,0,0" Padding="10" Background="White" Foreground="Black" FontSize="15">Register</Button>
+                    <TextBlock Grid.Row="5" Margin="10,10,10,0" Text="Confirm Password:" FontSize="15" />
+                    <PasswordBox Grid.Row="5" Margin="10,30,10,0" Name="ConfirmPasswordRegBox" Height="20"  />
+
+                    <TextBlock Grid.Row="6" Margin="10,10,10,0" Text="Register as a" FontSize="15" />
+                    <CheckBox Grid.Row="6" Margin="10,45,0,0" Content="Product Owner"></CheckBox>
+                    <CheckBox Grid.Row="6" Margin="130,45,0,0" Content="Scrummaster"></CheckBox>
+                    <CheckBox Grid.Row="6" Margin="240,45,0,0" Content="Developer"></CheckBox>
+
+                    <Button Grid.Row="7" Height="50" Width="350" Margin="0,20,0,0" Padding="10" Background="White" Foreground="Black" FontSize="15" Command="{Binding RegisterAccount}" CommandParameter="{Binding ElementName=ConfirmPasswordRegBox}">Register</Button>
                 </Grid>
 
             </Grid>

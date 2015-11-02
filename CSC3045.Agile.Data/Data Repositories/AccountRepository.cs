@@ -41,7 +41,7 @@ namespace CSC3045.Agile.Data.Data_Repositories
             }
         }
 
-        protected ICollection<Account> GetAccounts()
+        public ICollection<Account> GetAccounts()
         {
             using (var db = new Csc3045AgileContext())
             {
@@ -60,6 +60,16 @@ namespace CSC3045.Agile.Data.Data_Repositories
                     .FirstOrDefault(a => a.AccountId == id);
             }
 
+        }
+		
+		public Account GetByLogin(string login, string password)
+        {
+            using (Csc3045AgileContext entityContext = new Csc3045AgileContext())
+            {
+                return (from a in entityContext.AccountSet
+                        where (a.LoginEmail == login) && (a.Password == password)
+                        select a).FirstOrDefault();
+            }
         }
 
         // Gets account based on e-mail address instead of Account Id

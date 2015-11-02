@@ -61,6 +61,10 @@
       <Project>{7D783F9A-F128-4C31-B021-F1B512A8432E}</Project>
       <Name>CSC3045.Agile.Business.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CSC3045.Agile.Business.Entities\CSC3045.Agile.Business.Entities.csproj">
+      <Project>{02FDF132-B361-49FD-A988-D8A234DD98AA}</Project>
+      <Name>CSC3045.Agile.Business.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CSC3045.Agile.Data.Contracts\CSC3045.Agile.Data.Contracts.csproj">
       <Project>{EFD9FF88-099E-417B-A39A-1A358B9008CB}</Project>
       <Name>CSC3045.Agile.Data.Contracts</Name>
