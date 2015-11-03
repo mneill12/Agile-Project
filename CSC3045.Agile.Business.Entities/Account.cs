@@ -22,6 +22,9 @@ namespace CSC3045.Agile.Business.Entities
         [DataMember]
         public string LastName { get; set; }
 
+        [DataMember]
+        public string Password { get; set; }
+
         #region IIdentifiableEntity members
 
         public int EntityId

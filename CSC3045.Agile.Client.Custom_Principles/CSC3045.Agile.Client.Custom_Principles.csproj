@@ -1,17 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DB3EAC9A-09EB-41B5-8935-233160E88CA1}</ProjectGuid>
+    <ProjectGuid>{3EBDA9E6-9DE2-4F3B-9DE7-E13A2C6488A6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CSC3045.Agile.Business.Contracts</RootNamespace>
-    <AssemblyName>CSC3045.Agile.Business.Contracts</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <RootNamespace>CSC3045.Agile.Client.Custom_Principles</RootNamespace>
+    <AssemblyName>CSC3045.Agile.Client.Custom_Principles</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,40 +32,38 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnonymousIdentity - Copy.cs" />
+    <Compile Include="CustomIdentity.cs" />
+    <Compile Include="CustomPrinciple.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service Contracts\IAccountService.cs" />
-    <Compile Include="Service Contracts\IAuthenticationService.cs" />
-    <Compile Include="Service Contracts\IProjectService.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Data Contracts\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core.Common.Contracts\Core.Common.Contracts.csproj">
       <Project>{5f9b5530-f150-4bf0-9d07-0ad8a4c6ef7d}</Project>
       <Name>Core.Common.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Core.Common.ServiceModel\Core.Common.ServiceModel.csproj">
-      <Project>{73FBE0BF-9DB9-498E-8AEF-68210104D0C1}</Project>
-      <Name>Core.Common.ServiceModel</Name>
+    <ProjectReference Include="..\Core.Common.Tests\Core.Common.Tests.csproj">
+      <Project>{3492a5cb-8cb5-46ff-b307-fb6b85d594b1}</Project>
+      <Name>Core.Common.Tests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.Common.UI.Tests\Core.Common.UI.Tests.csproj">
+      <Project>{e2d4ae9f-521d-4d6d-8c95-fda6c1cacb40}</Project>
+      <Name>Core.Common.UI.Tests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.Common.UI\Core.Common.UI.csproj">
+      <Project>{5df27a6c-2466-4baa-b379-90d3d60ad5ba}</Project>
+      <Name>Core.Common.UI</Name>
     </ProjectReference>
     <ProjectReference Include="..\Core.Common\Core.Common.csproj">
-      <Project>{F6BCFF98-A714-4B7B-978F-23D812D1744A}</Project>
+      <Project>{f6bcff98-a714-4b7b-978f-23d812d1744a}</Project>
       <Name>Core.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CSC3045.Agile.Business.Entities\CSC3045.Agile.Business.Entities.csproj">
-      <Project>{02FDF132-B361-49FD-A988-D8A234DD98AA}</Project>
-      <Name>CSC3045.Agile.Business.Entities</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

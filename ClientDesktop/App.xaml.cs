@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Windows;
 using CSC3045.Agile.Client.Bootstrapper;
 using Core.Common.Core;
+using CSC3045.Agile.Client.CustomPrinciples;
 
 namespace ClientDesktop
 {
@@ -14,6 +15,10 @@ namespace ClientDesktop
     {
         protected override void OnStartup(StartupEventArgs e)
         {
+            //Might get this via DI
+            CustomPrincipal customPrincipal = new CustomPrincipal();
+            AppDomain.CurrentDomain.SetThreadPrincipal(customPrincipal);
+
             base.OnStartup(e);
 
             ObjectBase.Container = MEFLoader.Init(new List<ComposablePartCatalog>()

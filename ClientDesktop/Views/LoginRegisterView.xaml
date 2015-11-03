@@ -34,12 +34,12 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Row="0" Margin="10,10,10,0" Text="Username:" FontSize="15"></TextBlock>
-                    <TextBox Grid.Row="0" Margin="10,20,10,0" Name="UsernameLoginTxt" Height="20"></TextBox>
-
+                    <TextBox Grid.Row="0" Margin="10,20,10,0" Text ="{Binding Username}" Name="UsernameLoginTxt" Height="20"></TextBox>
+                       
                     <TextBlock Grid.Row="1" Margin="10,10,10,0" Text="Password:" FontSize="15"></TextBlock>
-                    <TextBox Grid.Row="1" Margin="10,20,10,0" Name="PasswordLoginTxt" Height="20"></TextBox>
+                    <PasswordBox x:Name="PasswordBox" Grid.Row="1" Margin="10,20,10,0" Height="20"></PasswordBox>
 
-                    <Button Grid.Row="2" Height="50" Width="350" Margin="0,0,0,0" Padding="10" Background="White" Foreground="Black" FontSize="15" Click="LoginButton_Click">Login</Button>
+                    <Button Grid.Row="2" Height="50" Width="350" Margin="0,0,0,0" Padding="10" Background="White" Foreground="Black" FontSize="15" Command="{Binding LoginCommand, Mode=OneTime}" CommandParameter="{Binding ElementName=PasswordBox}">Login</Button>
 
                     <Border 
                             Grid.Row="2"

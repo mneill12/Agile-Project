@@ -22,14 +22,14 @@ namespace ClientDesktop
     /// <summary>
     /// Mainwindow wraps all the MVVM architecture
     /// </summary>
-    public partial class MainWindow
+    public partial class MainWindow :MetroWindow
     {
         public MainWindow()
         {
             InitializeComponent();
 
             // Set datacontext, always obtained from MEF using resolve dependencies. Datacontext only needs to be set explicitly once.
-            login.DataContext = ObjectBase.Container.GetExportedValue<LoginRegisterViewModel>();
+           this.DataContext = ObjectBase.Container.GetExportedValue<LoginRegisterViewModel>();
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)

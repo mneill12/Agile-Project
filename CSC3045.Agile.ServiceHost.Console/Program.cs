@@ -14,14 +14,17 @@ namespace CSC3045.Agile.ServiceHost.Console
             System.Console.WriteLine("Starting up services...");
             System.Console.WriteLine("");
 
-            System.ServiceModel.ServiceHost hostAccountManager = new System.ServiceModel.ServiceHost(typeof(AccountService));
-            StartService(hostAccountManager, "AccountManager");
+            System.ServiceModel.ServiceHost hostAccountService = new System.ServiceModel.ServiceHost(typeof(AccountService));
+            StartService(hostAccountService, "AccountManager");
+
+            System.ServiceModel.ServiceHost hostAuthenticationService = new System.ServiceModel.ServiceHost(typeof(AuthenticationService));
+            StartService(hostAuthenticationService, "AccountManager");
 
             System.Console.WriteLine("");
             System.Console.WriteLine("Press [Enter] to exit.");
             System.Console.ReadLine();
 
-            StopService(hostAccountManager, "AccountManager");
+            StopService(hostAuthenticationService, "AccountManager");
         }
 
         static void StartService(System.ServiceModel.ServiceHost host, string serviceDescription)
