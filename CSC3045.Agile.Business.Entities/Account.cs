@@ -26,12 +26,12 @@ namespace CSC3045.Agile.Business.Entities
         public string LastName { get; set; }
 
         [DataMember]
-        public ICollection<UserRole> UserRoles { get; set; }
+        public ISet<UserRole> UserRoles { get; set; }
 
         // Many-to-many declarations
         public virtual ISet<Project> AssocicatedProjects { get; set; }
         public virtual ISet<Sprint> AssociatedSprints { get; set; }
-        public virtual ISet<PlanningPokerSession> AssociiatedPlanningPokerSessions { get; set; } 
+        public virtual ISet<PlanningPokerSession> AssociatedPlanningPokerSessions { get; set; } 
 
         #region IIdentifiableEntity members
 
