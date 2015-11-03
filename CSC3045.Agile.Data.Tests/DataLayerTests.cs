@@ -103,7 +103,7 @@ namespace CSC3045.Agile.Data.Tests
 
         public IEnumerable<Account> GetAccounts()
         {
-            IEnumerable<Account> accounts = _AccountRepository.GetAccounts();
+            IEnumerable<Account> accounts = _AccountRepository.Get();
 
             return accounts;
         } 
@@ -130,7 +130,7 @@ namespace CSC3045.Agile.Data.Tests
             IAccountRepository accountRepository = 
                 _DataRepositoryFactory.GetDataRepository<IAccountRepository>();
 
-            IEnumerable<Account> accounts = accountRepository.GetAccounts();
+            IEnumerable<Account> accounts = accountRepository.Get();
 
             return accounts;
         } 
