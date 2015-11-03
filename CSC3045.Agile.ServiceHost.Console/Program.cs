@@ -204,13 +204,13 @@ namespace CSC3045.Agile.ServiceHost.Console
 
         // Eager loading query to load associated entities when retrieving Accounts
         // @todo : move to account repo if/when CF DB works on all machines
-        static IEnumerable<Account> GetAccounts(bool withChildren)
+        static ICollection<Account> GetAccounts(bool withUserRoles)
         {
             AccountService service = new AccountService();
 
-            if (withChildren)
+            if (withUserRoles)
             {
-                return service.GetAllAccounts();
+                return service.GetAllAccountsWithUserRoles();
             }
 
             return service.GetAllAccounts();

@@ -51,16 +51,37 @@ namespace CSC3045.Agile.Business.Services
         #region IAccountService operations
 
         /**
-         * Get all accounts, along with associated user roles
-         * @return accounts - A collection of Account objects, with user roles
+         * Get all accounts
+         * @return accounts - A collection of Account objects
          */
-        public IEnumerable<Account> GetAllAccounts()
+        public ICollection<Account> GetAllAccounts()
         {
             return ExecuteFaultHandledOperation(() =>
             {
                 IAccountRepository accountRepository = _DataRepositoryFactory.GetDataRepository<IAccountRepository>();
 
-                IEnumerable<Account> accounts = accountRepository.GetAccounts();
+                ICollection<Account> accounts = accountRepository.GetAllAccounts();
+                if (accounts == null)
+                {
+                    NotFoundException ex = new NotFoundException("Error retrieving Accounts from database");
+                    throw new FaultException<NotFoundException>(ex, ex.Message);
+                }
+
+                return accounts;
+            });
+        }
+
+        /**
+         * Get all accounts, along with associated user roles
+         * @return accounts - A collection of Account objects, with user roles
+         */
+        public ICollection<Account> GetAllAccountsWithUserRoles()
+        {
+            return ExecuteFaultHandledOperation(() =>
+            {
+                IAccountRepository accountRepository = _DataRepositoryFactory.GetDataRepository<IAccountRepository>();
+
+                ICollection<Account> accounts = accountRepository.GetAllAccountsWithUserRoles();
                 if (accounts == null)
                 {
                     NotFoundException ex = new NotFoundException("Error retrieving Accounts from database");
@@ -97,13 +118,13 @@ namespace CSC3045.Agile.Business.Services
          * @parameter loginEmail - the login email to check
          * @parameter password - the password that should match a stored one
          */
-        public Account GetAccountInfoWithPassword(string loginEmail, string password)
+        public Account GetAccountInfoWithPasswordAndUserRoles(string loginEmail, string password)
         {
             return ExecuteFaultHandledOperation(() =>
             {
                 IAccountRepository accountRepository = _DataRepositoryFactory.GetDataRepository<IAccountRepository>();
 
-                Account accountEntity = accountRepository.GetByLogin(loginEmail, password);
+                Account accountEntity = accountRepository.GetByLoginAndPasswordWithUserRoles(loginEmail, password);
                 if (accountEntity == null)
                 {
                     AuthenticationException ex = new AuthenticationException(string.Format("An invalid combination was entered or the account cannot be found"));
