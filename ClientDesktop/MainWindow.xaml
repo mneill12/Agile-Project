@@ -27,6 +27,6 @@
     </Controls:MetroWindow.RightWindowCommands>
 
     <Grid>
-        <v:LoginRegisterView x:Name="login" />
+        <v:MainView x:Name="main" />
     </Grid>
 </Controls:MetroWindow>

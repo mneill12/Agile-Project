@@ -7,10 +7,10 @@
     <Application.Resources>
         <ResourceDictionary>
             <DataTemplate DataType="{x:Type vm:LoginRegisterViewModel}">
-                <v:DashboardView />
+                <v:LoginRegisterView />
             </DataTemplate>
             <DataTemplate DataType="{x:Type vm:DashboardViewModel}">
-                <v:LoginRegisterView />
+                <v:DashboardView />
             </DataTemplate>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />

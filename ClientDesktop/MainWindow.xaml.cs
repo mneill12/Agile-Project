@@ -29,7 +29,7 @@ namespace ClientDesktop
             InitializeComponent();
 
             // Set datacontext, always obtained from MEF using resolve dependencies. Datacontext only needs to be set explicitly once.
-            login.DataContext = ObjectBase.Container.GetExportedValue<LoginRegisterViewModel>();
+            main.DataContext = ObjectBase.Container.GetExportedValue<MainViewModel>();
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
