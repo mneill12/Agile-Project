@@ -38,6 +38,7 @@ namespace CSC3045.Agile.Data.Data_Repositories
             return results;
         }
 
+        //TODO @Marty - Is there a reason for this? GetEntity above does the same thing, as we override EntityId with ProjectId?
         //Gets project based on Project Id
         public Project GetByProjectId(int projectId)
         {

@@ -11,6 +11,9 @@ namespace CSC3045.Agile.Data.Contracts.Repository_Interfaces
     // Interface for custom methods of StoryTaskRepository
     public interface IStoryTaskRepository : IDataRepository<StoryTask>
     {
-       
+        IEnumerable<StoryTask> GetTasksByOwner(Account owner);
+        IEnumerable<StoryTask> GetBlockedTasks();
+        IEnumerable<StoryTask> GetTasksByStatus(CurrentStatus status);
+
     }
 }
