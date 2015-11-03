@@ -16,6 +16,7 @@ using Core.Common.Core;
 using MahApps.Metro.Controls;
 using System.Diagnostics;
 using ClientDesktop.ViewModels;
+using Core.Common.UI.Core;
 
 namespace ClientDesktop
 {
@@ -29,7 +30,7 @@ namespace ClientDesktop
             InitializeComponent();
 
             // Set datacontext, always obtained from MEF using resolve dependencies. Datacontext only needs to be set explicitly once.
-            main.DataContext = ObjectBase.Container.GetExportedValue<MainViewModel>();
+            DataContext = ObjectBase.Container.GetExportedValue<LoginRegisterViewModel>();
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
@@ -37,5 +38,7 @@ namespace ClientDesktop
             Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
             e.Handled = true;
         }
+
+
     }
 }

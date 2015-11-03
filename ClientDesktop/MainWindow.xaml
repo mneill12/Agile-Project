@@ -26,7 +26,5 @@
         </Controls:WindowCommands>
     </Controls:MetroWindow.RightWindowCommands>
 
-    <Grid>
-        <v:MainView x:Name="main" />
-    </Grid>
+    <ContentControl Content="{Binding CurrentViewModel}" />
 </Controls:MetroWindow>

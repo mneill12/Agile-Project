@@ -25,6 +25,8 @@ namespace ClientDesktop.ViewModels
 
             RegisterAccount = new DelegateCommand<PasswordBox>(OnRegisterAccount);
             AccountLogin = new DelegateCommand<PasswordBox>(OnAccountLogin);
+
+            CurrentViewModel = this;
         }
 
         IServiceFactory _ServiceFactory;
@@ -135,6 +137,11 @@ namespace ClientDesktop.ViewModels
                     WithClient<IAccountService>(_ServiceFactory.CreateClient<IAccountService>(), accountClient =>
                     {
                         Account myAccount = accountClient.GetAccountInfoWithPasswordAndUserRoles(_LoginEmail, passwordBox.Password);
+
+                        if (myAccount != null)
+                        {
+                            CurrentViewModel = ObjectBase.Container.GetExportedValue<DashboardViewModel>();
+                        }
                     });
                 }
                 catch (FaultException ex)
@@ -168,6 +175,11 @@ namespace ClientDesktop.ViewModels
                         WithClient<IAccountService>(_ServiceFactory.CreateClient<IAccountService>(), accountClient =>
                         {
                             Account myAccount = accountClient.RegisterAccount(_Account);
+
+                            if (myAccount != null)
+                            {
+                                CurrentViewModel = ObjectBase.Container.GetExportedValue<DashboardViewModel>();
+                            }
                         });
                     }
                     catch (Exception ex)
