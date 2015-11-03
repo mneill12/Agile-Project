@@ -23,7 +23,7 @@ namespace CSC3045.Agile.Data
             developerUserRoleSetWithScrumMaster.Add(new UserRole() {UserRoleName = "Developer", PermissionLevel = 0});
             developerUserRoleSetWithScrumMaster.Add(new UserRole() {UserRoleName = "Scrum Master", PermissionLevel = 1});
 
-            defaultAccounts.Add(new Account()
+            context.AccountSet.Add(new Account()
             {
                 LoginEmail = "jflyn07n@qub.ac.uk",
                 Password = "4nt1t7!",
@@ -32,7 +32,7 @@ namespace CSC3045.Agile.Data
                 UserRoles = developerUserRoleSet
             });
 
-            defaultAccounts.Add(new Account()
+            context.AccountSet.Add(new Account()
             { 
                 LoginEmail = "zeadie01@qub.ac.uk", 
                 Password = "4nt1t7!", 
@@ -40,7 +40,8 @@ namespace CSC3045.Agile.Data
                 LastName = "Eadie",
                 UserRoles = developerUserRoleSet
             });
-            defaultAccounts.Add(new Account()
+
+            context.AccountSet.Add(new Account()
             {
                 LoginEmail = "rmeharg01@qub.ac.uk",
                 Password = "4nt1t7!",
@@ -48,7 +49,7 @@ namespace CSC3045.Agile.Data
                 LastName = "Meharg",
                 UserRoles = developerUserRoleSet
             });
-            defaultAccounts.Add(new Account()
+            context.AccountSet.Add(new Account()
             {
                 LoginEmail = "nreid11@qub.ac.uk",
                 Password = "4nt1t7!",
@@ -56,7 +57,8 @@ namespace CSC3045.Agile.Data
                 LastName = "Reid",
                 UserRoles = developerUserRoleSetWithScrumMaster
             });
-            defaultAccounts.Add(new Account()
+
+            context.AccountSet.Add(new Account()
             {
                 LoginEmail = "zshen01@qub.ac.uk",
                 Password = "4nt1t7!",
@@ -64,7 +66,8 @@ namespace CSC3045.Agile.Data
                 LastName = "Shen",
                 UserRoles = developerUserRoleSet
             });
-            defaultAccounts.Add(new Account()
+
+            context.AccountSet.Add(new Account()
             {
                 LoginEmail = "mmcann71@qub.ac.uk",
                 Password = "4nt1t7!",
@@ -72,7 +75,8 @@ namespace CSC3045.Agile.Data
                 LastName = "McCann",
                 UserRoles = developerUserRoleSetWithScrumMaster
             });
-            defaultAccounts.Add(new Account()
+
+            context.AccountSet.Add(new Account()
             {
                 LoginEmail = "mneil12@qub.ac.uk",
                 Password = "4nt1t7!",
@@ -81,15 +85,8 @@ namespace CSC3045.Agile.Data
                 UserRoles = developerUserRoleSetWithScrumMaster
             });
 
-            foreach (Account acc in defaultAccounts)
-            {
-                context.AccountSet.Add(acc);
-            }
-
-
             IList<UserRole> defaultRoles = new List<UserRole>();
 
-           
             defaultRoles.Add(new UserRole()
             {
                 UserRoleName = "Project Manager", 

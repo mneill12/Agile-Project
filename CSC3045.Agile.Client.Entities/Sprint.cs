@@ -18,6 +18,8 @@ namespace CSC3045.Agile.Client.Entities
         private String _SprintName;
         private DateTime _StartDate;
         private DateTime _EndDate;
+        private ISet<Burndown> _Burndowns;
+        private ISet<Account> _TeamMembers; 
 
         public int SprintId
         {
@@ -124,6 +126,38 @@ namespace CSC3045.Agile.Client.Entities
                 {
                     _EndDate = value;
                     OnPropertyChanged(() => EndDate);
+                }
+            }
+        }
+
+        public ISet<Burndown> Burndowns
+        {
+            get
+            {
+                return _Burndowns;
+            }
+            set
+            {
+                if (_Burndowns != value)
+                {
+                    _Burndowns = value;
+                    OnPropertyChanged(() => Burndowns);
+                }
+            }
+        }
+
+        public ISet<Account> TeamMembers
+        {
+            get
+            {
+                return _TeamMembers;
+            }
+            set
+            {
+                if (_TeamMembers != value)
+                {
+                    _TeamMembers= value;
+                    OnPropertyChanged(() => TeamMembers);
                 }
             }
         }

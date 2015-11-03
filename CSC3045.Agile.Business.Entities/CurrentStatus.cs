@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Mapping;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,10 @@ namespace CSC3045.Agile.Business.Entities
 
         [DataMember]
         public String StoryStatusName { get; set; }
+
+        // Many to many declarationa
+        public virtual ISet<UserStory> AssociatedUserStories { get; set; }
+        public virtual ISet<StoryTask> AssociatedStoryTasks { get; set; } 
 
         #region IIdentifiableEntity members
 

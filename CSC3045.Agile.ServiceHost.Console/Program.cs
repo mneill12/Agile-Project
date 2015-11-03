@@ -43,6 +43,8 @@ namespace CSC3045.Agile.ServiceHost.Console
                     System.Console.WriteLine("Database:\t\tCSC3045GeneratedDB");
                     System.Console.WriteLine("Connection String:\t" + context.Database.Connection.ConnectionString);
                     System.Console.WriteLine("");
+
+                    RunDatabaseTests();
                 }
 
             }

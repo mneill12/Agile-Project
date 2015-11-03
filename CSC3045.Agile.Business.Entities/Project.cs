@@ -33,6 +33,12 @@ namespace CSC3045.Agile.Business.Entities
         [DataMember]
         public ISet<Sprint> Sprints { get; set; } 
 
+        [DataMember]
+        public ISet<Burndown> Burndowns { get; set; }
+
+        [DataMember]
+        public ISet<Account> ProjectMembers { get; set; } 
+
         #region IIdentifiableEntity members
 
         public int EntityId

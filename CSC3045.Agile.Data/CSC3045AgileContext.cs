@@ -30,6 +30,10 @@ namespace CSC3045.Agile.Data
 
         public DbSet<AcceptanceCriteria> AcceptanceCriteriaSet { get; set; }
 
+        public DbSet<Criteria> CriteriaSet { get; set; }
+
+        public DbSet<Burndown> BurndownSet { get; set; }
+
         public DbSet<BurndownPoint> BurndownPointSet { get; set; }
 
         public DbSet<PlanningPokerSession> PlanningPokerSessionSet { get; set; }
@@ -69,6 +73,9 @@ namespace CSC3045.Agile.Data
 
             modelBuilder.Entity<AcceptanceCriteria>()
                 .HasKey<int>(e => e.AcceptanceCriteriaId).Ignore(e => e.EntityId);
+
+            modelBuilder.Entity<Burndown>()
+                .HasKey<int>(e => e.BurndownId).Ignore(e => e.EntityId);
 
             modelBuilder.Entity<BurndownPoint>()
                 .HasKey<int>(e => e.BurndownPointId).Ignore(e => e.EntityId);

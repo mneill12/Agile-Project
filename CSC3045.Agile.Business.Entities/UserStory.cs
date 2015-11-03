@@ -34,6 +34,9 @@ namespace CSC3045.Agile.Business.Entities
         [DataMember]
         public ISet<AcceptanceCriteria> AcceptanceCriteria { get; set; }
 
+        // Many-to-many declarations
+        public virtual ISet<PlanningPokerSession> AssociatedPlanningPokersSessions { get; set; } 
+
         #region IIdentifiableEntity members
 
         public int EntityId

@@ -16,7 +16,9 @@ namespace CSC3045.Agile.Client.Entities
         private Account _ProductOwner;
         private string _ProjectName;
         private DateTime _ProjectDeadline;
-        private ISet<Sprint> _Sprints; 
+        private ISet<Sprint> _Sprints;
+        private ISet<Burndown> _Burndowns;
+        private ISet<Account> _ProjectMembers; 
 
         public int ProjectId
         {
@@ -126,6 +128,38 @@ namespace CSC3045.Agile.Client.Entities
                 {
                     _Sprints = value;
                     OnPropertyChanged(() => Sprints);
+                }
+            }
+        }
+
+        public ISet<Burndown> Burndowns
+        {
+            get
+            {
+                return _Burndowns;
+            }
+            set
+            {
+                if (_Burndowns != value)
+                {
+                    _Burndowns = value;
+                    OnPropertyChanged(() => Burndowns);
+                }
+            }
+        }
+
+        public ISet<Account> ProjectMembers
+        {
+            get
+            {
+                return _ProjectMembers;
+            }
+            set
+            {
+                if (_ProjectMembers != value)
+                {
+                    _ProjectMembers = value;
+                    OnPropertyChanged(() => ProjectMembers);
                 }
             }
         }

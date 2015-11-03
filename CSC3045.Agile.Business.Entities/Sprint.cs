@@ -34,6 +34,12 @@ namespace CSC3045.Agile.Business.Entities
         [DataMember]
         public DateTime EndDate { get; set; }
 
+        [DataMember]
+        public ISet<Burndown> Burndowns { get; set; }
+
+        [DataMember]
+        public ISet<Account> SprintMembers { get; set; } 
+
         #region IIdentifiableEntity members
 
         public int EntityId
