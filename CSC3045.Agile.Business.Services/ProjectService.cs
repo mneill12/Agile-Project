@@ -23,6 +23,7 @@ namespace CSC3045.Agile.Business.Services
 
         public ProjectService()
         {
+
         }
 
         public ProjectService(IDataRepositoryFactory dataRepositoryFactory)

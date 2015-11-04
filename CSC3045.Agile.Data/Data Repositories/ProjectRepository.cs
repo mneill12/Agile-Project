@@ -13,6 +13,8 @@ using CSC3045.Agile.Data.Contracts.Repository_Interfaces;
 namespace CSC3045.Agile.Data.Data_Repositories
 {
     // Project LINQ Entity Queries
+    [Export(typeof(IProjectRepository))]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class ProjectRepository : DataRepositoryBase<Project>, IProjectRepository
     {
         protected override Project AddEntity(Csc3045AgileContext entityContext, Project entity)
@@ -56,13 +58,15 @@ namespace CSC3045.Agile.Data.Data_Repositories
 
         public IEnumerable<Project> GetManagedProjectsByAccount(int projectManagerId)
         {
-            using(Csc3045AgileContext entityContext = new Csc3045AgileContext())
+            using(var entityContext = new Csc3045AgileContext())
             {
                 var query = (from p in entityContext.ProjectSet
                              where p.ProjectManagerId == projectManagerId
                              select p);
 
-                return query.AsEnumerable<Project>();
+                var results = query.ToList<Project>();
+
+                return results;
             }
         }
 
@@ -74,7 +78,7 @@ namespace CSC3045.Agile.Data.Data_Repositories
                              where p.ProductOwnerId == productOwnerId
                              select p);
 
-                return query.AsEnumerable<Project>();
+                return query.ToList<Project>();
             }
         }
 
@@ -89,7 +93,7 @@ namespace CSC3045.Agile.Data.Data_Repositories
                                select p
                                    );
 
-                return query.AsEnumerable<Project>();
+                return query.ToList<Project>();
 
             }
         }

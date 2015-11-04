@@ -86,6 +86,37 @@ namespace CSC3045.Agile.Data
                 context.AccountSet.Add(acc);
             }
 
+            IList<Project> defaultProjects = new List<Project>();
+
+            defaultProjects.Add(new Project()
+            {
+                ProjectManagerId = 1,
+                ProductOwnerId = 11,
+                ProjectName = "TestProject1",
+                ProjectDeadline = new DateTime(2015,1,1)
+            });
+
+            defaultProjects.Add(new Project()
+            {
+                ProjectManagerId = 1,
+                ProductOwnerId = 11,
+                ProjectName = "TestProject1",
+                ProjectDeadline = new DateTime(2015, 1, 1)
+            });
+
+            defaultProjects.Add(new Project()
+            {
+                ProjectManagerId = 2,
+                ProductOwnerId = 12,
+                ProjectName = "TestProject1",
+                ProjectDeadline = new DateTime(2015, 1, 1)
+            });
+
+            foreach (Project project in defaultProjects)
+            {
+                context.ProjectSet.Add(project);
+            }
+
 
             IList<UserRole> defaultRoles = new List<UserRole>();
 

@@ -54,6 +54,9 @@
       <HintPath>..\packages\Moq.4.2.1510.2205\lib\net40\Moq.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -73,6 +76,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="DataLayerTests.cs" />
+    <Compile Include="ProjectTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -92,9 +96,17 @@
       <Project>{02FDF132-B361-49FD-A988-D8A234DD98AA}</Project>
       <Name>CSC3045.Agile.Business.Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CSC3045.Agile.Business.Services\CSC3045.Agile.Business.Services.csproj">
+      <Project>{94591100-7878-4b81-b99b-634be8631585}</Project>
+      <Name>CSC3045.Agile.Business.Services</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CSC3045.Agile.Data.Contracts\CSC3045.Agile.Data.Contracts.csproj">
       <Project>{EFD9FF88-099E-417B-A39A-1A358B9008CB}</Project>
       <Name>CSC3045.Agile.Data.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSC3045.Business.Contracts\CSC3045.Agile.Business.Contracts.csproj">
+      <Project>{db3eac9a-09eb-41b5-8935-233160e88ca1}</Project>
+      <Name>CSC3045.Agile.Business.Contracts</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
