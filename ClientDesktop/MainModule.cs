@@ -26,8 +26,8 @@ namespace ClientDesktop
 
         public void Initialize()
         {
-            _RegionManager.RegisterViewWithRegion("LeftRegion", typeof (Views.LeftSideViews));
-            _RegionManager.RegisterViewWithRegion("RightRegion", typeof(Views.RightSideViews));
+            _RegionManager.RegisterViewWithRegion("TopBarRegion", typeof (Views.TopBarViews));
+            _RegionManager.RegisterViewWithRegion("MainRegion", typeof(Views.MainViews));
         }
 
         #endregion

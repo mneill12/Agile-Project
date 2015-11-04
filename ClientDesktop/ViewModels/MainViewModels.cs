@@ -9,9 +9,11 @@ namespace ClientDesktop.ViewModels
 
     [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class LeftSideViewModels
+    public class MainViewModels
     {
-        public LeftSideViewModels()
-        { }
+        public MainViewModels()
+        {
+
+        }
     }
 }

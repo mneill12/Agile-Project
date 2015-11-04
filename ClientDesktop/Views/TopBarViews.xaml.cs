@@ -1,22 +1,23 @@
 ﻿using System.ComponentModel.Composition;
 using System.Windows.Controls;
 using ClientDesktop.ViewModels;
+using Core.Common.UI.Core;
 
 namespace ClientDesktop.Views
 {
     /// <summary>
-    /// Interaction logic for RightSideViews.xaml
+    /// Interaction logic for TopBarViews.xaml
     /// </summary>
     [Export]
-    public partial class RightSideViews : UserControl
+    public partial class TopBarViews : UserControlViewBase
     {
-        public RightSideViews()
+        public TopBarViews()
         {
             InitializeComponent();
         }
 
         [Import]
-        public RightSideViewModels ViewModel
+        public TopBarViewModels ViewModel
         {
             set { DataContext = value; }
         }

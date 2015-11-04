@@ -1,16 +1,17 @@
-﻿<UserControl x:Class="ClientDesktop.Views.RightSideViews" 
+﻿<core:UserControlViewBase x:Class="ClientDesktop.Views.TopBarViews" 
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:core="CSC3045AgileCore"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="100">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Hello World From LeftView (Root Module)" Grid.Row="0"/>
+        <TextBlock Text="Hello World From Top View (Root Module)" Grid.Row="0"/>
         <ListBox Grid.Row="1">
             <ListBox.ItemTemplate >
                 <DataTemplate>
@@ -19,4 +20,4 @@
             </ListBox.ItemTemplate>
         </ListBox>
     </Grid>
-</UserControl>
+</core:UserControlViewBase>

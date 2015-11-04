@@ -14,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Prism.Modularity;
+using Prism.Regions;
 
 namespace ClientDesktop
 {
@@ -23,9 +25,30 @@ namespace ClientDesktop
     [Export]
     public partial class Shell : Window
     {
+        private const string MainModuleName = "MainModule";
+        private static Uri MainViewUri = new Uri("/MainView", UriKind.Relative);
+
         public Shell()
         {
             InitializeComponent();
+        }
+
+        [Import(AllowRecomposition = false)]
+        public IModuleManager ModuleManager;
+
+        [Import(AllowRecomposition = false)]
+        public IRegionManager RegionManager;
+
+        public void OnImportsSatisfied()
+        {
+            this.ModuleManager.LoadModuleCompleted +=
+                (s, e) =>
+                {
+                    if (e.ModuleInfo.ModuleName == MainModuleName)
+                    {
+                        this.RegionManager.RequestNavigate("MainRegion", MainViewUri);
+                    }
+                };
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)

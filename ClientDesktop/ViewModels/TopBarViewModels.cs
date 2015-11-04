@@ -8,9 +8,9 @@ namespace ClientDesktop.ViewModels
 {
     [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class RightSideViewModels
+    public class TopBarViewModels
     {
-        public RightSideViewModels()
+        public TopBarViewModels()
         { }
     }
 }

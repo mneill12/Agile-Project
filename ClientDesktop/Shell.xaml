@@ -8,12 +8,11 @@
         mc:Ignorable="d"
         Title="JELLO - Client Desktop" Height="960" Width="1280" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background="White" Foreground="Black">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-
-        <ContentControl x:Name="LeftRegion" regions:RegionManager.RegionName="LeftRegion" Grid.Column="0"/>
-        <ContentControl x:Name="RightRegion" regions:RegionManager.RegionName="RightRegion" Grid.Column="1"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <ContentControl x:Name="TopBarRegion" regions:RegionManager.RegionName="TopBarRegion" Grid.Row="0"/>
+        <ContentControl x:Name="MainRegion" regions:RegionManager.RegionName="MainRegion" Grid.Row="1"/>
     </Grid>
 </Window>
