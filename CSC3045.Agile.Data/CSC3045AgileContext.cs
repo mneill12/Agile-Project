@@ -30,13 +30,15 @@ namespace CSC3045.Agile.Data
 
         public DbSet<AcceptanceCriteria> AcceptanceCriteriaSet { get; set; }
 
+        public DbSet<Criteria> CriteriaSet { get; set; }
+
+        public DbSet<Burndown> BurndownSet { get; set; }
+
         public DbSet<BurndownPoint> BurndownPointSet { get; set; }
 
         public DbSet<PlanningPokerSession> PlanningPokerSessionSet { get; set; }
 
-        public DbSet<PlanningPokerStory> PlanningPokerStorySet { get; set; }
-
-        public DbSet<StoryStatus> StoryStatusSet { get; set; }
+        public DbSet<CurrentStatus> StoryStatusSet { get; set; }
 
         public DbSet<StoryTask> StoryTaskSet { get; set; }
 
@@ -72,16 +74,16 @@ namespace CSC3045.Agile.Data
             modelBuilder.Entity<AcceptanceCriteria>()
                 .HasKey<int>(e => e.AcceptanceCriteriaId).Ignore(e => e.EntityId);
 
+            modelBuilder.Entity<Burndown>()
+                .HasKey<int>(e => e.BurndownId).Ignore(e => e.EntityId);
+
             modelBuilder.Entity<BurndownPoint>()
                 .HasKey<int>(e => e.BurndownPointId).Ignore(e => e.EntityId);
 
             modelBuilder.Entity<PlanningPokerSession>()
                 .HasKey<int>(e => e.PlanningPokerSessionId).Ignore(e => e.EntityId);
 
-            modelBuilder.Entity<PlanningPokerStory>()
-                .HasKey<int>(e => e.PlanningPokerStoryId).Ignore(e => e.EntityId);
-
-            modelBuilder.Entity<StoryStatus>()
+            modelBuilder.Entity<CurrentStatus>()
                 .HasKey<int>(e => e.StoryStatusId).Ignore(e => e.EntityId);
 
             modelBuilder.Entity<StoryTask>()

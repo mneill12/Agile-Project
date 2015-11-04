@@ -28,7 +28,10 @@ namespace CSC3045.Agile.Business.Entities
         [DataMember]
         public ISet<UserRole> UserRoles { get; set; }
 
-        public virtual ISet<PlanningPokerSession> PlanningPokerSessions { get; set; }
+        // Many-to-many declarations
+        public virtual ISet<Project> AssocicatedProjects { get; set; }
+        public virtual ISet<Sprint> AssociatedSprints { get; set; }
+        public virtual ISet<PlanningPokerSession> AssociatedPlanningPokerSessions { get; set; } 
 
         #region IIdentifiableEntity members
 

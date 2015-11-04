@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Core.Common.Data;
 using CSC3045.Agile.Business.Entities;
+using System.Data.Entity;
 using CSC3045.Agile.Data.Contracts.Repository_Interfaces;
 
 namespace CSC3045.Agile.Data.Data_Repositories
@@ -29,19 +30,16 @@ namespace CSC3045.Agile.Data.Data_Repositories
 
         protected override IEnumerable<Backlog> GetEntities(Csc3045AgileContext entityContext)
         {
-            return from e in entityContext.BacklogSet
-                   select e;
+            return entityContext.BacklogSet
+                 .Include(a => a.AssociatedUserStories)
+                 .ToList();
         }
 
         protected override Backlog GetEntity(Csc3045AgileContext entityContext, int id)
         {
-            var query = (from e in entityContext.BacklogSet
-                         where e.BacklogId == id
-                         select e);
-
-            var results = query.FirstOrDefault();
-
-            return results;
+            return entityContext.BacklogSet
+                .Include(a => a.AssociatedUserStories)
+                .FirstOrDefault();
         }
     }
 }

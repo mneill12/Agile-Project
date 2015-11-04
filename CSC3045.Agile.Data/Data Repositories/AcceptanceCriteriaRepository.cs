@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Core.Common.Data;
 using CSC3045.Agile.Business.Entities;
+using System.Data.Entity;
 using CSC3045.Agile.Data.Contracts.Repository_Interfaces;
 
 namespace CSC3045.Agile.Data.Data_Repositories
@@ -29,19 +30,17 @@ namespace CSC3045.Agile.Data.Data_Repositories
 
         protected override IEnumerable<AcceptanceCriteria> GetEntities(Csc3045AgileContext entityContext)
         {
-            return from e in entityContext.AcceptanceCriteriaSet
-                   select e;
+            return entityContext.AcceptanceCriteriaSet
+                .Include(a => a.Criteria)
+                .ToList();
         }
 
         protected override AcceptanceCriteria GetEntity(Csc3045AgileContext entityContext, int id)
         {
-            var query = (from e in entityContext.AcceptanceCriteriaSet
-                         where e.AcceptanceCriteriaId == id
-                         select e);
-
-            var results = query.FirstOrDefault();
-
-            return results;
+            return entityContext.AcceptanceCriteriaSet
+                .Include(a => a.Criteria)
+                .FirstOrDefault();
         }
+ 
     }
 }

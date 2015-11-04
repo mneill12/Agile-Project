@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Core.Common.Data;
 using CSC3045.Agile.Business.Entities;
+using System.Data.Entity;
 using CSC3045.Agile.Data.Contracts.Repository_Interfaces;
 
 namespace CSC3045.Agile.Data.Data_Repositories
@@ -29,19 +30,18 @@ namespace CSC3045.Agile.Data.Data_Repositories
 
         protected override IEnumerable<PlanningPokerSession> GetEntities(Csc3045AgileContext entityContext)
         {
-            return from e in entityContext.PlanningPokerSessionSet
-                   select e;
+            return entityContext.PlanningPokerSessionSet
+                .Include(a => a.InvitedAccountSet)
+                .Include(b => b.UserStories.Select(c => c.Status))
+                .ToList();
         }
 
         protected override PlanningPokerSession GetEntity(Csc3045AgileContext entityContext, int id)
         {
-            var query = (from e in entityContext.PlanningPokerSessionSet
-                         where e.PlanningPokerSessionId == id
-                         select e);
-
-            var results = query.FirstOrDefault();
-
-            return results;
+            return entityContext.PlanningPokerSessionSet
+                 .Include(a => a.InvitedAccountSet)
+                 .Include(b => b.UserStories.Select(c => c.Status))
+                 .FirstOrDefault();
         }
     }
 }

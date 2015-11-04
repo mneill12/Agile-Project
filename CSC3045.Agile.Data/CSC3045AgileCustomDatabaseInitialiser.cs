@@ -23,7 +23,7 @@ namespace CSC3045.Agile.Data
             developerUserRoleSetWithScrumMaster.Add(new UserRole() {UserRoleName = "Developer", PermissionLevel = 0});
             developerUserRoleSetWithScrumMaster.Add(new UserRole() {UserRoleName = "Scrum Master", PermissionLevel = 1});
 
-            defaultAccounts.Add(new Account()
+            context.AccountSet.Add(new Account()
             {
                 LoginEmail = "jflyn07n@qub.ac.uk",
                 Password = "4nt1t7!",
@@ -32,7 +32,7 @@ namespace CSC3045.Agile.Data
                 UserRoles = developerUserRoleSet
             });
 
-            defaultAccounts.Add(new Account()
+            context.AccountSet.Add(new Account()
             { 
                 LoginEmail = "zeadie01@qub.ac.uk", 
                 Password = "4nt1t7!", 
@@ -40,7 +40,8 @@ namespace CSC3045.Agile.Data
                 LastName = "Eadie",
                 UserRoles = developerUserRoleSet
             });
-            defaultAccounts.Add(new Account()
+
+            context.AccountSet.Add(new Account()
             {
                 LoginEmail = "rmeharg01@qub.ac.uk",
                 Password = "4nt1t7!",
@@ -48,7 +49,7 @@ namespace CSC3045.Agile.Data
                 LastName = "Meharg",
                 UserRoles = developerUserRoleSet
             });
-            defaultAccounts.Add(new Account()
+            context.AccountSet.Add(new Account()
             {
                 LoginEmail = "nreid11@qub.ac.uk",
                 Password = "4nt1t7!",
@@ -56,7 +57,8 @@ namespace CSC3045.Agile.Data
                 LastName = "Reid",
                 UserRoles = developerUserRoleSetWithScrumMaster
             });
-            defaultAccounts.Add(new Account()
+
+            context.AccountSet.Add(new Account()
             {
                 LoginEmail = "zshen01@qub.ac.uk",
                 Password = "4nt1t7!",
@@ -64,7 +66,8 @@ namespace CSC3045.Agile.Data
                 LastName = "Shen",
                 UserRoles = developerUserRoleSet
             });
-            defaultAccounts.Add(new Account()
+
+            context.AccountSet.Add(new Account()
             {
                 LoginEmail = "mmcann71@qub.ac.uk",
                 Password = "4nt1t7!",
@@ -72,7 +75,8 @@ namespace CSC3045.Agile.Data
                 LastName = "McCann",
                 UserRoles = developerUserRoleSetWithScrumMaster
             });
-            defaultAccounts.Add(new Account()
+
+            context.AccountSet.Add(new Account()
             {
                 LoginEmail = "mneil12@qub.ac.uk",
                 Password = "4nt1t7!",
@@ -81,15 +85,8 @@ namespace CSC3045.Agile.Data
                 UserRoles = developerUserRoleSetWithScrumMaster
             });
 
-            foreach (Account acc in defaultAccounts)
-            {
-                context.AccountSet.Add(acc);
-            }
-
-
             IList<UserRole> defaultRoles = new List<UserRole>();
 
-           
             defaultRoles.Add(new UserRole()
             {
                 UserRoleName = "Project Manager", 
@@ -102,7 +99,6 @@ namespace CSC3045.Agile.Data
                 PermissionLevel = 3
             });
 
-
             foreach (UserRole usr in defaultRoles) 
             { 
                 context.UserRoleSet.Add(usr);
@@ -111,7 +107,7 @@ namespace CSC3045.Agile.Data
             UserStory defaultUserStory = new UserStory()
 
             {
-                Status = new StoryStatus()
+                Status = new CurrentStatus()
                 {
                     StoryStatusName = "Ready for Development"
                 },
@@ -139,7 +135,7 @@ namespace CSC3045.Agile.Data
                         Title = "TSK-001",
                         Description = "Setup database for server application, to include user management tables.",
                         Hours = 6,
-                        CurrentStatus = context.StoryStatusSet.Find(0),
+                        CurrentStatus = new CurrentStatus() {   StoryStatusName = "To-Do" },
                         IsBlocked = false,
                     },
                     new StoryTask()
@@ -147,7 +143,7 @@ namespace CSC3045.Agile.Data
                         Title = "TSK-002",
                         Description = "Develop server application to accept client connections for user management.",
                         Hours = 8,
-                        CurrentStatus = context.StoryStatusSet.Find(0),
+                        CurrentStatus = new CurrentStatus() {   StoryStatusName = "BA-QA" },
                         IsBlocked = false,
                     },
                     new StoryTask()
@@ -155,7 +151,7 @@ namespace CSC3045.Agile.Data
                         Title = "TSK-003",
                         Description = "Develop client application to make connection to server and call database CRUD methods.",
                         Hours = 4,
-                        CurrentStatus = context.StoryStatusSet.Find(0),
+                        CurrentStatus = new CurrentStatus() {   StoryStatusName = "Tech QA" },
                         IsBlocked = false,
                     },
                     new StoryTask()
@@ -163,7 +159,7 @@ namespace CSC3045.Agile.Data
                         Title = "TSK-004",
                         Description = "Develop encryption strategy and methods to obfuscate usernames and encrypt passwords.",
                         Hours = 9,
-                        CurrentStatus = context.StoryStatusSet.Find(0),
+                        CurrentStatus = new CurrentStatus() {   StoryStatusName = "Done" },
                         IsBlocked = false,
                     },
                     new StoryTask()
@@ -171,7 +167,7 @@ namespace CSC3045.Agile.Data
                         Title = "TSK-005",
                         Description = "Develop UI Registration Screen",
                         Hours = 12,
-                        CurrentStatus = context.StoryStatusSet.Find(0),
+                        CurrentStatus = new CurrentStatus() {   StoryStatusName = "User Acceptance Testing" },
                         IsBlocked = false,
                     },
                     new StoryTask()
@@ -179,7 +175,7 @@ namespace CSC3045.Agile.Data
                         Title = "TSK-006",
                         Description = "Create unit and integration tests for user management operations.",
                         Hours = 14,
-                        CurrentStatus = context.StoryStatusSet.Find(0),
+                        CurrentStatus = new CurrentStatus() {   StoryStatusName = "Done" },
                         IsBlocked = false,
                     }
                 }

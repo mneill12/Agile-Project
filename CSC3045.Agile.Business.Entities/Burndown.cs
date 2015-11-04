@@ -10,24 +10,25 @@ using Core.Common.Core;
 namespace CSC3045.Agile.Business.Entities
 {
     [DataContract]
-    public class StoryStatus : EntityBase, IIdentifiableEntity
+    public class Burndown : EntityBase, IIdentifiableEntity
     {
         [DataMember]
-        public int StoryStatusId { get; set; }
+        public int BurndownId { get; set; }
 
         [DataMember]
-        public String StoryStatusName { get; set; }
+        public String BurndownName { get; set; }
+
+        [DataMember]
+        public ISet<BurndownPoint> BurndownPoints { get; set; }
 
         #region IIdentifiableEntity members
 
         public int EntityId
         {
-            get { return StoryStatusId; }
-            set { StoryStatusId = value; }
+            get { return BurndownId; }
+            set { BurndownId = value; }
         }
 
         #endregion
     }
-
-
 }
