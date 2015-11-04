@@ -87,12 +87,10 @@ namespace CSC3045.Agile.Data.Data_Repositories
         {
             using(Csc3045AgileContext entityContext = new Csc3045AgileContext())
             {
-
                 var query = (from p in entityContext.ProjectSet
                                where p.AssociatedUsers.Select(a => a.AccountId).Contains(accountId)
                                select p
                                    );
-
                 return query.ToList<Project>();
 
             }

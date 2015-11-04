@@ -93,22 +93,15 @@ namespace CSC3045.Agile.Data
                 ProjectManagerId = 1,
                 ProductOwnerId = 11,
                 ProjectName = "TestProject1",
-                ProjectDeadline = new DateTime(2015,1,1)
-            });
-
-            defaultProjects.Add(new Project()
-            {
-                ProjectManagerId = 1,
-                ProductOwnerId = 11,
-                ProjectName = "TestProject1",
                 ProjectDeadline = new DateTime(2015, 1, 1)
+                
             });
 
             defaultProjects.Add(new Project()
             {
                 ProjectManagerId = 2,
                 ProductOwnerId = 12,
-                ProjectName = "TestProject1",
+                ProjectName = "TestProject2",
                 ProjectDeadline = new DateTime(2015, 1, 1)
             });
 
