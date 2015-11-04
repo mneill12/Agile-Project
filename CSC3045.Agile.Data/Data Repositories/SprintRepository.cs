@@ -15,25 +15,25 @@ namespace CSC3045.Agile.Data.Data_Repositories
     // Sprint LINQ Entity Queries
     public class SprintRepository : DataRepositoryBase<Sprint>
     {
-        protected override Sprint AddEntity(CSC3045AgileContext entityContext, Sprint entity)
+        protected override Sprint AddEntity(Csc3045AgileContext entityContext, Sprint entity)
         {
             return entityContext.SprintSet.Add(entity);
         }
 
-        protected override Sprint UpdateEntity(CSC3045AgileContext entityContext, Sprint entity)
+        protected override Sprint UpdateEntity(Csc3045AgileContext entityContext, Sprint entity)
         {
             return (from e in entityContext.SprintSet
                     where e.SprintId == entity.SprintId
                     select e).FirstOrDefault();
         }
 
-        protected override IEnumerable<Sprint> GetEntities(CSC3045AgileContext entityContext)
+        protected override IEnumerable<Sprint> GetEntities(Csc3045AgileContext entityContext)
         {
             return from e in entityContext.SprintSet
                    select e;
         }
 
-        protected override Sprint GetEntity(CSC3045AgileContext entityContext, int id)
+        protected override Sprint GetEntity(Csc3045AgileContext entityContext, int id)
         {
             var query = (from e in entityContext.SprintSet
                          where e.SprintId == id

@@ -1,4 +1,18 @@
-﻿using System;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,14 +36,14 @@ namespace ClientDesktop
     /// <summary>
     /// Mainwindow wraps all the MVVM architecture
     /// </summary>
-    public partial class MainWindow :MetroWindow
+    public partial class MainWindow
     {
         public MainWindow()
         {
             InitializeComponent();
 
             // Set datacontext, always obtained from MEF using resolve dependencies. Datacontext only needs to be set explicitly once.
-           this.DataContext = ObjectBase.Container.GetExportedValue<LoginRegisterViewModel>();
+            login.DataContext = ObjectBase.Container.GetExportedValue<LoginRegisterViewModel>();
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)

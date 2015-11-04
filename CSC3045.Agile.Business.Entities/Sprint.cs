@@ -17,13 +17,13 @@ namespace CSC3045.Agile.Business.Entities
         public int SprintId { get; set; }
 
         [DataMember]
-        public int ProjectId { get; set; }
+        public Project Project { get; set; }
 
         [DataMember]
         public int ScrumMasterId { get; set; }
 
         [DataMember]
-        public int BacklogId { get; set; }
+        public Backlog Backlog { get; set; }
 
         [DataMember]
         public int SprintNumber { get; set; }

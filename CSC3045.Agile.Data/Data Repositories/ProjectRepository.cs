@@ -15,25 +15,25 @@ namespace CSC3045.Agile.Data.Data_Repositories
     // Project LINQ Entity Queries
     public class ProjectRepository : DataRepositoryBase<Project>, IProjectRepository
     {
-        protected override Project AddEntity(CSC3045AgileContext entityContext, Project entity)
+        protected override Project AddEntity(Csc3045AgileContext entityContext, Project entity)
         {
             return entityContext.ProjectSet.Add(entity);
         }
 
-        protected override Project UpdateEntity(CSC3045AgileContext entityContext, Project entity)
+        protected override Project UpdateEntity(Csc3045AgileContext entityContext, Project entity)
         {
             return (from e in entityContext.ProjectSet
                     where e.ProjectId == entity.ProjectId
                     select e).FirstOrDefault();
         }
 
-        protected override IEnumerable<Project> GetEntities(CSC3045AgileContext entityContext)
+        protected override IEnumerable<Project> GetEntities(Csc3045AgileContext entityContext)
         {
             return from e in entityContext.ProjectSet
                    select e;
         }
 
-        protected override Project GetEntity(CSC3045AgileContext entityContext, int id)
+        protected override Project GetEntity(Csc3045AgileContext entityContext, int id)
         {
             var query = (from e in entityContext.ProjectSet
                          where e.ProjectId == id
@@ -47,7 +47,7 @@ namespace CSC3045.Agile.Data.Data_Repositories
         //Gets project based on Project Id
         public Project GetByProjectId(int projectId)
         {
-            using (CSC3045AgileContext entityContext = new CSC3045AgileContext())
+            using (Csc3045AgileContext entityContext = new Csc3045AgileContext())
             {
                 return GetEntity(entityContext, projectId);
             }
@@ -56,7 +56,7 @@ namespace CSC3045.Agile.Data.Data_Repositories
 
         public IEnumerable<Project> GetManagedProjectsByAccount(int projectManagerId)
         {
-            using(CSC3045AgileContext entityContext = new CSC3045AgileContext())
+            using(Csc3045AgileContext entityContext = new Csc3045AgileContext())
             {
                 var query = (from p in entityContext.ProjectSet
                              where p.ProjectManagerId == projectManagerId
@@ -66,12 +66,12 @@ namespace CSC3045.Agile.Data.Data_Repositories
             }
         }
 
-        public IEnumerable<Project> GetOwnedProjectsByAccount(int productOwnderId)
+        public IEnumerable<Project> GetOwnedProjectsByAccount(int productOwnerId)
         {
-            using (CSC3045AgileContext entityContext = new CSC3045AgileContext())
+            using (Csc3045AgileContext entityContext = new Csc3045AgileContext())
             {
                 var query = (from p in entityContext.ProjectSet
-                             where p.ProductOwnerId == productOwnderId
+                             where p.ProductOwnerId == productOwnerId
                              select p);
 
                 return query.AsEnumerable<Project>();

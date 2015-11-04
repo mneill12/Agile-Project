@@ -45,6 +45,7 @@
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.1.2.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
@@ -158,6 +159,10 @@
     <ProjectReference Include="..\CSC3045.Agile.Client.Custom_Principles\CSC3045.Agile.Client.Custom_Principles.csproj">
       <Project>{3ebda9e6-9de2-4f3b-9de7-e13a2c6488a6}</Project>
       <Name>CSC3045.Agile.Client.Custom_Principles</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSC3045.Agile.Client.Entities\CSC3045.Agile.Client.Entities.csproj">
+      <Project>{98f36136-c738-4bc9-b9e9-58cf1463e9c1}</Project>
+      <Name>CSC3045.Agile.Client.Entities</Name>
     </ProjectReference>
     <ProjectReference Include="..\CSC3045.Business.Contracts\CSC3045.Agile.Business.Contracts.csproj">
       <Project>{db3eac9a-09eb-41b5-8935-233160e88ca1}</Project>

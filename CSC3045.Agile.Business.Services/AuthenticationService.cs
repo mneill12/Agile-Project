@@ -63,13 +63,14 @@ namespace CSC3045.Agile.Business.Services
             IAccountRepository accountRepository = _DataRepositoryFactory.GetDataRepository<IAccountRepository>();
             IEnumerable<Account> accounts = accountRepository.Get();
 
+           
+
             return accounts;
         }
 
         [OperationBehavior(TransactionScopeRequired = true)]
         public User AuthenticateUser(string email, string clearTextPassword)
         {
-            String[] roles = new String[1];
             
             IEnumerable<Account> accounts = getAccounts();
 
@@ -84,7 +85,7 @@ namespace CSC3045.Agile.Business.Services
                 throw new UnauthorizedAccessException("Access denied. Please provide some valid credentials.");
              
  
-            return new User("", roles );
+            return new User(foundAccount.LoginEmail, foundAccount.UserRoles );
         }
  
     }

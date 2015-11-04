@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -17,13 +17,18 @@ namespace CSC3045.Agile.Business.Entities
         public string LoginEmail { get; set; }
 
         [DataMember]
+        public string Password { get; set; }
+
+        [DataMember]
         public string FirstName { get; set; }
 
         [DataMember]
         public string LastName { get; set; }
 
-        [DataMember]
-        public string Password { get; set; }
+        public ISet<UserRole> UserRoles { get; set; }
+
+        public virtual ISet<PlanningPokerSession> PlanningPokerSessions { get; set; }
+
 
         #region IIdentifiableEntity members
 

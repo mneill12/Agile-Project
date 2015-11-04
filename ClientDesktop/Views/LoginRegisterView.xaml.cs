@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,17 +27,6 @@ namespace ClientDesktop.Views
         {
             InitializeComponent();
         }
-        private void LoginButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (false)
-            {
-                this.DataContext = ObjectBase.Container.GetExportedValue<DashboardViewModel>();
-            }
-            else
-            {
-                //Alert user login has failed
-                MessageBox.Show("Failed login");
-            }
-        }
+
     }
 }

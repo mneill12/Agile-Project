@@ -78,7 +78,6 @@
     <Compile Include="Utils\HashHelper.cs" />
     <Compile Include="Utils\PropertySupport.cs" />
     <Compile Include="Utils\SimpleMapper.cs" />
-    <Compile Include="Utils\User.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core.Common.Contracts\Core.Common.Contracts.csproj">

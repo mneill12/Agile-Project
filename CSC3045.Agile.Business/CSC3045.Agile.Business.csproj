@@ -11,6 +11,8 @@
     <AssemblyName>CSC3045.Agile.Business</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -59,12 +61,17 @@
       <Project>{7D783F9A-F128-4C31-B021-F1B512A8432E}</Project>
       <Name>CSC3045.Agile.Business.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CSC3045.Agile.Business.Entities\CSC3045.Agile.Business.Entities.csproj">
+      <Project>{02FDF132-B361-49FD-A988-D8A234DD98AA}</Project>
+      <Name>CSC3045.Agile.Business.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CSC3045.Agile.Data.Contracts\CSC3045.Agile.Data.Contracts.csproj">
       <Project>{EFD9FF88-099E-417B-A39A-1A358B9008CB}</Project>
       <Name>CSC3045.Agile.Data.Contracts</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

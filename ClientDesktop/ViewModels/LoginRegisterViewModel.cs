@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel.Composition;
 using System.Windows;
-using System;
 using System.ComponentModel;
 using System.Threading;
 using System.Windows.Controls;
@@ -11,6 +10,8 @@ using Core.Common.UI.Core;
 using Core.Common.Utils;
 using CSC3045.Agile.Client.CustomPrinciples;
 using CSC3045.Agile.Client.Contracts;
+using CSC3045.Agile.Client.Entities;
+
 
 namespace ClientDesktop.ViewModels
 {
@@ -26,39 +27,40 @@ namespace ClientDesktop.ViewModels
         private User _autheticatedUser;
 
         #region Properties
-    public string Username
-    {
-        get { return _username;}
-        set { _username = value; NotifyPropertyChanged("Username"); }
-    }
- 
-    public string AuthenticatedUser {
-        get
+        public string Username
         {
-            if (IsAuthenticated)
-                return string.Format("Signed in as {0}. {1}",
-                      Thread.CurrentPrincipal.Identity.Name,
-                      Thread.CurrentPrincipal.IsInRole("Administrators") ? "You are an administrator!"
-                          : "You are NOT a member of the administrators group.");
- 
-            return "Not authenticated!";
+            get { return _username; }
+            set { _username = value; NotifyPropertyChanged("Username"); }
         }
-    }
- 
-    public string Status
-    {
-        get { return _status; }
-        set { _status = value; NotifyPropertyChanged("Status"); }
-    }
-    #endregion
- 
-    #region Commands
-    public DelegateCommand<object> LoginCommand { get { return _loginCommand; } }
- 
-    public DelegateCommand<object> LogoutCommand { get { return _logoutCommand; } }
- 
-    public DelegateCommand<object> ShowViewCommand { get { return _showViewCommand; } }
-    #endregion
+
+        public string AuthenticatedUser
+        {
+            get
+            {
+                if (IsAuthenticated)
+                    return string.Format("Signed in as {0}. {1}",
+                          Thread.CurrentPrincipal.Identity.Name,
+                          Thread.CurrentPrincipal.IsInRole("Administrators") ? "You are an administrator!"
+                              : "You are NOT a member of the administrators group.");
+
+                return "Not authenticated!";
+            }
+        }
+
+        public string Status
+        {
+            get { return _status; }
+            set { _status = value; NotifyPropertyChanged("Status"); }
+        }
+        #endregion
+
+        #region Commands
+        public DelegateCommand<object> LoginCommand { get { return _loginCommand; } }
+
+        public DelegateCommand<object> LogoutCommand { get { return _logoutCommand; } }
+
+        public DelegateCommand<object> ShowViewCommand { get { return _showViewCommand; } }
+        #endregion
 
         [Import]
         public DashboardViewModel DashboardViewModel { get; private set; }
@@ -84,81 +86,85 @@ namespace ClientDesktop.ViewModels
         {
 
         }
-  
-    private void Login(object parameter)
-    {
-        PasswordBox passwordBox = parameter as PasswordBox;
-        string clearTextPassword = passwordBox.Password;
-        try
-        {
-            WithClient<IAuthenticationService>(_ServiceFactory.CreateClient<IAuthenticationService>(), AuthenticationClient =>
-            {
 
-                _autheticatedUser = AuthenticationClient.AuthenticateUser(_username, clearTextPassword);
-         
-            });
- 
-            //Get the current principal object
+        private void Login(object parameter)
+        {
+            PasswordBox passwordBox = parameter as PasswordBox;
+            string clearTextPassword = passwordBox.Password;
+            try
+            {
+                WithClient<IAuthenticationService>(_ServiceFactory.CreateClient<IAuthenticationService>(), AuthenticationClient =>
+                {
+
+                    _autheticatedUser = AuthenticationClient.AuthenticateUser(_username, clearTextPassword);
+
+                });
+
+                //Get the current principal object
+                CustomPrincipal customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
+                if (customPrincipal == null)
+                    throw new ArgumentException("The application's default thread principal must be set to a CustomPrincipal object on startup.");
+
+                //Authenticate the user by setting the custome principle
+                UserRole[] userRoles = new UserRole[_autheticatedUser.Roles.Count];
+                _autheticatedUser.Roles.CopyTo(userRoles, 0);
+                customPrincipal.Identity = new CustomIdentity(_autheticatedUser.Email, userRoles);
+
+                //Update UI
+                NotifyPropertyChanged("AuthenticatedUser");
+                NotifyPropertyChanged("IsAuthenticated");
+                Username = string.Empty; //reset
+                passwordBox.Password = string.Empty; //reset
+                Status = string.Empty;
+            }
+            catch (UnauthorizedAccessException)
+            {
+                Status = "Login failed! Please provide some valid credentials.";
+            }
+            catch (Exception ex)
+            {
+                Status = string.Format("ERROR: {0}", ex.Message);
+            }
+        }
+
+        private bool CanLogin(object parameter)
+        {
+            return !IsAuthenticated;
+        }
+
+        private void Logout(object parameter)
+        {
             CustomPrincipal customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
-            if (customPrincipal == null)
-                throw new ArgumentException("The application's default thread principal must be set to a CustomPrincipal object on startup.");
- 
-            //Authenticate the user
-            customPrincipal.Identity = new CustomIdentity(_autheticatedUser.Email, _autheticatedUser.Roles);
- 
-            //Update UI
-            NotifyPropertyChanged("AuthenticatedUser");
-            NotifyPropertyChanged("IsAuthenticated");
-            Username = string.Empty; //reset
-            passwordBox.Password = string.Empty; //reset
-            Status = string.Empty;
+            if (customPrincipal != null)
+            {
+                customPrincipal.Identity = new AnonymousIdentity();
+                NotifyPropertyChanged("AuthenticatedUser");
+                NotifyPropertyChanged("IsAuthenticated");
+                //  _loginCommand.CanExecuteChanged();
+                //   _logoutCommand.RaiseCanExecuteChanged();
+                Status = string.Empty;
+            }
         }
-        catch (UnauthorizedAccessException)
+
+        private bool CanLogout(object parameter)
         {
-            Status = "Login failed! Please provide some valid credentials.";
+            return IsAuthenticated;
         }
-        catch (Exception ex)
+
+        public bool IsAuthenticated
         {
-            Status = string.Format("ERROR: {0}", ex.Message);
+            get { return Thread.CurrentPrincipal.Identity.IsAuthenticated; }
         }
-    }
- 
-    private bool CanLogin(object parameter)
-    {
-        return !IsAuthenticated;
-    }
- 
-    private void Logout(object parameter) {
-      CustomPrincipal customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
-      if (customPrincipal != null)
-      {
-          customPrincipal.Identity = new AnonymousIdentity();
-          NotifyPropertyChanged("AuthenticatedUser");
-          NotifyPropertyChanged("IsAuthenticated");
-        //  _loginCommand.CanExecuteChanged();
-        //   _logoutCommand.RaiseCanExecuteChanged();
-          Status = string.Empty;
-      }
-    }
- 
-    private bool CanLogout(object parameter)
-    {
-        return IsAuthenticated;
-    }
- 
-    public bool IsAuthenticated
-    {
-        get { return Thread.CurrentPrincipal.Identity.IsAuthenticated; }
-    }
-  
-    #region INotifyPropertyChanged Members
-    public event PropertyChangedEventHandler PropertyChanged;
- 
-    private void NotifyPropertyChanged(string propertyName) {
-      if (PropertyChanged != null)
-        PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-    }
-    #endregion
+
+        #region INotifyPropertyChanged Members
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+        #endregion
 
 
     }
