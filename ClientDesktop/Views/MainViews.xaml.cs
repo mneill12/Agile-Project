@@ -10,6 +10,7 @@ namespace ClientDesktop.Views
     /// Interaction logic for MainViews.xaml
     /// </summary>
     [Export]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class MainViews : UserControlViewBase
     { 
         public MainViews()

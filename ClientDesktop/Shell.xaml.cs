@@ -23,32 +23,12 @@ namespace ClientDesktop
     /// Interaction logic for Shell.xaml, replaces the standard MainWindow of WPF applications
     /// </summary>
     [Export]
-    public partial class Shell : Window
+    [PartCreationPolicy(CreationPolicy.NonShared)]
+    public partial class Shell
     {
-        private const string MainModuleName = "MainModule";
-        private static Uri MainViewUri = new Uri("/MainView", UriKind.Relative);
-
         public Shell()
         {
             InitializeComponent();
-        }
-
-        [Import(AllowRecomposition = false)]
-        public IModuleManager ModuleManager;
-
-        [Import(AllowRecomposition = false)]
-        public IRegionManager RegionManager;
-
-        public void OnImportsSatisfied()
-        {
-            this.ModuleManager.LoadModuleCompleted +=
-                (s, e) =>
-                {
-                    if (e.ModuleInfo.ModuleName == MainModuleName)
-                    {
-                        this.RegionManager.RequestNavigate("MainRegion", MainViewUri);
-                    }
-                };
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)

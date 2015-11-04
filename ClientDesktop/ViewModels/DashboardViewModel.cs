@@ -10,15 +10,14 @@ namespace ClientDesktop.ViewModels
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class DashboardViewModel : ViewModelBase
     {
+        IServiceFactory _ServiceFactory;
+
         [ImportingConstructor]
         public DashboardViewModel(IServiceFactory serviceFactory)
         {
             _ServiceFactory = serviceFactory;
-
-            CurrentViewModel = this;
         }
 
-        IServiceFactory _ServiceFactory;
 
         public override string ViewTitle
         {

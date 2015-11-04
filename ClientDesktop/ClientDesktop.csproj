@@ -195,6 +195,14 @@
       <Project>{F6BCFF98-A714-4B7B-978F-23D812D1744A}</Project>
       <Name>Core.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CSC3045.Agile.Business.Common\CSC3045.Agile.Business.Common.csproj">
+      <Project>{7d783f9a-f128-4c31-b021-f1b512a8432e}</Project>
+      <Name>CSC3045.Agile.Business.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSC3045.Agile.Business\CSC3045.Agile.Business.csproj">
+      <Project>{57E23A71-7ECA-4145-99F4-C6C9A6CE8138}</Project>
+      <Name>CSC3045.Agile.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CSC3045.Agile.Client.Bootstrapper\CSC3045.Agile.Client.Bootstrapper.csproj">
       <Project>{B8ECEFD0-4402-4858-9D7A-852C499A9402}</Project>
       <Name>CSC3045.Agile.Client.Bootstrapper</Name>
@@ -206,6 +214,18 @@
     <ProjectReference Include="..\CSC3045.Agile.Client.Entities\CSC3045.Agile.Client.Entities.csproj">
       <Project>{98F36136-C738-4BC9-B9E9-58CF1463E9C1}</Project>
       <Name>CSC3045.Agile.Client.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSC3045.Agile.Client.Proxies\CSC3045.Agile.Client.Proxies.csproj">
+      <Project>{DB50F5A9-ECC7-4419-AEA9-0D5F16787944}</Project>
+      <Name>CSC3045.Agile.Client.Proxies</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSC3045.Agile.Data.Contracts\CSC3045.Agile.Data.Contracts.csproj">
+      <Project>{efd9ff88-099e-417b-a39a-1a358b9008cb}</Project>
+      <Name>CSC3045.Agile.Data.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSC3045.Agile.Data\CSC3045.Agile.Data.csproj">
+      <Project>{C48A9C38-6A69-4656-9D0E-1894B1CE487C}</Project>
+      <Name>CSC3045.Agile.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

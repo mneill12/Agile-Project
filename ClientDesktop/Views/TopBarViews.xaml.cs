@@ -9,6 +9,7 @@ namespace ClientDesktop.Views
     /// Interaction logic for TopBarViews.xaml
     /// </summary>
     [Export]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class TopBarViews : UserControlViewBase
     {
         public TopBarViews()

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,8 @@ namespace ClientDesktop.Views
     /// <summary>
     /// Interaction logic for LoginRegisterView.xaml
     /// </summary>
+    [Export]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class LoginRegisterView : UserControlViewBase    
     {
         public LoginRegisterView()
@@ -28,5 +31,10 @@ namespace ClientDesktop.Views
             InitializeComponent();
         }
 
+        [Import]
+        public LoginRegisterViewModel ViewModel
+        {
+            set { DataContext = value; }
+        }
     }
 }

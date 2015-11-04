@@ -4,20 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:core="CSC3045AgileCore"
-             mc:Ignorable="d" 
-             d:DesignHeight="100">
+             mc:Ignorable="d" Background="LightSteelBlue">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <TextBlock Text="Hello World From Top View (Root Module)" Grid.Row="0"/>
-        <ListBox Grid.Row="1">
-            <ListBox.ItemTemplate >
-                <DataTemplate>
-                    <TextBlock />
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+        <TextBlock Text="This is the top bar view, place global nav/account stuff here" Grid.Row="0"/>
     </Grid>
 </core:UserControlViewBase>

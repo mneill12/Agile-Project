@@ -5,12 +5,6 @@
              xmlns:v="clr-namespace:ClientDesktop.Views" >
     <Application.Resources>
         <ResourceDictionary>
-            <DataTemplate DataType="{x:Type vm:LoginRegisterViewModel}">
-                <v:LoginRegisterView />
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:DashboardViewModel}">
-                <v:DashboardView />
-            </DataTemplate>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />

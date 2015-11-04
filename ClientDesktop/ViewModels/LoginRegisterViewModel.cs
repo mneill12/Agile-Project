@@ -17,6 +17,8 @@ namespace ClientDesktop.ViewModels
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class LoginRegisterViewModel : ViewModelBase
     {
+        IServiceFactory _ServiceFactory;
+
         // Import service factory so we can have 'stateful' contracts and closes proxies when service methods are finished
         [ImportingConstructor]
         public LoginRegisterViewModel(IServiceFactory serviceFactory)
@@ -26,10 +28,7 @@ namespace ClientDesktop.ViewModels
             RegisterAccount = new DelegateCommand<PasswordBox>(OnRegisterAccount);
             AccountLogin = new DelegateCommand<PasswordBox>(OnAccountLogin);
 
-            CurrentViewModel = this;
         }
-
-        IServiceFactory _ServiceFactory;
 
         public DelegateCommand<PasswordBox> RegisterAccount { get; private set; }
         public DelegateCommand<PasswordBox> AccountLogin { get; private set; }
@@ -140,7 +139,7 @@ namespace ClientDesktop.ViewModels
 
                         if (myAccount != null)
                         {
-                            CurrentViewModel = ObjectBase.Container.GetExportedValue<DashboardViewModel>();
+                            //ObjectBase.Container.GetExportedValue<DashboardViewModel>();
                         }
                     });
                 }
@@ -178,7 +177,7 @@ namespace ClientDesktop.ViewModels
 
                             if (myAccount != null)
                             {
-                                CurrentViewModel = ObjectBase.Container.GetExportedValue<DashboardViewModel>();
+                                //ObjectBase.Container.GetExportedValue<DashboardViewModel>();
                             }
                         });
                     }

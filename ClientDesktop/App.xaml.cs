@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition.Hosting;
+using System.ComponentModel.Composition.Primitives;
 using System.Configuration;
 using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Windows;
+using Core.Common.Core;
+using CSC3045.Agile.Client.Bootstrapper;
 
 namespace ClientDesktop
 {
@@ -13,6 +18,7 @@ namespace ClientDesktop
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+
             ApplicationBootstrapper bootstrapper = new ApplicationBootstrapper();
             bootstrapper.Run();
         }

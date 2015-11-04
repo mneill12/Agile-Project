@@ -7,24 +7,9 @@ using FluentValidation.Results;
 
 namespace Core.Common.UI.Core
 {
-    // IProChanged + Other View-to-ViewModel linking happens automatically with the ViewModelBase
+    // IPropChanged + Other View-to-ViewModel linking happens automatically with the ViewModelBase
     public class ViewModelBase : ObjectBase
     {
-        private ViewModelBase _CurrentViewModel;
-
-        public ViewModelBase CurrentViewModel
-        {
-            get
-            {
-                return _CurrentViewModel;
-            }
-            set
-            {
-                if (_CurrentViewModel == value) return;
-                _CurrentViewModel = value;
-            }
-        }
-
         public ViewModelBase()
         {
             ToggleErrorsCommand = new DelegateCommand<object>(OnToggleErrorsCommandExecute, OnToggleErrorsCommandCanExecute);
