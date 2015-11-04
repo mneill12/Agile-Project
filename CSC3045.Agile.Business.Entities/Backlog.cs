@@ -16,9 +16,6 @@ namespace CSC3045.Agile.Business.Entities
         public int BacklogId { get; set; }
 
         [DataMember]
-        public int SprintId { get; set; }
-
-        [DataMember]
         public ISet<UserStory> AssociatedUserStories { get; set; }
 
         #region IIdentifiableEntity members

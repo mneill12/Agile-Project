@@ -16,12 +16,6 @@ namespace CSC3045.Agile.Business.Entities
         public int BurndownPointId { get; set; }
 
         [DataMember]
-        public int ProjectId { get; set; }
-
-        [DataMember]
-        public int SprintId { get; set; }
-
-        [DataMember]
         public DateTime BurndownPointDate { get; set; }
 
         [DataMember]

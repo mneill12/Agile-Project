@@ -8,7 +8,7 @@ using FluentValidation;
 
 namespace CSC3045.Agile.Client.Entities
 {
-    public class StoryStatus : ObjectBase
+    public class CurrentStatus : ObjectBase
     {
         int _StoryStatusId;
         string _StoryStatusName;

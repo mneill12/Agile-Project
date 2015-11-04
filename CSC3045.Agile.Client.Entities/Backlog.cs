@@ -8,9 +8,8 @@ namespace CSC3045.Agile.Client.Entities
 {
     public class Backlog : ObjectBase
     {
-        int _BacklogId;
-        int _SprintId;
-        ISet<int> _AssociatedUserStoryIdSet;
+        private int _BacklogId;
+        private ISet<int> _AssociatedUserStoryIdSet;
 
         public int BacklogId
         {
@@ -21,19 +20,6 @@ namespace CSC3045.Agile.Client.Entities
                 {
                     _BacklogId = value;
                     OnPropertyChanged(() => BacklogId);
-                }
-            }
-        }
-
-        public int SprintId
-        {
-            get { return _SprintId; }
-            set
-            {
-                if (_SprintId != value)
-                {
-                    _SprintId = value;
-                    OnPropertyChanged(() => SprintId);
                 }
             }
         }

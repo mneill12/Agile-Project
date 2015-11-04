@@ -58,7 +58,7 @@
     <Compile Include="CSC3045AgileCustomDatabaseInitialiser.cs" />
     <Compile Include="Data Repositories\AccountRepository.cs" />
     <Compile Include="Data Repositories\AcceptanceCriteriaRepository.cs" />
-    <Compile Include="Data Repositories\PlanningPokerStoryRepository.cs" />
+    <Compile Include="Data Repositories\BurndownRepository.cs" />
     <Compile Include="Data Repositories\PlanningPokerSessionRepository.cs" />
     <Compile Include="Data Repositories\BacklogRepository.cs" />
     <Compile Include="Data Repositories\BurndownPointRepository.cs" />

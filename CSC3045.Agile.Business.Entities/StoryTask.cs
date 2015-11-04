@@ -16,9 +16,6 @@ namespace CSC3045.Agile.Business.Entities
         public int StoryTaskId { get; set; }
 
         [DataMember]
-        public int UserStoryId { get; set; }
-
-        [DataMember]
         public Account Owner { get; set; }
 
         [DataMember]
@@ -31,15 +28,15 @@ namespace CSC3045.Agile.Business.Entities
         public int Hours { get; set; }
 
         [DataMember]
-        public StoryStatus CurrentStatus { get; set; }
+        public CurrentStatus CurrentStatus { get; set; }
 
         [DataMember]
         public Boolean IsBlocked { get; set; }
 
         [DataMember]
-        public String UserNotea { get; set; }
+        public String UserNotes { get; set; }
 
-        public virtual ISet<UserStory> AssociatedUserStories { get; set; }
+       
 
         #region IIdentifiableEntity members
 
