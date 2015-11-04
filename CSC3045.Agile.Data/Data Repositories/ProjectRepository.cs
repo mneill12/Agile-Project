@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.Data.Entity.Migrations;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
-using Core.Common.Data;
 using CSC3045.Agile.Business.Entities;
 using CSC3045.Agile.Data.Contracts.Repository_Interfaces;
+using System.Data.Entity;
 
 namespace CSC3045.Agile.Data.Data_Repositories
 {
@@ -44,6 +38,7 @@ namespace CSC3045.Agile.Data.Data_Repositories
             return results;
         }
 
+        //TODO @Marty - Is there a reason for this? GetEntity above does the same thing, as we override EntityId with ProjectId?
         //Gets project based on Project Id
         public Project GetByProjectId(int projectId)
         {
@@ -56,25 +51,25 @@ namespace CSC3045.Agile.Data.Data_Repositories
 
         public IEnumerable<Project> GetManagedProjectsByAccount(int projectManagerId)
         {
-            using(Csc3045AgileContext entityContext = new Csc3045AgileContext())
+            using(var entityContext = new Csc3045AgileContext())
             {
-                var query = (from p in entityContext.ProjectSet
-                             where p.ProjectManagerId == projectManagerId
-                             select p);
-
-                return query.AsEnumerable<Project>();
+                return entityContext.ProjectSet
+                    .Include(a => a.ProjectManager)
+                    .Include(a => a.ProductOwner)
+                    .Where(a => a.ProjectManager.AccountId == projectManagerId)
+                    .ToList();
             }
         }
 
         public IEnumerable<Project> GetOwnedProjectsByAccount(int productOwnerId)
         {
-            using (Csc3045AgileContext entityContext = new Csc3045AgileContext())
+            using (var entityContext = new Csc3045AgileContext())
             {
-                var query = (from p in entityContext.ProjectSet
-                             where p.ProductOwnerId == productOwnerId
-                             select p);
-
-                return query.AsEnumerable<Project>();
+                return entityContext.ProjectSet
+                    .Include(a => a.ProjectManager)
+                    .Include(a => a.ProductOwner)
+                    .Where(a => a.ProductOwner.AccountId == productOwnerId)
+                    .ToList();
             }
         }
     }

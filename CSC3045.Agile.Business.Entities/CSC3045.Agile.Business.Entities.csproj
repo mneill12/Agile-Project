@@ -55,12 +55,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AcceptanceCriteria.cs" />
+    <Compile Include="Burndown.cs" />
     <Compile Include="BurndownPoint.cs" />
     <Compile Include="Account.cs" />
-    <Compile Include="PlanningPokerStory.cs" />
     <Compile Include="PlanningPokerSession.cs" />
     <Compile Include="Criteria.cs" />
-    <Compile Include="StoryStatus.cs" />
+    <Compile Include="CurrentStatus.cs" />
     <Compile Include="StoryTask.cs" />
     <Compile Include="Backlog.cs" />
     <Compile Include="UserStory.cs" />

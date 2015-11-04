@@ -10,12 +10,15 @@ namespace CSC3045.Agile.Client.Entities
 {
     public class Project : ObjectBase
     {
-        int _ProjectId;
-        Backlog _Backlog;
-        int _ProjectManagerId;
-        int _ProductOwnerId;
-        string _ProjectName;
-        DateTime _ProjectDeadline;
+        private int _ProjectId;
+        private Backlog _Backlog;
+        private Account _ProjectManager;
+        private Account _ProductOwner;
+        private string _ProjectName;
+        private DateTime _ProjectDeadline;
+        private ISet<Sprint> _Sprints;
+        private ISet<Burndown> _Burndowns;
+        private ISet<Account> _ProjectMembers; 
 
         public int ProjectId
         {
@@ -49,34 +52,34 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public int ProjectManagerId
+        public Account ProjectManager
         {
             get
             {
-                return _ProjectManagerId;
+                return _ProjectManager;
             }
             set
             {
-                if (_ProjectManagerId != value)
+                if (_ProjectManager != value)
                 {
-                    _ProjectManagerId = value;
-                    OnPropertyChanged(() => ProjectManagerId);
+                    _ProjectManager = value;
+                    OnPropertyChanged(() => ProjectManager);
                 }
             }
         }
 
-        public int ProductOwnerId
+        public Account ProductOwner
         {
             get
             {
-                return _ProductOwnerId;
+                return _ProductOwner;
             }
             set
             {
-                if (_ProductOwnerId != value)
+                if (_ProductOwner != value)
                 {
-                    _ProductOwnerId = value;
-                    OnPropertyChanged(() => ProductOwnerId);
+                    _ProductOwner = value;
+                    OnPropertyChanged(() => ProductOwner);
                 }
             }
         }
@@ -113,5 +116,52 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
+        public ISet<Sprint> Sprints
+        {
+            get
+            {
+                return _Sprints;
+            }
+            set
+            {
+                if (_Sprints != value)
+                {
+                    _Sprints = value;
+                    OnPropertyChanged(() => Sprints);
+                }
+            }
+        }
+
+        public ISet<Burndown> Burndowns
+        {
+            get
+            {
+                return _Burndowns;
+            }
+            set
+            {
+                if (_Burndowns != value)
+                {
+                    _Burndowns = value;
+                    OnPropertyChanged(() => Burndowns);
+                }
+            }
+        }
+
+        public ISet<Account> ProjectMembers
+        {
+            get
+            {
+                return _ProjectMembers;
+            }
+            set
+            {
+                if (_ProjectMembers != value)
+                {
+                    _ProjectMembers = value;
+                    OnPropertyChanged(() => ProjectMembers);
+                }
+            }
+        }
     }
 }

@@ -50,40 +50,31 @@ namespace CSC3045.Agile.Business.Services
 
         #region IAccountService operations
 
-        public ICollection<Account> GetAllAccounts()
+        /**
+         * Get all accounts, along with associated user roles
+         * @return accounts - A collection of Account objects, with user roles
+         */
+        public IEnumerable<Account> GetAllAccounts()
         {
             return ExecuteFaultHandledOperation(() =>
             {
                 IAccountRepository accountRepository = _DataRepositoryFactory.GetDataRepository<IAccountRepository>();
 
-                ICollection<Account> accountsWithChildren = accountRepository.GetAllAccounts();
-                if (accountsWithChildren == null)
+                IEnumerable<Account> accounts = accountRepository.GetAccounts();
+                if (accounts == null)
                 {
                     NotFoundException ex = new NotFoundException("Error retrieving Accounts from database");
                     throw new FaultException<NotFoundException>(ex, ex.Message);
                 }
 
-                return accountsWithChildren;
+                return accounts;
             });
         }
 
-        public ICollection<Account> GetAllAccountsWithChildren()
-        {
-            return ExecuteFaultHandledOperation(() =>
-            {
-                IAccountRepository accountRepository = _DataRepositoryFactory.GetDataRepository<IAccountRepository>();
-
-                ICollection<Account> accountsWithChildren = accountRepository.GetAccountsWithChildren();
-                if (accountsWithChildren == null)
-                {
-                    NotFoundException ex = new NotFoundException("Error retrieving Accounts from database");
-                    throw new FaultException<NotFoundException>(ex, ex.Message);
-                }
-
-                return accountsWithChildren;
-            });
-        }
-
+        /**
+         * Get a single account by login (email address)
+         * @parameter loginEmail - the email to retrieve account for
+         */
         public Account GetAccountInfo(string loginEmail)
         {
             return ExecuteFaultHandledOperation(() =>
@@ -101,6 +92,11 @@ namespace CSC3045.Agile.Business.Services
             });
         }
 
+        /**
+         * Get a single account be login (email) and password combined
+         * @parameter loginEmail - the login email to check
+         * @parameter password - the password that should match a stored one
+         */
         public Account GetAccountInfoWithPassword(string loginEmail, string password)
         {
             return ExecuteFaultHandledOperation(() =>
@@ -118,6 +114,10 @@ namespace CSC3045.Agile.Business.Services
             });
         }
 
+        /**
+         * Register a new account
+         * @parameter account - the new account object to store
+         */
         public Account RegisterAccount(Account account)
         {
             if (!IsAccountAlreadyCreated(account.LoginEmail))
@@ -134,6 +134,10 @@ namespace CSC3045.Agile.Business.Services
             return null;
         }
 
+        /**
+         * Update an account
+         * @parameter account - the updated account object to store
+         */
         [OperationBehavior(TransactionScopeRequired = true)]
         public void UpdateAccountInfo(Account account)
         {
@@ -145,6 +149,10 @@ namespace CSC3045.Agile.Business.Services
             });
         }
 
+        /**
+         * Check if an account already exists
+         * @parameter loginEmail - The email address to check for existence
+         */
         public bool IsAccountAlreadyCreated(string loginEmail)
         {
             return ExecuteFaultHandledOperation(() =>

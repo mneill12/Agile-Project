@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Core.Common.Data;
 using CSC3045.Agile.Business.Entities;
 using CSC3045.Agile.Data.Contracts.Repository_Interfaces;
+using System.Data.Entity;
 
 namespace CSC3045.Agile.Data.Data_Repositories
 {
@@ -29,19 +30,18 @@ namespace CSC3045.Agile.Data.Data_Repositories
 
         protected override IEnumerable<Sprint> GetEntities(Csc3045AgileContext entityContext)
         {
-            return from e in entityContext.SprintSet
-                   select e;
+            return entityContext.SprintSet
+                .Include(a => a.SprintMembers.Select(b => b.UserRoles))
+                .Include(c => c.Burndowns.Select(d => d.BurndownPoints))
+                .ToList();
         }
 
         protected override Sprint GetEntity(Csc3045AgileContext entityContext, int id)
         {
-            var query = (from e in entityContext.SprintSet
-                         where e.SprintId == id
-                         select e);
-
-            var results = query.FirstOrDefault();
-
-            return results;
+            return entityContext.SprintSet
+                .Include(a => a.SprintMembers.Select(b => b.UserRoles))
+                .Include(c => c.Burndowns.Select(d => d.BurndownPoints))
+                .FirstOrDefault();
         }
     }
 }

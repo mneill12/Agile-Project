@@ -42,9 +42,12 @@ namespace CSC3045.Agile.ServiceHost.Console
                 {
                     System.Console.WriteLine("Successfully created database.");
                     System.Console.WriteLine("");
-                    System.Console.WriteLine("Data Source:\t" + context.Database.Connection.DataSource);
-                    System.Console.WriteLine("Database:\tCSC3045GeneratedDB");
+                    System.Console.WriteLine("Data Source:\t\t" + context.Database.Connection.DataSource);
+                    System.Console.WriteLine("Database:\t\tCSC3045GeneratedDB");
+                    System.Console.WriteLine("Connection String:\t" + context.Database.Connection.ConnectionString);
                     System.Console.WriteLine("");
+
+                    RunDatabaseTests();
                 }
 
             }
@@ -91,7 +94,7 @@ namespace CSC3045.Agile.ServiceHost.Console
             {
 
                 ICollection<UserStory> userStorySet = GetUserStories();
-                ICollection<Account> accountSet = GetAccounts(true);
+                IEnumerable<Account> accountSet = GetAccounts(true);
 
                 foreach (UserStory userStoryTest in userStorySet)
                 {
@@ -128,18 +131,18 @@ namespace CSC3045.Agile.ServiceHost.Console
                             System.Console.WriteLine("\tDescription:\t" + tsk.Description);
                             System.Console.WriteLine("\tHours:\t" + tsk.Hours);
                             System.Console.WriteLine("\tBlocked Status:\t" + tsk.IsBlocked);
-                            //System.Console.WriteLine("\t Status: " + tsk.CurrentStatus.StoryStatusName);
-                            System.Console.WriteLine("\t ===============================================");
+                            System.Console.WriteLine("\tStatus: " + tsk.CurrentStatus.StoryStatusName);
+                            System.Console.WriteLine("\t===============================================");
                         }
 
                         System.Console.WriteLine();
-                        System.Console.WriteLine("\t Acceptance Critera: ");
+                        System.Console.WriteLine("\tAcceptance Critera: ");
                         System.Console.WriteLine();
 
                         foreach (AcceptanceCriteria ac in userStoryTest.AcceptanceCriteria)
                         {
                             System.Console.WriteLine();
-                            System.Console.WriteLine("\t Scenario:\t" + ac.Scenario);
+                            System.Console.WriteLine("\tScenario:\t" + ac.Scenario);
 
                             System.Console.WriteLine();
                             foreach (Criteria cri in ac.Criteria)
@@ -204,13 +207,13 @@ namespace CSC3045.Agile.ServiceHost.Console
 
         // Eager loading query to load associated entities when retrieving Accounts
         // @todo : move to account repo if/when CF DB works on all machines
-        static ICollection<Account> GetAccounts(bool withChildren)
+        static IEnumerable<Account> GetAccounts(bool withChildren)
         {
             AccountService service = new AccountService();
 
             if (withChildren)
             {
-                return service.GetAllAccountsWithChildren();
+                return service.GetAllAccounts();
             }
 
             return service.GetAllAccounts();
