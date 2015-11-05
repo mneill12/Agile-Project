@@ -207,7 +207,7 @@ namespace ClientDesktop.ViewModels
                             _LoginEmail = string.Empty;
                             Status = string.Empty;
 
-                            _RegionManager.RequestNavigate("MainRegion", ServiceLocator.Current.GetInstance<DashboardView>().Name);
+                            _RegionManager.RequestNavigate("MainRegion", "DashboardView");
                         }
                         else
                         {
