@@ -25,6 +25,8 @@ namespace CSC3045.Agile.Client.Bootstrapper
                 foreach (var part in catalogParts)
                     catalog.Catalogs.Add(part);
 
+
+
             CompositionContainer container = new CompositionContainer(catalog);
 
             return container;

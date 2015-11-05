@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -26,13 +26,11 @@ namespace CSC3045.Agile.Business.Entities
         [DataMember]
         public string LastName { get; set; }
 
-        [DataMember]
-        public ISet<UserRole> UserRoles { get; set; }
+        public virtual ISet<UserRole> UserRoles { get; set; }
+        public ISet<Project> AssocicatedProjects { get; set; }
+        public ISet<Sprint> AssociatedSprints { get; set; }
+        public ISet<PlanningPokerSession> AssociatedPlanningPokerSessions { get; set; } 
 
-        // Many-to-many declarations
-        public virtual ISet<Project> AssocicatedProjects { get; set; }
-        public virtual ISet<Sprint> AssociatedSprints { get; set; }
-        public virtual ISet<PlanningPokerSession> AssociatedPlanningPokerSessions { get; set; } 
 
         #region IIdentifiableEntity members
 

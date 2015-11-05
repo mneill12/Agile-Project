@@ -213,6 +213,10 @@
       <Project>{6D0A76B5-8951-4F26-AA64-8295560277A1}</Project>
       <Name>CSC3045.Agile.Client.Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CSC3045.Agile.Client.CustomPrinciples\CSC3045.Agile.Client.CustomPrinciples.csproj">
+      <Project>{3ebda9e6-9de2-4f3b-9de7-e13a2c6488a6}</Project>
+      <Name>CSC3045.Agile.Client.CustomPrinciples</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CSC3045.Agile.Client.Entities\CSC3045.Agile.Client.Entities.csproj">
       <Project>{98F36136-C738-4BC9-B9E9-58CF1463E9C1}</Project>
       <Name>CSC3045.Agile.Client.Entities</Name>

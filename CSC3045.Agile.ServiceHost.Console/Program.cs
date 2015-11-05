@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using Core.Common.Core;
@@ -29,8 +29,12 @@ namespace CSC3045.Agile.ServiceHost.Console
             System.Console.WriteLine("Starting up services...");
             System.Console.WriteLine("");
 
-            System.ServiceModel.ServiceHost hostAccountManager = new System.ServiceModel.ServiceHost(typeof(AccountService));
-            StartService(hostAccountManager, "AccountManager");
+            System.ServiceModel.ServiceHost hostAccountService = new System.ServiceModel.ServiceHost(typeof(AccountService));
+            StartService(hostAccountService, "AccountService");
+
+            System.ServiceModel.ServiceHost hostAuthenticationService = new System.ServiceModel.ServiceHost(typeof(AuthenticationService));
+            StartService(hostAuthenticationService, "AuthenticationService");
+
             System.Console.WriteLine("Initialising CodeFirst Database");
 
             try
@@ -59,7 +63,8 @@ namespace CSC3045.Agile.ServiceHost.Console
             System.Console.WriteLine("Press [Enter] to exit.");
             System.Console.ReadLine();
 
-            StopService(hostAccountManager, "AccountManager");
+            StopService(hostAuthenticationService, "AccountService");
+            StopService(hostAuthenticationService, "AuthenticationService");
         }
 
         static void StartService(System.ServiceModel.ServiceHost host, string serviceDescription)

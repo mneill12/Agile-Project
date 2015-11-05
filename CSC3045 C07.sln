@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Common", "Core.Common\Core.Common.csproj", "{F6BCFF98-A714-4B7B-978F-23D812D1744A}"
 EndProject
@@ -64,6 +64,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSC3045.Agile.Client.Bootstrapper", "CSC3045.Agile.Client.Bootstrapper\CSC3045.Agile.Client.Bootstrapper.csproj", "{B8ECEFD0-4402-4858-9D7A-852C499A9402}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSC3045.Agile.Client.Proxies.Tests", "CSC3045.Agile.Client.Proxies.Tests\CSC3045.Agile.Client.Proxies.Tests.csproj", "{CE401553-8D76-4503-8EAD-12AA1C0C3B28}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSC3045.Agile.Client.CustomPrinciples", "CSC3045.Agile.Client.CustomPrinciples\CSC3045.Agile.Client.CustomPrinciples.csproj", "{3EBDA9E6-9DE2-4F3B-9DE7-E13A2C6488A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -167,6 +169,10 @@ Global
 		{CE401553-8D76-4503-8EAD-12AA1C0C3B28}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE401553-8D76-4503-8EAD-12AA1C0C3B28}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE401553-8D76-4503-8EAD-12AA1C0C3B28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EBDA9E6-9DE2-4F3B-9DE7-E13A2C6488A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EBDA9E6-9DE2-4F3B-9DE7-E13A2C6488A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EBDA9E6-9DE2-4F3B-9DE7-E13A2C6488A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EBDA9E6-9DE2-4F3B-9DE7-E13A2C6488A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -196,5 +202,6 @@ Global
 		{DB50F5A9-ECC7-4419-AEA9-0D5F16787944} = {FDE5AEB5-3891-4B2C-9EAD-1564D1562F79}
 		{B8ECEFD0-4402-4858-9D7A-852C499A9402} = {FDE5AEB5-3891-4B2C-9EAD-1564D1562F79}
 		{CE401553-8D76-4503-8EAD-12AA1C0C3B28} = {D15D505E-91DC-48F8-A124-88D1DE9AB75A}
+		{3EBDA9E6-9DE2-4F3B-9DE7-E13A2C6488A6} = {FDE5AEB5-3891-4B2C-9EAD-1564D1562F79}
 	EndGlobalSection
 EndGlobal

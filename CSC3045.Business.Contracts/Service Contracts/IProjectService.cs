@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CSC3045.Agile.Business.Entities;
 
-namespace CSC3045.Agile.Business.Contracts.Service_Contracts
+namespace CSC3045.Agile.Business.Contracts
 {
     [ServiceContract]
     public interface IProjectService

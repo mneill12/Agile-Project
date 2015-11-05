@@ -1,15 +1,19 @@
 ﻿using System;
-using System.ComponentModel;
 using System.ComponentModel.Composition;
-using System.ServiceModel;
 using System.Windows;
+using System.ComponentModel;
+using System.Threading;
 using System.Windows.Controls;
-using Core.Common;
+using System.Security;
 using Core.Common.Contracts;
-using Core.Common.Core;
 using Core.Common.UI.Core;
+using Core.Common.Utils;
+using CSC3045.Agile.Client.CustomPrinciples;
 using CSC3045.Agile.Client.Contracts;
 using CSC3045.Agile.Client.Entities;
+using System.ServiceModel;
+using Core.Common;
+
 
 namespace ClientDesktop.ViewModels
 {
@@ -17,30 +21,27 @@ namespace ClientDesktop.ViewModels
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class LoginRegisterViewModel : ViewModelBase
     {
-        IServiceFactory _ServiceFactory;
+        #region Binding Properties
 
-        // Import service factory so we can have 'stateful' contracts and closes proxies when service methods are finished
-        [ImportingConstructor]
-        public LoginRegisterViewModel(IServiceFactory serviceFactory)
-        {
-            _ServiceFactory = serviceFactory;
-
-            RegisterAccount = new DelegateCommand<PasswordBox>(OnRegisterAccount);
-            AccountLogin = new DelegateCommand<PasswordBox>(OnAccountLogin);
-
-        }
-
-        public DelegateCommand<PasswordBox> RegisterAccount { get; private set; }
-        public DelegateCommand<PasswordBox> AccountLogin { get; private set; }
-
-        #region LoginRegisterView Bindings
-
-        private string _LoginEmail;
-
+        private string _LoginEmail = "jflyn07n@qub.ac.uk";
         private string _RegisterFirstName;
         private string _RegisterLastName;
         private string _RegisterEmail;
         private string _RegisterConfirmEmail;
+        private string _Status;
+
+        public string AuthenticatedUser{
+            get
+            {
+                if (IsAuthenticated)
+                    return string.Format("Signed in as {0}. {1}",
+                          Thread.CurrentPrincipal.Identity.Name,
+                          Thread.CurrentPrincipal.IsInRole("Administrators") ? "You are an administrator!"
+                              : "You are NOT a member of the administrators group.");
+
+                return "Not authenticated!";
+            }
+        }
 
         public string LoginEmail
         {
@@ -112,16 +113,58 @@ namespace ClientDesktop.ViewModels
             }
         }
 
+        public string Status
+        {
+            get
+            {
+                return _Status;
+            }
+            set
+            {
+                if (_Status == value) return;
+                _Status = value;
+                OnPropertyChanged("Status");
+            }
+        }
+
         #endregion
 
+        #region Delegate Commands
+
+        private readonly DelegateCommand<PasswordBox> _RegisterAccount;
+        private readonly DelegateCommand<PasswordBox> _AccountLogin;
+        private readonly DelegateCommand<object> _LogoutCommand;
+
+        public DelegateCommand<PasswordBox> RegisterAccount { get { return _RegisterAccount; } }
+        public DelegateCommand<PasswordBox> AccountLogin { get { return _AccountLogin; } }
+        public DelegateCommand<object> LogoutCommand { get { return _LogoutCommand; } }
+
+        #endregion
+
+        [Import]
+        public DashboardViewModel DashboardViewModel { get; private set; }
+
+        // Import service factory so we can have 'stateful' contracts and closes proxies when service methods are finished
+        [ImportingConstructor]
+        public LoginRegisterViewModel(IServiceFactory serviceFactory)
+        {
+            _ServiceFactory = serviceFactory;
+
+            _RegisterAccount = new DelegateCommand<PasswordBox>(OnRegisterAccount);
+            _AccountLogin = new DelegateCommand<PasswordBox>(OnAccountLogin);
+            _LogoutCommand = new DelegateCommand<object>(Logout, CanLogout);
+        }
+
+        IServiceFactory _ServiceFactory;
+
         public event EventHandler<ErrorMessageEventArgs> ErrorOccured;
-        
+
+
         public override string ViewTitle
         {
             get { return "Login/Register"; }
         }
 
-        // This gets hit every time the page is loaded while the constructor only gets loaded initially, use for getting up-to-data from the database
         protected override void OnViewLoaded()
         {
 
@@ -131,15 +174,38 @@ namespace ClientDesktop.ViewModels
         {
             if (_LoginEmail != null && passwordBox.Password != null)
             {
+                string hashedPassword = new HashHelper().CalculateHash(passwordBox.Password, _LoginEmail);
+
                 try
                 {
-                    WithClient<IAccountService>(_ServiceFactory.CreateClient<IAccountService>(), accountClient =>
+                    WithClient<IAuthenticationService>(_ServiceFactory.CreateClient<IAuthenticationService>(), authenticationClient =>
                     {
-                        Account myAccount = accountClient.GetAccountInfoWithPasswordAndUserRoles(_LoginEmail, passwordBox.Password);
+                        Account account = authenticationClient.AuthenticateUser(_LoginEmail, hashedPassword);
 
-                        if (myAccount != null)
+                        if (account != null)
                         {
-                            //ObjectBase.Container.GetExportedValue<DashboardViewModel>();
+                            //Get the current principal object
+                            CustomPrincipal customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
+                            if (customPrincipal == null)
+                                throw new ArgumentException("The application's default thread principal must be set to a CustomPrincipal object on startup.");
+
+                            //Authenticate the user by setting the custom principles
+                            if (account.UserRoles != null)
+                            {
+                                UserRole[] userRoles = new UserRole[account.UserRoles.Count];
+                                account.UserRoles.CopyTo(userRoles, 0);
+                                customPrincipal.Identity = new CustomIdentity(account.LoginEmail, userRoles);
+                            }
+
+                            //Update UI
+                            OnPropertyChanged("AuthenticatedUser");
+                            OnPropertyChanged("IsAuthenticated");
+                            _LoginEmail = string.Empty;
+                            Status = string.Empty;
+                        }
+                        else
+                        {
+                            throw new UnauthorizedAccessException();
                         }
                     });
                 }
@@ -147,6 +213,15 @@ namespace ClientDesktop.ViewModels
                 {
                     if (ErrorOccured != null)
                         ErrorOccured(this, new ErrorMessageEventArgs(ex.Message));
+
+                    Status = "Account not found, please check your e-mail and password";
+                }
+                catch (UnauthorizedAccessException ex)
+                {
+                    if (ErrorOccured != null)
+                        ErrorOccured(this, new ErrorMessageEventArgs(ex.Message));
+
+                    Status = "Login failed! Please provide some valid credentials.";
                 }
                 catch (Exception ex)
                 {
@@ -157,35 +232,65 @@ namespace ClientDesktop.ViewModels
 
         }
 
+        private bool CanLogin(object parameter)
+        {
+            return !IsAuthenticated;
+        }
+
+        private void Logout(object parameter)
+        {
+            CustomPrincipal customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
+            if (customPrincipal != null)
+            {
+
+                customPrincipal.Identity = new AnonymousIdentity();
+                OnPropertyChanged("AuthenticatedUser");
+                OnPropertyChanged("IsAuthenticated");
+                Status = string.Empty;
+            }
+        }
+
+        private bool CanLogout(object parameter)
+        {
+            return IsAuthenticated;
+        }
+
+        public bool IsAuthenticated
+        {
+            get { return Thread.CurrentPrincipal.Identity.IsAuthenticated; }
+        }
+
         protected void OnRegisterAccount(PasswordBox passwordBox)
         {
-            if ( _RegisterEmail != null && passwordBox.Password != null && _RegisterFirstName != null && _RegisterLastName != null)
+            if (_RegisterEmail != null && passwordBox.Password != null && _RegisterFirstName != null && _RegisterLastName != null)
             {
-                    try
-                    {
-                        Account _Account = new Account()
-                        {
-                            LoginEmail = _RegisterEmail,
-                            Password = passwordBox.Password,
-                            FirstName = _RegisterFirstName,
-                            LastName = _RegisterLastName
-                        };
-                        
-                        WithClient<IAccountService>(_ServiceFactory.CreateClient<IAccountService>(), accountClient =>
-                        {
-                            Account myAccount = accountClient.RegisterAccount(_Account);
+                string hashedPassword = new HashHelper().CalculateHash(passwordBox.Password, _LoginEmail);
 
-                            if (myAccount != null)
-                            {
-                                //ObjectBase.Container.GetExportedValue<DashboardViewModel>();
-                            }
-                        });
-                    }
-                    catch (Exception ex)
+                try
+                {
+                    Account _Account = new Account()
                     {
-                        if (ErrorOccured != null)
-                            ErrorOccured(this, new ErrorMessageEventArgs(ex.Message));
-                    }
+                        LoginEmail = _RegisterEmail,
+                        Password = hashedPassword,
+                        FirstName = _RegisterFirstName,
+                        LastName = _RegisterLastName
+                    };
+
+                    WithClient<IAccountService>(_ServiceFactory.CreateClient<IAccountService>(), accountClient =>
+                    {
+                        Account myAccount = accountClient.RegisterAccount(_Account);
+
+                        if (myAccount != null)
+                        {
+                            //ObjectBase.Container.GetExportedValue<DashboardViewModel>();
+                        }
+                    });
+                }
+                catch (Exception ex)
+                {
+                    if (ErrorOccured != null)
+                        ErrorOccured(this, new ErrorMessageEventArgs(ex.Message));
+                }
             }
             else
             {
@@ -195,6 +300,5 @@ namespace ClientDesktop.ViewModels
 
             }
         }
-
     }
 }
