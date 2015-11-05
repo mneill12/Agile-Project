@@ -24,6 +24,13 @@ namespace ClientDesktop
 
             base.OnStartup(e);
 
+            // Init proxies for ServiceFactorty.cs
+            ObjectBase.Container = MEFLoader.Init(new List<ComposablePartCatalog>()
+            {
+                new AssemblyCatalog(Assembly.GetExecutingAssembly())
+            });
+
+            // Init proxies for services in ViewModels
             ApplicationBootstrapper bootstrapper = new ApplicationBootstrapper();
             bootstrapper.Run();
         }

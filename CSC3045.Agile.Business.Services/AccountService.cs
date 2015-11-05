@@ -148,9 +148,6 @@ namespace CSC3045.Agile.Business.Services
                 {
                     IAccountRepository accountRepository = _DataRepositoryFactory.GetDataRepository<IAccountRepository>();
 
-                    HashHelper hashHelper = new HashHelper();
-                    account.Password = hashHelper.CalculateHash( account.Password, account.LoginEmail);
-
                     return accountRepository.Add(account);
                 });
 

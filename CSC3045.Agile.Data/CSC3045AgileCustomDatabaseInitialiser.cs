@@ -26,7 +26,7 @@ namespace CSC3045.Agile.Data
             context.AccountSet.Add(new Account()
             {
                 LoginEmail = "jflyn07n@qub.ac.uk",
-                Password = "4nt1t7!",
+                Password = "kYt8nwSk+rRitvhmseNKSrjyB06QKHlrQljre3t8O9I=", // Plaintext password: 4nt1t7!
                 FirstName = "Joe",
                 LastName = "Flynn",
                 UserRoles = developerUserRoleSet

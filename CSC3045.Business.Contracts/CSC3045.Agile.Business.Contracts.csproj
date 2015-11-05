@@ -49,9 +49,10 @@
     <Compile Include="Service Contracts\IAccountService.cs" />
     <Compile Include="Service Contracts\IAuthenticationService.cs" />
     <Compile Include="Service Contracts\IProjectService.cs" />
-    <Compile Include="Data Contracts\User.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Data Contracts\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core.Common.Contracts\Core.Common.Contracts.csproj">
       <Project>{5f9b5530-f150-4bf0-9d07-0ad8a4c6ef7d}</Project>

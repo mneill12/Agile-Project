@@ -11,6 +11,8 @@ using Core.Common.Utils;
 using CSC3045.Agile.Client.CustomPrinciples;
 using CSC3045.Agile.Client.Contracts;
 using CSC3045.Agile.Client.Entities;
+using System.ServiceModel;
+using Core.Common;
 
 
 namespace ClientDesktop.ViewModels
@@ -19,14 +21,19 @@ namespace ClientDesktop.ViewModels
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class LoginRegisterViewModel : ViewModelBase
     {
-        private readonly DelegateCommand<object> _loginCommand;
-        private readonly DelegateCommand<object> _logoutCommand;
-        private readonly DelegateCommand<object> _showViewCommand;
-        private string _username;
+        #region Binding Properties
+
+        private string _username = "jflyn07n@qub.ac.uk";
         private string _status;
         private Account _autheticatedUser;
 
-        #region Properties
+        private string _LoginEmail;
+        private string _RegisterFirstName;
+        private string _RegisterLastName;
+        private string _RegisterEmail;
+        private string _RegisterConfirmEmail;
+
+
         public string Username
         {
             get { return _username; }
@@ -51,14 +58,97 @@ namespace ClientDesktop.ViewModels
             get { return _status; }
             set { _status = value; NotifyPropertyChanged("Status"); }
         }
+
+
+        public string LoginEmail
+        {
+            get
+            {
+                return _LoginEmail;
+            }
+            set
+            {
+                if (_LoginEmail == value) return;
+                _LoginEmail = value;
+                OnPropertyChanged("LoginEmail");
+            }
+        }
+
+        public string RegisterFirstName
+        {
+            get
+            {
+                return _RegisterFirstName;
+            }
+            set
+            {
+                if (_RegisterFirstName == value) return;
+                _RegisterFirstName = value;
+                OnPropertyChanged("RegisterFirstName");
+            }
+        }
+
+        public string RegisterLastName
+        {
+            get
+            {
+                return _RegisterLastName;
+            }
+            set
+            {
+                if (_RegisterLastName == value) return;
+                _RegisterLastName = value;
+                OnPropertyChanged("RegisterLastName");
+            }
+        }
+
+        public string RegisterEmail
+        {
+            get
+            {
+                return _RegisterEmail;
+            }
+            set
+            {
+                if (_RegisterEmail == value) return;
+                _RegisterEmail = value;
+                OnPropertyChanged("RegisterEmail");
+            }
+        }
+
+        public string RegisterConfirmEmail
+        {
+            get
+            {
+                return _RegisterConfirmEmail;
+            }
+            set
+            {
+                if (_RegisterConfirmEmail == value) return;
+                _RegisterConfirmEmail = value;
+                OnPropertyChanged("RegisterConfirmEmail");
+            }
+        }
+
         #endregion
 
-        #region Commands
-        public DelegateCommand<object> LoginCommand { get { return _loginCommand; } }
+        #region Delegate Commands
 
-        public DelegateCommand<object> LogoutCommand { get { return _logoutCommand; } }
+        private readonly DelegateCommand<object> _LoginCommand;
+        private readonly DelegateCommand<object> _LogoutCommand;
+        private readonly DelegateCommand<object> _ShowViewCommand;
+        private readonly DelegateCommand<PasswordBox> _RegisterAccount;
+        private readonly DelegateCommand<PasswordBox> _AccountLogin;
 
-        public DelegateCommand<object> ShowViewCommand { get { return _showViewCommand; } }
+        public DelegateCommand<object> LoginCommand { get { return _LoginCommand; } }
+
+        public DelegateCommand<object> LogoutCommand { get { return _LogoutCommand; } }
+
+        public DelegateCommand<object> ShowViewCommand { get { return _ShowViewCommand; } }
+
+        public DelegateCommand<PasswordBox> RegisterAccount { get { return _RegisterAccount; } }
+        public DelegateCommand<PasswordBox> AccountLogin { get { return _AccountLogin; } }
+
         #endregion
 
         [Import]
@@ -69,11 +159,16 @@ namespace ClientDesktop.ViewModels
         public LoginRegisterViewModel(IServiceFactory serviceFactory)
         {
             _ServiceFactory = serviceFactory;
-            _loginCommand = new DelegateCommand<object>(Login, CanLogin);
-            _logoutCommand = new DelegateCommand<object>(Logout, CanLogout);
+
+            _LoginCommand = new DelegateCommand<object>(Login, CanLogin);
+            _LogoutCommand = new DelegateCommand<object>(Logout, CanLogout);
+            _RegisterAccount = new DelegateCommand<PasswordBox>(OnRegisterAccount);
+            _AccountLogin = new DelegateCommand<PasswordBox>(OnAccountLogin);
         }
 
         IServiceFactory _ServiceFactory;
+
+        public event EventHandler<ErrorMessageEventArgs> ErrorOccured;
 
 
         public override string ViewTitle
@@ -90,13 +185,15 @@ namespace ClientDesktop.ViewModels
         {
             PasswordBox passwordBox = parameter as PasswordBox;
             string clearTextPassword = passwordBox.Password;
+
+            HashHelper hashHelper = new HashHelper();
+            string hashedPassword = hashHelper.CalculateHash(clearTextPassword, _username);
+
             try
             {
-
                 WithClient<IAuthenticationService>(_ServiceFactory.CreateClient<IAuthenticationService>(), AuthenticationClient =>
-
                 {
-                    _autheticatedUser = AuthenticationClient.AuthenticateUser(_username, clearTextPassword);
+                    _autheticatedUser = AuthenticationClient.AuthenticateUser(_username, hashedPassword);
 
                 });
 
@@ -158,6 +255,75 @@ namespace ClientDesktop.ViewModels
         public bool IsAuthenticated
         {
             get { return Thread.CurrentPrincipal.Identity.IsAuthenticated; }
+        }
+
+        protected void OnAccountLogin(PasswordBox passwordBox)
+        {
+            if (_LoginEmail != null && passwordBox.Password != null)
+            {
+                try
+                {
+                    WithClient<IAccountService>(_ServiceFactory.CreateClient<IAccountService>(), accountClient =>
+                    {
+                        Account myAccount = accountClient.GetAccountInfoWithPasswordAndUserRoles(_LoginEmail, passwordBox.Password);
+
+                        if (myAccount != null)
+                        {
+                            //ObjectBase.Container.GetExportedValue<DashboardViewModel>();
+                        }
+                    });
+                }
+                catch (FaultException ex)
+                {
+                    if (ErrorOccured != null)
+                        ErrorOccured(this, new ErrorMessageEventArgs(ex.Message));
+                }
+                catch (Exception ex)
+                {
+                    if (ErrorOccured != null)
+                        ErrorOccured(this, new ErrorMessageEventArgs(ex.Message));
+                }
+            }
+
+        }
+
+        protected void OnRegisterAccount(PasswordBox passwordBox)
+        {
+            if (_RegisterEmail != null && passwordBox.Password != null && _RegisterFirstName != null && _RegisterLastName != null)
+            {
+                try
+                {
+                    Account _Account = new Account()
+                    {
+                        LoginEmail = _RegisterEmail,
+                        Password = passwordBox.Password,
+                        FirstName = _RegisterFirstName,
+                        LastName = _RegisterLastName
+                    };
+
+                    WithClient<IAccountService>(_ServiceFactory.CreateClient<IAccountService>(), accountClient =>
+                    {
+                        Account myAccount = accountClient.RegisterAccount(_Account);
+
+                        if (myAccount != null)
+                        {
+                            //ObjectBase.Container.GetExportedValue<DashboardViewModel>();
+                        }
+                    });
+                }
+                catch (Exception ex)
+                {
+                    if (ErrorOccured != null)
+                        ErrorOccured(this, new ErrorMessageEventArgs(ex.Message));
+                }
+            }
+            else
+            {
+                if (ErrorOccured != null)
+                    ErrorOccured(this,
+                        new ErrorMessageEventArgs("Please complete all fields to register an account"));
+
+            }
         }
 
         #region INotifyPropertyChanged Members

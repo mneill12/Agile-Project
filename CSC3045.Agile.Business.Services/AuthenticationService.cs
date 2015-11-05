@@ -30,29 +30,17 @@ namespace CSC3045.Agile.Business.Services
         IDataRepositoryFactory _DataRepositoryFactory;
       
         [OperationBehavior(TransactionScopeRequired = true)]
-        public Account AuthenticateUser(string email, string clearTextPassword)
+        public Account AuthenticateUser(string email, string hashedPassword)
         {
             IAccountRepository accountRepository = _DataRepositoryFactory.GetDataRepository<IAccountRepository>();
             Account foundAccount = accountRepository.GetByLogin(email);
-            HashHelper hashHelper = new HashHelper();
-            Account account = new Account();
 
-            if (foundAccount == null)
+            if (hashedPassword.Equals(foundAccount.Password))
             {
                 return foundAccount;
             }
 
-            else if ((hashHelper.CalculateHash(clearTextPassword, email)).Equals(foundAccount.Password))
-            {
-                //Lovely work around for the the serivce failure.
-                account.AccountId = foundAccount.AccountId;
-                account.UserRoles = foundAccount.UserRoles;
-                account.LoginEmail = foundAccount.LoginEmail;
-
-                return account;
-            }
-            
-            return account;
+            return null;
            
         }
  
