@@ -14,9 +14,6 @@ namespace CSC3045.Agile.Client.Entities
         private string _FirstName;
         private string _LastName;
         private ISet<UserRole> _UserRoles;
-        private ISet<Project> _AssocicatedProjects;
-        private ISet<Sprint> _AssociatedSprints;
-        private ISet<PlanningPokerSession> _AssociatedPlanningPokerSessions;
 
         public int AccountId
         {
@@ -95,45 +92,6 @@ namespace CSC3045.Agile.Client.Entities
                 }
             }
         }
-
-        public ISet<Project> AssocicatedProjects
-        {
-            get { return _AssocicatedProjects; }
-            set
-            {
-                if (_AssocicatedProjects != value)
-                {
-                    _AssocicatedProjects = value;
-                    OnPropertyChanged(() => AssocicatedProjects);
-                }
-            }
-        }
-
-        public ISet<Sprint> AssocicatedSprints
-        {
-            get { return _AssociatedSprints; }
-            set
-            {
-                if (_AssociatedSprints != value)
-                {
-                    _AssociatedSprints = value;
-                    OnPropertyChanged(() => AssocicatedSprints);
-                }
-            }
-        }
-
-        public ISet<PlanningPokerSession> AssocicatedPlanningPokerSessions
-        {
-            get { return _AssociatedPlanningPokerSessions; }
-            set
-            {
-                if (_AssociatedPlanningPokerSessions != value)
-                {
-                    _AssociatedPlanningPokerSessions = value;
-                    OnPropertyChanged(() => AssocicatedPlanningPokerSessions);
-                }
-            }
-        }
-
+        
     }
 }

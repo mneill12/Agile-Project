@@ -32,16 +32,7 @@ namespace CSC3045.Agile.Business.Services
         [OperationBehavior(TransactionScopeRequired = true)]
         public Account AuthenticateUser(string email, string hashedPassword)
         {
-            IAccountRepository accountRepository = _DataRepositoryFactory.GetDataRepository<IAccountRepository>();
-            Account foundAccount = accountRepository.GetByLogin(email);
-
-            if ( (foundAccount != null) && (hashedPassword.Equals(foundAccount.Password)))
-            {
-                return foundAccount;
-            }
-
-            return null;
-           
+            return _DataRepositoryFactory.GetDataRepository<IAccountRepository>().GetByLoginAndPasswordWithUserRoles(email, hashedPassword);          
         }
  
     }
