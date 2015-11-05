@@ -12,6 +12,7 @@ namespace CSC3045.Agile.Business.Contracts
     [DataContract]
     public class User
     {
+        
         public User()
         {
 

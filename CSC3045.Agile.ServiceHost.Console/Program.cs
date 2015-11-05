@@ -34,7 +34,7 @@ namespace CSC3045.Agile.ServiceHost.Console
             StartService(hostAccountService, "AccountManager");
 
             System.ServiceModel.ServiceHost hostAuthenticationService = new System.ServiceModel.ServiceHost(typeof(AuthenticationService));
-            StartService(hostAuthenticationService, "AccountManager");
+            StartService(hostAuthenticationService, "AuthenticationManager");
             System.Console.WriteLine("Initialising CodeFirst Database");
             try
             {

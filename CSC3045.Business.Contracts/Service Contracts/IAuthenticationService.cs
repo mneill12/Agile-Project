@@ -13,8 +13,9 @@ namespace CSC3045.Agile.Business.Contracts
     public interface IAuthenticationService
     {
         [OperationContract]
+        [FaultContract(typeof(NotFoundException))]
         [TransactionFlow(TransactionFlowOption.Allowed)]
-        User AuthenticateUser(String email, String Password);
+        Account AuthenticateUser(String email, String Password);
     }
 }
 

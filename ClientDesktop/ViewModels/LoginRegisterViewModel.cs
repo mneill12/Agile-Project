@@ -24,7 +24,7 @@ namespace ClientDesktop.ViewModels
         private readonly DelegateCommand<object> _showViewCommand;
         private string _username;
         private string _status;
-        private User _autheticatedUser;
+        private Account _autheticatedUser;
 
         #region Properties
         public string Username
@@ -98,7 +98,10 @@ namespace ClientDesktop.ViewModels
 
                     _autheticatedUser = AuthenticationClient.AuthenticateUser(_username, clearTextPassword);
 
+
                 });
+
+                //if account is empty fire event to tell user that.
 
                 //Get the current principal object
                 CustomPrincipal customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
@@ -106,9 +109,9 @@ namespace ClientDesktop.ViewModels
                     throw new ArgumentException("The application's default thread principal must be set to a CustomPrincipal object on startup.");
 
                 //Authenticate the user by setting the custome principle
-                UserRole[] userRoles = new UserRole[_autheticatedUser.Roles.Count];
-                _autheticatedUser.Roles.CopyTo(userRoles, 0);
-                customPrincipal.Identity = new CustomIdentity(_autheticatedUser.Email, userRoles);
+                UserRole[] userRoles = new UserRole[_autheticatedUser.UserRoles.Count];
+                _autheticatedUser.UserRoles.CopyTo(userRoles, 0);
+                customPrincipal.Identity = new CustomIdentity(_autheticatedUser.LoginEmail, userRoles);
 
                 //Update UI
                 NotifyPropertyChanged("AuthenticatedUser");

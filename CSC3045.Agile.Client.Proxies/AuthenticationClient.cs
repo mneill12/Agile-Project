@@ -17,7 +17,7 @@ namespace CSC3045.Agile.Client.Proxies
     public class AuthenticationClient : ClientBase<IAuthenticationService>, IAuthenticationService
     {
     
-        public User AuthenticateUser(string email, string password )
+        public Account AuthenticateUser(string email, string password )
         {
             try
             {
@@ -26,7 +26,7 @@ namespace CSC3045.Agile.Client.Proxies
             catch (Exception ex)
             {
                 String Status = string.Format("ERROR: {0}", ex.Message);
-                return new User();
+                return new Account();
             }
         }
     }
