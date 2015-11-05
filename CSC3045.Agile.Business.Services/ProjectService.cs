@@ -30,8 +30,22 @@ namespace CSC3045.Agile.Business.Services
             _DataRepositoryFactory = dataRepositoryFactory;
         }
 
+        public ProjectService(IBusinessEngineFactory businessEngineFactory)
+        {
+            _BusinessEngineFactory = businessEngineFactory;
+        }
+
+        public ProjectService(IDataRepositoryFactory dataRepositoryFactory, IBusinessEngineFactory businessEngineFactory)
+        {
+            _DataRepositoryFactory = dataRepositoryFactory;
+            _BusinessEngineFactory = businessEngineFactory;
+        }
+
         [Import]
         IDataRepositoryFactory _DataRepositoryFactory;
+
+        [Import]
+        IBusinessEngineFactory _BusinessEngineFactory;
 
         #region IProjectService operations
 
@@ -54,18 +68,13 @@ namespace CSC3045.Agile.Business.Services
             throw new NotImplementedException();
         }
 
-        public bool AddProject(Project project)
+        public Project AddProject(Project project)
         {
             IProjectRepository projectRepository = _DataRepositoryFactory.GetDataRepository<IProjectRepository>();
 
             Project p = projectRepository.Add(project);
 
-            if(p == null)
-            {
-                return false;
-            }
-
-            return true;
+            return p;
         }
 
         public IEnumerable<Project> GetProjectsByProjectManager(int projectManagerId)

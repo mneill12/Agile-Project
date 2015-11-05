@@ -1,4 +1,5 @@
-﻿using Core.Common.Exceptions;
+﻿using Core.Common.Contracts;
+using Core.Common.Exceptions;
 using CSC3045.Agile.Client.Entities;
 using System;
 using System.Collections.Generic;
@@ -7,14 +8,14 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CSC3045.Agile.Business.Contracts.Service_Contracts
+namespace CSC3045.Agile.Client.Contracts
 {
     [ServiceContract]
-    public interface IProjectService
+    public interface IProjectService : IServiceContract
     {
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
-        bool AddProject(Project project);
+        Project AddProject(Project project);
 
         [OperationContract]
         [FaultContract(typeof(NotFoundException))]
