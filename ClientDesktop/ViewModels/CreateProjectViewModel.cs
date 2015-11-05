@@ -65,7 +65,7 @@ namespace ClientDesktop.ViewModels
                 {
                     Project _Project = new Project()
                     {
-                        ProjectName = _ProjectName,
+                        ProjectName = textBox.Text,
                         ProjectDeadline = new DateTime(2016,1,1)
                     };
 

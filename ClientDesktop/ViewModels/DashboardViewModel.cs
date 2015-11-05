@@ -3,12 +3,13 @@ using System.Windows.Controls;
 using Core.Common.Contracts;
 using Core.Common.Core;
 using Core.Common.UI.Core;
+using Prism.Regions;
 
 namespace ClientDesktop.ViewModels
 {
     [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class DashboardViewModel : ViewModelBase
+    public class DashboardViewModel : ViewModelBase, INavigationAware
     {
         IServiceFactory _ServiceFactory;
 
@@ -28,6 +29,20 @@ namespace ClientDesktop.ViewModels
         {
 
         }
-        
+
+        public void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            
+        }
+
+        public bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            return true;
+        }
+
+        public void OnNavigatedFrom(NavigationContext navigationContext)
+        {
+            
+        }
     }
 }
