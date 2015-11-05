@@ -5,6 +5,8 @@ using System.ComponentModel;
 using System.Threading;
 using System.Windows.Controls;
 using System.Security;
+using ClientDesktop.Views;
+using Core.Common;
 using Core.Common.Contracts;
 using Core.Common.UI.Core;
 using Core.Common.Utils;
@@ -12,8 +14,8 @@ using CSC3045.Agile.Client.CustomPrinciples;
 using CSC3045.Agile.Client.Contracts;
 using CSC3045.Agile.Client.Entities;
 using System.ServiceModel;
-using Core.Common;
-
+using Microsoft.Practices.ServiceLocation;
+using Prism.Regions;
 
 namespace ClientDesktop.ViewModels
 {
@@ -21,7 +23,7 @@ namespace ClientDesktop.ViewModels
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class LoginRegisterViewModel : ViewModelBase
     {
-        #region Binding Properties
+        #region LoginRegisterView Bindings
 
         private string _LoginEmail = "jflyn07n@qub.ac.uk";
         private string _RegisterFirstName;
@@ -144,21 +146,23 @@ namespace ClientDesktop.ViewModels
         [Import]
         public DashboardViewModel DashboardViewModel { get; private set; }
 
+        private IServiceFactory _ServiceFactory;
+        private IRegionManager _RegionManager;
+
         // Import service factory so we can have 'stateful' contracts and closes proxies when service methods are finished
         [ImportingConstructor]
-        public LoginRegisterViewModel(IServiceFactory serviceFactory)
+        public LoginRegisterViewModel(IServiceFactory serviceFactory, IRegionManager regionManager)
         {
             _ServiceFactory = serviceFactory;
+            _RegionManager = regionManager;
 
             _RegisterAccount = new DelegateCommand<PasswordBox>(OnRegisterAccount);
             _AccountLogin = new DelegateCommand<PasswordBox>(OnAccountLogin);
             _LogoutCommand = new DelegateCommand<object>(Logout, CanLogout);
+
         }
 
-        IServiceFactory _ServiceFactory;
-
         public event EventHandler<ErrorMessageEventArgs> ErrorOccured;
-
 
         public override string ViewTitle
         {
@@ -180,9 +184,9 @@ namespace ClientDesktop.ViewModels
                 {
                     WithClient<IAuthenticationService>(_ServiceFactory.CreateClient<IAuthenticationService>(), authenticationClient =>
                     {
-                        Account account = authenticationClient.AuthenticateUser(_LoginEmail, hashedPassword);
+                        GlobalCommands.MyAccount = authenticationClient.AuthenticateUser(_LoginEmail, hashedPassword);
 
-                        if (account != null)
+                        if (GlobalCommands.MyAccount != null)
                         {
                             //Get the current principal object
                             CustomPrincipal customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
@@ -190,11 +194,11 @@ namespace ClientDesktop.ViewModels
                                 throw new ArgumentException("The application's default thread principal must be set to a CustomPrincipal object on startup.");
 
                             //Authenticate the user by setting the custom principles
-                            if (account.UserRoles != null)
+                            if (GlobalCommands.MyAccount.UserRoles != null)
                             {
-                                UserRole[] userRoles = new UserRole[account.UserRoles.Count];
-                                account.UserRoles.CopyTo(userRoles, 0);
-                                customPrincipal.Identity = new CustomIdentity(account.LoginEmail, userRoles);
+                                UserRole[] userRoles = new UserRole[GlobalCommands.MyAccount.UserRoles.Count];
+                                GlobalCommands.MyAccount.UserRoles.CopyTo(userRoles, 0);
+                                customPrincipal.Identity = new CustomIdentity(GlobalCommands.MyAccount.LoginEmail, userRoles);
                             }
 
                             //Update UI
@@ -202,6 +206,8 @@ namespace ClientDesktop.ViewModels
                             OnPropertyChanged("IsAuthenticated");
                             _LoginEmail = string.Empty;
                             Status = string.Empty;
+
+                            _RegionManager.RequestNavigate("MainRegion", ServiceLocator.Current.GetInstance<DashboardView>().Name);
                         }
                         else
                         {
@@ -275,14 +281,14 @@ namespace ClientDesktop.ViewModels
                         FirstName = _RegisterFirstName,
                         LastName = _RegisterLastName
                     };
-
+                        
                     WithClient<IAccountService>(_ServiceFactory.CreateClient<IAccountService>(), accountClient =>
                     {
-                        Account myAccount = accountClient.RegisterAccount(_Account);
+                        GlobalCommands.MyAccount = accountClient.RegisterAccount(_Account);
 
-                        if (myAccount != null)
+                        if (GlobalCommands.MyAccount != null)
                         {
-                            //ObjectBase.Container.GetExportedValue<DashboardViewModel>();
+                            _RegionManager.RequestNavigate("MainRegion", "DashboardView");
                         }
                     });
                 }
@@ -295,8 +301,7 @@ namespace ClientDesktop.ViewModels
             else
             {
                 if (ErrorOccured != null)
-                    ErrorOccured(this,
-                        new ErrorMessageEventArgs("Please complete all fields to register an account"));
+                    ErrorOccured(this, new ErrorMessageEventArgs("Please complete all fields to register an account"));
 
             }
         }
