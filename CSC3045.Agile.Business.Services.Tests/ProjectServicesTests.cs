@@ -117,8 +117,8 @@ namespace CSC3045.Agile.Business.Services.Tests
 
             IEnumerable<Project> projectsToGet = new List<Project>()
             {
-                new Project() { ProjectId = 1, ProductOwnerId = 1, ProjectManagerId = 12, ProjectName = "testproject1", AssociatedUsers = associatedAccounts1 },
-                new Project() { ProjectId = 2, ProductOwnerId = 2, ProjectManagerId = 12, ProjectName = "testproject2", AssociatedUsers = associatedAccounts2 }
+                new Project() { ProjectId = 1, ProductOwner = new Account(){AccountId = 1}, ProjectManager = new Account(){AccountId = 12}, ProjectName = "testproject1", AssociatedUsers = associatedAccounts1 },
+                new Project() { ProjectId = 2, ProductOwner = new Account(){AccountId = 2}, ProjectManager = new Account(){AccountId = 12}, ProjectName = "testproject2", AssociatedUsers = associatedAccounts2 }
             };
 
             Mock<IDataRepositoryFactory> mockDataRepositoryFactory = new Mock<IDataRepositoryFactory>();
