@@ -65,7 +65,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSC3045.Agile.Client.Bootst
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSC3045.Agile.Client.Proxies.Tests", "CSC3045.Agile.Client.Proxies.Tests\CSC3045.Agile.Client.Proxies.Tests.csproj", "{CE401553-8D76-4503-8EAD-12AA1C0C3B28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSC3045.Agile.Client.CustomPrinciples", "CSC3045.Agile.Client.Custom_Principles\CSC3045.Agile.Client.CustomPrinciples.csproj", "{3EBDA9E6-9DE2-4F3B-9DE7-E13A2C6488A6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSC3045.Agile.Client.CustomPrinciples", "CSC3045.Agile.Client.CustomPrinciples\CSC3045.Agile.Client.CustomPrinciples.csproj", "{3EBDA9E6-9DE2-4F3B-9DE7-E13A2C6488A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
