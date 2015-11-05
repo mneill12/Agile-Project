@@ -14,7 +14,7 @@ namespace CSC3045.Agile.Business.Contracts.Service_Contracts
     {
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
-        bool AddProject(Project project);
+        Project AddProject(Project project);
 
         [OperationContract]
         [FaultContract(typeof(NotFoundException))]

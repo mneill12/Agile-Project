@@ -1,4 +1,4 @@
-﻿using CSC3045.Agile.Business.Contracts.Service_Contracts;
+﻿using CSC3045.Agile.Client.Contracts;
 using CSC3045.Agile.Client.Entities;
 using System;
 using System.Collections.Generic;
@@ -14,7 +14,7 @@ namespace CSC3045.Agile.Client.Proxies
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class ProjectClient : ClientBase<IProjectService>, IProjectService
     {
-        public bool AddProject(Project project)
+        public Project AddProject(Project project)
         {
             return Channel.AddProject(project);
         }
