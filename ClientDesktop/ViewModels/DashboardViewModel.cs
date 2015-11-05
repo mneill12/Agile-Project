@@ -1,4 +1,7 @@
 ﻿using System.ComponentModel.Composition;
+using System.Windows.Controls;
+using Core.Common.Contracts;
+using Core.Common.Core;
 using Core.Common.UI.Core;
 
 namespace ClientDesktop.ViewModels
@@ -7,6 +10,14 @@ namespace ClientDesktop.ViewModels
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class DashboardViewModel : ViewModelBase
     {
+        IServiceFactory _ServiceFactory;
+
+        [ImportingConstructor]
+        public DashboardViewModel(IServiceFactory serviceFactory)
+        {
+            _ServiceFactory = serviceFactory;
+        }
+
 
         public override string ViewTitle
         {
