@@ -56,9 +56,9 @@ namespace CSC3045.Agile.Business.Services.Tests
 
             ProjectService service = new ProjectService(mockDataRepositoryFactory.Object);
 
-            bool result = service.AddProject(projectToAdd);
+            Project returnedProject = service.AddProject(projectToAdd);
 
-            Assert.IsTrue(result, "true");
+            Assert.IsTrue(returnedProject != null);
 
         }
 
