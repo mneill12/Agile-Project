@@ -5,7 +5,6 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using CSC3045.Agile.Business.Contracts;
-using CSC3045.Agile.Business.Contracts.Service_Contracts;
 using Core.Common.Contracts;
 using System.ComponentModel.Composition;
 using CSC3045.Agile.Data.Contracts.Repository_Interfaces;

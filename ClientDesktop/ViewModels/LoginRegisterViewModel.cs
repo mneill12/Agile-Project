@@ -23,22 +23,12 @@ namespace ClientDesktop.ViewModels
     {
         #region Binding Properties
 
-        private string _username;
-        private string _status;
-        private Account _autheticatedUser;
-
-        private string _LoginEmail;
+        private string _LoginEmail = "jflyn07n@qub.ac.uk";
         private string _RegisterFirstName;
         private string _RegisterLastName;
         private string _RegisterEmail;
         private string _RegisterConfirmEmail;
-
-
-        public string Username
-        {
-            get { return _username; }
-            set { _username = value; NotifyPropertyChanged("Username"); }
-        }
+        private string _Status;
 
         public string AuthenticatedUser{
             get
@@ -52,13 +42,6 @@ namespace ClientDesktop.ViewModels
                 return "Not authenticated!";
             }
         }
-
-        public string Status
-        {
-            get { return _status; }
-            set { _status = value; NotifyPropertyChanged("Status"); }
-        }
-
 
         public string LoginEmail
         {
@@ -130,24 +113,31 @@ namespace ClientDesktop.ViewModels
             }
         }
 
+        public string Status
+        {
+            get
+            {
+                return _Status;
+            }
+            set
+            {
+                if (_Status == value) return;
+                _Status = value;
+                OnPropertyChanged("Status");
+            }
+        }
+
         #endregion
 
         #region Delegate Commands
 
-        private readonly DelegateCommand<object> _LoginCommand;
-        private readonly DelegateCommand<object> _LogoutCommand;
-        private readonly DelegateCommand<object> _ShowViewCommand;
         private readonly DelegateCommand<PasswordBox> _RegisterAccount;
         private readonly DelegateCommand<PasswordBox> _AccountLogin;
-
-        public DelegateCommand<object> LoginCommand { get { return _LoginCommand; } }
-
-        public DelegateCommand<object> LogoutCommand { get { return _LogoutCommand; } }
-
-        public DelegateCommand<object> ShowViewCommand { get { return _ShowViewCommand; } }
+        private readonly DelegateCommand<object> _LogoutCommand;
 
         public DelegateCommand<PasswordBox> RegisterAccount { get { return _RegisterAccount; } }
         public DelegateCommand<PasswordBox> AccountLogin { get { return _AccountLogin; } }
+        public DelegateCommand<object> LogoutCommand { get { return _LogoutCommand; } }
 
         #endregion
 
@@ -160,10 +150,9 @@ namespace ClientDesktop.ViewModels
         {
             _ServiceFactory = serviceFactory;
 
-            _LoginCommand = new DelegateCommand<object>(Login, CanLogin);
-            _LogoutCommand = new DelegateCommand<object>(Logout, CanLogout);
             _RegisterAccount = new DelegateCommand<PasswordBox>(OnRegisterAccount);
             _AccountLogin = new DelegateCommand<PasswordBox>(OnAccountLogin);
+            _LogoutCommand = new DelegateCommand<object>(Logout, CanLogout);
         }
 
         IServiceFactory _ServiceFactory;
@@ -181,52 +170,66 @@ namespace ClientDesktop.ViewModels
 
         }
 
-        private void Login(object parameter)
+        protected void OnAccountLogin(PasswordBox passwordBox)
         {
-            PasswordBox passwordBox = parameter as PasswordBox;
-            string clearTextPassword = passwordBox.Password;
-
-            HashHelper hashHelper = new HashHelper();
-            string hashedPassword = hashHelper.CalculateHash(clearTextPassword, _username);
-
-            try
+            if (_LoginEmail != null && passwordBox.Password != null)
             {
-                WithClient<IAuthenticationService>(_ServiceFactory.CreateClient<IAuthenticationService>(), AuthenticationClient =>
-                {
-                    _autheticatedUser = AuthenticationClient.AuthenticateUser(_username, hashedPassword);
+                string hashedPassword = new HashHelper().CalculateHash(passwordBox.Password, _LoginEmail);
 
-                });
-
-                if(_autheticatedUser == null)
+                try
                 {
-                    throw new UnauthorizedAccessException();
+                    WithClient<IAuthenticationService>(_ServiceFactory.CreateClient<IAuthenticationService>(), authenticationClient =>
+                    {
+                        Account account = authenticationClient.AuthenticateUser(_LoginEmail, hashedPassword);
+
+                        if (account != null)
+                        {
+                            //Get the current principal object
+                            CustomPrincipal customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
+                            if (customPrincipal == null)
+                                throw new ArgumentException("The application's default thread principal must be set to a CustomPrincipal object on startup.");
+
+                            //Authenticate the user by setting the custom principles
+                            if (account.UserRoles != null)
+                            {
+                                UserRole[] userRoles = new UserRole[account.UserRoles.Count];
+                                account.UserRoles.CopyTo(userRoles, 0);
+                                customPrincipal.Identity = new CustomIdentity(account.LoginEmail, userRoles);
+                            }
+
+                            //Update UI
+                            OnPropertyChanged("AuthenticatedUser");
+                            OnPropertyChanged("IsAuthenticated");
+                            _LoginEmail = string.Empty;
+                            Status = string.Empty;
+                        }
+                        else
+                        {
+                            throw new UnauthorizedAccessException();
+                        }
+                    });
                 }
+                catch (FaultException ex)
+                {
+                    if (ErrorOccured != null)
+                        ErrorOccured(this, new ErrorMessageEventArgs(ex.Message));
 
-                //Get the current principal object
-                CustomPrincipal customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
-                if (customPrincipal == null)
-                    throw new ArgumentException("The application's default thread principal must be set to a CustomPrincipal object on startup.");
+                    Status = "Account not found, please check your e-mail and password";
+                }
+                catch (UnauthorizedAccessException ex)
+                {
+                    if (ErrorOccured != null)
+                        ErrorOccured(this, new ErrorMessageEventArgs(ex.Message));
 
-                //Authenticate the user by setting the custome principle
-                UserRole[] userRoles = new UserRole[_autheticatedUser.UserRoles.Count];
-                _autheticatedUser.UserRoles.CopyTo(userRoles, 0);
-                customPrincipal.Identity = new CustomIdentity(_autheticatedUser.LoginEmail, userRoles);
+                    Status = "Login failed! Please provide some valid credentials.";
+                }
+                catch (Exception ex)
+                {
+                    if (ErrorOccured != null)
+                        ErrorOccured(this, new ErrorMessageEventArgs(ex.Message));
+                }
+            }
 
-                //Update UI
-                NotifyPropertyChanged("AuthenticatedUser");
-                NotifyPropertyChanged("IsAuthenticated");
-                Username = string.Empty; //reset
-                passwordBox.Password = string.Empty; //reset
-                Status = string.Empty;
-            }
-            catch (UnauthorizedAccessException)
-            {
-                Status = "Login failed! Please provide some valid credentials.";
-            }
-            catch (Exception ex)
-            {
-                Status = string.Format("ERROR: {0}", ex.Message);
-            }
         }
 
         private bool CanLogin(object parameter)
@@ -241,8 +244,8 @@ namespace ClientDesktop.ViewModels
             {
 
                 customPrincipal.Identity = new AnonymousIdentity();
-                NotifyPropertyChanged("AuthenticatedUser");
-                NotifyPropertyChanged("IsAuthenticated");
+                OnPropertyChanged("AuthenticatedUser");
+                OnPropertyChanged("IsAuthenticated");
                 Status = string.Empty;
             }
         }
@@ -257,46 +260,18 @@ namespace ClientDesktop.ViewModels
             get { return Thread.CurrentPrincipal.Identity.IsAuthenticated; }
         }
 
-        protected void OnAccountLogin(PasswordBox passwordBox)
-        {
-            if (_LoginEmail != null && passwordBox.Password != null)
-            {
-                try
-                {
-                    WithClient<IAccountService>(_ServiceFactory.CreateClient<IAccountService>(), accountClient =>
-                    {
-                        Account myAccount = accountClient.GetAccountInfoWithPasswordAndUserRoles(_LoginEmail, passwordBox.Password);
-
-                        if (myAccount != null)
-                        {
-                            //ObjectBase.Container.GetExportedValue<DashboardViewModel>();
-                        }
-                    });
-                }
-                catch (FaultException ex)
-                {
-                    if (ErrorOccured != null)
-                        ErrorOccured(this, new ErrorMessageEventArgs(ex.Message));
-                }
-                catch (Exception ex)
-                {
-                    if (ErrorOccured != null)
-                        ErrorOccured(this, new ErrorMessageEventArgs(ex.Message));
-                }
-            }
-
-        }
-
         protected void OnRegisterAccount(PasswordBox passwordBox)
         {
             if (_RegisterEmail != null && passwordBox.Password != null && _RegisterFirstName != null && _RegisterLastName != null)
             {
+                string hashedPassword = new HashHelper().CalculateHash(passwordBox.Password, _LoginEmail);
+
                 try
                 {
                     Account _Account = new Account()
                     {
                         LoginEmail = _RegisterEmail,
-                        Password = passwordBox.Password,
+                        Password = hashedPassword,
                         FirstName = _RegisterFirstName,
                         LastName = _RegisterLastName
                     };
@@ -325,17 +300,5 @@ namespace ClientDesktop.ViewModels
 
             }
         }
-
-        #region INotifyPropertyChanged Members
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void NotifyPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
-        #endregion
-
-
     }
 }

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("CSC3045.Agile.Client.Custom_Principles")]
+[assembly: AssemblyTitle("CSC3045.Agile.Client.CustomPrinciples")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("CSC3045.Agile.Client.Custom_Principles")]
+[assembly: AssemblyProduct("CSC3045.Agile.Client.CustomPrinciples")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
