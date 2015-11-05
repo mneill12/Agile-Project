@@ -26,7 +26,7 @@ namespace CSC3045.Agile.Business.Entities
         [DataMember]
         public string LastName { get; set; }
 
-        public virtual ISet<UserRole> UserRoles { get; set; }
+        public ISet<UserRole> UserRoles { get; set; }
         public ISet<Project> AssocicatedProjects { get; set; }
         public ISet<Sprint> AssociatedSprints { get; set; }
         public ISet<PlanningPokerSession> AssociatedPlanningPokerSessions { get; set; } 
