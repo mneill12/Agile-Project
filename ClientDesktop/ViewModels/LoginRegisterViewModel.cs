@@ -103,7 +103,6 @@ namespace ClientDesktop.ViewModels
                 {
                     throw new UnauthorizedAccessException();
                 }
-                //if account is empty fire event to tell user that.
 
                 //Get the current principal object
                 CustomPrincipal customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;

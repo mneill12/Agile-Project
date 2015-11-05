@@ -25,6 +25,8 @@ namespace ClientDesktop
             {
                 new AssemblyCatalog(Assembly.GetExecutingAssembly())
             });
+
+            
         }
 		
     }

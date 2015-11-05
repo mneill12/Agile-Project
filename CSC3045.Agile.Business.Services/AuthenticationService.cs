@@ -45,7 +45,6 @@ namespace CSC3045.Agile.Business.Services
             else if ((hashHelper.CalculateHash(clearTextPassword, email)).Equals(foundAccount.Password))
             {
                 //Lovely work around for the the serivce failure.
-                
                 account.AccountId = foundAccount.AccountId;
                 account.UserRoles = foundAccount.UserRoles;
                 account.LoginEmail = foundAccount.LoginEmail;
