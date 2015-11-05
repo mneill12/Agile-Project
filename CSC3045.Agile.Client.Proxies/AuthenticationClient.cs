@@ -18,16 +18,8 @@ namespace CSC3045.Agile.Client.Proxies
     {
     
         public Account AuthenticateUser(string email, string password )
-        {
-            try
-            {
-                return Channel.AuthenticateUser(email, password);
-            }
-            catch (Exception ex)
-            {
-                String Status = string.Format("ERROR: {0}", ex.Message);
-                return new Account();
-            }
+        {      
+                return Channel.AuthenticateUser(email, password); 
         }
     }
 }

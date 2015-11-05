@@ -95,12 +95,14 @@ namespace ClientDesktop.ViewModels
             {
                 WithClient<IAuthenticationService>(_ServiceFactory.CreateClient<IAuthenticationService>(), AuthenticationClient =>
                 {
-
                     _autheticatedUser = AuthenticationClient.AuthenticateUser(_username, clearTextPassword);
-
 
                 });
 
+                if(_autheticatedUser == null)
+                {
+                    throw new UnauthorizedAccessException();
+                }
                 //if account is empty fire event to tell user that.
 
                 //Get the current principal object

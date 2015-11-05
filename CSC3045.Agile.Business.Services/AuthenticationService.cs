@@ -39,7 +39,7 @@ namespace CSC3045.Agile.Business.Services
 
             if (foundAccount == null)
             {
-                return account;
+                return foundAccount;
             }
 
             else if ((hashHelper.CalculateHash(clearTextPassword, email)).Equals(foundAccount.Password))
