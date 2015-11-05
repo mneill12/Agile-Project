@@ -23,7 +23,7 @@ namespace ClientDesktop.ViewModels
     {
         #region Binding Properties
 
-        private string _username = "jflyn07n@qub.ac.uk";
+        private string _username;
         private string _status;
         private Account _autheticatedUser;
 

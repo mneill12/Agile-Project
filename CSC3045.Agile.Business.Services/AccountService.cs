@@ -14,7 +14,6 @@ using System.ServiceProcess;
 using Core.Common;
 using CSC3045.Agile.Business.Common;
 using CSC3045.Agile.Data.Contracts.Repository_Interfaces;
-using Core.Common.Utils;
 
 namespace CSC3045.Agile.Business.Services
 {

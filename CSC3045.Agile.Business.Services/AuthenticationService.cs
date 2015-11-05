@@ -35,7 +35,7 @@ namespace CSC3045.Agile.Business.Services
             IAccountRepository accountRepository = _DataRepositoryFactory.GetDataRepository<IAccountRepository>();
             Account foundAccount = accountRepository.GetByLogin(email);
 
-            if (hashedPassword.Equals(foundAccount.Password))
+            if ( (foundAccount != null) && (hashedPassword.Equals(foundAccount.Password)))
             {
                 return foundAccount;
             }

@@ -17,9 +17,9 @@ namespace CSC3045.Agile.Client.Proxies
     public class AuthenticationClient : ClientBase<IAuthenticationService>, IAuthenticationService
     {
     
-        public Account AuthenticateUser(string email, string password )
+        public Account AuthenticateUser(string email, string hashedPassword )
         {      
-                return Channel.AuthenticateUser(email, password); 
+                return Channel.AuthenticateUser(email, hashedPassword); 
         }
     }
 }

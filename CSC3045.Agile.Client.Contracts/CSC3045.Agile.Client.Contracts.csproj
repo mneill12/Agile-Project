@@ -46,7 +46,6 @@
     <Compile Include="Service Contracts\IAccountService.cs" />
     <Compile Include="Service Contracts\IProjectService.cs" />
     <Compile Include="Service Contracts\IAuthenticationService.cs" />
-    <Compile Include="Data Contracts\User.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
