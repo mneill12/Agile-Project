@@ -4,8 +4,21 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:core="CSC3045AgileCore"
-             mc:Ignorable="d" Background="LightSteelBlue">
+             mc:Ignorable="d" Background="LightSteelBlue" Height="40" Width="1280">
     <Grid>
-        <TextBlock Text="This is the top bar view, place global nav/account stuff here" Grid.Row="0"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="600"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="80"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="This is the top bar view, place global nav/account stuff here" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"/>
+        <!--<TextBlock Text="You are currently logged out, please login" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="0" /> -->
+        <TextBlock Text="Hi Darryl - darryl@qub.ac.uk" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" />
+        <TextBlock Text="Available As: Project Owner, Scrum Master, Developer" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="1" />
+        <Button x:Name="LogoutButton" Content="Logout" Width="75" Grid.Column="2" Grid.RowSpan="3" HorizontalAlignment="Right"/>
     </Grid>
 </core:UserControlViewBase>

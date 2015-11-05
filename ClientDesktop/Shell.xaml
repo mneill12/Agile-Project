@@ -28,7 +28,7 @@
     </Controls:MetroWindow.RightWindowCommands>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <ContentControl x:Name="TopBarRegion" regions:RegionManager.RegionName="TopBarRegion" Grid.Row="0" />
