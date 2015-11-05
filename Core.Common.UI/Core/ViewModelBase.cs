@@ -7,7 +7,7 @@ using FluentValidation.Results;
 
 namespace Core.Common.UI.Core
 {
-    // IProChanged + Other View-to-ViewModel linking happens automatically with the ViewModelBase
+    // IPropChanged + Other View-to-ViewModel linking happens automatically with the ViewModelBase
     public class ViewModelBase : ObjectBase
     {
         public ViewModelBase()

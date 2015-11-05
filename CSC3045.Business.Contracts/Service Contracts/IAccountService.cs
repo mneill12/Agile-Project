@@ -12,12 +12,20 @@ namespace CSC3045.Agile.Business.Contracts
     public interface IAccountService
     {
         [OperationContract]
+        [FaultContract(typeof (NotFoundException))]
+        ICollection<Account> GetAllAccounts();
+
+        [OperationContract]
+        [FaultContract(typeof(NotFoundException))]
+        ICollection<Account> GetAllAccountsWithUserRoles();
+
+        [OperationContract]
         [FaultContract(typeof(NotFoundException))]
         Account GetAccountInfo(string loginEmail);
 
         [OperationContract]
         [FaultContract(typeof(NotFoundException))]
-        Account GetAccountInfoWithPassword(string loginEmail, string password);
+        Account GetAccountInfoWithPasswordAndUserRoles(string loginEmail, string password);
 
         [OperationContract]
         [FaultContract(typeof(NotFoundException))]

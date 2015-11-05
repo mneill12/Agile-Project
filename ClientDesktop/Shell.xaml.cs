@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,28 +14,27 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ClientDesktop.ViewModels;
-using Core.Common.Core;
-using Core.Common.UI.Core;
+using Prism.Modularity;
+using Prism.Regions;
 
-namespace ClientDesktop.Views
+namespace ClientDesktop
 {
     /// <summary>
-    /// Interaction logic for LoginRegisterView.xaml
+    /// Interaction logic for Shell.xaml, replaces the standard MainWindow of WPF applications
     /// </summary>
     [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public partial class LoginRegisterView : UserControlViewBase    
+    public partial class Shell
     {
-        public LoginRegisterView()
+        public Shell()
         {
             InitializeComponent();
         }
 
-        [Import]
-        public LoginRegisterViewModel ViewModel
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
-            set { DataContext = value; }
+            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+            e.Handled = true;
         }
     }
 }

@@ -12,8 +12,16 @@ namespace CSC3045.Agile.Data.Contracts.Repository_Interfaces
     public interface IAccountRepository : IDataRepository<Account>
     {
         Account GetByLogin(string login);
+		
+		Account GetByLoginAndPassword(string login, string password);
+
+        Account GetByLoginAndPasswordWithUserRoles(string login, string password);
+
         IEnumerable<Account> GetByUserRole(UserRole role);
-        IEnumerable<Account> GetAccounts();
-		Account GetByLogin(string login, string password);
+
+        ICollection<Account> GetAllAccounts();
+		
+        ICollection<Account> GetAllAccountsWithUserRoles();
+
     }
 }

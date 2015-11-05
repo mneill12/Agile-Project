@@ -23,7 +23,6 @@ namespace CSC3045.Agile.ServiceHost.Console
     {
         static void Main(string[] args)
         {
-
             // Init MEF to use DI with engines/repositories
             ObjectBase.Container = MEFLoader.Init();
 
@@ -33,6 +32,7 @@ namespace CSC3045.Agile.ServiceHost.Console
             System.ServiceModel.ServiceHost hostAccountManager = new System.ServiceModel.ServiceHost(typeof(AccountService));
             StartService(hostAccountManager, "AccountManager");
             System.Console.WriteLine("Initialising CodeFirst Database");
+
             try
             {
                 using (var context = new Csc3045AgileContext())
@@ -179,20 +179,15 @@ namespace CSC3045.Agile.ServiceHost.Console
                         }
 
                         System.Console.WriteLine();
-
-
                     }
                 }
-
             }
-
         }
 
         // Eager loading query to load associated entities when retrieving user stories
         // @todo : move to user story repo if/when CF DB works on all machines
         static ICollection<UserStory> GetUserStories()
         {
-
             using (var db = new Csc3045AgileContext())
             {
                 return db.UserStorySet
@@ -204,13 +199,13 @@ namespace CSC3045.Agile.ServiceHost.Console
 
         // Eager loading query to load associated entities when retrieving Accounts
         // @todo : move to account repo if/when CF DB works on all machines
-        static IEnumerable<Account> GetAccounts(bool withChildren)
+        static ICollection<Account> GetAccounts(bool withUserRoles)
         {
             AccountService service = new AccountService();
 
-            if (withChildren)
+            if (withUserRoles)
             {
-                return service.GetAllAccounts();
+                return service.GetAllAccountsWithUserRoles();
             }
 
             return service.GetAllAccounts();

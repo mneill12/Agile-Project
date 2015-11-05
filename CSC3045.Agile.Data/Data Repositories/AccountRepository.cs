@@ -41,16 +41,6 @@ namespace CSC3045.Agile.Data.Data_Repositories
             }
         }
 
-        public IEnumerable<Account> GetAccounts()
-        {
-            using (var db = new Csc3045AgileContext())
-            {
-                return db.AccountSet
-                    .Include(a => a.UserRoles)
-                    .ToList();
-            }
-        }
-
         protected override Account GetEntity(Csc3045AgileContext entityContext, int id)
         {
             using (var db = new Csc3045AgileContext())
@@ -61,8 +51,8 @@ namespace CSC3045.Agile.Data.Data_Repositories
             }
 
         }
-		
-		public Account GetByLogin(string login, string password)
+
+        public Account GetByLoginAndPassword(string login, string password)
         {
             using (Csc3045AgileContext entityContext = new Csc3045AgileContext())
             {
@@ -72,26 +62,54 @@ namespace CSC3045.Agile.Data.Data_Repositories
             }
         }
 
+
+        public Account GetByLoginAndPasswordWithUserRoles(string login, string password)
+        {
+            using (Csc3045AgileContext entityContext = new Csc3045AgileContext())
+            {
+                return (from a in entityContext.AccountSet
+                        where (a.LoginEmail == login) && (a.Password == password)
+                        select a).Include(a => a.UserRoles).FirstOrDefault();
+            }
+        }
+
         // Gets account based on e-mail address instead of Account Id
         public Account GetByLogin(string login)
         {
-            using (var db = new Csc3045AgileContext())
+            using (Csc3045AgileContext entityContext = new Csc3045AgileContext())
             {
-                return db.AccountSet
+                return entityContext.AccountSet
                     .Include(a => a.UserRoles)
                     .FirstOrDefault(a => a.LoginEmail == login);
             }
-
         }
 
         // Gets accounts that have a particular user-role attached
         public IEnumerable<Account> GetByUserRole(UserRole role)
         {
-            using (var db = new Csc3045AgileContext())
+            using (Csc3045AgileContext entityContext = new Csc3045AgileContext())
             {
-                return db.AccountSet
+                return entityContext.AccountSet
                     .Include(a => a.UserRoles)
                     .Where(a => a.UserRoles.Contains(role))
+                    .ToList();
+            }
+        }
+
+        public ICollection<Account> GetAllAccounts()
+        {
+            using (Csc3045AgileContext entityContext = new Csc3045AgileContext())
+            {
+                return entityContext.AccountSet.ToList();
+            }
+        }
+
+        public ICollection<Account> GetAllAccountsWithUserRoles()
+        {
+            using (Csc3045AgileContext entityContext = new Csc3045AgileContext())
+            {
+                return entityContext.AccountSet
+                    .Include(a => a.UserRoles)
                     .ToList();
             }
         }

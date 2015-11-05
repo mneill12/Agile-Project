@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:ClientDesktop.Views"
              xmlns:core="CSC3045AgileCore">
     <Grid>
-        <Grid Width="1280" Height="960" Background="LightSlateGray" Margin="0,0,0,0" Grid.ColumnSpan="2">
+        <Grid Background="LightSlateGray" Margin="0,0,0,0" Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>

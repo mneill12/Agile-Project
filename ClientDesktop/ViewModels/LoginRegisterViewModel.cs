@@ -17,6 +17,8 @@ namespace ClientDesktop.ViewModels
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class LoginRegisterViewModel : ViewModelBase
     {
+        IServiceFactory _ServiceFactory;
+
         // Import service factory so we can have 'stateful' contracts and closes proxies when service methods are finished
         [ImportingConstructor]
         public LoginRegisterViewModel(IServiceFactory serviceFactory)
@@ -25,9 +27,8 @@ namespace ClientDesktop.ViewModels
 
             RegisterAccount = new DelegateCommand<PasswordBox>(OnRegisterAccount);
             AccountLogin = new DelegateCommand<PasswordBox>(OnAccountLogin);
-        }
 
-        IServiceFactory _ServiceFactory;
+        }
 
         public DelegateCommand<PasswordBox> RegisterAccount { get; private set; }
         public DelegateCommand<PasswordBox> AccountLogin { get; private set; }
@@ -134,7 +135,12 @@ namespace ClientDesktop.ViewModels
                 {
                     WithClient<IAccountService>(_ServiceFactory.CreateClient<IAccountService>(), accountClient =>
                     {
-                        Account myAccount = accountClient.GetAccountInfoWithPassword(_LoginEmail, passwordBox.Password);
+                        Account myAccount = accountClient.GetAccountInfoWithPasswordAndUserRoles(_LoginEmail, passwordBox.Password);
+
+                        if (myAccount != null)
+                        {
+                            //ObjectBase.Container.GetExportedValue<DashboardViewModel>();
+                        }
                     });
                 }
                 catch (FaultException ex)
@@ -168,6 +174,11 @@ namespace ClientDesktop.ViewModels
                         WithClient<IAccountService>(_ServiceFactory.CreateClient<IAccountService>(), accountClient =>
                         {
                             Account myAccount = accountClient.RegisterAccount(_Account);
+
+                            if (myAccount != null)
+                            {
+                                //ObjectBase.Container.GetExportedValue<DashboardViewModel>();
+                            }
                         });
                     }
                     catch (Exception ex)
