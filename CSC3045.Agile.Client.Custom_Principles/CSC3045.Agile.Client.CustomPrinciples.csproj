@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AnonymousIdentity - Copy.cs" />
+    <Compile Include="AnonymousIdentity.cs" />
     <Compile Include="CustomIdentity.cs" />
     <Compile Include="CustomPrinciple.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

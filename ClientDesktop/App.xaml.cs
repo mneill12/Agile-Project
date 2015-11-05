@@ -9,6 +9,7 @@ using System.Reflection;
 using System.Windows;
 using Core.Common.Core;
 using CSC3045.Agile.Client.Bootstrapper;
+using CSC3045.Agile.Client.CustomPrinciples;
 
 namespace ClientDesktop
 {

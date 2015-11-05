@@ -1,11 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-<<<<<<< HEAD
-VisualStudioVersion = 12.0.40629.0
-=======
-VisualStudioVersion = 12.0.21005.1
->>>>>>> e06e3107fc6dc5d56025b869a824b574f442a1bc
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Common", "Core.Common\Core.Common.csproj", "{F6BCFF98-A714-4B7B-978F-23D812D1744A}"
 EndProject
@@ -69,7 +65,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSC3045.Agile.Client.Bootst
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSC3045.Agile.Client.Proxies.Tests", "CSC3045.Agile.Client.Proxies.Tests\CSC3045.Agile.Client.Proxies.Tests.csproj", "{CE401553-8D76-4503-8EAD-12AA1C0C3B28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSC3045.Agile.Client.Custom_Principles", "CSC3045.Agile.Client.Custom_Principles\CSC3045.Agile.Client.Custom_Principles.csproj", "{3EBDA9E6-9DE2-4F3B-9DE7-E13A2C6488A6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSC3045.Agile.Client.CustomPrinciples", "CSC3045.Agile.Client.Custom_Principles\CSC3045.Agile.Client.CustomPrinciples.csproj", "{3EBDA9E6-9DE2-4F3B-9DE7-E13A2C6488A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
