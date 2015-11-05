@@ -10,6 +10,7 @@ using Core.Common.Core;
 using Core.Common.UI.Core;
 using CSC3045.Agile.Client.Contracts;
 using CSC3045.Agile.Client.Entities;
+using System.Globalization;
 
 namespace ClientDesktop.ViewModels
 {
@@ -29,7 +30,7 @@ namespace ClientDesktop.ViewModels
         public DelegateCommand<TextBox> CreateProject {get; private set;}
 
         private string _ProjectName;
-
+        private string _ProjectDeadline;
         public string ProjectName
         {
             get
@@ -40,7 +41,21 @@ namespace ClientDesktop.ViewModels
             {
                 if (_ProjectName == value) return;
                 _ProjectName = value;
-                OnPropertyChanged("ProjectNameTextBox");
+                OnPropertyChanged("ProjectName");
+            }
+        }
+
+        public string ProjectDeadline
+        {
+            get
+            {
+                return _ProjectDeadline;
+            }
+            set
+            {
+                if (_ProjectDeadline == value) return;
+                _ProjectDeadline = value;
+                OnPropertyChanged("ProjectDeadline");
             }
         }
 
@@ -59,14 +74,14 @@ namespace ClientDesktop.ViewModels
 
         protected void OnCreateProject(TextBox textBox)
         {
-            if(textBox.Text != null)
+            if(ProjectName != null && ProjectDeadline != null)
             {
                 try
                 {
                     Project _Project = new Project()
                     {
                         ProjectName = textBox.Text,
-                        ProjectDeadline = new DateTime(2016,1,1)
+                        ProjectDeadline = DateTime.ParseExact("01/01/2001", "dd/mm/yyyy", CultureInfo.InvariantCulture)
                     };
 
                     WithClient<IProjectService>(_ServiceFactory.CreateClient<IProjectService>(), projectClient =>

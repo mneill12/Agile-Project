@@ -63,6 +63,7 @@ namespace CSC3045.Agile.Business.Services
             return projectEntity;
         }
 
+        [OperationBehavior(TransactionScopeRequired = true)]
         public void UpdateProjectInfo(Entities.Project project)
         {
             throw new NotImplementedException();
