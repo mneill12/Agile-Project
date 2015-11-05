@@ -106,7 +106,6 @@
     </Compile>
     <Compile Include="ViewModels\CreateProjectViewModel.cs" />
     <Compile Include="ShellViewModel.cs" />
->>>>>>> d5e3bad5e111c5a42b1e7e3b90675aea835427f4
     <Compile Include="ViewModels\DashboardViewModel.cs" />
     <Compile Include="ViewModels\MainViewModels.cs" />
     <Compile Include="ViewModels\LoginRegisterViewModel.cs" />
