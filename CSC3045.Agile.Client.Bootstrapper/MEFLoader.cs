@@ -19,11 +19,14 @@ namespace CSC3045.Agile.Client.Bootstrapper
         {
             AggregateCatalog catalog = new AggregateCatalog();
 
-            catalog.Catalogs.Add(new AssemblyCatalog(typeof(AccountClient).Assembly));
+            catalog.Catalogs.Add(new AssemblyCatalog(typeof(AuthenticationClient).Assembly));
+          //  catalog.Catalogs.Add(new AssemblyCatalog(typeof(AccountClient).Assembly));
 
             if (catalogParts != null)
                 foreach (var part in catalogParts)
                     catalog.Catalogs.Add(part);
+
+
 
             CompositionContainer container = new CompositionContainer(catalog);
 

@@ -17,6 +17,10 @@ namespace ClientDesktop
     {
         protected override void OnStartup(StartupEventArgs e)
         {
+		
+            CustomPrincipal customPrincipal = new CustomPrincipal();
+            AppDomain.CurrentDomain.SetThreadPrincipal(customPrincipal);
+
             base.OnStartup(e);
 
             ApplicationBootstrapper bootstrapper = new ApplicationBootstrapper();
