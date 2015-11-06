@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:ClientDesktop.Views"
              xmlns:core="CSC3045AgileCore">
     <Grid Height="960" Width="1280" Background="LightSlateGray" Margin="0,0,0,0">
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -24,7 +25,7 @@
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
         
-            <Grid Margin="10,10,10,10">
+            <Grid Grid.Column="0" Margin="10,10,10,10">
                 <Grid.RowDefinitions>
                     <RowDefinition />
                     <RowDefinition />
@@ -40,6 +41,67 @@
 
                 <Button Grid.Row="4" Name="CreateProjectButton" FontSize="10" Margin="0,5,0,0" Command="{Binding CreateProject}" CommandParameter="{Binding ElementName=ProjectNameTextBox}" >Create Project</Button>
             </Grid>
+
+            <Grid Grid.Column="1"  Margin="10,10,10,10">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                
+                <TextBlock Grid.Row="0" Text="Select a product owner: "></TextBlock>
+                
+                <ListView Grid.Row="1" HorizontalContentAlignment="Stretch" ItemsSource="{Binding ProductOwners}">
+                    <ListView.View>
+                        <GridView>
+                            
+                            <GridViewColumn Width="125" Header="First Name"  DisplayMemberBinding="{Binding ProductOwnerFirstName}" />
+                            <GridViewColumn Width="125" Header="Surname"  DisplayMemberBinding="{Binding ProductOwnerSurname}" />
+                            <GridViewColumn Width="125" Header="Email Address"  DisplayMemberBinding="{Binding ProductOwnerEmailAddress}" />
+                            
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                
+            </Grid>
+            
+            <Grid Grid.Column="2" Margin="10,10,10,10">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="Select project scrum masters: "></TextBlock>
+
+                <ListView Grid.Row="1" HorizontalContentAlignment="Stretch" ItemsSource="{Binding ScrumMasters}">
+                    <ListView.View>
+                        <GridView>
+
+                            <GridViewColumn Width="125" Header="First Name"  DisplayMemberBinding="{Binding ProductOwnerFirstName}" />
+                            <GridViewColumn Width="125" Header="Surname"  DisplayMemberBinding="{Binding ProductOwnerSurname}" />
+                            <GridViewColumn Width="125" Header="Email Address"  DisplayMemberBinding="{Binding ProductOwnerEmailAddress}" />
+
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
         </Grid>
+
+        <!--This is the hidden helper Grid which does the resizing -->
+        <Grid Visibility="Hidden">
+            <Grid.ColumnDefinitions>
+                <!--Width is bound to width of the first GridViewColumn -->
+                <ColumnDefinition Width="{Binding ElementName=col1, Path=ActualWidth}"/>
+                <!--Width is set to "Fill"-->
+                <ColumnDefinition Width="*"/>
+                <!--Correction Width-->
+                <ColumnDefinition Width="10"/>
+            </Grid.ColumnDefinitions>
+            <!--This is the hidden helper Field which is used to bind to, using the "Fill" column of the helper grid-->
+            <Grid Grid.Column="1" x:Name="helperField"/>
+        </Grid>
+
     </Grid>
+    
+    
+    
 </core:UserControlViewBase>

@@ -11,6 +11,7 @@ using Core.Common.UI.Core;
 using CSC3045.Agile.Client.Contracts;
 using CSC3045.Agile.Client.Entities;
 using System.Globalization;
+using System.Collections.Generic;
 
 namespace ClientDesktop.ViewModels
 {
@@ -25,12 +26,17 @@ namespace ClientDesktop.ViewModels
         {
             _ServiceFactory = serviceFactory;
             CreateProject = new DelegateCommand<TextBox>(OnCreateProject);
+            _ProductOwners = new List<ProductOwnerScrumMasterInfo>();
+            _ScrumMasters = new List<ProductOwnerScrumMasterInfo>();
         }
 
         public DelegateCommand<TextBox> CreateProject {get; private set;}
 
         private string _ProjectName;
         private string _ProjectDeadline;
+        private List<ProductOwnerScrumMasterInfo> _ProductOwners;
+        private List<ProductOwnerScrumMasterInfo> _ScrumMasters;
+
         public string ProjectName
         {
             get
@@ -59,6 +65,52 @@ namespace ClientDesktop.ViewModels
             }
         }
 
+        public List<ProductOwnerScrumMasterInfo> ProductOwners
+        {
+            get
+            {
+                return _ProductOwners;
+            }
+            set
+            {
+                if (_ProductOwners == value) return;
+                _ProductOwners = value;
+                OnPropertyChanged("ProductOwners");
+            }
+        }
+
+        public List<ProductOwnerScrumMasterInfo> ScrumMasters
+        {
+            get
+            {
+                return _ScrumMasters;
+            }
+            set
+            {
+                if (_ScrumMasters == value) return;
+                _ScrumMasters = value;
+                OnPropertyChanged("ScrumMasters");
+            }
+        }
+
+        //public string ProductOwnerFirstName { get; set; }
+        //public string ProductOwnerSurname { get; set; }
+        //public string ProductOwnerEmailAddress { get; set; }
+
+        public class ProductOwnerScrumMasterInfo
+        {
+            public string FirstName { get; set; }
+            public string Surname { get; set; }
+            public string EmailAddress { get; set; }
+
+            public ProductOwnerScrumMasterInfo(string fname, string sname, string email)
+            {
+                FirstName = fname;
+                Surname = sname;
+                EmailAddress = email;
+            }
+        }
+
         public event EventHandler<ErrorMessageEventArgs> ErrorOccured;
 
         public override string ViewTitle
@@ -69,7 +121,34 @@ namespace ClientDesktop.ViewModels
         // This gets hit every time the page is loaded while the constructor only gets loaded initially, use for getting up-to-data from the database
         protected override void OnViewLoaded()
         {
+            getProductOwnersAndScrumMasters();
+        }
 
+        protected void getProductOwnersAndScrumMasters()
+        {
+            WithClient<IAccountService>(_ServiceFactory.CreateClient<IAccountService>(), accountClient =>
+            {
+                ICollection<Account> accounts = accountClient.GetAllAccountsWithUserRoles();
+                UserRole productOwnerRole = new UserRole() { UserRoleId = 5, UserRoleName = "Product Owner", PermissionLevel = 3 };
+                UserRole scrumMasterRole = new UserRole() { UserRoleId = 3, UserRoleName = "Scrum Master", PermissionLevel = 1 };
+
+                foreach(Account a in accounts)
+                {
+                    //_ProductOwners.Add(new ProductOwnerScrumMasterInfo(a.FirstName, a.LastName, a.LoginEmail));
+
+                    if (a.UserRoles != null)
+                    {
+                        if(a.UserRoles.Contains(productOwnerRole))
+                        {
+                            _ProductOwners.Add(new ProductOwnerScrumMasterInfo(a.FirstName, a.LastName, a.LoginEmail));
+                        }
+                        if(a.UserRoles.Contains(scrumMasterRole))
+                        {
+                            _ScrumMasters.Add(new ProductOwnerScrumMasterInfo(a.FirstName, a.LastName, a.LoginEmail));
+                        }
+                    }
+                }
+            });
         }
 
         protected void OnCreateProject(TextBox textBox)
