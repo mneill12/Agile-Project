@@ -81,7 +81,7 @@ namespace ClientDesktop.ViewModels
                     Project _Project = new Project()
                     {
                         ProjectName = textBox.Text,
-                        ProjectDeadline = DateTime.ParseExact("01/01/2001", "dd/mm/yyyy", CultureInfo.InvariantCulture)
+                        ProjectDeadline = DateTime.ParseExact(ProjectDeadline, "dd/mm/yyyy", CultureInfo.InvariantCulture)
                     };
 
                     WithClient<IProjectService>(_ServiceFactory.CreateClient<IProjectService>(), projectClient =>
