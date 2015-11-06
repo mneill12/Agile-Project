@@ -176,7 +176,11 @@ namespace ClientDesktop.ViewModels
 
         protected void OnAccountLogin(PasswordBox passwordBox)
         {
-            if (_LoginEmail != null && passwordBox.Password != null)
+            if (string.IsNullOrEmpty(_LoginEmail) || string.IsNullOrEmpty(passwordBox.Password))
+            {
+                Status = "Please complete all fields to login";
+            }
+            else
             {
                 string hashedPassword = new HashHelper().CalculateHash(passwordBox.Password, _LoginEmail);
 
@@ -269,7 +273,12 @@ namespace ClientDesktop.ViewModels
 
         protected void OnRegisterAccount(PasswordBox passwordBox)
         {
-            if (_RegisterEmail != null && passwordBox.Password != null && _RegisterFirstName != null && _RegisterLastName != null)
+            if (string.IsNullOrEmpty(_RegisterEmail) || string.IsNullOrEmpty(passwordBox.Password) ||
+                string.IsNullOrEmpty(_RegisterFirstName) || string.IsNullOrEmpty(_RegisterLastName))
+            {
+                Status = "Please complete all fields to register an account";
+            }
+            else
             {
                 string hashedPassword = new HashHelper().CalculateHash(passwordBox.Password, _LoginEmail);
 
@@ -298,12 +307,6 @@ namespace ClientDesktop.ViewModels
                     if (ErrorOccured != null)
                         ErrorOccured(this, new ErrorMessageEventArgs(ex.Message));
                 }
-            }
-            else
-            {
-                if (ErrorOccured != null)
-                    ErrorOccured(this, new ErrorMessageEventArgs("Please complete all fields to register an account"));
-
             }
         }
     }

@@ -92,6 +92,9 @@ namespace ClientDesktop.ViewModels
         private void UpdateLoginStatus(bool isLoggedIn)
         {
             IsLoggedIn = isLoggedIn;
+            Email = GlobalCommands.MyAccount.LoginEmail;
+            FirstName = GlobalCommands.MyAccount.FirstName;
+            LastName = GlobalCommands.MyAccount.LastName;
         }
     }
 }
