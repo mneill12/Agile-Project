@@ -41,5 +41,9 @@ namespace CSC3045.Agile.Client.Contracts
         [FaultContract(typeof(NotFoundException))]
         ICollection<UserRole> GetAllUserRoles();
 
+        [OperationContract]
+        [FaultContract(typeof(NotFoundException))]
+        IEnumerable<Account> GetByUserRole(UserRole role);
+
     }
 }

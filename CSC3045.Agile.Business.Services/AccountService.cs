@@ -202,5 +202,23 @@ namespace CSC3045.Agile.Business.Services
         }
 
         #endregion
+
+
+        public IEnumerable<Account> GetByUserRole(UserRole role)
+        {
+            return ExecuteFaultHandledOperation(() =>
+            {
+                IAccountRepository accountRepository = _DataRepositoryFactory.GetDataRepository<IAccountRepository>();
+
+                IEnumerable<Account> accounts = accountRepository.GetByUserRole(role);
+                if(accounts == null)
+                {
+                    NotFoundException ex = new NotFoundException("Error retrieving Accounts from database");
+                    throw new FaultException<NotFoundException>(ex, ex.Message);
+                }
+
+                return accounts;
+            });
+        }
     }
 }
