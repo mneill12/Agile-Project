@@ -12,18 +12,18 @@ namespace ClientDesktop
     {
         private readonly IRegionManager _regionManager;
 
-        public DelegateCommand<object> NavigateCommand { get; private set; } 
+        public DelegateCommand<string> NavigateCommand { get; set; } 
 
         public ShellViewModel(IRegionManager regionManager)
         {
             _regionManager = regionManager;
-            NavigateCommand = new DelegateCommand<object>(Navigate);
+            NavigateCommand = new DelegateCommand<string>(Navigate);
         }
 
-        private void Navigate(object navigatePath)
+        private void Navigate(string navigatePath)
         {
             if(navigatePath != null)
-                _regionManager.RequestNavigate("MainRegion", navigatePath.ToString());
+                _regionManager.RequestNavigate("MainRegion", navigatePath);
         }
     }
 }

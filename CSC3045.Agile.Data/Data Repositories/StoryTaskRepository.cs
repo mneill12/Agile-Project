@@ -14,6 +14,8 @@ using System.Data.Entity;
 namespace CSC3045.Agile.Data.Data_Repositories
 {
     // StoryTask LINQ Entity Queries
+    [Export(typeof(IStoryTaskRepository))]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class StoryTaskRepository : DataRepositoryBase<StoryTask>
     {
         protected override StoryTask AddEntity(Csc3045AgileContext entityContext, StoryTask entity)

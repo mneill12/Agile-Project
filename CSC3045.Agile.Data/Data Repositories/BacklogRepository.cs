@@ -14,6 +14,8 @@ using CSC3045.Agile.Data.Contracts.Repository_Interfaces;
 namespace CSC3045.Agile.Data.Data_Repositories
 {
     // Backlog LINQ Entity Queries
+    [Export(typeof(IBacklogRepository))]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class BacklogRepository : DataRepositoryBase<Backlog>
     {
         protected override Backlog AddEntity(Csc3045AgileContext entityContext, Backlog entity)
