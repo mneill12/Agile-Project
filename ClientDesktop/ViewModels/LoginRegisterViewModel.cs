@@ -202,8 +202,14 @@ namespace ClientDesktop.ViewModels
             get { return "Login/Register"; }
         }
 
+        protected override void OnViewLoaded()
+        {
+            LoginEmail = "jflyn07n@qub.ac.uk";
+        }
+
         public override void OnNavigatedTo(NavigationContext navigationContext)
         {
+            base.OnNavigatedTo(navigationContext);
             LoginEmail = "jflyn07n@qub.ac.uk";
         }
 

@@ -8,7 +8,7 @@ using Prism.Regions;
 
 namespace Core.Common.UI.Core
 {
-    public class UserControlViewBase : UserControl, INavigationAware
+    public class UserControlViewBase : UserControl
     {
         public UserControlViewBase()
         {
@@ -42,21 +42,6 @@ namespace Core.Common.UI.Core
             {
                 OnWireViewModelEvents(e.NewValue as ViewModelBase);
             }
-        }
-
-        public virtual bool IsNavigationTarget(NavigationContext navigationContext)
-        {
-            return true;
-        }
-
-        public virtual void OnNavigatedTo(NavigationContext navigationContext)
-        {
-
-        }
-
-        public virtual void OnNavigatedFrom(NavigationContext navigationContext)
-        {
-
         }
     }
 }

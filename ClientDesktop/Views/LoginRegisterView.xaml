@@ -8,13 +8,13 @@
     <Grid>
         <Grid Background="LightSlateGray" Margin="0,0,0,0" Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <!--Title row-->
-            <TextBlock Grid.Row="0" Margin="0,20,0,0" Text="Welcome to JELLO" TextAlignment="Center" Foreground="White" FontSize="40"></TextBlock>
-            
+            <TextBlock Grid.Row="0" Margin="0,20,0,0" Text="Welcome to JELLO" TextAlignment="Center" Foreground="White" FontSize="40" />
+
             <!--Login and register area blocks-->
             <Grid Grid.Row="1" Margin="10,30,10,0">
                 <Grid.ColumnDefinitions>
@@ -25,14 +25,14 @@
                 <!--Register block-->
                 <Grid Grid.Column="0" Margin="30,0,30,0" Background="White">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="1*"></RowDefinition>
-                        <RowDefinition Height="1*"></RowDefinition>
-                        <RowDefinition Height="1*"></RowDefinition>
-                        <RowDefinition Height="1*"></RowDefinition>
-                        <RowDefinition Height="1*"></RowDefinition>
-                        <RowDefinition Height="1*"></RowDefinition>
-                        <RowDefinition Height="1*"></RowDefinition>
-                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition />
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Row="0" Margin="10,10,10,0" Text="First Name:" FontSize="15" />
@@ -54,9 +54,9 @@
                     <PasswordBox Grid.Row="5" Margin="10,30,10,0" Name="ConfirmPasswordRegBox" Height="20"  />
 
                     <TextBlock Grid.Row="6" Margin="10,10,10,0" Text="Register as a" FontSize="15" />
-                    <CheckBox Grid.Row="6" Margin="10,45,0,0" Content="Product Owner"></CheckBox>
-                    <CheckBox Grid.Row="6" Margin="130,45,0,0" Content="Scrummaster"></CheckBox>
-                    <CheckBox Grid.Row="6" Margin="240,45,0,0" Content="Developer"></CheckBox>
+                    <CheckBox Grid.Row="6" Margin="10,45,0,0" Content="Product Owner" />
+                    <CheckBox Grid.Row="6" Margin="130,45,0,0" Content="Scrummaster" />
+                    <CheckBox Grid.Row="6" Margin="240,45,0,0" Content="Developer" />
 
                     <Button Grid.Row="7" Height="50" Width="350" Margin="0,20,0,0" Padding="10" Background="White" Foreground="Black" FontSize="15" Command="{Binding RegisterAccount}" CommandParameter="{Binding ElementName=ConfirmPasswordRegBox}">Register</Button>
                 </Grid>
@@ -64,18 +64,18 @@
                 <!--Login block-->
                 <Grid Grid.Column="1" Margin="20,0,30,0" Height="400" Background="DeepSkyBlue">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="1*"></RowDefinition>
-                        <RowDefinition Height="1*"></RowDefinition>
-                        <RowDefinition Height="1*"></RowDefinition>
-                        <RowDefinition Height="1*"></RowDefinition>
-                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" Margin="10,10,10,0" Text="Username:" FontSize="15"></TextBlock>
-                    <TextBox Grid.Row="0" Margin="10,20,10,0" Text ="{Binding LoginEmail}" Name="UsernameLoginTxt" Height="20" ></TextBox>
+                    <TextBlock Grid.Row="0" Margin="10,10,10,0" Text="Username:" FontSize="15"/>
+                    <TextBox Grid.Row="0" Margin="10,20,10,0" Text="{Binding LoginEmail,Mode=TwoWay}" Name="UsernameLoginTxt" Height="20" />
 
-                    <TextBlock Grid.Row="1" Margin="10,10,10,0" Text="Password:" FontSize="15"></TextBlock>
-                    <PasswordBox x:Name="PasswordLoginBox" Grid.Row="1" Margin="10,20,10,0" Height="20" Password="4nt1t7!"></PasswordBox>
+                    <TextBlock Grid.Row="1" Margin="10,10,10,0" Text="Password:" FontSize="15"/>
+                    <PasswordBox x:Name="PasswordLoginBox" Grid.Row="1" Margin="10,20,10,0" Height="20" Password="4nt1t7!" />
 
                     <Button Grid.Row="2" Height="50" Width="350" Margin="0,0,0,0" Padding="10" Background="White" Foreground="Black" FontSize="15" Command="{Binding AccountLogin, Mode=OneTime}" CommandParameter="{Binding ElementName=PasswordLoginBox}">Login</Button>
 
@@ -90,12 +90,10 @@
 
                     <TextBlock Grid.Row="3" Margin="10,10,10,0" Text="Work Offline" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Center" />
                     <Button Grid.Row="3" Height="20" Width="100" Margin="210,60,0,0" Padding="0" Background="White" Foreground="Black" FontSize="10">Choose XML file</Button>
-                    <TextBox Grid.Row="3" Margin="0,60,110,0" Name="XmlFileNameTxt" Height="20" Width="200"></TextBox>
+                    <TextBox Grid.Row="3" Margin="0,60,110,0" Name="XmlFileNameTxt" Height="20" Width="200" />
                     <Button Grid.Row="4" Height="50" Width="350" Margin="0,30,0,0" Padding="10" Background="White" Foreground="Black" FontSize="15">Upload</Button>
                 </Grid>
-
             </Grid>
-
         </Grid>
     </Grid>
 </core:UserControlViewBase>

@@ -9,7 +9,7 @@ using Prism.Regions;
 namespace Core.Common.UI.Core
 {
     // IPropChanged + Other View-to-ViewModel linking happens automatically with the ViewModelBase
-    public class ViewModelBase : ObjectBase
+    public class ViewModelBase : ObjectBase, INavigationAware
     {
         public ViewModelBase()
         {
@@ -27,7 +27,9 @@ namespace Core.Common.UI.Core
             }
         }
 
-        protected virtual void OnViewLoaded() { }
+        protected virtual void OnViewLoaded()
+        {
+        }
 
         protected void WithClient<T>(T proxy, Action<T> codeToExecute)
         {
@@ -120,6 +122,21 @@ namespace Core.Common.UI.Core
         protected virtual bool OnToggleErrorsCommandCanExecute(object arg)
         {
             return !IsValid;
+        }
+
+        public virtual void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            
+        }
+
+        public virtual bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            return true;
+        }
+
+        public virtual void OnNavigatedFrom(NavigationContext navigationContext)
+        {
+            
         }
     }
 }

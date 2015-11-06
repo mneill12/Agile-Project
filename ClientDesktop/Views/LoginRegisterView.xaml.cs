@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using ClientDesktop.ViewModels;
 using Core.Common.Core;
 using Core.Common.UI.Core;
+using Prism.Regions;
 
 namespace ClientDesktop.Views
 {
