@@ -17,6 +17,8 @@ using System.Data.Entity;
 namespace CSC3045.Agile.Data.Data_Repositories
 {
     // UserStory LINQ Entity Queries
+    [Export(typeof(IUserStoryRepository))]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class UserStoryRepository : DataRepositoryBase<UserStory>
     {
       

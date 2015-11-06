@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Windows;
 using System.ComponentModel;
@@ -31,6 +32,7 @@ namespace ClientDesktop.ViewModels
         private string _RegisterEmail;
         private string _RegisterConfirmEmail;
         private string _Status;
+        private ICollection<UserRole> _UserRoles; 
 
         public string AuthenticatedUser{
             get
@@ -129,6 +131,20 @@ namespace ClientDesktop.ViewModels
             }
         }
 
+        public ICollection<UserRole> UserRoles
+        {
+            get
+            {
+                return _UserRoles;
+            }
+            set
+            {
+                if (_UserRoles == value) return;
+                _UserRoles = value;
+                OnPropertyChanged("UserRoles");
+            }
+        }
+
         #endregion
 
         #region Delegate Commands
@@ -160,6 +176,29 @@ namespace ClientDesktop.ViewModels
             _AccountLogin = new DelegateCommand<PasswordBox>(OnAccountLogin);
             _LogoutCommand = new DelegateCommand<object>(Logout, CanLogout);
 
+            GetUserRoles();
+        }
+
+        /// <summary>
+        /// Called on construction to get a list of available user roles to populate registration
+        /// </summary>
+        private void GetUserRoles()
+        {
+            try
+            {
+                WithClient<IAccountService>(_ServiceFactory.CreateClient<IAccountService>(),
+                    accountClient => { UserRoles = accountClient.GetAllUserRoles(); });
+            }
+            catch (FaultException ex)
+            {
+                if (ErrorOccured != null)
+                    ErrorOccured(this, new ErrorMessageEventArgs(ex.Message));
+            }
+            catch (Exception ex)
+            {
+                if (ErrorOccured != null)
+                    ErrorOccured(this, new ErrorMessageEventArgs(ex.Message));
+            }
         }
 
         public event EventHandler<ErrorMessageEventArgs> ErrorOccured;

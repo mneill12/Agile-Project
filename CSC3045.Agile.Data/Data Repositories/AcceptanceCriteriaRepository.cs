@@ -14,6 +14,8 @@ using CSC3045.Agile.Data.Contracts.Repository_Interfaces;
 namespace CSC3045.Agile.Data.Data_Repositories
 {
     // AcceptanceCriteria LINQ Entity Queries
+    [Export(typeof(IAcceptanceCriteriaRepository))]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class AcceptanceCriteriaRepository : DataRepositoryBase<AcceptanceCriteria>
     {
         protected override AcceptanceCriteria AddEntity(Csc3045AgileContext entityContext, AcceptanceCriteria entity)

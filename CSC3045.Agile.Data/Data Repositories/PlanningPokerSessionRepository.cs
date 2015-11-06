@@ -14,6 +14,8 @@ using CSC3045.Agile.Data.Contracts.Repository_Interfaces;
 namespace CSC3045.Agile.Data.Data_Repositories
 {
     // PlanningPokerSession LINQ Entity Queries
+    [Export(typeof(IPlanningPokerSessionRepository))]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class PlanningPokerSessionRepository : DataRepositoryBase<PlanningPokerSession>
     {
         protected override PlanningPokerSession AddEntity(Csc3045AgileContext entityContext, PlanningPokerSession entity)

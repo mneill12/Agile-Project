@@ -13,6 +13,8 @@ using CSC3045.Agile.Data.Contracts.Repository_Interfaces;
 namespace CSC3045.Agile.Data.Data_Repositories
 {
     // BurndownPoint LINQ Entity Queries
+    [Export(typeof(IBurndownPointRepository))]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class BurndownPointRepository : DataRepositoryBase<BurndownPoint>
     {
         protected override BurndownPoint AddEntity(Csc3045AgileContext entityContext, BurndownPoint entity)
