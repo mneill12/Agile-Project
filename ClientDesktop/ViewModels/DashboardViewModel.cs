@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.Composition;
 using System.Windows.Controls;
+using System.Windows.Media;
 using Core.Common.Contracts;
 using Core.Common.Core;
 using Core.Common.UI.Core;
@@ -27,7 +28,7 @@ namespace ClientDesktop.ViewModels
 
         protected override void OnViewLoaded()
         {
-
+            
         }
     }
 }

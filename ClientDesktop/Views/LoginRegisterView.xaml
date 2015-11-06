@@ -6,15 +6,16 @@
              xmlns:local="clr-namespace:ClientDesktop.Views"
              xmlns:core="CSC3045AgileCore">
     <Grid>
-        <Grid Margin="0,0,0,0" Grid.ColumnSpan="2">
+        <Grid Margin="0,0,0.286,0" Grid.ColumnSpan="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
 
             <!--Title row-->
-            <TextBlock Text="&#xf085;" FontFamily="pack://application:,,,/Resources/#FontAwesome" Foreground="White" Margin="53,20,728.714,0" TextAlignment="Left" FontSize="40"></TextBlock>
-            <TextBlock FontFamily="pack://application:,,,/Resources/#AquaWax" Grid.Row="0" Margin="66,18,-0.286,2" Padding="50 0 0 0" Text="Welcome to JELLO" TextAlignment="Left" Foreground="White" FontSize="40"></TextBlock>
+            <!-- <TextBlock Text="&#xf085;" FontFamily="pack://application:,,,/Resources/#FontAwesome" Foreground="White" Margin="53,20,728.714,0" TextAlignment="Left" FontSize="40"></TextBlock> -->
+            <!--<TextBlock FontFamily="pack://application:,,,/Resources/#AquaWax" Grid.Row="0" Margin="-1,28,672.857,8.571" Padding="50 0 0 0" Text="JELLO" TextAlignment="Left" Foreground="White" FontSize="40"></TextBlock>
+            <TextBlock FontFamily="pack://application:,,,/Resources/#AquaWax" Grid.Row="0" Margin="0,70,671.857,457" Padding="50 0 0 0" Text="AGILE MANAGEMENT" TextAlignment="Left" Foreground="White" FontSize="10" Grid.RowSpan="2"></TextBlock>-->
 
             <!--Login and register area blocks-->
             <Grid Grid.Row="1" Margin="10,30,10,0">
@@ -38,9 +39,9 @@
 
                     <TextBlock Grid.Row="0" Margin="10,10,10,0" Text="First Name:" FontSize="15" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White"/>
                     <TextBox Grid.Row="0" Margin="10,30,10,0" Name="FirstNameRegTxt" Height="20" Text="{Binding RegisterFirstName}"/>
-                       
 
-                        <TextBlock Grid.Row="1" Margin="10,10,10,0" Text="Last Name:" FontSize="15" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White"/>
+
+                    <TextBlock Grid.Row="1" Margin="10,10,10,0" Text="Last Name:" FontSize="15" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White"/>
                     <TextBox Grid.Row="1" Margin="10,30,10,0" Name="LastNameRegTxt" Height="20" Text="{Binding RegisterLastName}"/>
 
                     <TextBlock Grid.Row="2" Margin="10,10,10,0" Text="Email Address:" FontSize="15" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White" />

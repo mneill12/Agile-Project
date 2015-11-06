@@ -36,7 +36,7 @@
     </Controls:MetroWindow.RightWindowCommands>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="100"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBlock Foreground="White" Grid.Row="1" FontWeight="Bold" Text="{Binding Source={x:Static sys:DateTime.Now},  StringFormat=dd / MMM / yyyy}" TextAlignment="Right" VerticalAlignment="Center" Margin="487,705,26.286,10.429"/>
