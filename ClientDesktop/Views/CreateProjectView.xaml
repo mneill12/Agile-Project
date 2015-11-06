@@ -39,7 +39,9 @@
                 <TextBlock Grid.Row="2" Text="Project Deadline: (dd/mm/yyyy)" FontSize="16" />
                 <TextBox Grid.Row="3" Name="ProjectDeadlineTextBox" FontSize="14" Margin="0,5,0,0" Text="{Binding ProjectDeadline}"/>
 
-                <Button Grid.Row="4" Name="CreateProjectButton" FontSize="10" Margin="0,5,0,0" Command="{Binding CreateProject}" CommandParameter="{Binding ElementName=ProjectNameTextBox}" >Create Project</Button>
+                <Button Grid.Row="4" Name="CreateProjectButton" FontSize="10" Margin="0,5,0,0" Command="{Binding CreateProject}" CommandParameter="{Binding ElementName=ScrumMastersListView}">
+                    Create Project
+                </Button>
             </Grid>
 
             <Grid Grid.Column="1"  Margin="10,10,10,10">
@@ -50,13 +52,13 @@
                 
                 <TextBlock Grid.Row="0" Text="Select a product owner: "></TextBlock>
                 
-                <ListView Grid.Row="1" HorizontalContentAlignment="Stretch" ItemsSource="{Binding ProductOwners}">
+                <ListView Name="ProductOwnersListView" Grid.Row="1" HorizontalContentAlignment="Stretch" ItemsSource="{Binding ProductOwners}">
                     <ListView.View>
                         <GridView>
                             
-                            <GridViewColumn Width="125" Header="First Name"  DisplayMemberBinding="{Binding ProductOwnerFirstName}" />
-                            <GridViewColumn Width="125" Header="Surname"  DisplayMemberBinding="{Binding ProductOwnerSurname}" />
-                            <GridViewColumn Width="125" Header="Email Address"  DisplayMemberBinding="{Binding ProductOwnerEmailAddress}" />
+                            <GridViewColumn Width="125" Header="First Name"  DisplayMemberBinding="{Binding FirstName}" />
+                            <GridViewColumn Width="125" Header="Surname"  DisplayMemberBinding="{Binding Surname}" />
+                            <GridViewColumn Width="135" Header="Email Address"  DisplayMemberBinding="{Binding EmailAddress}" />
                             
                         </GridView>
                     </ListView.View>
@@ -72,13 +74,13 @@
 
                 <TextBlock Grid.Row="0" Text="Select project scrum masters: "></TextBlock>
 
-                <ListView Grid.Row="1" HorizontalContentAlignment="Stretch" ItemsSource="{Binding ScrumMasters}">
+                <ListView Name="ScrumMastersListView" Grid.Row="1" HorizontalContentAlignment="Stretch" ItemsSource="{Binding ScrumMasters}" >
                     <ListView.View>
                         <GridView>
 
-                            <GridViewColumn Width="125" Header="First Name"  DisplayMemberBinding="{Binding ProductOwnerFirstName}" />
-                            <GridViewColumn Width="125" Header="Surname"  DisplayMemberBinding="{Binding ProductOwnerSurname}" />
-                            <GridViewColumn Width="125" Header="Email Address"  DisplayMemberBinding="{Binding ProductOwnerEmailAddress}" />
+                            <GridViewColumn Width="125" Header="First Name"  DisplayMemberBinding="{Binding FirstName}" />
+                            <GridViewColumn Width="125" Header="Surname"  DisplayMemberBinding="{Binding Surname}" />
+                            <GridViewColumn Width="135" Header="Email Address"  DisplayMemberBinding="{Binding EmailAddress}" />
 
                         </GridView>
                     </ListView.View>

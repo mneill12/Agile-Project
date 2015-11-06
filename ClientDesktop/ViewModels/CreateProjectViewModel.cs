@@ -12,6 +12,8 @@ using CSC3045.Agile.Client.Contracts;
 using CSC3045.Agile.Client.Entities;
 using System.Globalization;
 using System.Collections.Generic;
+using System.Windows.Input;
+using System.Windows.Data;
 
 namespace ClientDesktop.ViewModels
 {
@@ -93,10 +95,6 @@ namespace ClientDesktop.ViewModels
             }
         }
 
-        //public string ProductOwnerFirstName { get; set; }
-        //public string ProductOwnerSurname { get; set; }
-        //public string ProductOwnerEmailAddress { get; set; }
-
         public class ProductOwnerScrumMasterInfo
         {
             public string FirstName { get; set; }
@@ -132,24 +130,28 @@ namespace ClientDesktop.ViewModels
                 UserRole productOwnerRole = new UserRole() { UserRoleId = 5, UserRoleName = "Product Owner", PermissionLevel = 3 };
                 UserRole scrumMasterRole = new UserRole() { UserRoleId = 3, UserRoleName = "Scrum Master", PermissionLevel = 1 };
 
-                foreach(Account a in accounts)
-                {
-                    //_ProductOwners.Add(new ProductOwnerScrumMasterInfo(a.FirstName, a.LastName, a.LoginEmail));
+                IEnumerable<Account> projOwners = accountClient.GetByUserRole(3);
+                IEnumerable<Account> scrumMasters = accountClient.GetByUserRole(1);
 
-                    if (a.UserRoles != null)
+                if (projOwners != null)
+                {
+                    foreach (Account a in projOwners)
                     {
-                        if(a.UserRoles.Contains(productOwnerRole))
-                        {
-                            _ProductOwners.Add(new ProductOwnerScrumMasterInfo(a.FirstName, a.LastName, a.LoginEmail));
-                        }
-                        if(a.UserRoles.Contains(scrumMasterRole))
-                        {
-                            _ScrumMasters.Add(new ProductOwnerScrumMasterInfo(a.FirstName, a.LastName, a.LoginEmail));
-                        }
+                        _ProductOwners.Add(new ProductOwnerScrumMasterInfo(a.FirstName, a.LastName, a.LoginEmail));
+                    }
+                }
+
+                if (scrumMasters != null)
+                {
+                    foreach (Account a in scrumMasters)
+                    {
+                        _ScrumMasters.Add(new ProductOwnerScrumMasterInfo(a.FirstName, a.LastName, a.LoginEmail));
                     }
                 }
             });
         }
+
+        
 
         protected void OnCreateProject(TextBox textBox)
         {
