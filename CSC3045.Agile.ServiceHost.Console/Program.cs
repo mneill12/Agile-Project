@@ -35,6 +35,9 @@ namespace CSC3045.Agile.ServiceHost.Console
             System.ServiceModel.ServiceHost hostAuthenticationService = new System.ServiceModel.ServiceHost(typeof(AuthenticationService));
             StartService(hostAuthenticationService, "AuthenticationService");
 
+            System.ServiceModel.ServiceHost hostProjectService = new System.ServiceModel.ServiceHost(typeof(ProjectService));
+            StartService(hostProjectService, "ProjectService");
+
             System.Console.WriteLine("Initialising CodeFirst Database");
 
             try
@@ -65,6 +68,7 @@ namespace CSC3045.Agile.ServiceHost.Console
 
             StopService(hostAuthenticationService, "AccountService");
             StopService(hostAuthenticationService, "AuthenticationService");
+            StopService(hostProjectService, "ProjectService");
         }
 
         static void StartService(System.ServiceModel.ServiceHost host, string serviceDescription)
