@@ -11,8 +11,7 @@ namespace ClientDesktop.ViewModels
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class TopBarViewModels : ViewModelBase
     {
-        public TopBarViewModels()
-        { }
+        #region TopBarBindings
 
         private string _Email;
         private string _FirstName;
@@ -75,12 +74,24 @@ namespace ClientDesktop.ViewModels
             }
         }
 
-        public bool IsLoggedOut
+        #endregion
+
+        #region Delegate Commands
+
+        public DelegateCommand<bool> UpdateLoggedIn { get; set; }  
+
+        #endregion
+
+        public TopBarViewModels()
         {
-            get
-            {
-                return !_IsLoggedIn;
-            }
+            UpdateLoggedIn = new DelegateCommand<bool>(UpdateLoginStatus);
+
+            GlobalCommands.IsLoggedIn.RegisterCommand(UpdateLoggedIn);
+        }
+
+        private void UpdateLoginStatus(bool isLoggedIn)
+        {
+            IsLoggedIn = isLoggedIn;
         }
     }
 }

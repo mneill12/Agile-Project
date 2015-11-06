@@ -207,6 +207,7 @@ namespace ClientDesktop.ViewModels
                             _LoginEmail = string.Empty;
                             Status = string.Empty;
 
+                            GlobalCommands.IsLoggedIn.Execute(true);
                             _RegionManager.RequestNavigate("MainRegion", "DashboardView");
                         }
                         else
