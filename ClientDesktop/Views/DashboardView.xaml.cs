@@ -21,7 +21,7 @@ namespace ClientDesktop.Views
     /// <summary>
     /// Interaction logic for DashboardView.xaml
     /// </summary>
-    [Export("DashboardView")]
+    [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class DashboardView : UserControlViewBase
     {

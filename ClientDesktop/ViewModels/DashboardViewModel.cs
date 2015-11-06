@@ -31,8 +31,7 @@ namespace ClientDesktop.ViewModels
 
         private void OnAddProject(object obj)
         {
-            _RegionManager.Regions["MainRegion"].Add(ServiceLocator.Current.GetInstance<CreateProjectView>());
-            _RegionManager.RequestNavigate("MainRegion", "ClientDesktop.Views.CreateProjectView");
+            _RegionManager.RequestNavigate(RegionNames.Content, typeof(CreateProjectView).FullName);
         }
 
 

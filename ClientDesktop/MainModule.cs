@@ -33,8 +33,8 @@ namespace ClientDesktop
         // Using MEF DI for adding views to a region that has been setup in shell
         public void Initialize()
         {
-            _RegionManager.Regions["TopBarRegion"].Add(ServiceLocator.Current.GetInstance<TopBarViews>());
-            _RegionManager.Regions["MainRegion"].Add(ServiceLocator.Current.GetInstance<LoginRegisterView>());
+            _RegionManager.Regions[RegionNames.TopBar].Add(ServiceLocator.Current.GetInstance<TopBarViews>());
+            _RegionManager.Regions[RegionNames.Content].Add(ServiceLocator.Current.GetInstance<LoginRegisterView>());
         }
 
         #endregion

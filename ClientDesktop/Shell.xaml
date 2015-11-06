@@ -32,6 +32,6 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <ContentControl x:Name="TopBarRegion" regions:RegionManager.RegionName="TopBarRegion" Grid.Row="0" />
-        <ContentControl x:Name="MainRegion" regions:RegionManager.RegionName="MainRegion" Grid.Row="1"/>
+        <ContentControl x:Name="ContentRegion" regions:RegionManager.RegionName="ContentRegion" Grid.Row="1"/>
     </Grid>
 </Controls:MetroWindow>

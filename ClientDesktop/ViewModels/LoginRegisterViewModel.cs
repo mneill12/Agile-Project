@@ -15,6 +15,7 @@ using CSC3045.Agile.Client.CustomPrinciples;
 using CSC3045.Agile.Client.Contracts;
 using CSC3045.Agile.Client.Entities;
 using System.ServiceModel;
+using Core.Common.Core;
 using Microsoft.Practices.ServiceLocation;
 using Prism.Regions;
 
@@ -157,9 +158,6 @@ namespace ClientDesktop.ViewModels
 
         #endregion
 
-        [Import]
-        public DashboardViewModel DashboardViewModel { get; private set; }
-
         private IServiceFactory _ServiceFactory;
         private IRegionManager _RegionManager;
 
@@ -167,14 +165,11 @@ namespace ClientDesktop.ViewModels
         [ImportingConstructor]
         public LoginRegisterViewModel(IServiceFactory serviceFactory, IRegionManager regionManager)
         {
-            //LoginEmail = "jflyn07n@qub.ac.uk";
-
             _ServiceFactory = serviceFactory;
             _RegionManager = regionManager;
 
             _RegisterAccount = new DelegateCommand<PasswordBox>(OnRegisterAccount);
             _AccountLogin = new DelegateCommand<PasswordBox>(OnAccountLogin);
-
             GetUserRoles();
         }
 
@@ -207,9 +202,9 @@ namespace ClientDesktop.ViewModels
             get { return "Login/Register"; }
         }
 
-        protected override void OnViewLoaded()
+        public override void OnNavigatedTo(NavigationContext navigationContext)
         {
-           LoginEmail = "jflyn07n@qub.ac.uk";
+            LoginEmail = "jflyn07n@qub.ac.uk";
         }
 
         protected void OnAccountLogin(PasswordBox passwordBox)
@@ -250,7 +245,7 @@ namespace ClientDesktop.ViewModels
                             Status = string.Empty;
 
                             GlobalCommands.IsLoggedIn.Execute(true);
-                            _RegionManager.RequestNavigate("MainRegion", "DashboardView");
+                            _RegionManager.RequestNavigate(RegionNames.Content, typeof(DashboardView).FullName);
                         }
                         else
                         {
@@ -337,7 +332,7 @@ namespace ClientDesktop.ViewModels
                         if (GlobalCommands.MyAccount != null)
                         {
                             GlobalCommands.IsLoggedIn.Execute(true);
-                            _RegionManager.RequestNavigate("MainRegion", "DashboardView");
+                            _RegionManager.RequestNavigate(RegionNames.Content, typeof(DashboardView).FullName);
                         }
                     });
                 }

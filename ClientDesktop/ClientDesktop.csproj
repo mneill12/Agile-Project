@@ -101,13 +101,13 @@
     <Compile Include="GlobalCommands.cs" />
     <Compile Include="IShellViewModel.cs" />
     <Compile Include="MainModule.cs" />
+    <Compile Include="RegionNames.cs" />
     <Compile Include="Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\CreateProjectViewModel.cs" />
     <Compile Include="ShellViewModel.cs" />
     <Compile Include="ViewModels\DashboardViewModel.cs" />
-    <Compile Include="ViewModels\MainViewModels.cs" />
     <Compile Include="ViewModels\LoginRegisterViewModel.cs" />
     <Compile Include="ViewModels\TopBarViewModels.cs" />
     <Compile Include="Views\CreateProjectView.xaml.cs">
@@ -122,9 +122,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Views\MainViews.xaml.cs">
-      <DependentUpon>MainViews.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TopBarViews.xaml.cs">
       <DependentUpon>TopBarViews.xaml</DependentUpon>
@@ -146,10 +143,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\LoginRegisterView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\MainViews.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

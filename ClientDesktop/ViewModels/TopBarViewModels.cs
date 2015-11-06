@@ -111,16 +111,9 @@ namespace ClientDesktop.ViewModels
         private void Logout(object parameter)
         {
             //TODO: Move principal permissions here
-
             GlobalCommands.MyAccount = null;
-            _RegionManager.RequestNavigate("MainRegion", "ClientDesktop.Views.LoginRegisterView");
-            string name = ServiceLocator.Current.GetInstance<LoginRegisterView>().Name;
-            //_RegionManager.Regions["MainRegion"].Add(ServiceLocator.Current.GetInstance<LoginRegisterView>());
+            _RegionManager.RequestNavigate(RegionNames.Content, typeof(LoginRegisterView).FullName);
             IsLoggedIn = false;
-            //_RegionManager.Regions["MainRegion"].
-
-            // ServiceLocator.Current.GetInstance<LoginRegisterViewModel>;
-
         }
 
         private bool CanLogout(object parameter)
