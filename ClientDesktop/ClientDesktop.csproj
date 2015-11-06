@@ -108,7 +108,6 @@
     <Compile Include="ViewModels\DashboardViewModel.cs" />
     <Compile Include="ViewModels\MainViewModels.cs" />
     <Compile Include="ViewModels\LoginRegisterViewModel.cs" />
-    <Compile Include="ViewModels\OverviewPageViewModel.cs" />
     <Compile Include="ViewModels\TopBarViewModels.cs" />
     <Compile Include="Views\DashboardView.xaml.cs">
       <DependentUpon>DashboardView.xaml</DependentUpon>
@@ -122,9 +121,6 @@
     </Compile>
     <Compile Include="Views\MainViews.xaml.cs">
       <DependentUpon>MainViews.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\OverviewPageView.xaml.cs">
-      <DependentUpon>OverviewPageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TopBarViews.xaml.cs">
       <DependentUpon>TopBarViews.xaml</DependentUpon>
@@ -146,10 +142,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainViews.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\OverviewPageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
