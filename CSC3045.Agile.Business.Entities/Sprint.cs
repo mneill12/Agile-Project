@@ -26,7 +26,7 @@ namespace CSC3045.Agile.Business.Entities
         public int SprintNumber { get; set; }
 
         [DataMember]
-        public String SprintName { get; set; }
+        public string SprintName { get; set; }
 
         [DataMember]
         public DateTime StartDate { get; set; }
@@ -35,10 +35,10 @@ namespace CSC3045.Agile.Business.Entities
         public DateTime EndDate { get; set; }
 
         [DataMember]
-        public ISet<Burndown> Burndowns { get; set; }
+        public ICollection<Burndown> Burndowns { get; set; }
 
         [DataMember]
-        public ISet<Account> SprintMembers { get; set; } 
+        public ICollection<Account> SprintMembers { get; set; } 
 
         #region IIdentifiableEntity members
 

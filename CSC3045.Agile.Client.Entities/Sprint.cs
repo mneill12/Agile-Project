@@ -15,11 +15,11 @@ namespace CSC3045.Agile.Client.Entities
         private Account _ScrumMaster;
         private Backlog _Backlog;
         private int _SprintNumber;
-        private String _SprintName;
+        private string _SprintName;
         private DateTime _StartDate;
         private DateTime _EndDate;
-        private ISet<Burndown> _Burndowns;
-        private ISet<Account> _TeamMembers; 
+        private ICollection<Burndown> _Burndowns;
+        private ICollection<Account> _TeamMembers; 
 
         public int SprintId
         {
@@ -82,7 +82,7 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public String SprintName
+        public string SprintName
         {
             get
             {
@@ -130,7 +130,7 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public ISet<Burndown> Burndowns
+        public ICollection<Burndown> Burndowns
         {
             get
             {
@@ -146,7 +146,7 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public ISet<Account> TeamMembers
+        public ICollection<Account> TeamMembers
         {
             get
             {

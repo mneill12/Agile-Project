@@ -17,8 +17,8 @@ namespace CSC3045.Agile.Client.Entities
         private int _StoryPoints;
         private string _UserNotes;
         private CurrentStatus _CurrentStatus;
-        private ISet<StoryTask> _AssociatedTasks;
-        private ISet<AcceptanceCriteria> _AcceptanceCriteria;
+        private ICollection<StoryTask> _AssociatedTasks;
+        private ICollection<AcceptanceCriteria> _AcceptanceCriteria;
 
         public int UserStoryId
         {
@@ -36,7 +36,7 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public String StoryName
+        public string StoryName
         {
             get
             {
@@ -52,7 +52,7 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public String Description
+        public string Description
         {
             get
             {
@@ -84,7 +84,7 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public String UserNotes
+        public string UserNotes
         {
             get
             {
@@ -116,7 +116,7 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public ISet<StoryTask> AssociatedTasks
+        public ICollection<StoryTask> AssociatedTasks
         {
             get
             {
@@ -132,7 +132,7 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public ISet<AcceptanceCriteria> AcceptanceCriteria
+        public ICollection<AcceptanceCriteria> AcceptanceCriteria
         {
             get
             {

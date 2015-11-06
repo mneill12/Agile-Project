@@ -13,10 +13,10 @@ namespace CSC3045.Agile.Client.Entities
         private string _Password;
         private string _FirstName;
         private string _LastName;
-        private ISet<UserRole> _UserRoles;
-        private ISet<Project> _AssocicatedProjects;
-        private ISet<Sprint> _AssociatedSprints;
-        private ISet<PlanningPokerSession> _AssociatedPlanningPokerSessions;
+        private ICollection<UserRole> _UserRoles;
+        private ICollection<Project> _AssocicatedProjects;
+        private ICollection<Sprint> _AssociatedSprints;
+        private ICollection<PlanningPokerSession> _AssociatedPlanningPokerSessions;
 
         public int AccountId
         {
@@ -83,7 +83,7 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public ISet<UserRole> UserRoles
+        public ICollection<UserRole> UserRoles
         {
             get { return _UserRoles; }
             set
@@ -96,7 +96,7 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public ISet<Project> AssocicatedProjects
+        public ICollection<Project> AssocicatedProjects
         {
             get { return _AssocicatedProjects; }
             set
@@ -109,7 +109,7 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public ISet<Sprint> AssociatedSprints
+        public ICollection<Sprint> AssociatedSprints
         {
             get { return _AssociatedSprints; }
             set
@@ -122,7 +122,7 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public ISet<PlanningPokerSession> AssociatedPlanningPokerSessions
+        public ICollection<PlanningPokerSession> AssociatedPlanningPokerSessions
         {
             get { return _AssociatedPlanningPokerSessions; }
             set

@@ -12,7 +12,7 @@ namespace CSC3045.Agile.Client.Entities
     {
         private int _acceptanceCriteriaId;
         private string _scenario;
-        private ISet<Criteria> _criteria;
+        private ICollection<Criteria> _criteria;
         private bool _isSatisfied;
 
         public int AcceptanceCriteriaId
@@ -31,7 +31,7 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public String Scenario
+        public string Scenario
         {
             get
             {
@@ -47,7 +47,7 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public ISet<Criteria> Criteria
+        public ICollection<Criteria> Criteria
         {
             get
             {

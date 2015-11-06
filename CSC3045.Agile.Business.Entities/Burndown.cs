@@ -16,10 +16,10 @@ namespace CSC3045.Agile.Business.Entities
         public int BurndownId { get; set; }
 
         [DataMember]
-        public String BurndownName { get; set; }
+        public string BurndownName { get; set; }
 
         [DataMember]
-        public ISet<BurndownPoint> BurndownPoints { get; set; }
+        public ICollection<BurndownPoint> BurndownPoints { get; set; }
 
         #region IIdentifiableEntity members
 

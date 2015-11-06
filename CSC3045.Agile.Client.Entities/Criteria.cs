@@ -30,7 +30,7 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public String CriteriaType
+        public string CriteriaType
         {
             get
             {
@@ -46,7 +46,7 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public String CriteriaOutline
+        public string CriteriaOutline
         {
             get
             {
