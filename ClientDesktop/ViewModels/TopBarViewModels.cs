@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
+using ClientDesktop.Views;
 using Core.Common.UI.Core;
+using Microsoft.Practices.ServiceLocation;
+using Prism.Regions;
 
 namespace ClientDesktop.ViewModels
 {
@@ -78,15 +81,23 @@ namespace ClientDesktop.ViewModels
 
         #region Delegate Commands
 
-        public DelegateCommand<bool> UpdateLoggedIn { get; set; }  
+        public DelegateCommand<bool> UpdateLoginStatusCommand { get; set; }
+        public DelegateCommand<object> LogoutCommand { get; set; }
 
         #endregion
 
-        public TopBarViewModels()
-        {
-            UpdateLoggedIn = new DelegateCommand<bool>(UpdateLoginStatus);
+        private readonly IRegionManager _RegionManager;
 
-            GlobalCommands.IsLoggedIn.RegisterCommand(UpdateLoggedIn);
+        [ImportingConstructor]
+        public TopBarViewModels(IRegionManager regionManager)
+        {
+            _RegionManager = regionManager;
+
+            UpdateLoginStatusCommand = new DelegateCommand<bool>(UpdateLoginStatus);
+            LogoutCommand = new DelegateCommand<object>(Logout, CanLogout);
+
+            // Links the Update Login Status Command to be accessed globally
+            GlobalCommands.IsLoggedIn.RegisterCommand(UpdateLoginStatusCommand);
         }
 
         private void UpdateLoginStatus(bool isLoggedIn)
@@ -95,6 +106,26 @@ namespace ClientDesktop.ViewModels
             Email = GlobalCommands.MyAccount.LoginEmail;
             FirstName = GlobalCommands.MyAccount.FirstName;
             LastName = GlobalCommands.MyAccount.LastName;
+        }
+
+        private void Logout(object parameter)
+        {
+            //TODO: Move principal permissions here
+
+            GlobalCommands.MyAccount = null;
+            _RegionManager.RequestNavigate("MainRegion", "ClientDesktop.Views.LoginRegisterView");
+            string name = ServiceLocator.Current.GetInstance<LoginRegisterView>().Name;
+            //_RegionManager.Regions["MainRegion"].Add(ServiceLocator.Current.GetInstance<LoginRegisterView>());
+            IsLoggedIn = false;
+            //_RegionManager.Regions["MainRegion"].
+
+            // ServiceLocator.Current.GetInstance<LoginRegisterViewModel>;
+
+        }
+
+        private bool CanLogout(object parameter)
+        {
+            return (GlobalCommands.MyAccount != null);
         }
     }
 }

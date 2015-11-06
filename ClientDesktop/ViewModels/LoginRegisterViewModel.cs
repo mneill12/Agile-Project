@@ -26,7 +26,7 @@ namespace ClientDesktop.ViewModels
     {
         #region LoginRegisterView Bindings
 
-        private string _LoginEmail = "jflyn07n@qub.ac.uk";
+        private string _LoginEmail;
         private string _RegisterFirstName;
         private string _RegisterLastName;
         private string _RegisterEmail;
@@ -151,11 +151,9 @@ namespace ClientDesktop.ViewModels
 
         private readonly DelegateCommand<PasswordBox> _RegisterAccount;
         private readonly DelegateCommand<PasswordBox> _AccountLogin;
-        private readonly DelegateCommand<object> _LogoutCommand;
 
         public DelegateCommand<PasswordBox> RegisterAccount { get { return _RegisterAccount; } }
         public DelegateCommand<PasswordBox> AccountLogin { get { return _AccountLogin; } }
-        public DelegateCommand<object> LogoutCommand { get { return _LogoutCommand; } }
 
         #endregion
 
@@ -169,12 +167,13 @@ namespace ClientDesktop.ViewModels
         [ImportingConstructor]
         public LoginRegisterViewModel(IServiceFactory serviceFactory, IRegionManager regionManager)
         {
+            //LoginEmail = "jflyn07n@qub.ac.uk";
+
             _ServiceFactory = serviceFactory;
             _RegionManager = regionManager;
 
             _RegisterAccount = new DelegateCommand<PasswordBox>(OnRegisterAccount);
             _AccountLogin = new DelegateCommand<PasswordBox>(OnAccountLogin);
-            _LogoutCommand = new DelegateCommand<object>(Logout, CanLogout);
 
             GetUserRoles();
         }
@@ -210,24 +209,24 @@ namespace ClientDesktop.ViewModels
 
         protected override void OnViewLoaded()
         {
-
+           LoginEmail = "jflyn07n@qub.ac.uk";
         }
 
         protected void OnAccountLogin(PasswordBox passwordBox)
         {
-            if (string.IsNullOrEmpty(_LoginEmail) || string.IsNullOrEmpty(passwordBox.Password))
+            if (string.IsNullOrEmpty(LoginEmail) || string.IsNullOrEmpty(passwordBox.Password))
             {
                 Status = "Please complete all fields to login";
             }
             else
             {
-                string hashedPassword = new HashHelper().CalculateHash(passwordBox.Password, _LoginEmail);
+                string hashedPassword = new HashHelper().CalculateHash(passwordBox.Password, LoginEmail);
 
                 try
                 {
                     WithClient<IAuthenticationService>(_ServiceFactory.CreateClient<IAuthenticationService>(), authenticationClient =>
                     {
-                        GlobalCommands.MyAccount = authenticationClient.AuthenticateUser(_LoginEmail, hashedPassword);
+                        GlobalCommands.MyAccount = authenticationClient.AuthenticateUser(LoginEmail, hashedPassword);
 
                         if (GlobalCommands.MyAccount != null)
                         {
@@ -247,7 +246,7 @@ namespace ClientDesktop.ViewModels
                             //Update UI
                             OnPropertyChanged("AuthenticatedUser");
                             OnPropertyChanged("IsAuthenticated");
-                            _LoginEmail = string.Empty;
+                            LoginEmail = string.Empty;
                             Status = string.Empty;
 
                             GlobalCommands.IsLoggedIn.Execute(true);
@@ -337,6 +336,7 @@ namespace ClientDesktop.ViewModels
 
                         if (GlobalCommands.MyAccount != null)
                         {
+                            GlobalCommands.IsLoggedIn.Execute(true);
                             _RegionManager.RequestNavigate("MainRegion", "DashboardView");
                         }
                     });

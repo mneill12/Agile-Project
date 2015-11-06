@@ -11,8 +11,8 @@
     <Grid>
         <DockPanel LastChildFill="True">
             <StackPanel  DockPanel.Dock="Top" Height="50" Orientation="Horizontal" Background="Black">
-                <TextBox FontSize="30" FontWeight="Bold" Foreground="#FF57C8EA" Background="#FF070303" HorizontalAlignment="Left" Width="545" BorderThickness="0" Height="50">Hi, Darryl!</TextBox>
-                <Button x:Name="button" Content="+" Background="#FF57C8EA" RenderTransformOrigin="3.614,0.46" Width="50" FontSize="30" FontWeight="Bold" Height="50" VerticalAlignment="Bottom"/>
+                <TextBox FontSize="30" FontWeight="Bold" Foreground="#FF57C8EA" Background="#FF070303" HorizontalAlignment="Left" Width="545" BorderThickness="0" Height="50">Hi, Joe!</TextBox>
+                <Button x:Name="button" Content="Add Project" Background="#FF57C8EA" RenderTransformOrigin="3.614,0.46" Width="240" FontSize="30" FontWeight="Bold" Height="50" VerticalAlignment="Bottom" Command="{Binding AddProjectCommand}"/>
             </StackPanel>
             <StackPanel DockPanel.Dock="Left" Background="Black">
                 <Border BorderBrush="Black"  BorderThickness="1" >
