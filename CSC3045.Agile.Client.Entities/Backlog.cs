@@ -9,7 +9,7 @@ namespace CSC3045.Agile.Client.Entities
     public class Backlog : ObjectBase
     {
         private int _BacklogId;
-        private ISet<int> _AssociatedUserStoryIdSet;
+        private ICollection<int> _AssociatedUserStoryIdSet;
 
         public int BacklogId
         {
@@ -24,7 +24,7 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public ISet<int> AssociatedUserStoryIdSet
+        public ICollection<int> AssociatedUserStoryIdSet
         {
             get { return _AssociatedUserStoryIdSet; }
             set

@@ -25,22 +25,22 @@ namespace CSC3045.Agile.Business.Entities
         public Account ProductOwner { get; set; }
 
         [DataMember]
-        public String ProjectName { get; set; }
+        public string ProjectName { get; set; }
 
         [DataMember]
         public DateTime ProjectDeadline { get; set; }
 
         [DataMember]
-        public ISet<Sprint> Sprints { get; set; } 
+        public ICollection<Sprint> Sprints { get; set; } 
 
         [DataMember]
-        public ISet<Burndown> Burndowns { get; set; }
+        public ICollection<Burndown> Burndowns { get; set; }
 
         [DataMember]
-        public ISet<Account> ProjectMembers { get; set; } 
+        public ICollection<Account> ProjectMembers { get; set; } 
 
         [DataMember]
-        public ISet<Account> AssociatedUsers { get; set; }
+        public ICollection<Account> AssociatedUsers { get; set; }
 
         #region IIdentifiableEntity members
 

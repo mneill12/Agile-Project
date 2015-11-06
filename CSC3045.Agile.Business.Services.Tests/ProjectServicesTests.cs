@@ -101,14 +101,14 @@ namespace CSC3045.Agile.Business.Services.Tests
         {
             
 
-            ISet<Account> associatedAccounts1 = new HashSet<Account>()
+            ICollection<Account> associatedAccounts1 = new HashSet<Account>()
             {
                 new Account() {AccountId=100},
                 new Account() {AccountId=101},
                 new Account() {AccountId=102}
             };
 
-            ISet<Account> associatedAccounts2 = new HashSet<Account>()
+            ICollection<Account> associatedAccounts2 = new HashSet<Account>()
             {
                 new Account() {AccountId=200},
                 new Account() {AccountId=201},

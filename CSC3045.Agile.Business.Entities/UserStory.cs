@@ -14,28 +14,28 @@ namespace CSC3045.Agile.Business.Entities
         public int UserStoryId { get; set; }
 
         [DataMember]
-        public String StoryNumber { get; set; }
+        public string StoryNumber { get; set; }
 
         [DataMember]
-        public String Description { get; set; }
+        public string Description { get; set; }
 
         [DataMember]
         public int StoryPoints { get; set; }
 
         [DataMember]
-        public String UserNotes { get; set; }
+        public string UserNotes { get; set; }
 
         [DataMember]
         public CurrentStatus Status { get; set; }
 
         [DataMember]
-        public ISet<StoryTask> AssociatedTasks { get; set; }
+        public ICollection<StoryTask> AssociatedTasks { get; set; }
 
         [DataMember]
-        public ISet<AcceptanceCriteria> AcceptanceCriteria { get; set; }
+        public ICollection<AcceptanceCriteria> AcceptanceCriteria { get; set; }
 
         // Many-to-many declarations
-        public virtual ISet<PlanningPokerSession> AssociatedPlanningPokersSessions { get; set; } 
+        public virtual ICollection<PlanningPokerSession> AssociatedPlanningPokersSessions { get; set; } 
 
         #region IIdentifiableEntity members
 

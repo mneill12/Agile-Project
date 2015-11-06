@@ -4,11 +4,12 @@ using System.Linq;
 using Core.Common.Core;
 using System.ComponentModel;
 using FluentValidation.Results;
+using Prism.Regions;
 
 namespace Core.Common.UI.Core
 {
     // IPropChanged + Other View-to-ViewModel linking happens automatically with the ViewModelBase
-    public class ViewModelBase : ObjectBase
+    public class ViewModelBase : ObjectBase, INavigationAware
     {
         public ViewModelBase()
         {
@@ -119,6 +120,21 @@ namespace Core.Common.UI.Core
         protected virtual bool OnToggleErrorsCommandCanExecute(object arg)
         {
             return !IsValid;
+        }
+
+        public virtual bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            return true;
+        }
+
+        public void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            
+        }
+
+        public void OnNavigatedFrom(NavigationContext navigationContext)
+        {
+            
         }
     }
 }

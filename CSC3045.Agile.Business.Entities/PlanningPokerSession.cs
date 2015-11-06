@@ -20,10 +20,10 @@ namespace CSC3045.Agile.Business.Entities
         public DateTime StartTime { get; set; }
 
         [DataMember]
-        public ISet<Account> InvitedAccountSet { get; set; }
+        public ICollection<Account> InvitedAccountSet { get; set; }
 
         [DataMember]
-        public ISet<UserStory> UserStories { get; set; } 
+        public ICollection<UserStory> UserStories { get; set; } 
 
         #region IIdentifiableEntity members
 

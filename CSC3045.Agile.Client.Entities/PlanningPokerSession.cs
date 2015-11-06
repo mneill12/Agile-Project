@@ -11,8 +11,8 @@ namespace CSC3045.Agile.Client.Entities
     {
         private int _PlanningPokerSessionId;
         private DateTime _StartTime;
-        private ISet<Account> _InvitedAccountSet;
-        private ISet<UserStory> _UserStories; 
+        private ICollection<Account> _InvitedAccountSet;
+        private ICollection<UserStory> _UserStories; 
 
         public int PlanningPokerSessionId
         {
@@ -40,7 +40,7 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public ISet<Account> InvitedAccountSet
+        public ICollection<Account> InvitedAccountSet
         {
             get { return _InvitedAccountSet; }
             set
@@ -53,7 +53,7 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public ISet<UserStory> UserStories
+        public ICollection<UserStory> UserStories
         {
             get { return _UserStories; }
             set

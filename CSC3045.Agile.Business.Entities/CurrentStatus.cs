@@ -17,11 +17,11 @@ namespace CSC3045.Agile.Business.Entities
         public int StoryStatusId { get; set; }
 
         [DataMember]
-        public String StoryStatusName { get; set; }
+        public string StoryStatusName { get; set; }
 
         // Many to many declarationa
-        public virtual ISet<UserStory> AssociatedUserStories { get; set; }
-        public virtual ISet<StoryTask> AssociatedStoryTasks { get; set; } 
+        public virtual ICollection<UserStory> AssociatedUserStories { get; set; }
+        public virtual ICollection<StoryTask> AssociatedStoryTasks { get; set; } 
 
         #region IIdentifiableEntity members
 

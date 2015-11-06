@@ -11,6 +11,6 @@ namespace CSC3045.Agile.Data.Contracts.Repository_Interfaces
     // Interface for custom methods of UserRoleRepository
     public interface IUserRoleRepository : IDataRepository<UserRole>
     {
-       
+        ICollection<UserRole> GetAllUserRoles();
     }
 }

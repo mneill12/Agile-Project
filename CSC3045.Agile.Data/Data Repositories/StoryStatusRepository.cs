@@ -13,6 +13,8 @@ using CSC3045.Agile.Data.Contracts.Repository_Interfaces;
 namespace CSC3045.Agile.Data.Data_Repositories
 {
     // StoryStatus LINQ Entity Queries
+    [Export(typeof(IStoryStatusRepository))]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class StoryStatusRepository : DataRepositoryBase<CurrentStatus>
     {
         protected override CurrentStatus AddEntity(Csc3045AgileContext entityContext, CurrentStatus entity)

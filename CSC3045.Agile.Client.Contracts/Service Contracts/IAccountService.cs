@@ -37,5 +37,9 @@ namespace CSC3045.Agile.Client.Contracts
         [TransactionFlow(TransactionFlowOption.Allowed)]
         void UpdateAccountInfo(Account account);
 
+        [OperationContract]
+        [FaultContract(typeof(NotFoundException))]
+        ICollection<UserRole> GetAllUserRoles();
+
     }
 }

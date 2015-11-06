@@ -51,7 +51,7 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public String Title
+        public string Title
         {
             get
             {
@@ -68,7 +68,7 @@ namespace CSC3045.Agile.Client.Entities
         }
 
 
-        public String Description
+        public string Description
         {
             get
             {
@@ -132,7 +132,7 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public String UserNotes
+        public string UserNotes
         {
             get
             {

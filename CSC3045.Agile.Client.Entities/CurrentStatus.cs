@@ -30,7 +30,7 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public String StoryStatusName
+        public string StoryStatusName
         {
             get
             {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Windows;
 using System.ComponentModel;
@@ -31,6 +32,7 @@ namespace ClientDesktop.ViewModels
         private string _RegisterEmail;
         private string _RegisterConfirmEmail;
         private string _Status;
+        private ICollection<UserRole> _UserRoles; 
 
         public string AuthenticatedUser{
             get
@@ -129,6 +131,20 @@ namespace ClientDesktop.ViewModels
             }
         }
 
+        public ICollection<UserRole> UserRoles
+        {
+            get
+            {
+                return _UserRoles;
+            }
+            set
+            {
+                if (_UserRoles == value) return;
+                _UserRoles = value;
+                OnPropertyChanged("UserRoles");
+            }
+        }
+
         #endregion
 
         #region Delegate Commands
@@ -160,6 +176,29 @@ namespace ClientDesktop.ViewModels
             _AccountLogin = new DelegateCommand<PasswordBox>(OnAccountLogin);
             _LogoutCommand = new DelegateCommand<object>(Logout, CanLogout);
 
+            GetUserRoles();
+        }
+
+        /// <summary>
+        /// Called on construction to get a list of available user roles to populate registration
+        /// </summary>
+        private void GetUserRoles()
+        {
+            try
+            {
+                WithClient<IAccountService>(_ServiceFactory.CreateClient<IAccountService>(),
+                    accountClient => { UserRoles = accountClient.GetAllUserRoles(); });
+            }
+            catch (FaultException ex)
+            {
+                if (ErrorOccured != null)
+                    ErrorOccured(this, new ErrorMessageEventArgs(ex.Message));
+            }
+            catch (Exception ex)
+            {
+                if (ErrorOccured != null)
+                    ErrorOccured(this, new ErrorMessageEventArgs(ex.Message));
+            }
         }
 
         public event EventHandler<ErrorMessageEventArgs> ErrorOccured;
@@ -176,7 +215,11 @@ namespace ClientDesktop.ViewModels
 
         protected void OnAccountLogin(PasswordBox passwordBox)
         {
-            if (_LoginEmail != null && passwordBox.Password != null)
+            if (string.IsNullOrEmpty(_LoginEmail) || string.IsNullOrEmpty(passwordBox.Password))
+            {
+                Status = "Please complete all fields to login";
+            }
+            else
             {
                 string hashedPassword = new HashHelper().CalculateHash(passwordBox.Password, _LoginEmail);
 
@@ -207,6 +250,7 @@ namespace ClientDesktop.ViewModels
                             _LoginEmail = string.Empty;
                             Status = string.Empty;
 
+                            GlobalCommands.IsLoggedIn.Execute(true);
                             _RegionManager.RequestNavigate("MainRegion", "DashboardView");
                         }
                         else
@@ -268,7 +312,12 @@ namespace ClientDesktop.ViewModels
 
         protected void OnRegisterAccount(PasswordBox passwordBox)
         {
-            if (_RegisterEmail != null && passwordBox.Password != null && _RegisterFirstName != null && _RegisterLastName != null)
+            if (string.IsNullOrEmpty(_RegisterEmail) || string.IsNullOrEmpty(passwordBox.Password) ||
+                string.IsNullOrEmpty(_RegisterFirstName) || string.IsNullOrEmpty(_RegisterLastName))
+            {
+                Status = "Please complete all fields to register an account";
+            }
+            else
             {
                 string hashedPassword = new HashHelper().CalculateHash(passwordBox.Password, _LoginEmail);
 
@@ -297,12 +346,6 @@ namespace ClientDesktop.ViewModels
                     if (ErrorOccured != null)
                         ErrorOccured(this, new ErrorMessageEventArgs(ex.Message));
                 }
-            }
-            else
-            {
-                if (ErrorOccured != null)
-                    ErrorOccured(this, new ErrorMessageEventArgs("Please complete all fields to register an account"));
-
             }
         }
     }

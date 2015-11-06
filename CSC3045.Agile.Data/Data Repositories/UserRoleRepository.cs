@@ -13,7 +13,9 @@ using CSC3045.Agile.Data.Contracts.Repository_Interfaces;
 namespace CSC3045.Agile.Data.Data_Repositories
 {
     // UserRole LINQ Entity Queries
-    public class UserRoleRepository : DataRepositoryBase<UserRole>
+    [Export(typeof(IUserRoleRepository))]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
+    public class UserRoleRepository : DataRepositoryBase<UserRole>, IUserRoleRepository
     {
         protected override UserRole AddEntity(Csc3045AgileContext entityContext, UserRole entity)
         {
@@ -42,6 +44,14 @@ namespace CSC3045.Agile.Data.Data_Repositories
             var results = query.FirstOrDefault();
 
             return results;
+        }
+
+        public ICollection<UserRole> GetAllUserRoles()
+        {
+            using (Csc3045AgileContext entityContext = new Csc3045AgileContext())
+            {
+                return entityContext.UserRoleSet.ToList();
+            }
         }
     }
 }

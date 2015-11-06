@@ -16,10 +16,10 @@ namespace CSC3045.Agile.Business.Entities
         public int CriteriaId { get; set; }
 
         [DataMember]
-        public String CriteriaType { get; set; }
+        public string CriteriaType { get; set; }
 
         [DataMember]
-        public String CriteriaOutline { get; set; }
+        public string CriteriaOutline { get; set; }
 
         #region IIdentifiableEntity members
 

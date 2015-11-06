@@ -19,10 +19,10 @@ namespace CSC3045.Agile.Business.Entities
         public Account Owner { get; set; }
 
         [DataMember]
-        public String Title { get; set; }
+        public string Title { get; set; }
 
         [DataMember]
-        public String Description { get; set; }
+        public string Description { get; set; }
 
         [DataMember]
         public int Hours { get; set; }
@@ -34,7 +34,7 @@ namespace CSC3045.Agile.Business.Entities
         public Boolean IsBlocked { get; set; }
 
         [DataMember]
-        public String UserNotes { get; set; }
+        public string UserNotes { get; set; }
 
        
 

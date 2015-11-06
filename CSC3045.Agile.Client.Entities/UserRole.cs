@@ -13,7 +13,7 @@ namespace CSC3045.Agile.Client.Entities
         private int _UserRoleId;
         private string _UserRoleName;
         private int _PermissionLevel;
-        private ISet<Account> _Accounts;
+        private ICollection<Account> _Accounts;
 
         public int UserRoleId
         {
@@ -31,7 +31,7 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public String UserRoleName
+        public string UserRoleName
         {
             get
             {
@@ -63,7 +63,7 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public ISet<Account> Accounts
+        public ICollection<Account> Accounts
         {
             get { return _Accounts; }
             set

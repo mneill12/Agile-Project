@@ -9,7 +9,7 @@ namespace ClientDesktop.ViewModels
 {
     [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class DashboardViewModel : ViewModelBase, INavigationAware
+    public class DashboardViewModel : ViewModelBase
     {
         IServiceFactory _ServiceFactory;
 
@@ -28,21 +28,6 @@ namespace ClientDesktop.ViewModels
         protected override void OnViewLoaded()
         {
 
-        }
-
-        public void OnNavigatedTo(NavigationContext navigationContext)
-        {
-            
-        }
-
-        public bool IsNavigationTarget(NavigationContext navigationContext)
-        {
-            return true;
-        }
-
-        public void OnNavigatedFrom(NavigationContext navigationContext)
-        {
-            
         }
     }
 }

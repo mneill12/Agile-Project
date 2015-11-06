@@ -10,7 +10,7 @@ namespace CSC3045.Agile.Client.Entities
     {
         private int _BurndownId;
         private string _BurndownName;
-        private ISet<BurndownPoint> _BurndownPoints;
+        private ICollection<BurndownPoint> _BurndownPoints;
 
         public int BurndownId
         {
@@ -25,7 +25,7 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public String BurndownName
+        public string BurndownName
         {
             get { return _BurndownName; }
             set
@@ -38,7 +38,7 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public ISet<BurndownPoint> BurndownPoints
+        public ICollection<BurndownPoint> BurndownPoints
         {
             get { return _BurndownPoints; }
             set

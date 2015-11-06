@@ -14,6 +14,8 @@ using System.Data.Entity;
 namespace CSC3045.Agile.Data.Data_Repositories
 {
     // Sprint LINQ Entity Queries
+    [Export(typeof(ISprintRepository))]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class SprintRepository : DataRepositoryBase<Sprint>
     {
         protected override Sprint AddEntity(Csc3045AgileContext entityContext, Sprint entity)

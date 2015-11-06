@@ -18,6 +18,6 @@ namespace CSC3045.Agile.Client.Contracts
         [OperationContract]
         [FaultContract(typeof(NotFoundException))]
         [TransactionFlow(TransactionFlowOption.Allowed)]
-        Account AuthenticateUser(String email, String Password);
+        Account AuthenticateUser(string email, string Password);
     }
 }

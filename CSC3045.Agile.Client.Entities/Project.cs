@@ -16,9 +16,9 @@ namespace CSC3045.Agile.Client.Entities
         private Account _ProductOwner;
         private string _ProjectName;
         private DateTime _ProjectDeadline;
-        private ISet<Sprint> _Sprints;
-        private ISet<Burndown> _Burndowns;
-        private ISet<Account> _ProjectMembers; 
+        private ICollection<Sprint> _Sprints;
+        private ICollection<Burndown> _Burndowns;
+        private ICollection<Account> _ProjectMembers; 
 
         public int ProjectId
         {
@@ -84,7 +84,7 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public String ProjectName
+        public string ProjectName
         {
             get
             {
@@ -116,7 +116,7 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public ISet<Sprint> Sprints
+        public ICollection<Sprint> Sprints
         {
             get
             {
@@ -132,7 +132,7 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public ISet<Burndown> Burndowns
+        public ICollection<Burndown> Burndowns
         {
             get
             {
@@ -148,7 +148,7 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public ISet<Account> ProjectMembers
+        public ICollection<Account> ProjectMembers
         {
             get
             {
