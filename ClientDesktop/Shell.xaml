@@ -4,7 +4,11 @@
         xmlns:v="clr-namespace:ClientDesktop.Views"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
 		xmlns:regions="http://prismlibrary.com/"
-        Title="JELLO - Client Desktop" Height="960" Width="1280" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background="LightSteelBlue" Foreground="Black">
+        Title="JELLO - Client Desktop" Height="960" Width="1280" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Foreground="Black">
+    <Window.Background>
+        <ImageBrush ImageSource="Resources/abstract.jpg">
+        </ImageBrush>
+    </Window.Background>
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             <Button Content="settings" />
