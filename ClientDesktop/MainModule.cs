@@ -34,7 +34,7 @@ namespace ClientDesktop
         public void Initialize()
         {
             _RegionManager.Regions["TopBarRegion"].Add(ServiceLocator.Current.GetInstance<TopBarViews>());
-            _RegionManager.Regions["MainRegion"].Add(ServiceLocator.Current.GetInstance<CreateProjectView>());
+            _RegionManager.Regions["MainRegion"].Add(ServiceLocator.Current.GetInstance<LoginRegisterView>());
         }
 
         #endregion
