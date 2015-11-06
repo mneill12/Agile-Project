@@ -204,13 +204,13 @@ namespace CSC3045.Agile.Business.Services
         #endregion
 
 
-        public IEnumerable<Account> GetByUserRole(UserRole role)
+        public IEnumerable<Account> GetByUserRole(int permissionLevel)
         {
             return ExecuteFaultHandledOperation(() =>
             {
                 IAccountRepository accountRepository = _DataRepositoryFactory.GetDataRepository<IAccountRepository>();
 
-                IEnumerable<Account> accounts = accountRepository.GetByUserRole(role);
+                IEnumerable<Account> accounts = accountRepository.GetByUserRole(permissionLevel);
                 if(accounts == null)
                 {
                     NotFoundException ex = new NotFoundException("Error retrieving Accounts from database");

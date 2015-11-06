@@ -85,13 +85,13 @@ namespace CSC3045.Agile.Data.Data_Repositories
         }
 
         // Gets accounts that have a particular user-role attached
-        public IEnumerable<Account> GetByUserRole(UserRole role)
+        public IEnumerable<Account> GetByUserRole(int permissionLevel)
         {
             using (Csc3045AgileContext entityContext = new Csc3045AgileContext())
             {
                 return entityContext.AccountSet
                     .Include(a => a.UserRoles)
-                    .Where(a => a.UserRoles.Contains(role))
+                    .Where(a => a.UserRoles.Select(r => r.PermissionLevel).Contains(permissionLevel))
                     .ToList();
             }
         }
