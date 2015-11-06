@@ -23,6 +23,11 @@ namespace CSC3045.Agile.Data
             developerUserRoleSetWithScrumMaster.Add(new UserRole() {UserRoleName = "Developer", PermissionLevel = 0});
             developerUserRoleSetWithScrumMaster.Add(new UserRole() {UserRoleName = "Scrum Master", PermissionLevel = 1});
 
+            var developerUserRoleSetWithProductOwner = new HashSet<UserRole>();
+            developerUserRoleSetWithProductOwner.Add(new UserRole() { UserRoleName = "Developer", PermissionLevel = 0 });
+            developerUserRoleSetWithProductOwner.Add(new UserRole() { UserRoleName = "Product Owner", PermissionLevel = 3 });
+
+
             context.AccountSet.Add(new Account()
             {
                 LoginEmail = "jflyn07n@qub.ac.uk",
@@ -73,7 +78,7 @@ namespace CSC3045.Agile.Data
                 Password = "4nt1t7!",
                 FirstName = "Martin",
                 LastName = "McCann",
-                UserRoles = developerUserRoleSetWithScrumMaster
+                UserRoles = developerUserRoleSetWithProductOwner
             });
 
             context.AccountSet.Add(new Account()
@@ -128,6 +133,12 @@ namespace CSC3045.Agile.Data
             {
                 UserRoleName = "Product Owner", 
                 PermissionLevel = 3
+            });
+
+            defaultRoles.Add(new UserRole()
+            {
+                UserRoleName = "Scrum Master",
+                PermissionLevel = 1
             });
 
             foreach (UserRole usr in defaultRoles) 

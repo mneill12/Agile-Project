@@ -17,7 +17,7 @@ namespace CSC3045.Agile.Data.Contracts.Repository_Interfaces
 
         Account GetByLoginAndPasswordWithUserRoles(string login, string password);
 
-        IEnumerable<Account> GetByUserRole(UserRole role);
+        IEnumerable<Account> GetByUserRole(int permissionLevel);
 
         ICollection<Account> GetAllAccounts();
 		
