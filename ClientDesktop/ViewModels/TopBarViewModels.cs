@@ -4,6 +4,7 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using ClientDesktop.Views;
+using Core.Common.Core;
 using Core.Common.UI.Core;
 using Microsoft.Practices.ServiceLocation;
 using Prism.Regions;
@@ -108,12 +109,21 @@ namespace ClientDesktop.ViewModels
             LastName = GlobalCommands.MyAccount.LastName;
         }
 
+        // Resets global properties and the content region
         private void Logout(object parameter)
         {
             //TODO: Move principal permissions here
             GlobalCommands.MyAccount = null;
-            _RegionManager.RequestNavigate(RegionNames.Content, typeof(LoginRegisterView).FullName);
             IsLoggedIn = false;
+
+            List<object> allViews = new List<object>(_RegionManager.Regions[RegionNames.Content].Views);
+
+            for (var i = 0; i < allViews.Count; i++)
+            {
+                _RegionManager.Regions[RegionNames.Content].Remove(allViews[i]);
+            }
+
+            _RegionManager.Regions[RegionNames.Content].Add(ServiceLocator.Current.GetInstance<LoginRegisterView>());
         }
 
         private bool CanLogout(object parameter)
