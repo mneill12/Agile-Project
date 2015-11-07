@@ -30,8 +30,10 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
         <ContentControl x:Name="TopBarRegion" regions:RegionManager.RegionName="TopBarRegion" Grid.Row="0" />
         <ContentControl x:Name="ContentRegion" regions:RegionManager.RegionName="ContentRegion" Grid.Row="1"/>
+        <ContentControl x:Name="StatusRegion" regions:RegionManager.RegionName="StatusRegion" Grid.Row="2"/>
     </Grid>
 </Controls:MetroWindow>
