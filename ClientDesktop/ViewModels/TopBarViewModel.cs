@@ -14,7 +14,7 @@ namespace ClientDesktop.ViewModels
 {
     [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class TopBarViewModels : ViewModelBase
+    public class TopBarViewModel : ViewModelBase
     {
         #region TopBarBindings
 
@@ -107,7 +107,7 @@ namespace ClientDesktop.ViewModels
         private readonly IRegionManager _RegionManager;
 
         [ImportingConstructor]
-        public TopBarViewModels(IRegionManager regionManager)
+        public TopBarViewModel(IRegionManager regionManager)
         {
             _RegionManager = regionManager;
 

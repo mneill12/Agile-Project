@@ -6,19 +6,19 @@ using Core.Common.UI.Core;
 namespace ClientDesktop.Views
 {
     /// <summary>
-    /// Interaction logic for TopBarViews.xaml
+    /// Interaction logic for TopBarView.xaml
     /// </summary>
     [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public partial class TopBarViews : UserControlViewBase
+    public partial class TopBarView : UserControlViewBase
     {
-        public TopBarViews()
+        public TopBarView()
         {
             InitializeComponent();
         }
 
         [Import]
-        public TopBarViewModels ViewModel
+        public TopBarViewModel ViewModel
         {
             set { DataContext = value; }
         }

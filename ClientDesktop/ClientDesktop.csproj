@@ -110,7 +110,7 @@
     <Compile Include="ViewModels\DashboardViewModel.cs" />
     <Compile Include="ViewModels\EditAccountViewModel.cs" />
     <Compile Include="ViewModels\LoginRegisterViewModel.cs" />
-    <Compile Include="ViewModels\TopBarViewModels.cs" />
+    <Compile Include="ViewModels\TopBarViewModel.cs" />
     <Compile Include="Views\CreateProjectView.xaml.cs">
       <DependentUpon>CreateProjectView.xaml</DependentUpon>
     </Compile>
@@ -127,8 +127,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Views\TopBarViews.xaml.cs">
-      <DependentUpon>TopBarViews.xaml</DependentUpon>
+    <Compile Include="Views\TopBarView.xaml.cs">
+      <DependentUpon>TopBarView.xaml</DependentUpon>
     </Compile>
     <Page Include="Resources\Icons.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -154,7 +154,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\TopBarViews.xaml">
+    <Page Include="Views\TopBarView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
