@@ -40,11 +40,6 @@ namespace Core.Common.UI.Core
                 disposableClient.Dispose();
         }
 
-        public virtual string ViewTitle
-        {
-            get { return String.Empty; }
-        }
-
         List<ObjectBase> _Models;
 
         protected virtual void AddModels(List<ObjectBase> models) { }
@@ -124,16 +119,21 @@ namespace Core.Common.UI.Core
             return !IsValid;
         }
 
+        // NavigationContext can pass objects as params through XAML to different viewmodels
+
+        // Event triggered when view is navigated to
         public virtual void OnNavigatedTo(NavigationContext navigationContext)
         {
             
         }
 
+        // Target the same view if true, used for reinitializing views when 'false'
         public virtual bool IsNavigationTarget(NavigationContext navigationContext)
         {
             return true;
         }
 
+        // Event triggered when view is navigated from
         public virtual void OnNavigatedFrom(NavigationContext navigationContext)
         {
             

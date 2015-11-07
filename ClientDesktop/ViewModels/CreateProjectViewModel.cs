@@ -111,11 +111,6 @@ namespace ClientDesktop.ViewModels
 
         public event EventHandler<ErrorMessageEventArgs> ErrorOccured;
 
-        public override string ViewTitle
-        {
-            get { return "Create Project"; }
-        }
-
         // This gets hit every time the page is loaded while the constructor only gets loaded initially, use for getting up-to-data from the database
         protected override void OnViewLoaded()
         {

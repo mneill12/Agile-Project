@@ -34,12 +34,6 @@ namespace ClientDesktop.ViewModels
             _RegionManager.RequestNavigate(RegionNames.Content, typeof(CreateProjectView).FullName);
         }
 
-
-        public override string ViewTitle
-        {
-            get { return "Dashboard"; }
-        }
-
         protected override void OnViewLoaded()
         {
 

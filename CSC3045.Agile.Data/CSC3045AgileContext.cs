@@ -10,14 +10,16 @@ using Core.Common.Contracts;
 
 namespace CSC3045.Agile.Data
 {
-    // ORM Rules
+    /// <summary>
+    /// ORM Rules
+    /// DropCreateDB on model change by default, if specificed create sample data
+    /// </summary>
     public class Csc3045AgileContext : DbContext
     {
         public Csc3045AgileContext()
             : base("CSC3045GeneratedDB")
         {
-
-            Database.SetInitializer<Csc3045AgileContext>(new Csc3045AgileCustomDatabaseInitialiser());
+            Database.SetInitializer(new Csc3045AgileCustomDatabaseInitialiser());
         }
 
         public DbSet<Account> AccountSet { get; set; }

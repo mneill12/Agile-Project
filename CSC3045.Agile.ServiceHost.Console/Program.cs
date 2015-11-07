@@ -10,6 +10,7 @@ using System.Data.Entity.Core.EntityClient;
 using System.Linq;
 using System.Reflection;
 using System.Security.Principal;
+using Core.Common;
 using Core.Common.Contracts;
 using Core.Common.Extensions;
 using CSC3045.Agile.Data;
@@ -26,18 +27,6 @@ namespace CSC3045.Agile.ServiceHost.Console
             // Init MEF to use DI with engines/repositories
             ObjectBase.Container = MEFLoader.Init();
 
-            System.Console.WriteLine("Starting up services...");
-            System.Console.WriteLine("");
-
-            System.ServiceModel.ServiceHost hostAccountService = new System.ServiceModel.ServiceHost(typeof(AccountService));
-            StartService(hostAccountService, "AccountService");
-
-            System.ServiceModel.ServiceHost hostAuthenticationService = new System.ServiceModel.ServiceHost(typeof(AuthenticationService));
-            StartService(hostAuthenticationService, "AuthenticationService");
-
-            System.ServiceModel.ServiceHost hostProjectService = new System.ServiceModel.ServiceHost(typeof(ProjectService));
-            StartService(hostProjectService, "ProjectService");
-
             System.Console.WriteLine("Initialising CodeFirst Database");
 
             try
@@ -50,8 +39,6 @@ namespace CSC3045.Agile.ServiceHost.Console
                     System.Console.WriteLine("Database:\t\tCSC3045GeneratedDB");
                     System.Console.WriteLine("Connection String:\t" + context.Database.Connection.ConnectionString);
                     System.Console.WriteLine("");
-
-                    RunDatabaseTests();
                 }
 
             }
@@ -62,6 +49,20 @@ namespace CSC3045.Agile.ServiceHost.Console
                 System.Console.WriteLine("");
 
             }
+
+            System.Console.WriteLine("Starting up services...");
+            System.Console.WriteLine("");
+
+            System.ServiceModel.ServiceHost hostAccountService = new System.ServiceModel.ServiceHost(typeof(AccountService));
+            StartService(hostAccountService, "AccountService");
+
+            System.ServiceModel.ServiceHost hostAuthenticationService = new System.ServiceModel.ServiceHost(typeof(AuthenticationService));
+            StartService(hostAuthenticationService, "AuthenticationService");
+
+            System.ServiceModel.ServiceHost hostProjectService = new System.ServiceModel.ServiceHost(typeof(ProjectService));
+            StartService(hostProjectService, "ProjectService");
+
+            RunDatabaseTests();
 
             System.Console.WriteLine("Press [Enter] to exit.");
             System.Console.ReadLine();
@@ -98,9 +99,8 @@ namespace CSC3045.Agile.ServiceHost.Console
         {
             using (new Csc3045AgileContext())
             {
-
                 ICollection<UserStory> userStorySet = GetUserStories();
-                IEnumerable<Account> accountSet = GetAccounts(true);
+                IEnumerable<Account> accountSet = GetAccounts();
 
                 foreach (UserStory userStoryTest in userStorySet)
                 {
@@ -114,7 +114,6 @@ namespace CSC3045.Agile.ServiceHost.Console
                 var input = System.Console.ReadLine();
                 if (null != input && input.Contains("y"))
                 {
-
                     foreach (UserStory userStoryTest in userStorySet)
                     {
 
