@@ -13,7 +13,7 @@ namespace CSC3045.Agile.Client.Entities
         private string _Password;
         private string _FirstName;
         private string _LastName;
-        private ICollection<UserRole> _UserRoles;
+        private IList<UserRole> _UserRoles;
         private ICollection<Project> _AssocicatedProjects;
         private ICollection<Sprint> _AssociatedSprints;
         private ICollection<PlanningPokerSession> _AssociatedPlanningPokerSessions;
@@ -83,7 +83,7 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public ICollection<UserRole> UserRoles
+        public IList<UserRole> UserRoles
         {
             get { return _UserRoles; }
             set

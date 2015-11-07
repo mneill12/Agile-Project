@@ -46,7 +46,7 @@ namespace CSC3045.Agile.Data.Data_Repositories
             return results;
         }
 
-        public ICollection<UserRole> GetAllUserRoles()
+        public IList<UserRole> GetAllUserRoles()
         {
             using (Csc3045AgileContext entityContext = new Csc3045AgileContext())
             {

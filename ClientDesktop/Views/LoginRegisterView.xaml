@@ -54,11 +54,13 @@
                     <PasswordBox Grid.Row="5" Margin="10,30,10,0" Name="ConfirmPasswordRegBox" Height="20"  />
 
                     <TextBlock Grid.Row="6" Margin="10,10,10,0" Text="Register as a" FontSize="15" />
-                    <CheckBox Grid.Row="6" Margin="10,45,0,0" Content="Product Owner" />
-                    <CheckBox Grid.Row="6" Margin="130,45,0,0" Content="Scrummaster" />
-                    <CheckBox Grid.Row="6" Margin="240,45,0,0" Content="Developer" />
-
-                    <Button Grid.Row="7" Height="50" Width="350" Margin="0,20,0,0" Padding="10" Background="White" Foreground="Black" FontSize="15" Command="{Binding RegisterAccount}" CommandParameter="{Binding ElementName=ConfirmPasswordRegBox}">Register</Button>
+                    <CheckBox Grid.Row="6" Margin="10,45,0,0" Content="Developer" 
+                              IsChecked="{Binding RegisterIsDeveloper}" />
+                    <CheckBox Grid.Row="6" Margin="130,45,0,0" Content="Product Owner" 
+                              IsChecked="{Binding RegisterIsProductOwner}" />
+                    <CheckBox Grid.Row="6" Margin="240,45,0,0" Content="Scrum Master"
+                              IsChecked="{Binding RegisterIsScrumMaster}" />
+                    <Button Grid.Row="7" Height="50" Width="350" Margin="0,20,0,0" Padding="10" Background="White" Foreground="Black" FontSize="15" Command="{Binding RegisterAccount}" CommandParameter="{Binding ElementName=ConfirmPasswordRegBox}" Content="Register" />
                 </Grid>
 
                 <!--Login block-->
@@ -72,16 +74,14 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Row="0" Margin="10,10,10,0" Text="Username:" FontSize="15"/>
-                    <TextBox Grid.Row="0" Margin="10,20,10,0" Text="{Binding LoginEmail,Mode=TwoWay}" Name="UsernameLoginTxt" Height="20" />
+                    <TextBox Grid.Row="0" Margin="10,20,10,0" Text="{Binding LoginEmail}" Name="UsernameLoginTxt" Height="20" />
 
                     <TextBlock Grid.Row="1" Margin="10,10,10,0" Text="Password:" FontSize="15"/>
                     <PasswordBox x:Name="PasswordLoginBox" Grid.Row="1" Margin="10,20,10,0" Height="20" Password="4nt1t7!" />
 
-                    <Button Grid.Row="2" Height="50" Width="350" Margin="0,0,0,0" Padding="10" Background="White" Foreground="Black" FontSize="15" Command="{Binding AccountLogin, Mode=OneTime}" CommandParameter="{Binding ElementName=PasswordLoginBox}">Login</Button>
+                    <Button Grid.Row="2" Height="50" Width="350" Margin="0,0,0,0" Padding="10" Background="White" Foreground="Black" FontSize="15" Command="{Binding AccountLogin, Mode=OneTime}" CommandParameter="{Binding ElementName=PasswordLoginBox}" Content="Login" />
 
-
-                    <Border 
-                            Grid.Row="2"
+                    <Border Grid.Row="2"
                             Margin="0,65,0,0" 
                             Height="10" 
                             VerticalAlignment="Top" 
@@ -89,9 +89,9 @@
                             BorderThickness="10" />
 
                     <TextBlock Grid.Row="3" Margin="10,10,10,0" Text="Work Offline" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Center" />
-                    <Button Grid.Row="3" Height="20" Width="100" Margin="210,60,0,0" Padding="0" Background="White" Foreground="Black" FontSize="10">Choose XML file</Button>
+                    <Button Grid.Row="3" Height="20" Width="100" Margin="210,60,0,0" Padding="0" Background="White" Foreground="Black" FontSize="10" Content="Choose XML File" />
                     <TextBox Grid.Row="3" Margin="0,60,110,0" Name="XmlFileNameTxt" Height="20" Width="200" />
-                    <Button Grid.Row="4" Height="50" Width="350" Margin="0,30,0,0" Padding="10" Background="White" Foreground="Black" FontSize="15">Upload</Button>
+                    <Button Grid.Row="4" Height="50" Width="350" Margin="0,30,0,0" Padding="10" Background="White" Foreground="Black" FontSize="15" Content="Upload" />
                 </Grid>
             </Grid>
         </Grid>

@@ -12,8 +12,6 @@ namespace ClientDesktop
     {
         public static Account MyAccount;
 
-        public static CompositeCommand NavigateCommand = new CompositeCommand();
-
         public static CompositeCommand IsLoggedIn = new CompositeCommand();
 
     }

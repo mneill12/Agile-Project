@@ -6,6 +6,7 @@ using System.Text;
 using ClientDesktop.Views;
 using Core.Common.Core;
 using Core.Common.UI.Core;
+using CSC3045.Agile.Client.Entities;
 using Microsoft.Practices.ServiceLocation;
 using Prism.Regions;
 
@@ -21,6 +22,7 @@ namespace ClientDesktop.ViewModels
         private string _FirstName;
         private string _LastName;
         private bool _IsLoggedIn;
+        private IList<UserRole> _UserRoles;
 
         public string Email
         {
@@ -78,6 +80,20 @@ namespace ClientDesktop.ViewModels
             }
         }
 
+        public IList<UserRole> UserRoles
+        {
+            get
+            {
+                return _UserRoles;
+            }
+            set
+            {
+                if (_UserRoles == value) return;
+                _UserRoles = value;
+                OnPropertyChanged("UserRoles");
+            }
+        }
+
         #endregion
 
         #region Delegate Commands
@@ -104,6 +120,7 @@ namespace ClientDesktop.ViewModels
         private void UpdateLoginStatus(bool isLoggedIn)
         {
             IsLoggedIn = isLoggedIn;
+            UserRoles = GlobalCommands.MyAccount.UserRoles;
             Email = GlobalCommands.MyAccount.LoginEmail;
             FirstName = GlobalCommands.MyAccount.FirstName;
             LastName = GlobalCommands.MyAccount.LastName;

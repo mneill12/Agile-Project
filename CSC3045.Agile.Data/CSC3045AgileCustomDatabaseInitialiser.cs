@@ -14,16 +14,48 @@ namespace CSC3045.Agile.Data
     {
         protected override void Seed(Csc3045AgileContext context)
         {
-            var developerUserRoleSet = new HashSet<UserRole>();
-            developerUserRoleSet.Add(new UserRole() {UserRoleName = "Developer"});
+            IList<UserRole> defaultRoles = new List<UserRole>();
 
-            var developerUserRoleSetWithScrumMaster = new HashSet<UserRole>();
-            developerUserRoleSetWithScrumMaster.Add(new UserRole() {UserRoleName = "Developer"});
-            developerUserRoleSetWithScrumMaster.Add(new UserRole() {UserRoleName = "Scrum Master"});
+            defaultRoles.Add(new UserRole()
+            {
+                EntityId = 1,
+                UserRoleId = 1,
+                UserRoleName = "Developer"
+            });
 
-            var developerUserRoleSetWithProductOwner = new HashSet<UserRole>();
-            developerUserRoleSetWithProductOwner.Add(new UserRole() { UserRoleName = "Developer"});
-            developerUserRoleSetWithProductOwner.Add(new UserRole() { UserRoleName = "Product Owner"});
+            defaultRoles.Add(new UserRole()
+            {
+                EntityId = 2,
+                UserRoleId = 2,
+                UserRoleName = "Product Owner"
+            });
+
+            defaultRoles.Add(new UserRole()
+            {
+                EntityId = 3,
+                UserRoleId = 3,
+                UserRoleName = "Scrum Master"
+            });
+
+            context.UserRoleSet.AddRange(defaultRoles);
+
+
+            var developerUserRoleSet = new HashSet<UserRole>()
+            {
+                defaultRoles[0]
+            };
+
+            var developerUserRoleSetWithProductOwner = new HashSet<UserRole>()
+            {
+                defaultRoles[0],
+                defaultRoles[1]
+            };
+
+            var developerUserRoleSetWithScrumMaster = new HashSet<UserRole>()
+            {
+                defaultRoles[0],
+                defaultRoles[2]
+            };
 
             IList<Account> defaultAccounts = new List<Account>(); // Plaintext password: 4nt1t7!
 
@@ -114,31 +146,6 @@ namespace CSC3045.Agile.Data
             foreach (Project project in defaultProjects)
             {
                 context.ProjectSet.Add(project);
-            }
-
-            IList<UserRole> defaultRoles = new List<UserRole>();
-
-            defaultRoles.Add(new UserRole()
-            {
-                UserRoleId = 0,
-                UserRoleName = "Developer"
-            });
-
-            defaultRoles.Add(new UserRole()
-            {
-                UserRoleId = 1,
-                UserRoleName = "Product Owner"
-            });
-
-            defaultRoles.Add(new UserRole()
-            {
-                UserRoleId = 2,
-                UserRoleName = "Scrum Master"
-            });
-
-            foreach (UserRole usr in defaultRoles) 
-            { 
-                context.UserRoleSet.Add(usr);
             }
 
             context.ProjectSet.AddRange(defaultProjects);

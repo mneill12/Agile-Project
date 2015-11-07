@@ -32,8 +32,10 @@ namespace ClientDesktop.ViewModels
         private string _RegisterLastName;
         private string _RegisterEmail;
         private string _RegisterConfirmEmail;
+        private bool _RegisterIsDeveloper;
+        private bool _RegisterIsScrumMaster;
+        private bool _RegisterIsProductOwner;
         private string _Status;
-        private ICollection<UserRole> _UserRoles; 
 
         public string AuthenticatedUser{
             get
@@ -118,6 +120,47 @@ namespace ClientDesktop.ViewModels
             }
         }
 
+        public bool RegisterIsDeveloper
+        {
+            get
+            {
+                return _RegisterIsDeveloper;
+            }
+            set
+            {
+                if (_RegisterIsDeveloper == value) return;
+                _RegisterIsDeveloper = value;
+                OnPropertyChanged("RegisterIsDeveloper");
+            }
+        }
+
+        public bool RegisterIsScrumMaster
+        {
+            get
+            {
+                return _RegisterIsScrumMaster;
+            }
+            set
+            {
+                if (_RegisterIsScrumMaster == value) return;
+                _RegisterIsScrumMaster = value;
+                OnPropertyChanged("RegisterIsScrumMaster");
+            }
+        }
+        public bool RegisterIsProductOwner
+        {
+            get
+            {
+                return _RegisterIsProductOwner;
+            }
+            set
+            {
+                if (_RegisterIsProductOwner == value) return;
+                _RegisterIsProductOwner = value;
+                OnPropertyChanged("RegisterIsProductOwner");
+            }
+        }
+
         public string Status
         {
             get
@@ -129,20 +172,6 @@ namespace ClientDesktop.ViewModels
                 if (_Status == value) return;
                 _Status = value;
                 OnPropertyChanged("Status");
-            }
-        }
-
-        public ICollection<UserRole> UserRoles
-        {
-            get
-            {
-                return _UserRoles;
-            }
-            set
-            {
-                if (_UserRoles == value) return;
-                _UserRoles = value;
-                OnPropertyChanged("UserRoles");
             }
         }
 
@@ -296,24 +325,44 @@ namespace ClientDesktop.ViewModels
                 string hashedPassword = new HashHelper().CalculateHash(passwordBox.Password, _LoginEmail);
 
                 try
-                {
-                    Account _Account = new Account()
-                    {
-                        LoginEmail = _RegisterEmail,
-                        Password = hashedPassword,
-                        FirstName = _RegisterFirstName,
-                        LastName = _RegisterLastName
-                    };
-                        
+                {;
                     WithClient<IAccountService>(_ServiceFactory.CreateClient<IAccountService>(), accountClient =>
                     {
-                        GlobalCommands.MyAccount = accountClient.RegisterAccount(_Account);
+                        IList<UserRole> allUserRoles = (IList<UserRole>) accountClient.GetAllUserRoles();
+                        IList<UserRole> selectedUserRoles = new List<UserRole>();
+
+                        if (RegisterIsDeveloper)
+                        {
+                            selectedUserRoles.Add(allUserRoles[0]);
+                        }
+
+                        if (RegisterIsProductOwner)
+                        {
+                            selectedUserRoles.Add(allUserRoles[1]);
+                        }
+
+                        if (RegisterIsScrumMaster)
+                        {
+                            selectedUserRoles.Add(allUserRoles[2]);
+                        }
+
+                        Account account = new Account()
+                        {
+                            LoginEmail = _RegisterEmail,
+                            Password = hashedPassword,
+                            FirstName = _RegisterFirstName,
+                            LastName = _RegisterLastName,
+                            UserRoles = selectedUserRoles
+                        };
+
+                        GlobalCommands.MyAccount = accountClient.RegisterAccount(account);
 
                         if (GlobalCommands.MyAccount != null)
                         {
                             GlobalCommands.IsLoggedIn.Execute(true);
                             _RegionManager.RequestNavigate(RegionNames.Content, typeof(DashboardView).FullName);
                         }
+
                     });
                 }
                 catch (Exception ex)

@@ -184,13 +184,13 @@ namespace CSC3045.Agile.Business.Services
             });
         }
 
-        public ICollection<UserRole> GetAllUserRoles()
+        public IList<UserRole> GetAllUserRoles()
         {
             return ExecuteFaultHandledOperation(() =>
             {
                 IUserRoleRepository userRoleRepository = _DataRepositoryFactory.GetDataRepository<IUserRoleRepository>();
 
-                ICollection<UserRole> userRoles = userRoleRepository.GetAllUserRoles();
+                IList<UserRole> userRoles = userRoleRepository.GetAllUserRoles();
                 if (userRoles == null)
                 {
                     NotFoundException ex = new NotFoundException("Error - There are no user roles to get");

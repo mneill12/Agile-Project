@@ -44,7 +44,11 @@ namespace CSC3045.Agile.Client.Proxies
             Channel.UpdateAccountInfo(account);
         }
 
-        public ICollection<UserRole> GetAllUserRoles()
+        /// <summary>
+        /// List user roles set on db init
+        /// </summary>
+        /// <returns>[0] Developer, [1] Product Owner, [2] Scrum Master</returns>
+        public IList<UserRole> GetAllUserRoles()
         {
             return Channel.GetAllUserRoles();
         }
