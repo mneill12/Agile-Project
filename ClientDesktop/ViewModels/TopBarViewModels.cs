@@ -100,6 +100,7 @@ namespace ClientDesktop.ViewModels
 
         public DelegateCommand<bool> UpdateLoginStatusCommand { get; set; }
         public DelegateCommand<object> LogoutCommand { get; set; }
+        public DelegateCommand<object> EditAccountCommand { get; set; }
 
         #endregion
 
@@ -112,6 +113,7 @@ namespace ClientDesktop.ViewModels
 
             UpdateLoginStatusCommand = new DelegateCommand<bool>(UpdateLoginStatus);
             LogoutCommand = new DelegateCommand<object>(Logout, CanLogout);
+            EditAccountCommand = new DelegateCommand<object>(EditAccount);
 
             // Links the Update Login Status Command to be accessed globally
             GlobalCommands.IsLoggedIn.RegisterCommand(UpdateLoginStatusCommand);
@@ -146,6 +148,11 @@ namespace ClientDesktop.ViewModels
         private bool CanLogout(object parameter)
         {
             return (GlobalCommands.MyAccount != null);
+        }
+
+        private void EditAccount(object parameter)
+        {
+            _RegionManager.RequestNavigate(RegionNames.Content, typeof(EditAccountView).FullName);
         }
     }
 }

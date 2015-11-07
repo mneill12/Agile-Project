@@ -22,8 +22,8 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="600"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="80"/>
-            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="90"/>
+            <ColumnDefinition Width="90"/>
         </Grid.ColumnDefinitions>
         <TextBlock Text="You are currently OFFLINE, please login" Margin="10" VerticalAlignment="Center" Grid.RowSpan="2" Grid.Column="0" Visibility="{Binding Path=IsLoggedIn, Converter={StaticResource convBoolToInverseToVisibility}}"/>
         <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" Visibility="{Binding Path=IsLoggedIn, Converter={StaticResource BoolToVis}}">
@@ -36,7 +36,7 @@
             </TextBlock.Text>
         </TextBlock>
         <TextBlock Text="{Binding Path=UserRoles,Converter={StaticResource UserRoleToString},StringFormat=Available as: {0}}" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="1" Visibility="{Binding Path=IsLoggedIn, Converter={StaticResource BoolToVis}}" />
-        <Button x:Name="MyAccountButton" Content="My Account" Width="75" Grid.Column="2" Grid.RowSpan="3" HorizontalAlignment="Right" Visibility="{Binding Path=IsLoggedIn, Converter={StaticResource BoolToVis}}" Command="{Binding EditCommand}"/>
-        <Button x:Name="LogoutButton" Content="Logout" Width="75" Grid.Column="3" Grid.RowSpan="3" HorizontalAlignment="Right" Visibility="{Binding Path=IsLoggedIn, Converter={StaticResource BoolToVis}}" Command="{Binding LogoutCommand}"/>
+        <Button x:Name="MyAccountButton" Content="My Account" Width="85" Grid.Column="2" Grid.RowSpan="3" HorizontalAlignment="Right" Visibility="{Binding Path=IsLoggedIn, Converter={StaticResource BoolToVis}}" Command="{Binding EditAccountCommand}"/>
+        <Button x:Name="LogoutButton" Content="Logout" Width="85" Grid.Column="3" Grid.RowSpan="3" HorizontalAlignment="Right" Visibility="{Binding Path=IsLoggedIn, Converter={StaticResource BoolToVis}}" Command="{Binding LogoutCommand}"/>
     </Grid>
 </core:UserControlViewBase>
