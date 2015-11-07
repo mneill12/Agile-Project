@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:core="CSC3045AgileCore"
              xmlns:util="clr-namespace:Core.Common.UI.Util;assembly=Core.Common.UI"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" Background="LightSteelBlue" Height="40" Width="1280">
     <core:UserControlViewBase.Resources>
         <util:ConverterChain x:Key="convBoolToInverseToVisibility">

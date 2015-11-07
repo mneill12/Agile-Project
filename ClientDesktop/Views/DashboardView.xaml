@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClientDesktop.Views"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:core="CSC3045AgileCore"
              mc:Ignorable="d" 
              d:DesignHeight="960" d:DesignWidth="1280"

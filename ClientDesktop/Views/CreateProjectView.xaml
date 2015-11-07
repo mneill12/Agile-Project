@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ClientDesktop.Views"
-             xmlns:core="CSC3045AgileCore">
+             xmlns:core="CSC3045AgileCore"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls">
     <Grid Height="960" Width="1280" Background="LightSlateGray" Margin="0,0,0,0">
         
         <Grid.RowDefinitions>
@@ -36,9 +37,13 @@
             
                 <TextBlock Grid.Row="0" Text="Project Name: " FontSize="16" />
                 <TextBox Grid.Row="1" Name="ProjectNameTextBox" FontSize="14" Margin="0,5,0,0" Text="{Binding ProjectName}"/>
-                <TextBlock Grid.Row="2" Text="Project Deadline: (dd/mm/yyyy)" FontSize="16" />
-                <TextBox Grid.Row="3" Name="ProjectDeadlineTextBox" FontSize="14" Margin="0,5,0,0" Text="{Binding ProjectDeadline}"/>
+                <TextBlock Grid.Row="2" Text="Project Start: (dd/mm/yyyy)" FontSize="16" />
+                <!--<TextBox Grid.Row="3" Name="ProjectDeadlineTextBox" FontSize="14" Margin="0,5,0,0" Text="{Binding ProjectDeadline}"/> -->
 
+                <DatePicker Grid.Row="3"
+                            SelectedDate="{Binding ProjectDeadline, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                            controls:TextBoxHelper.Watermark="Select a date" />
+                
                 <Button Grid.Row="4" Name="CreateProjectButton" FontSize="10" Margin="0,5,0,0" Command="{Binding CreateProject}" CommandParameter="{Binding ElementName=ProjectNameTextBox}">
                     Create Project
                 </Button>
