@@ -25,41 +25,42 @@
                     </StackPanel>
                 </Border>
 
-            </StackPanel>
-            <Border BorderBrush="Black" DockPanel.Dock="Right"  BorderThickness="0">
-                <StackPanel MinWidth="150">
-                    <TextBox BorderBrush="Transparent" Background="Transparent" Foreground="White">Project Owner: Darryl Stewart</TextBox>
-                    <TextBox BorderBrush="Transparent" Background="Transparent" Foreground="White">Project Manager: Sarah Bell</TextBox>
-                    <TextBox BorderBrush="Transparent" Background="Transparent" Foreground="White">Scrum Master: Lan Walson</TextBox>
-
-                    <TextBox BorderBrush="Transparent" Background="Transparent" Foreground="White"></TextBox>
-
-                    <TextBox BorderBrush="Transparent" Background="Transparent" Foreground="White">Phil Connor</TextBox>
-                    <TextBox BorderBrush="Transparent" Background="Transparent" Foreground="White">Klye Molloy</TextBox>
-                    <TextBox BorderBrush="Transparent" Background="Transparent" Foreground="White">Luke Summer</TextBox>
-                    <TextBox BorderBrush="Transparent" Background="Transparent" Foreground="White">Anna Boyd</TextBox>
-                    <TextBox BorderBrush="Transparent" Background="Transparent" Foreground="White" >Donna Sellar</TextBox>
-                    <TextBox BorderBrush="Transparent" Background="Transparent" Foreground="White">David Evergreen</TextBox>
-                    <TextBox BorderBrush="Transparent" Background="Transparent" Foreground="White">Katy Wellan</TextBox>
-                </StackPanel>
-            </Border>
-
-
-            <StackPanel >
+            </StackPanel>     
+            <StackPanel Margin="0,0,0,-0.143" Width="1102" >
                 <TextBlock Margin="20,10,20,0" FontSize="20" FontWeight="DemiBold" Width="971" Background="Transparent" Foreground="White">PROJECT X</TextBlock>
-
-
+                <TextBlock FontWeight="Bold" Margin="20,15,20,0" Background="Transparent" Foreground="White" Width="975">Project Backlog</TextBlock>
                 <StackPanel>
-                    <TextBlock FontWeight="Bold" Margin="20,15,20,0" Background="Transparent" Foreground="White" Width="975">Project Backlog</TextBlock>
-                    <TextBlock Margin="20,10,20,0" Background="Transparent" Foreground="White" Text="CSC-001 - As a user of the scrum client program I can register so that I can connect to the scrum management server"/>
-                    <TextBlock Margin="20,10,20,0" Background="Transparent" Foreground="White" Text="CSC-002 - As a registering user I can select the scrum role(s) that I will potentially take (Product Owner, Scrum Master, Developer) so that I will be able to carry out those roles in projects"/>
-                    <TextBlock Margin="20,10,20,0" Background="Transparent" Foreground="White" Text="CSC-003 - As a registered user I can log in with my username and  password so that I can begin using the system"/>
-                    <TextBlock Margin="20,10,20,0" Background="Transparent" Foreground="White" Text="CSC-004 - As a logged in user I can create a new project so that I can be the Project Manager"/>
-                    <TextBlock Margin="20,10,20,0" Background="Transparent" Foreground="White" Text="CSC-005 - As a Project Manager I can search for a specific registered Product Owner and assign them as a Product Owner for my project so they can begin to add stories to the ..."/>
-                    <TextBlock Margin="20,10,20,0" Background="Transparent" Foreground="White" Text="CSC-006 - As a Project Manager I can search for specific registered Scrum Masters and add them to the Project so that they can begin to organize Sprints"/>
-                    <TextBlock Margin="20,10,20,0" Background="Transparent" Foreground="White" Text="CSC-007 - As a logged in user I can see a list of the projects to which I have been assigned and open one so that I can work on the project according to my role(s) on the project" />
-                    <TextBlock Margin="20,10,20,0" Background="Transparent" Foreground="White" Text="CSC-008 - As a Product Owner I can manage the Product Backlog for the project"/>
-                </StackPanel>
+                    <Border Margin="2" Padding="0 5 0 15" BorderThickness="0" BorderBrush="Black" CornerRadius="0">
+                        <Border.Background>
+                            <SolidColorBrush Color="Black" Opacity="0.4" />
+                        </Border.Background>
+                        <TextBlock Margin="20,10,20,0" Background="Transparent" Foreground="White" Text="CSC-001 - As a user of the scrum client program I can register so that I can connect to the scrum management server"/>
+                    </Border>
+                    <Border Margin="2" Padding="0 5 0 15" BorderThickness="0" BorderBrush="Black" CornerRadius="0">
+                        <Border.Background>
+                            <SolidColorBrush Color="Black" Opacity="0.4" />
+                        </Border.Background>
+                        <TextBlock Margin="20,10,20,0" Background="Transparent" Foreground="White" Text="CSC-002 - As a registering user I can select the scrum role(s) that I will potentially take (Product Owner, Scrum Master, Developer) so that I will be able to carry out those roles in projects"/>
+                    </Border>
+                    <Border Margin="2" Padding="0 5 0 15" BorderThickness="0" BorderBrush="Black" CornerRadius="0">
+                        <Border.Background>
+                            <SolidColorBrush Color="Black" Opacity="0.4" />
+                        </Border.Background>
+                        <TextBlock Margin="20,10,20,0" Background="Transparent" Foreground="White" Text="CSC-003 - As a registered user I can log in with my username and  password so that I can begin using the system"/>
+                    </Border>
+                    <Border Margin="2" Padding="0 5 0 15" BorderThickness="0" BorderBrush="Black" CornerRadius="10">
+                        <Border.Background>
+                            <SolidColorBrush Color="Black" Opacity="0.4" />
+                        </Border.Background>
+                        <TextBlock Margin="20,10,20,0" Background="Transparent" Foreground="White" Text="CSC-004 - As a logged in user I can create a new project so that I can be the Project Manager"/>
+                    </Border>
+                    <Border Margin="2" Padding="0 5 0 15" BorderThickness="0" BorderBrush="Black" CornerRadius="10">
+                        <Border.Background>
+                            <SolidColorBrush Color="Black" Opacity="0.4" />
+                        </Border.Background>
+                        <TextBlock Margin="20,10,20,0" Background="Transparent" Foreground="White" Text="CSC-005 - As a Project Manager I can search for a specific registered Product Owner and assign them as a Product Owner for my project so they can begin to add stories to the ..."/>
+                    </Border>
+                      </StackPanel>
             </StackPanel>
             <TextBlock HorizontalAlignment="Left" Width="30" Height="25" Margin="20 30" FontFamily="pack://application:,,,/Resources/#FontAwesome" Text="&#xF113;" Foreground="White" FontSize="25" TextAlignment="Left" RenderTransformOrigin="3.852,-3.137" />
 

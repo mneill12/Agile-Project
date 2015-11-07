@@ -220,5 +220,22 @@ namespace CSC3045.Agile.Business.Services
                 return accounts;
             });
         }
+
+        public ICollection<StoryTask> GetOwnedTasks(Account account)
+        {
+            return ExecuteFaultHandledOperation(() =>
+            {
+                IStoryTaskRepository userRoleRepository = _DataRepositoryFactory.GetDataRepository<IStoryTaskRepository>();
+
+                IEnumerable<StoryTask> userRoles = userRoleRepository.GetTasksByOwner(account);
+                if (userRoles == null)
+                {
+                    NotFoundException ex = new NotFoundException("Error - There are no tasks to get");
+                    throw new FaultException<NotFoundException>(ex, ex.Message);
+                }
+
+                return userRoles.ToList();
+            });
+        }
     }
 }

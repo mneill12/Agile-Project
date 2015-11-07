@@ -1,9 +1,14 @@
-﻿using System.ComponentModel.Composition;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
 using Core.Common.Contracts;
 using Core.Common.Core;
 using Core.Common.UI.Core;
+using CSC3045.Agile.Client.Contracts;
+using CSC3045.Agile.Client.Entities;
 using Prism.Regions;
 
 namespace ClientDesktop.ViewModels
@@ -12,6 +17,12 @@ namespace ClientDesktop.ViewModels
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class DashboardViewModel : ViewModelBase
     {
+        #region LoginRegisterView Bindings
+
+        private ICollection<StoryTask> _OwnedTasks;
+
+        #endregion
+
         IServiceFactory _ServiceFactory;
 
         [ImportingConstructor]
@@ -28,7 +39,15 @@ namespace ClientDesktop.ViewModels
 
         protected override void OnViewLoaded()
         {
-            
+            WithClient<IAccountService>(_ServiceFactory.CreateClient<IAccountService>(),
+                   accountClient => { _OwnedTasks = accountClient.GetOwnedTasks(GlobalCommands.MyAccount); });
+
+            if (_OwnedTasks == null || _OwnedTasks.Count == 0)
+            {
+                _OwnedTasks.Add(new StoryTask() {Title = "You have no assigned tasks!"});
+            }
+
+
         }
     }
 }

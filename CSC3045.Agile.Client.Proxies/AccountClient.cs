@@ -49,6 +49,11 @@ namespace CSC3045.Agile.Client.Proxies
             return Channel.GetAllUserRoles();
         }
 
+        public ICollection<StoryTask> GetOwnedTasks(Account account)
+        {
+            return Channel.GetOwnedTasks(account);
+        } 
+
 
         public IEnumerable<Account> GetByUserRole(int permissionLevel)
         {
