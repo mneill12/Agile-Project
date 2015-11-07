@@ -27,6 +27,18 @@ namespace CSC3045.Agile.ServiceHost.Console
             // Init MEF to use DI with engines/repositories
             ObjectBase.Container = MEFLoader.Init();
 
+            System.Console.WriteLine("Starting up services...");
+            System.Console.WriteLine("");
+
+            System.ServiceModel.ServiceHost hostAccountService = new System.ServiceModel.ServiceHost(typeof(AccountService));
+            StartService(hostAccountService, "AccountService");
+
+            System.ServiceModel.ServiceHost hostAuthenticationService = new System.ServiceModel.ServiceHost(typeof(AuthenticationService));
+            StartService(hostAuthenticationService, "AuthenticationService");
+
+            System.ServiceModel.ServiceHost hostProjectService = new System.ServiceModel.ServiceHost(typeof(ProjectService));
+            StartService(hostProjectService, "ProjectService");
+
             System.Console.WriteLine("Initialising CodeFirst Database");
 
             try
@@ -40,7 +52,6 @@ namespace CSC3045.Agile.ServiceHost.Console
                     System.Console.WriteLine("Connection String:\t" + context.Database.Connection.ConnectionString);
                     System.Console.WriteLine("");
                 }
-
             }
             catch (Exception e)
             {
@@ -49,18 +60,6 @@ namespace CSC3045.Agile.ServiceHost.Console
                 System.Console.WriteLine("");
 
             }
-
-            System.Console.WriteLine("Starting up services...");
-            System.Console.WriteLine("");
-
-            System.ServiceModel.ServiceHost hostAccountService = new System.ServiceModel.ServiceHost(typeof(AccountService));
-            StartService(hostAccountService, "AccountService");
-
-            System.ServiceModel.ServiceHost hostAuthenticationService = new System.ServiceModel.ServiceHost(typeof(AuthenticationService));
-            StartService(hostAuthenticationService, "AuthenticationService");
-
-            System.ServiceModel.ServiceHost hostProjectService = new System.ServiceModel.ServiceHost(typeof(ProjectService));
-            StartService(hostProjectService, "ProjectService");
 
             RunDatabaseTests();
 
@@ -100,7 +99,7 @@ namespace CSC3045.Agile.ServiceHost.Console
             using (new Csc3045AgileContext())
             {
                 ICollection<UserStory> userStorySet = GetUserStories();
-                IEnumerable<Account> accountSet = GetAccounts();
+                IEnumerable<Account> accountSet = GetAccounts(true);
 
                 foreach (UserStory userStoryTest in userStorySet)
                 {
@@ -175,15 +174,10 @@ namespace CSC3045.Agile.ServiceHost.Console
                         System.Console.WriteLine("Full Name: \t\t\t" + account.FirstName + " " + account.LastName);
                         System.Console.WriteLine("Login Email:\t\t\t" + account.LoginEmail);
                         System.Console.WriteLine("Password:\t\t\t" + account.Password);
-                        System.Console.WriteLine();
-                        System.Console.WriteLine("\tUser Roles:");
-                        System.Console.WriteLine();
+                        System.Console.Write("User Roles:\t\t\t");
                         foreach (UserRole role in account.UserRoles)
                         {
-
-                            System.Console.WriteLine("\tRole:\t\t\t\t" + role.UserRoleName);
-                            System.Console.WriteLine("\tPermission Level:\t\t" + role.PermissionLevel);
-                            System.Console.WriteLine();
+                            System.Console.Write(role.UserRoleName + " ");
                         }
 
                         System.Console.WriteLine();

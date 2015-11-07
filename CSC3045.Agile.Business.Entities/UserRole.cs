@@ -16,9 +16,6 @@ namespace CSC3045.Agile.Business.Entities
         [DataMember]
         public string UserRoleName { get; set; }
 
-        [DataMember]
-        public int PermissionLevel { get; set; }
-
         public ICollection<Account> Accounts { get; set; }
 
         #region IIdentifiableEntity members

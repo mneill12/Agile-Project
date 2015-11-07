@@ -50,9 +50,9 @@ namespace CSC3045.Agile.Client.Proxies
         }
 
 
-        public IEnumerable<Account> GetByUserRole(int permissionLevel)
+        public IEnumerable<Account> GetByUserRole(int roleId)
         {
-            return Channel.GetByUserRole(permissionLevel);
+            return Channel.GetByUserRole(roleId);
         }
     }
 }

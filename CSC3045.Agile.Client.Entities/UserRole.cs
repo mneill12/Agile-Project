@@ -12,7 +12,6 @@ namespace CSC3045.Agile.Client.Entities
     {
         private int _UserRoleId;
         private string _UserRoleName;
-        private int _PermissionLevel;
         private ICollection<Account> _Accounts;
 
         public int UserRoleId
@@ -43,22 +42,6 @@ namespace CSC3045.Agile.Client.Entities
                 {
                     _UserRoleName = value;
                     OnPropertyChanged(() => UserRoleName);
-                }
-            }
-        }
-
-        public int PermissionLevel
-        {
-            get
-            {
-                return _PermissionLevel;
-            }
-            set
-            {
-                if (_PermissionLevel != value)
-                {
-                    _PermissionLevel = value;
-                    OnPropertyChanged(() => PermissionLevel);
                 }
             }
         }

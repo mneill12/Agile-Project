@@ -121,16 +121,15 @@ namespace ClientDesktop.ViewModels
         {
             WithClient<IAccountService>(_ServiceFactory.CreateClient<IAccountService>(), accountClient =>
             {
-                ICollection<Account> accounts = accountClient.GetAllAccountsWithUserRoles();
-                UserRole productOwnerRole = new UserRole() { UserRoleId = 5, UserRoleName = "Product Owner", PermissionLevel = 3 };
-                UserRole scrumMasterRole = new UserRole() { UserRoleId = 3, UserRoleName = "Scrum Master", PermissionLevel = 1 };
+                UserRole productOwnerRole = new UserRole() { UserRoleName = "Product Owner" };
+                UserRole scrumMasterRole = new UserRole() { UserRoleName = "Scrum Master" };
 
-                IEnumerable<Account> projOwners = accountClient.GetByUserRole(3);
-                IEnumerable<Account> scrumMasters = accountClient.GetByUserRole(1);
+                IEnumerable<Account> productOwners = accountClient.GetByUserRole(1);
+                IEnumerable<Account> scrumMasters = accountClient.GetByUserRole(2);
 
-                if (projOwners != null)
+                if (productOwners != null)
                 {
-                    foreach (Account a in projOwners)
+                    foreach (Account a in productOwners)
                     {
                         _ProductOwners.Add(new ProductOwnerScrumMasterInfo(a.FirstName, a.LastName, a.LoginEmail));
                     }
