@@ -39,15 +39,7 @@ namespace ClientDesktop.ViewModels
 
         protected override void OnViewLoaded()
         {
-            WithClient<IAccountService>(_ServiceFactory.CreateClient<IAccountService>(),
-                   accountClient => { _OwnedTasks = accountClient.GetOwnedTasks(GlobalCommands.MyAccount); });
-
-            if (_OwnedTasks == null || _OwnedTasks.Count == 0)
-            {
-                _OwnedTasks.Add(new StoryTask() {Title = "You have no assigned tasks!"});
-            }
-
-
+           
         }
     }
 }

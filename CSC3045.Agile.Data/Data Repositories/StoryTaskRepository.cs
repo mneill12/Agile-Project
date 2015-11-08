@@ -16,7 +16,7 @@ namespace CSC3045.Agile.Data.Data_Repositories
     // StoryTask LINQ Entity Queries
     [Export(typeof(IStoryTaskRepository))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class StoryTaskRepository : DataRepositoryBase<StoryTask>
+    public class StoryTaskRepository : DataRepositoryBase<StoryTask>, IStoryTaskRepository
     {
         protected override StoryTask AddEntity(Csc3045AgileContext entityContext, StoryTask entity)
         {
@@ -45,8 +45,9 @@ namespace CSC3045.Agile.Data.Data_Repositories
         }
 
         // Get StoryTasks by Owner
-        protected IEnumerable<StoryTask> GetTasksByOwner(Csc3045AgileContext entityContext, Account owner)
+        public IEnumerable<StoryTask> GetTasksByOwner(Account owner)
         {
+            using (var entityContext = new Csc3045AgileContext())
             return entityContext.StoryTaskSet
                .Include(a => a.Owner)
                .Where(a => a.Owner.AccountId == owner.AccountId)
@@ -54,8 +55,9 @@ namespace CSC3045.Agile.Data.Data_Repositories
         } 
 
         // Get blocked tasks
-        protected IEnumerable<StoryTask> GetBlockedTasks(Csc3045AgileContext entityContext)
+        public IEnumerable<StoryTask> GetBlockedTasks()
         {
+            using (var entityContext = new Csc3045AgileContext())
             return entityContext.StoryTaskSet
                .Include(a => a.Owner)
                .Where(a => a.IsBlocked)
@@ -63,12 +65,14 @@ namespace CSC3045.Agile.Data.Data_Repositories
         } 
 
         // Get tasks by status
-        protected IEnumerable<StoryTask> GetTasksByStatus(Csc3045AgileContext entityContext, CurrentStatus status)
+        public IEnumerable<StoryTask> GetTasksByStatus(CurrentStatus status)
         {
+            using (var entityContext = new Csc3045AgileContext())
             return entityContext.StoryTaskSet
                .Include(a => a.Owner)
                .Where(a => a.CurrentStatus.StoryStatusName.Equals(status.StoryStatusName))
                .ToList();
+
         } 
     }
 }

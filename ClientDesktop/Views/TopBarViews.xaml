@@ -6,6 +6,7 @@
              xmlns:core="CSC3045AgileCore"
              xmlns:util="clr-namespace:Core.Common.UI.Util;assembly=Core.Common.UI"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" Height="100" Width="1280">
     <core:UserControlViewBase.Resources>
         <util:ConverterChain x:Key="convBoolToInverseToVisibility">
@@ -40,5 +41,12 @@
         <TextBlock Visibility="{Binding IsLoggedIn, Converter={StaticResource BoolToVis}}" Foreground="White" Margin="529,26.857,268,-20.714" VerticalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="2"><Run Language="en-gb" Text="TSK-012, TSK-023, TSK-094"/></TextBlock>
         <TextBlock Text="&#xf085;" Visibility="{Binding IsLoggedIn, Converter={StaticResource BoolToVis}}" FontFamily="pack://application:,,,/Resources/#FontAwesome" Foreground="White" TextAlignment="Left" FontSize="20" Height="24" Margin="446,21.857,47,-24.714" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1"/>
         <TextBlock Text="&#xf052;" Visibility="{Binding IsLoggedIn, Converter={StaticResource BoolToVis}}" FontFamily="pack://application:,,,/Resources/#FontAwesome" Foreground="White" TextAlignment="Left" FontSize="20" Height="24" Margin="75,20.857,58,-23.714" VerticalAlignment="Top" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2"/>
+        <ItemsControl x:Name="OwnedTasks" Foreground="White">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Title}" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </Grid>
 </core:UserControlViewBase>

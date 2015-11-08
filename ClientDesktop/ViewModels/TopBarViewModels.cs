@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
+using Core.Common.Contracts;
 using Core.Common.UI.Core;
+using CSC3045.Agile.Client.Contracts;
+using CSC3045.Agile.Client.Entities;
 
 namespace ClientDesktop.ViewModels
 {
@@ -17,6 +21,7 @@ namespace ClientDesktop.ViewModels
         private string _FirstName;
         private string _LastName;
         private bool _IsLoggedIn;
+        private ObservableCollection<StoryTask> _OwnedTasks; 
 
         public string Email
         {
@@ -74,7 +79,23 @@ namespace ClientDesktop.ViewModels
             }
         }
 
+        public ObservableCollection<StoryTask> OwnedTasks
+        {
+            get
+            {
+                return _OwnedTasks;
+            }
+            set
+            {
+                if (_OwnedTasks == value) return;
+                _OwnedTasks = value;
+                OnPropertyChanged("OwnedTasks");
+            }
+        }
+
         #endregion
+
+        IServiceFactory _ServiceFactory;
 
         #region Delegate Commands
 
@@ -95,6 +116,18 @@ namespace ClientDesktop.ViewModels
             Email = GlobalCommands.MyAccount.LoginEmail;
             FirstName = GlobalCommands.MyAccount.FirstName;
             LastName = GlobalCommands.MyAccount.LastName;
+            if (null != GlobalCommands.MyOwnedTasks)
+            {
+                AddRange(OwnedTasks, GlobalCommands.MyOwnedTasks);
+            }
+        }
+
+        public static void AddRange<T>(ObservableCollection<T> collection, IEnumerable<T> items)
+        {
+            foreach (var item in items)
+            {
+                collection.Add(item);
+            }
         }
     }
 }

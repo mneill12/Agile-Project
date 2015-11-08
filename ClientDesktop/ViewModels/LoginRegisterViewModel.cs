@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Windows;
 using System.ComponentModel;
+using System.Linq;
 using System.Threading;
 using System.Windows.Controls;
 using System.Security;
@@ -32,7 +33,7 @@ namespace ClientDesktop.ViewModels
         private string _RegisterEmail;
         private string _RegisterConfirmEmail;
         private string _Status;
-        private ICollection<UserRole> _UserRoles; 
+        private ICollection<UserRole> _UserRoles;
 
         public string AuthenticatedUser{
             get
@@ -152,12 +153,14 @@ namespace ClientDesktop.ViewModels
         private readonly DelegateCommand<PasswordBox> _RegisterAccount;
         private readonly DelegateCommand<PasswordBox> _AccountLogin;
         private readonly DelegateCommand<object> _LogoutCommand;
+        private readonly DelegateCommand<TextBox> _XMLFilePath; 
 
         public DelegateCommand<PasswordBox> RegisterAccount { get { return _RegisterAccount; } }
         public DelegateCommand<PasswordBox> AccountLogin { get { return _AccountLogin; } }
         public DelegateCommand<object> LogoutCommand { get { return _LogoutCommand; } }
+        public DelegateCommand<TextBox> XMLFilePath { get { return _XMLFilePath; } }
 
-        #endregion
+            #endregion
 
         [Import]
         public DashboardViewModel DashboardViewModel { get; private set; }
@@ -175,6 +178,7 @@ namespace ClientDesktop.ViewModels
             _RegisterAccount = new DelegateCommand<PasswordBox>(OnRegisterAccount);
             _AccountLogin = new DelegateCommand<PasswordBox>(OnAccountLogin);
             _LogoutCommand = new DelegateCommand<object>(Logout, CanLogout);
+            _XMLFilePath = new DelegateCommand<TextBox>(XMLButtonClick);
 
             GetUserRoles();
         }
@@ -258,6 +262,11 @@ namespace ClientDesktop.ViewModels
                             throw new UnauthorizedAccessException();
                         }
                     });
+
+                    WithClient<IAccountService>(_ServiceFactory.CreateClient<IAccountService>(), accountClient =>
+                    {
+                        GlobalCommands.MyOwnedTasks = accountClient.GetOwnedTasks(GlobalCommands.MyAccount).ToList();
+                    });
                 }
                 catch (FaultException ex)
                 {
@@ -285,6 +294,29 @@ namespace ClientDesktop.ViewModels
         private bool CanLogin(object parameter)
         {
             return !IsAuthenticated;
+        }
+
+
+        protected void XMLButtonClick(TextBox sender)
+        {
+            // Create OpenFileDialog 
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+
+            // Set filter for file extension and default file extension 
+            dlg.DefaultExt = ".png";
+            dlg.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif";
+
+
+            // Display OpenFileDialog by calling ShowDialog method 
+            Nullable<bool> result = dlg.ShowDialog();
+
+
+            // Get the selected file name and display in a TextBox 
+            if (result == true)
+            {
+                // Open document 
+                string filename = dlg.FileName;
+            }
         }
 
         private void Logout(object parameter)
