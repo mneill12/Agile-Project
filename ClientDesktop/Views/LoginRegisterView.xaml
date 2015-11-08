@@ -9,15 +9,9 @@
     <Grid>
         <Grid Margin="0,0,0.286,0" Grid.ColumnSpan="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-
-            <!--Title row-->
-            <!-- <TextBlock Text="&#xf085;" FontFamily="pack://application:,,,/Resources/#FontAwesome" Foreground="White" Margin="53,20,728.714,0" TextAlignment="Left" FontSize="40"></TextBlock> -->
-            <!--<TextBlock FontFamily="pack://application:,,,/Resources/#AquaWax" Grid.Row="0" Margin="-1,28,672.857,8.571" Padding="50 0 0 0" Text="JELLO" TextAlignment="Left" Foreground="White" FontSize="40"></TextBlock>
-            <TextBlock FontFamily="pack://application:,,,/Resources/#AquaWax" Grid.Row="0" Margin="0,70,671.857,457" Padding="50 0 0 0" Text="AGILE MANAGEMENT" TextAlignment="Left" Foreground="White" FontSize="10" Grid.RowSpan="2"></TextBlock>-->
-
             <!--Login and register area blocks-->
             <Grid Grid.Row="1" Margin="10,30,10,0">
                 <Grid.ColumnDefinitions>
@@ -26,16 +20,16 @@
                 </Grid.ColumnDefinitions>
 
                 <!--Register block-->
-                <Grid Grid.Column="0" Margin="30,0,30,0">
+                <Grid Grid.Column="0" Margin="30,0,30,0" HorizontalAlignment="Left">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="1*"></RowDefinition>
-                        <RowDefinition Height="1*"></RowDefinition>
-                        <RowDefinition Height="1*"></RowDefinition>
-                        <RowDefinition Height="1*"></RowDefinition>
-                        <RowDefinition Height="1*"></RowDefinition>
-                        <RowDefinition Height="1*"></RowDefinition>
-                        <RowDefinition Height="1*"></RowDefinition>
-                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition />
                     </Grid.RowDefinitions>
 
                     <TextBox controls:TextBoxHelper.ClearTextButton="True" controls:TextBoxHelper.Watermark="First Name"  Grid.Row="0" Margin="10,30,10,0" Name="FirstNameRegTxt" Height="20" Text="{Binding RegisterFirstName}"/>
@@ -45,7 +39,7 @@
                     <PasswordBox controls:TextBoxHelper.ClearTextButton="True" controls:TextBoxHelper.Watermark="Password" Grid.Row="4" Margin="10,30,10,0" Name="PasswordRegBox" Height="20" />
                     <PasswordBox controls:TextBoxHelper.ClearTextButton="True" controls:TextBoxHelper.Watermark="Confirm Password" Grid.Row="5" Margin="10,30,10,0" Name="ConfirmPasswordRegBox" Height="20"  />
 
-                    <TextBlock Grid.Row="6" Margin="10,10,10,0" FontSize="15" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White" ><Run Language="en-gb" Text="Available Roles:"/></TextBlock>
+                    <TextBlock Grid.Row="6" Margin="10,20.429,10.286,51.714" FontSize="15" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White" Grid.RowSpan="2" ><Run Language="en-gb" Text="Available Roles:"/></TextBlock>
                     <CheckBox Grid.Row="6" Margin="10,45,0,0" Content="Product Owner" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White"></CheckBox>
                     <CheckBox Grid.Row="6" Margin="130,45,0,0" Content="Scrummaster" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White"></CheckBox>
                     <CheckBox Grid.Row="6" Margin="240,45,0,0" Content="Developer" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White"></CheckBox>
@@ -54,9 +48,9 @@
                 </Grid>
 
                 <!--Login block-->
-                <Grid Grid.Column="1" Margin="20.714,6,29.571,0.429">
+                <Grid Grid.Column="1" Margin="20.714,6,29.571,0.429" HorizontalAlignment="Left">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="200"></RowDefinition>
                         <RowDefinition Height="1*"></RowDefinition>
                         <RowDefinition Height="1*"></RowDefinition>
                         <RowDefinition Height="1*"></RowDefinition>
@@ -64,12 +58,10 @@
 
                     </Grid.RowDefinitions>
 
-                    <TextBox controls:TextBoxHelper.ClearTextButton="True" controls:TextBoxHelper.Watermark="Username" Grid.Row="0" Margin="10,24,10.001,66" Text ="{Binding LoginEmail}" Name="UsernameLoginTxt" Height="20" ></TextBox>
-                    <PasswordBox controls:TextBoxHelper.ClearTextButton="True" controls:TextBoxHelper.Watermark="Password" x:Name="PasswordLoginBox" Margin="10,81,10.001,9" Height="20" Password="4nt1t7!"/>
+                    <TextBox controls:TextBoxHelper.ClearTextButton="True" controls:TextBoxHelper.Watermark="Username" Grid.Row="0" Margin="10,26,10.001,148" Text ="{Binding LoginEmail}" Name="UsernameLoginTxt" Height="20" ></TextBox>
+                    <PasswordBox controls:TextBoxHelper.ClearTextButton="True" controls:TextBoxHelper.Watermark="Password" x:Name="PasswordLoginBox" Margin="10,85,10,89" Height="20" Password="4nt1t7!"/>
 
-                    <Button Grid.Row="1" Width="100" Margin="10,18,246.001,51.571" FontFamily="pack://application:,,,/Resources/#AquaWax" BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" FontSize="10" Command="{Binding AccountLogin, Mode=OneTime}" CommandParameter="{Binding ElementName=PasswordLoginBox}">Login</Button>
-
-
+                    <Button Width="100" Height="30" FontFamily="pack://application:,,,/Resources/#AquaWax" BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" FontSize="10" Command="{Binding AccountLogin, Mode=OneTime}" CommandParameter="{Binding ElementName=PasswordLoginBox}" Grid.Row="0" Margin="10,138,246,32">Login</Button>
                     <Border 
                             Grid.Row="2"
                             Margin="0,65,0,0" 
@@ -78,17 +70,17 @@
                 
                             BorderThickness="10" />
 
-                    <TextBlock Grid.Row="1" Margin="11,80.857,230.001,0" Text="Work Offline" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Center" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White"/>
-                    <Button Grid.Row="2" Height="20" Width="100" Margin="216,22.857,36.001,27" FontFamily="pack://application:,,,/Resources/#AquaWax" BorderBrush="White" BorderThickness="1" Padding="5" Background="Black" Foreground="White" FontSize="8" Command="{Binding XMLButtonClick}" CommandParameter="{Binding ElementName=XmlFileNameTxt}">Choose XML file</Button>
-                    <TextBox HorizontalAlignment="Left" Grid.Row="2" Margin="11,21.857,141.001,27" Name="XmlFileNameTxt" Height="20" Width="200"/>
-                    <TextBlock Grid.Row="3" Margin="11,2.286,9.001,28" Text="Choose a Project XML file to load into the system" FontSize="10" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White"/>
-                    <TextBlock Grid.Row="3" Margin="11,16.286,9.001,77.143" Text="to continue working while offline." FontSize="10" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White" Grid.RowSpan="2"/>
+                    <TextBlock Grid.Row="2" Margin="10,14,262,0" Text="Work Offline" FontSize="15" VerticalAlignment="Top" HorizontalAlignment="Center" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White"/>
+                    <Button Grid.Row="2" Height="20" Width="100" Margin="220,38,36,11.857" FontFamily="pack://application:,,,/Resources/#AquaWax" BorderBrush="White" BorderThickness="1" Padding="5" Background="Black" Foreground="White" FontSize="8" Command="{Binding XMLButtonClick}" CommandParameter="{Binding ElementName=XmlFileNameTxt}">Choose XML file</Button>
+                    <TextBox HorizontalAlignment="Left" Grid.Row="2" Margin="10,37,0,11.857" Name="XmlFileNameTxt" Height="20" Width="200"/>
+                    <TextBlock Grid.Row="3" Margin="11,36.571,9.001,-5.571" Text="Choose a Project XML file to load into the system" FontSize="10" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White" Grid.RowSpan="2"/>
+                    <TextBlock Grid.Row="3" Margin="11,50.571,9.001,43.429" Text="to continue working while offline." FontSize="10" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White"/>
 
-                    <Button Grid.Row="3"  Width="100" Margin="10,36.143,246.001,46.857" Padding="10" FontFamily="pack://application:,,,/Resources/#AquaWax" BorderBrush="White" BorderThickness="1" Background="Black" Foreground="White" FontSize="10">Upload</Button>
+                    <Button Grid.Row="3"  Width="100" Margin="8,74.571,248,9.429" Padding="10" FontFamily="pack://application:,,,/Resources/#AquaWax" BorderBrush="White" BorderThickness="1" Background="Black" Foreground="White" FontSize="10">Upload</Button>
+                    <TextBlock Margin="13,2,292,0" Text="Log in..." FontSize="15" VerticalAlignment="Top" HorizontalAlignment="Center" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White"/>
                 </Grid>
-
             </Grid>
-
         </Grid>
+        <TextBlock Margin="51,38,731.143,0" Text="Register an account..." FontSize="15" VerticalAlignment="Top" HorizontalAlignment="Left" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White"/>
     </Grid>
 </core:UserControlViewBase>

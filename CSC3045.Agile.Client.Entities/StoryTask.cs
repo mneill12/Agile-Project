@@ -1,30 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Core.Common.Core;
-using FluentValidation;
+﻿using Core.Common.Core;
 
 namespace CSC3045.Agile.Client.Entities
 {
     public class StoryTask : ObjectBase
     {
-        private int _StoryTaskId;
-        private Account _Owner;
-        private string _Title;
+        private CurrentStatus _CurrentStatus;
         private string _Description;
         private int _Hours;
-        private CurrentStatus _CurrentStatus;
         private bool _IsBlocked;
+        private Account _Owner;
+        private int _StoryTaskId;
+        private string _Title;
         private string _UserNotes;
 
         public int StoryTaskId
         {
-            get
-            {
-                return _StoryTaskId;
-            }
+            get { return _StoryTaskId; }
             set
             {
                 if (_StoryTaskId != value)
@@ -37,10 +28,7 @@ namespace CSC3045.Agile.Client.Entities
 
         public Account Owner
         {
-            get
-            {
-                return _Owner;
-            }
+            get { return _Owner; }
             set
             {
                 if (_Owner != value)
@@ -53,10 +41,7 @@ namespace CSC3045.Agile.Client.Entities
 
         public string Title
         {
-            get
-            {
-                return _Title;
-            }
+            get { return _Title; }
             set
             {
                 if (_Title != value)
@@ -70,10 +55,7 @@ namespace CSC3045.Agile.Client.Entities
 
         public string Description
         {
-            get
-            {
-                return _Description;
-            }
+            get { return _Description; }
             set
             {
                 if (_Description != value)
@@ -86,10 +68,7 @@ namespace CSC3045.Agile.Client.Entities
 
         public int Hours
         {
-            get
-            {
-                return _Hours;
-            }
+            get { return _Hours; }
             set
             {
                 if (_Hours != value)
@@ -102,10 +81,7 @@ namespace CSC3045.Agile.Client.Entities
 
         public CurrentStatus CurrentStatus
         {
-            get
-            {
-                return _CurrentStatus;
-            }
+            get { return _CurrentStatus; }
             set
             {
                 if (_CurrentStatus != value)
@@ -116,12 +92,9 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public Boolean IsBlocked
+        public bool IsBlocked
         {
-            get
-            {
-                return _IsBlocked;
-            }
+            get { return _IsBlocked; }
             set
             {
                 if (_IsBlocked != value)
@@ -134,10 +107,7 @@ namespace CSC3045.Agile.Client.Entities
 
         public string UserNotes
         {
-            get
-            {
-                return _UserNotes;
-            }
+            get { return _UserNotes; }
             set
             {
                 if (_UserNotes != value)
@@ -147,6 +117,5 @@ namespace CSC3045.Agile.Client.Entities
                 }
             }
         }
-
     }
 }

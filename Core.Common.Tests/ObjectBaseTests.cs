@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using Core.Common.Contracts;
+﻿using System.ComponentModel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Core.Common.Tests
@@ -12,8 +9,8 @@ namespace Core.Common.Tests
         [TestMethod]
         public void test_clean_property_change()
         {
-            TestClass objTest = new TestClass();
-            bool propertyChanged = false;
+            var objTest = new TestClass();
+            var propertyChanged = false;
 
             objTest.PropertyChanged += (s, e) =>
             {
@@ -29,7 +26,7 @@ namespace Core.Common.Tests
         [TestMethod]
         public void test_dirty_property_change()
         {
-            TestClass objTest = new TestClass();
+            var objTest = new TestClass();
 
             Assert.IsFalse(objTest.IsDirty, "Object should be clean.");
 
@@ -41,10 +38,10 @@ namespace Core.Common.Tests
         [TestMethod]
         public void test_property_change_single_subscription()
         {
-            TestClass objTest = new TestClass();
-            int changeCounter = 0;
-            PropertyChangedEventHandler handler1 = new PropertyChangedEventHandler((s, e) => { changeCounter++; });
-            PropertyChangedEventHandler handler2 = new PropertyChangedEventHandler((s, e) => { changeCounter++; });
+            var objTest = new TestClass();
+            var changeCounter = 0;
+            PropertyChangedEventHandler handler1 = (s, e) => { changeCounter++; };
+            PropertyChangedEventHandler handler2 = (s, e) => { changeCounter++; };
 
             objTest.PropertyChanged += handler1;
             objTest.PropertyChanged += handler1; // should not duplicate
@@ -60,8 +57,8 @@ namespace Core.Common.Tests
         [TestMethod]
         public void test_property_change_dual_syntax()
         {
-            TestClass objTest = new TestClass();
-            bool propertyChanged = false;
+            var objTest = new TestClass();
+            var propertyChanged = false;
 
             objTest.PropertyChanged += (s, e) =>
             {
@@ -82,7 +79,7 @@ namespace Core.Common.Tests
         [TestMethod]
         public void test_child_dirty_tracking()
         {
-            TestClass objTest = new TestClass();
+            var objTest = new TestClass();
 
             Assert.IsFalse(objTest.IsAnythingDirty(), "Nothing in the object graph should be dirty.");
 
@@ -98,9 +95,9 @@ namespace Core.Common.Tests
         [TestMethod]
         public void test_dirty_object_aggregating()
         {
-            TestClass objTest = new TestClass();
+            var objTest = new TestClass();
 
-            List<IDirtyCapable> dirtyObjects = objTest.GetDirtyObjects();
+            var dirtyObjects = objTest.GetDirtyObjects();
 
             Assert.IsTrue(dirtyObjects.Count == 0, "There should be no dirty object returned.");
 
@@ -123,7 +120,7 @@ namespace Core.Common.Tests
         [TestMethod]
         public void test_object_validation()
         {
-            TestClass objTest = new TestClass();
+            var objTest = new TestClass();
 
             Assert.IsFalse(objTest.IsValid, "Object should not be valid as one its rules should be broken.");
 

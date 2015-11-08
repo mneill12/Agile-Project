@@ -1,7 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
 using System.Runtime.Serialization;
 using Core.Common.Contracts;
 using Core.Common.Core;
@@ -31,8 +28,7 @@ namespace CSC3045.Agile.Business.Entities
 
         public ICollection<Project> AssocicatedProjects { get; set; }
         public ICollection<Sprint> AssociatedSprints { get; set; }
-        public ICollection<PlanningPokerSession> AssociatedPlanningPokerSessions { get; set; } 
-
+        public ICollection<PlanningPokerSession> AssociatedPlanningPokerSessions { get; set; }
 
         #region IIdentifiableEntity members
 

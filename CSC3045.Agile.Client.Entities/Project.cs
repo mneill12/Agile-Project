@@ -1,31 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Core.Common.Core;
-using FluentValidation;
 
 namespace CSC3045.Agile.Client.Entities
 {
     public class Project : ObjectBase
     {
-        private int _ProjectId;
         private Backlog _Backlog;
-        private Account _ProjectManager;
-        private Account _ProductOwner;
-        private string _ProjectName;
-        private DateTime _ProjectDeadline;
-        private ICollection<Sprint> _Sprints;
         private ICollection<Burndown> _Burndowns;
-        private ICollection<Account> _ProjectMembers; 
+        private Account _ProductOwner;
+        private DateTime _ProjectDeadline;
+        private int _ProjectId;
+        private Account _ProjectManager;
+        private ICollection<Account> _ProjectMembers;
+        private string _ProjectName;
+        private ICollection<Sprint> _Sprints;
 
         public int ProjectId
         {
-            get
-            {
-                return _ProjectId;
-            }
+            get { return _ProjectId; }
             set
             {
                 if (_ProjectId != value)
@@ -38,10 +31,7 @@ namespace CSC3045.Agile.Client.Entities
 
         public Backlog Backlog
         {
-            get
-            {
-                return _Backlog;
-            }
+            get { return _Backlog; }
             set
             {
                 if (_Backlog != value)
@@ -54,10 +44,7 @@ namespace CSC3045.Agile.Client.Entities
 
         public Account ProjectManager
         {
-            get
-            {
-                return _ProjectManager;
-            }
+            get { return _ProjectManager; }
             set
             {
                 if (_ProjectManager != value)
@@ -70,10 +57,7 @@ namespace CSC3045.Agile.Client.Entities
 
         public Account ProductOwner
         {
-            get
-            {
-                return _ProductOwner;
-            }
+            get { return _ProductOwner; }
             set
             {
                 if (_ProductOwner != value)
@@ -86,10 +70,7 @@ namespace CSC3045.Agile.Client.Entities
 
         public string ProjectName
         {
-            get
-            {
-                return _ProjectName;
-            }
+            get { return _ProjectName; }
             set
             {
                 if (_ProjectName != value)
@@ -102,10 +83,7 @@ namespace CSC3045.Agile.Client.Entities
 
         public DateTime ProjectDeadline
         {
-            get
-            {
-                return _ProjectDeadline;
-            }
+            get { return _ProjectDeadline; }
             set
             {
                 if (_ProjectDeadline != value)
@@ -118,10 +96,7 @@ namespace CSC3045.Agile.Client.Entities
 
         public ICollection<Sprint> Sprints
         {
-            get
-            {
-                return _Sprints;
-            }
+            get { return _Sprints; }
             set
             {
                 if (_Sprints != value)
@@ -134,10 +109,7 @@ namespace CSC3045.Agile.Client.Entities
 
         public ICollection<Burndown> Burndowns
         {
-            get
-            {
-                return _Burndowns;
-            }
+            get { return _Burndowns; }
             set
             {
                 if (_Burndowns != value)
@@ -150,10 +122,7 @@ namespace CSC3045.Agile.Client.Entities
 
         public ICollection<Account> ProjectMembers
         {
-            get
-            {
-                return _ProjectMembers;
-            }
+            get { return _ProjectMembers; }
             set
             {
                 if (_ProjectMembers != value)

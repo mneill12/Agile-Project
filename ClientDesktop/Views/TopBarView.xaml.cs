@@ -1,25 +1,23 @@
 ﻿using System.ComponentModel.Composition;
-using System.Windows.Controls;
 using ClientDesktop.ViewModels;
-using Core.Common.Core;
 using Core.Common.UI.Core;
 
 namespace ClientDesktop.Views
 {
     /// <summary>
-    /// Interaction logic for MainViews.xaml
+    ///     Interaction logic for TopBarView.xaml
     /// </summary>
     [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public partial class MainViews : UserControlViewBase
-    { 
-        public MainViews()
+    public partial class TopBarView : UserControlViewBase
+    {
+        public TopBarView()
         {
             InitializeComponent();
         }
 
         [Import]
-        public MainViewModels ViewModel
+        public TopBarViewModel ViewModel
         {
             set { DataContext = value; }
         }

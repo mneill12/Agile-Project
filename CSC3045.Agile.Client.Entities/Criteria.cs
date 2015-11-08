@@ -1,25 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Core.Common.Core;
-using FluentValidation;
+﻿using Core.Common.Core;
 
 namespace CSC3045.Agile.Client.Entities
 {
     public class Criteria : ObjectBase
     {
         private int _criteriaId;
-        private string _criteriaType;
         private string _criteriaOutline;
-       
+        private string _criteriaType;
+
         public int CriteriaId
         {
-            get
-            {
-                return _criteriaId;
-            }
+            get { return _criteriaId; }
             set
             {
                 if (_criteriaId != value)
@@ -32,10 +23,7 @@ namespace CSC3045.Agile.Client.Entities
 
         public string CriteriaType
         {
-            get
-            {
-                return _criteriaType;
-            }
+            get { return _criteriaType; }
             set
             {
                 if (_criteriaType != value)
@@ -48,10 +36,7 @@ namespace CSC3045.Agile.Client.Entities
 
         public string CriteriaOutline
         {
-            get
-            {
-                return _criteriaOutline;
-            }
+            get { return _criteriaOutline; }
             set
             {
                 if (_criteriaOutline != value)

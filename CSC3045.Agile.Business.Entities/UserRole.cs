@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Core.Common.Contracts;
 using Core.Common.Core;
@@ -15,9 +13,6 @@ namespace CSC3045.Agile.Business.Entities
 
         [DataMember]
         public string UserRoleName { get; set; }
-
-        [DataMember]
-        public int PermissionLevel { get; set; }
 
         public ICollection<Account> Accounts { get; set; }
 

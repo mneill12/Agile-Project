@@ -1,24 +1,23 @@
 ﻿using System.ComponentModel.Composition;
-using System.Windows.Controls;
 using ClientDesktop.ViewModels;
 using Core.Common.UI.Core;
 
 namespace ClientDesktop.Views
 {
     /// <summary>
-    /// Interaction logic for TopBarViews.xaml
+    ///     Interaction logic for EditAccountView.xaml
     /// </summary>
     [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public partial class TopBarViews : UserControlViewBase
+    public partial class EditAccountView : UserControlViewBase
     {
-        public TopBarViews()
+        public EditAccountView()
         {
             InitializeComponent();
         }
 
         [Import]
-        public TopBarViewModels ViewModel
+        public EditAccountViewModel ViewModel
         {
             set { DataContext = value; }
         }

@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Security.Principal;
+﻿using System.Security.Principal;
 using CSC3045.Agile.Client.Entities;
-
 
 namespace CSC3045.Agile.Client.CustomPrinciples
 {
@@ -17,14 +11,23 @@ namespace CSC3045.Agile.Client.CustomPrinciples
             Roles = roles;
         }
 
-        public string Name { get; private set; }
         public string Email { get; private set; }
         public UserRole[] Roles { get; private set; }
 
-        #region IIdentity Members
-        public string AuthenticationType { get { return "Custom authentication"; } }
+        public string Name { get; private set; }
 
-        public bool IsAuthenticated { get { return !string.IsNullOrEmpty(Email); } }
+        #region IIdentity Members
+
+        public string AuthenticationType
+        {
+            get { return "Custom authentication"; }
+        }
+
+        public bool IsAuthenticated
+        {
+            get { return !string.IsNullOrEmpty(Email); }
+        }
+
         #endregion
     }
 }

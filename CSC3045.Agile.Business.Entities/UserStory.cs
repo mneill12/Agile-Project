@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Core.Common.Contracts;
 using Core.Common.Core;
@@ -35,7 +33,7 @@ namespace CSC3045.Agile.Business.Entities
         public ICollection<AcceptanceCriteria> AcceptanceCriteria { get; set; }
 
         // Many-to-many declarations
-        public virtual ICollection<PlanningPokerSession> AssociatedPlanningPokersSessions { get; set; } 
+        public virtual ICollection<PlanningPokerSession> AssociatedPlanningPokersSessions { get; set; }
 
         #region IIdentifiableEntity members
 

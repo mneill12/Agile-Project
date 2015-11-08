@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Data.Entity.Migrations;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
-using Core.Common.Data;
-using CSC3045.Agile.Business.Entities;
 using System.Data.Entity;
+using System.Linq;
+using CSC3045.Agile.Business.Entities;
 using CSC3045.Agile.Data.Contracts.Repository_Interfaces;
 
 namespace CSC3045.Agile.Data.Data_Repositories
 {
     // Burndown LINQ Entity Queries
-    [Export(typeof(IBurndownRepository))]
+    [Export(typeof (IBurndownRepository))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class BurndownRepository : DataRepositoryBase<Burndown>
     {

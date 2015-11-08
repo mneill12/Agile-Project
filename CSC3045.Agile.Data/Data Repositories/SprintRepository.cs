@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Data.Entity.Migrations;
+using System.Data.Entity;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
-using Core.Common.Data;
 using CSC3045.Agile.Business.Entities;
 using CSC3045.Agile.Data.Contracts.Repository_Interfaces;
-using System.Data.Entity;
 
 namespace CSC3045.Agile.Data.Data_Repositories
 {
     // Sprint LINQ Entity Queries
-    [Export(typeof(ISprintRepository))]
+    [Export(typeof (ISprintRepository))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class SprintRepository : DataRepositoryBase<Sprint>
     {
@@ -26,8 +20,8 @@ namespace CSC3045.Agile.Data.Data_Repositories
         protected override Sprint UpdateEntity(Csc3045AgileContext entityContext, Sprint entity)
         {
             return (from e in entityContext.SprintSet
-                    where e.SprintId == entity.SprintId
-                    select e).FirstOrDefault();
+                where e.SprintId == entity.SprintId
+                select e).FirstOrDefault();
         }
 
         protected override IEnumerable<Sprint> GetEntities(Csc3045AgileContext entityContext)

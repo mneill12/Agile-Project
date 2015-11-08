@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using CSC3045.Agile.Client.Entities;
 using Microsoft.Practices.Prism.Commands;
 
 namespace ClientDesktop
 {
-    class GlobalCommands
+    internal class GlobalCommands
     {
         public static Account MyAccount;
 
@@ -17,6 +13,5 @@ namespace ClientDesktop
         public static CompositeCommand NavigateCommand = new CompositeCommand();
 
         public static CompositeCommand IsLoggedIn = new CompositeCommand();
-
     }
 }

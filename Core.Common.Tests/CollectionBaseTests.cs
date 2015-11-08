@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using Core.Common.Contracts;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Core.Common.Tests
@@ -11,10 +8,10 @@ namespace Core.Common.Tests
         [TestMethod]
         public void test_collection_item_collection_and_property_change_notification()
         {
-            TestList objList = new TestList();
-            TestClass objTest = new TestClass();
-            bool collectionChanged = false;
-            bool propertyChanged = false;
+            var objList = new TestList();
+            var objTest = new TestClass();
+            var collectionChanged = false;
+            var propertyChanged = false;
 
             objList.CollectionChanged += (s, e) => collectionChanged = true;
 
@@ -36,8 +33,8 @@ namespace Core.Common.Tests
         [TestMethod]
         public void test_collection_dirtiness()
         {
-            TestList objList = new TestList();
-            TestClass objTest = new TestClass();
+            var objList = new TestList();
+            var objTest = new TestClass();
 
             objList.Add(objTest);
 
@@ -49,8 +46,8 @@ namespace Core.Common.Tests
         [TestMethod]
         public void test_collection_property_dirtyness()
         {
-            TestClass objTest = new TestClass();
-            TestChild objChild = new TestChild();
+            var objTest = new TestClass();
+            var objChild = new TestChild();
 
             objTest.Children.Add(objChild);
 
@@ -64,10 +61,10 @@ namespace Core.Common.Tests
         [TestMethod]
         public void test_dirty_collection_aggregating()
         {
-            TestClass objTest = new TestClass();
-            TestChild objChild = new TestChild();
+            var objTest = new TestClass();
+            var objChild = new TestChild();
 
-            List<IDirtyCapable> dirtyObjects = objTest.GetDirtyObjects();
+            var dirtyObjects = objTest.GetDirtyObjects();
 
             objTest.Children.Add(objChild);
 

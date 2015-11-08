@@ -1,19 +1,14 @@
 ﻿using System;
-using System.ComponentModel;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Globalization;
 using System.ServiceModel;
-using System.Windows;
 using System.Windows.Controls;
 using Core.Common;
 using Core.Common.Contracts;
-using Core.Common.Core;
 using Core.Common.UI.Core;
 using CSC3045.Agile.Client.Contracts;
 using CSC3045.Agile.Client.Entities;
-using System.Globalization;
-using System.Collections.Generic;
-using System.Windows.Input;
-using System.Windows.Data;
 
 namespace ClientDesktop.ViewModels
 {
@@ -21,7 +16,12 @@ namespace ClientDesktop.ViewModels
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class CreateProjectViewModel : ViewModelBase
     {
-        IServiceFactory _ServiceFactory;
+        private List<ProductOwnerScrumMasterInfo> _ProductOwners;
+        private string _ProjectDeadline;
+
+        private string _ProjectName;
+        private List<ProductOwnerScrumMasterInfo> _ScrumMasters;
+        private readonly IServiceFactory _ServiceFactory;
 
         [ImportingConstructor]
         public CreateProjectViewModel(IServiceFactory serviceFactory)
@@ -32,19 +32,11 @@ namespace ClientDesktop.ViewModels
             _ScrumMasters = new List<ProductOwnerScrumMasterInfo>();
         }
 
-        public DelegateCommand<TextBox> CreateProject {get; private set;}
-
-        private string _ProjectName;
-        private string _ProjectDeadline;
-        private List<ProductOwnerScrumMasterInfo> _ProductOwners;
-        private List<ProductOwnerScrumMasterInfo> _ScrumMasters;
+        public DelegateCommand<TextBox> CreateProject { get; private set; }
 
         public string ProjectName
         {
-            get
-            {
-                return _ProjectName;
-            }
+            get { return _ProjectName; }
             set
             {
                 if (_ProjectName == value) return;
@@ -55,10 +47,7 @@ namespace ClientDesktop.ViewModels
 
         public string ProjectDeadline
         {
-            get
-            {
-                return _ProjectDeadline;
-            }
+            get { return _ProjectDeadline; }
             set
             {
                 if (_ProjectDeadline == value) return;
@@ -69,10 +58,7 @@ namespace ClientDesktop.ViewModels
 
         public List<ProductOwnerScrumMasterInfo> ProductOwners
         {
-            get
-            {
-                return _ProductOwners;
-            }
+            get { return _ProductOwners; }
             set
             {
                 if (_ProductOwners == value) return;
@@ -83,10 +69,7 @@ namespace ClientDesktop.ViewModels
 
         public List<ProductOwnerScrumMasterInfo> ScrumMasters
         {
-            get
-            {
-                return _ScrumMasters;
-            }
+            get { return _ScrumMasters; }
             set
             {
                 if (_ScrumMasters == value) return;
@@ -95,26 +78,7 @@ namespace ClientDesktop.ViewModels
             }
         }
 
-        public class ProductOwnerScrumMasterInfo
-        {
-            public string FirstName { get; set; }
-            public string Surname { get; set; }
-            public string EmailAddress { get; set; }
-
-            public ProductOwnerScrumMasterInfo(string fname, string sname, string email)
-            {
-                FirstName = fname;
-                Surname = sname;
-                EmailAddress = email;
-            }
-        }
-
         public event EventHandler<ErrorMessageEventArgs> ErrorOccured;
-
-        public override string ViewTitle
-        {
-            get { return "Create Project"; }
-        }
 
         // This gets hit every time the page is loaded while the constructor only gets loaded initially, use for getting up-to-data from the database
         protected override void OnViewLoaded()
@@ -124,18 +88,17 @@ namespace ClientDesktop.ViewModels
 
         protected void getProductOwnersAndScrumMasters()
         {
-            WithClient<IAccountService>(_ServiceFactory.CreateClient<IAccountService>(), accountClient =>
+            WithClient(_ServiceFactory.CreateClient<IAccountService>(), accountClient =>
             {
-                ICollection<Account> accounts = accountClient.GetAllAccountsWithUserRoles();
-                UserRole productOwnerRole = new UserRole() { UserRoleId = 5, UserRoleName = "Product Owner", PermissionLevel = 3 };
-                UserRole scrumMasterRole = new UserRole() { UserRoleId = 3, UserRoleName = "Scrum Master", PermissionLevel = 1 };
+                var productOwnerRole = new UserRole {UserRoleName = "Product Owner"};
+                var scrumMasterRole = new UserRole {UserRoleName = "Scrum Master"};
 
-                IEnumerable<Account> projOwners = accountClient.GetByUserRole(3);
-                IEnumerable<Account> scrumMasters = accountClient.GetByUserRole(1);
+                var productOwners = accountClient.GetByUserRole(1);
+                var scrumMasters = accountClient.GetByUserRole(2);
 
-                if (projOwners != null)
+                if (productOwners != null)
                 {
-                    foreach (Account a in projOwners)
+                    foreach (var a in productOwners)
                     {
                         _ProductOwners.Add(new ProductOwnerScrumMasterInfo(a.FirstName, a.LastName, a.LoginEmail));
                     }
@@ -143,7 +106,7 @@ namespace ClientDesktop.ViewModels
 
                 if (scrumMasters != null)
                 {
-                    foreach (Account a in scrumMasters)
+                    foreach (var a in scrumMasters)
                     {
                         _ScrumMasters.Add(new ProductOwnerScrumMasterInfo(a.FirstName, a.LastName, a.LoginEmail));
                     }
@@ -151,23 +114,23 @@ namespace ClientDesktop.ViewModels
             });
         }
 
-        
 
         protected void OnCreateProject(TextBox textBox)
         {
-            if(ProjectName != null && ProjectDeadline != null)
+            if (ProjectName != null && ProjectDeadline != null)
             {
                 try
                 {
-                    Project _Project = new Project()
+                    var _Project = new Project
                     {
                         ProjectName = textBox.Text,
-                        ProjectDeadline = DateTime.ParseExact(ProjectDeadline, "dd/mm/yyyy", CultureInfo.InvariantCulture)
+                        ProjectDeadline =
+                            DateTime.ParseExact(ProjectDeadline, "dd/mm/yyyy", CultureInfo.InvariantCulture)
                     };
 
-                    WithClient<IProjectService>(_ServiceFactory.CreateClient<IProjectService>(), projectClient =>
+                    WithClient(_ServiceFactory.CreateClient<IProjectService>(), projectClient =>
                     {
-                        Project myProject = projectClient.AddProject(_Project);
+                        var myProject = projectClient.AddProject(_Project);
 
                         if (myProject != null)
                         {
@@ -175,17 +138,31 @@ namespace ClientDesktop.ViewModels
                         }
                     });
                 }
-                catch(FaultException ex)
+                catch (FaultException ex)
                 {
                     if (ErrorOccured != null)
                         ErrorOccured(this, new ErrorMessageEventArgs(ex.Message));
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     if (ErrorOccured != null)
                         ErrorOccured(this, new ErrorMessageEventArgs(ex.Message));
                 }
             }
+        }
+
+        public class ProductOwnerScrumMasterInfo
+        {
+            public ProductOwnerScrumMasterInfo(string fname, string sname, string email)
+            {
+                FirstName = fname;
+                Surname = sname;
+                EmailAddress = email;
+            }
+
+            public string FirstName { get; set; }
+            public string Surname { get; set; }
+            public string EmailAddress { get; set; }
         }
     }
 }

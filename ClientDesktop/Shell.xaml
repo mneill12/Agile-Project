@@ -12,7 +12,6 @@
         <ImageBrush ImageSource="Resources/abstract.jpg">
         </ImageBrush>
     </Window.Background>
-  
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             <Button Content="settings" />
@@ -20,15 +19,15 @@
                 <Hyperlink NavigateUri="https://www.youtube.com/watch?v=oLmDe8pAc6I&amp;list=PLX4Y2n2d1-uUlu6lRwOYDRd0AgSu1cSMt" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="none" Background="Black" Foreground="Red">
                     <StackPanel Orientation="Horizontal">
                         <Rectangle Width="20" Height="20"
-                       Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
+                                   Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
                             <Rectangle.OpacityMask>
                                 <VisualBrush Stretch="Fill"
-                             Visual="{StaticResource appbar_youtube}" />
+                                             Visual="{StaticResource appbar_youtube}" />
                             </Rectangle.OpacityMask>
                         </Rectangle>
                         <TextBlock Margin="4 0 0 0"
-                       VerticalAlignment="Center"
-                       Text="Click Me" />
+                                   VerticalAlignment="Center"
+                                   Text="Click Me" />
                     </StackPanel>
                 </Hyperlink>
             </Button>
@@ -37,10 +36,12 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
+            <RowDefinition Height="960"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBlock Foreground="White" Grid.Row="1" FontWeight="Bold" Text="{Binding Source={x:Static sys:DateTime.Now},  StringFormat=dd / MMM / yyyy}" TextAlignment="Right" VerticalAlignment="Center" Margin="487,705,26.286,10.429"/>
         <ContentControl x:Name="TopBarRegion" regions:RegionManager.RegionName="TopBarRegion" Grid.Row="0" />
-        <ContentControl x:Name="MainRegion" regions:RegionManager.RegionName="MainRegion" Grid.Row="1"/>
+        <ContentControl x:Name="ContentRegion" regions:RegionManager.RegionName="ContentRegion" Grid.Row="1" />
+        <ContentControl x:Name="StatusRegion" regions:RegionManager.RegionName="StatusRegion" Grid.Row="2" />
     </Grid>
 </Controls:MetroWindow>

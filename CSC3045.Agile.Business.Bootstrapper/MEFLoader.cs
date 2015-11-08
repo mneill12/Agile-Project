@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition.Hosting;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.Composition.Hosting;
 using CSC3045.Agile.Business.Business_Engines;
 using CSC3045.Agile.Data.Data_Repositories;
 
@@ -14,12 +9,12 @@ namespace CSC3045.Agile.Business.Bootstrapper
     {
         public static CompositionContainer Init()
         {
-            AggregateCatalog catalog = new AggregateCatalog();
+            var catalog = new AggregateCatalog();
 
-            catalog.Catalogs.Add(new AssemblyCatalog(typeof(AccountRepository).Assembly));
-            catalog.Catalogs.Add(new AssemblyCatalog(typeof(AccountEngine).Assembly));
+            catalog.Catalogs.Add(new AssemblyCatalog(typeof (AccountRepository).Assembly));
+            catalog.Catalogs.Add(new AssemblyCatalog(typeof (AccountEngine).Assembly));
 
-            CompositionContainer container = new CompositionContainer(catalog);
+            var container = new CompositionContainer(catalog);
 
             return container;
         }

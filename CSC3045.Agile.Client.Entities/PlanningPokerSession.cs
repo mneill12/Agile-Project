@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Core.Common.Core;
-using CSC3045.Agile.Client.Entities;
-
 
 namespace CSC3045.Agile.Client.Entities
 {
     public class PlanningPokerSession : ObjectBase
     {
+        private ICollection<Account> _InvitedAccountSet;
         private int _PlanningPokerSessionId;
         private DateTime _StartTime;
-        private ICollection<Account> _InvitedAccountSet;
-        private ICollection<UserStory> _UserStories; 
+        private ICollection<UserStory> _UserStories;
 
         public int PlanningPokerSessionId
         {

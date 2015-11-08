@@ -5,7 +5,6 @@ using System.ComponentModel;
 using System.ComponentModel.Composition.Hosting;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
 using Core.Common.Contracts;
@@ -18,22 +17,80 @@ namespace Core.Common.Core
 {
     public abstract class ObjectBase : NotificationObject, IDirtyCapable, IExtensibleDataObject, IDataErrorInfo
     {
+        protected bool _IsDirty;
+
+        protected IEnumerable<ValidationFailure> _ValidationErrors;
+        protected IValidator _Validator;
+
         public ObjectBase()
         {
             _Validator = GetValidator();
             Validate();
         }
 
-        protected bool _IsDirty = false;
-        protected IValidator _Validator = null;
-
-        protected IEnumerable<ValidationFailure> _ValidationErrors = null;
- 
         public static CompositionContainer Container { get; set; }
 
         #region IExtensibleDataObject Members
 
         public ExtensionDataObject ExtensionData { get; set; }
+
+        #endregion
+
+        #region Protected methods
+
+        protected void WalkObjectGraph(Func<ObjectBase, bool> snippetForObject,
+            Action<IList> snippetForCollection,
+            params string[] exemptProperties)
+        {
+            var visited = new List<ObjectBase>();
+            Action<ObjectBase> walk = null;
+
+            var exemptions = new List<string>();
+            if (exemptProperties != null)
+                exemptions = exemptProperties.ToList();
+
+            walk = o =>
+            {
+                if (o != null && !visited.Contains(o))
+                {
+                    visited.Add(o);
+
+                    var exitWalk = snippetForObject.Invoke(o);
+
+                    if (!exitWalk)
+                    {
+                        var properties = o.GetBrowsableProperties();
+                        foreach (var property in properties)
+                        {
+                            if (!exemptions.Contains(property.Name))
+                            {
+                                if (property.PropertyType.IsSubclassOf(typeof (ObjectBase)))
+                                {
+                                    var obj = (ObjectBase) (property.GetValue(o, null));
+                                    walk(obj);
+                                }
+                                else
+                                {
+                                    var coll = property.GetValue(o, null) as IList;
+                                    if (coll != null)
+                                    {
+                                        snippetForCollection.Invoke(coll);
+
+                                        foreach (var item in coll)
+                                        {
+                                            if (item is ObjectBase)
+                                                walk((ObjectBase) item);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+
+            walk(this);
+        }
 
         #endregion
 
@@ -52,109 +109,50 @@ namespace Core.Common.Core
 
         public virtual bool IsAnythingDirty()
         {
-            bool isDirty = false;
+            var isDirty = false;
 
             WalkObjectGraph(
-            o =>
-            {
-                if (o.IsDirty)
+                o =>
                 {
-                    isDirty = true;
-                    return true; // short circuit
-                }
-                else
+                    if (o.IsDirty)
+                    {
+                        isDirty = true;
+                        return true; // short circuit
+                    }
                     return false;
-            }, coll => { });
+                }, coll => { });
 
             return isDirty;
         }
 
         public List<IDirtyCapable> GetDirtyObjects()
         {
-            List<IDirtyCapable> dirtyObjects = new List<IDirtyCapable>();
+            var dirtyObjects = new List<IDirtyCapable>();
 
             WalkObjectGraph(
-            o =>
-            {
-                if (o.IsDirty)
-                    dirtyObjects.Add(o);
+                o =>
+                {
+                    if (o.IsDirty)
+                        dirtyObjects.Add(o);
 
-                return false;
-            }, coll => { });
+                    return false;
+                }, coll => { });
 
             return dirtyObjects;
         }
 
         /// <summary>
-        /// Walks the object graph cleaning any dirty object.
+        ///     Walks the object graph cleaning any dirty object.
         /// </summary>
         public void CleanAll()
         {
             WalkObjectGraph(
-            o =>
-            {
-                if (o.IsDirty)
-                    o.IsDirty = false;
-                return false;
-            }, coll => { });
-        }
-
-        #endregion
-
-        #region Protected methods
-
-        protected void WalkObjectGraph(Func<ObjectBase, bool> snippetForObject,
-                                       Action<IList> snippetForCollection,
-                                       params string[] exemptProperties)
-        {
-            List<ObjectBase> visited = new List<ObjectBase>();
-            Action<ObjectBase> walk = null;
-
-            List<string> exemptions = new List<string>();
-            if (exemptProperties != null)
-                exemptions = exemptProperties.ToList();
-
-            walk = (o) =>
-            {
-                if (o != null && !visited.Contains(o))
+                o =>
                 {
-                    visited.Add(o);
-
-                    bool exitWalk = snippetForObject.Invoke(o);
-
-                    if (!exitWalk)
-                    {
-                        PropertyInfo[] properties = o.GetBrowsableProperties();
-                        foreach (PropertyInfo property in properties)
-                        {
-                            if (!exemptions.Contains(property.Name))
-                            {
-                                if (property.PropertyType.IsSubclassOf(typeof(ObjectBase)))
-                                {
-                                    ObjectBase obj = (ObjectBase)(property.GetValue(o, null));
-                                    walk(obj);
-                                }
-                                else
-                                {
-                                    IList coll = property.GetValue(o, null) as IList;
-                                    if (coll != null)
-                                    {
-                                        snippetForCollection.Invoke(coll);
-
-                                        foreach (object item in coll)
-                                        {
-                                            if (item is ObjectBase)
-                                                walk((ObjectBase)item);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            };
-
-            walk(this);
+                    if (o.IsDirty)
+                        o.IsDirty = false;
+                    return false;
+                }, coll => { });
         }
 
         #endregion
@@ -168,7 +166,7 @@ namespace Core.Common.Core
 
         protected void OnPropertyChanged<T>(Expression<Func<T>> propertyExpression, bool makeDirty)
         {
-            string propertyName = PropertySupport.ExtractPropertyName(propertyExpression);
+            var propertyName = PropertySupport.ExtractPropertyName(propertyExpression);
             OnPropertyChanged(propertyName, makeDirty);
         }
 
@@ -181,7 +179,7 @@ namespace Core.Common.Core
 
             Validate();
         }
-        
+
         #endregion
 
         #region Validation
@@ -202,7 +200,7 @@ namespace Core.Common.Core
         {
             if (_Validator != null)
             {
-                ValidationResult results = _Validator.Validate(this);
+                var results = _Validator.Validate(this);
                 _ValidationErrors = results.Errors;
             }
         }
@@ -214,8 +212,7 @@ namespace Core.Common.Core
             {
                 if (_ValidationErrors != null && _ValidationErrors.Count() > 0)
                     return false;
-                else
-                    return true;
+                return true;
             }
         }
 
@@ -227,16 +224,16 @@ namespace Core.Common.Core
         {
             get { return string.Empty; }
         }
-        
+
         string IDataErrorInfo.this[string columnName]
         {
             get
             {
-                StringBuilder errors = new StringBuilder();
+                var errors = new StringBuilder();
 
                 if (_ValidationErrors != null && _ValidationErrors.Count() > 0)
                 {
-                    foreach (ValidationFailure validationError in _ValidationErrors)
+                    foreach (var validationError in _ValidationErrors)
                     {
                         if (validationError.PropertyName == columnName)
                             errors.AppendLine(validationError.ErrorMessage);
@@ -248,6 +245,5 @@ namespace Core.Common.Core
         }
 
         #endregion
-
     }
 }

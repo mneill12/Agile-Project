@@ -1,16 +1,12 @@
-using System;
 using Core.Common.Core;
 
 namespace Core.Common.Tests
 {
     internal class TestClass : ObjectBase
     {
-        string _CleanProp = string.Empty;
-        string _DirtyProp = string.Empty;
-        string _StringProp = string.Empty;
-        TestChild _Child = new TestChild();
-        CollectionBase<TestChild> _Children = new CollectionBase<TestChild>();
-        TestChild _NotNavigableChild = new TestChild();
+        private string _CleanProp = string.Empty;
+        private string _DirtyProp = string.Empty;
+        private string _StringProp = string.Empty;
 
         public string CleanProp
         {
@@ -51,20 +47,11 @@ namespace Core.Common.Tests
             }
         }
 
-        public TestChild Child
-        {
-            get { return _Child; }
-        }
+        public TestChild Child { get; set; }
 
         [NotNavigable]
-        public TestChild NotNavigableChild
-        {
-            get { return _NotNavigableChild; }
-        }
+        public TestChild NotNavigableChild { get; set; }  
 
-        public CollectionBase<TestChild> Children
-        {
-            get { return _Children; }
-        }
+        public CollectionBase<TestChild> Children { get; set; }
     }
 }

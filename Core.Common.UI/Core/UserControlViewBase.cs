@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -9,6 +6,10 @@ namespace Core.Common.UI.Core
 {
     public class UserControlViewBase : UserControl
     {
+        public static readonly DependencyProperty ViewLoadedProperty =
+            DependencyProperty.Register("ViewLoaded", typeof (object), typeof (UserControlViewBase),
+                new PropertyMetadata(null));
+
         public UserControlViewBase()
         {
             // Programmatically bind the view-model's ViewLoaded property to the view's ViewLoaded property.
@@ -17,15 +18,15 @@ namespace Core.Common.UI.Core
             DataContextChanged += OnDataContextChanged;
         }
 
-        public static readonly DependencyProperty ViewLoadedProperty =
-            DependencyProperty.Register("ViewLoaded", typeof(object), typeof(UserControlViewBase),
-            new PropertyMetadata(null));
+        protected virtual void OnUnwireViewModelEvents(ViewModelBase viewModel)
+        {
+        }
 
-        protected virtual void OnUnwireViewModelEvents(ViewModelBase viewModel) { }
+        protected virtual void OnWireViewModelEvents(ViewModelBase viewModel)
+        {
+        }
 
-        protected virtual void OnWireViewModelEvents(ViewModelBase viewModel) { }
-        
-        void OnDataContextChanged(object sender, System.Windows.DependencyPropertyChangedEventArgs e)
+        private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (e.NewValue == null)
             {

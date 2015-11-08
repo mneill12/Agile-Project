@@ -1,31 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Core.Common.Core;
-using FluentValidation;
-using CSC3045.Agile.Client.Entities;
 
 namespace CSC3045.Agile.Client.Entities
 {
     public class UserStory : ObjectBase
     {
-        private int _UserStoryId;
-        private string _StoryName;
+        private ICollection<AcceptanceCriteria> _AcceptanceCriteria;
+        private ICollection<StoryTask> _AssociatedTasks;
+        private CurrentStatus _CurrentStatus;
         private string _Description;
+        private string _StoryName;
         private int _StoryPoints;
         private string _UserNotes;
-        private CurrentStatus _CurrentStatus;
-        private ICollection<StoryTask> _AssociatedTasks;
-        private ICollection<AcceptanceCriteria> _AcceptanceCriteria;
+        private int _UserStoryId;
 
         public int UserStoryId
         {
-            get
-            {
-                return _UserStoryId;
-            }
+            get { return _UserStoryId; }
             set
             {
                 if (_UserStoryId != value)
@@ -38,10 +29,7 @@ namespace CSC3045.Agile.Client.Entities
 
         public string StoryName
         {
-            get
-            {
-                return _StoryName;
-            }
+            get { return _StoryName; }
             set
             {
                 if (_StoryName != value)
@@ -54,10 +42,7 @@ namespace CSC3045.Agile.Client.Entities
 
         public string Description
         {
-            get
-            {
-                return _Description;
-            }
+            get { return _Description; }
             set
             {
                 if (_Description != value)
@@ -70,10 +55,7 @@ namespace CSC3045.Agile.Client.Entities
 
         public int StoryPoints
         {
-            get
-            {
-                return _StoryPoints;
-            }
+            get { return _StoryPoints; }
             set
             {
                 if (_StoryPoints != value)
@@ -86,10 +68,7 @@ namespace CSC3045.Agile.Client.Entities
 
         public string UserNotes
         {
-            get
-            {
-                return _UserNotes;
-            }
+            get { return _UserNotes; }
             set
             {
                 if (_UserNotes != value)
@@ -102,10 +81,7 @@ namespace CSC3045.Agile.Client.Entities
 
         public CurrentStatus CurrentStatus
         {
-            get
-            {
-                return _CurrentStatus;
-            }
+            get { return _CurrentStatus; }
             set
             {
                 if (_CurrentStatus != value)
@@ -118,10 +94,7 @@ namespace CSC3045.Agile.Client.Entities
 
         public ICollection<StoryTask> AssociatedTasks
         {
-            get
-            {
-                return _AssociatedTasks;
-            }
+            get { return _AssociatedTasks; }
             set
             {
                 if (_AssociatedTasks != value)
@@ -134,10 +107,7 @@ namespace CSC3045.Agile.Client.Entities
 
         public ICollection<AcceptanceCriteria> AcceptanceCriteria
         {
-            get
-            {
-                return _AcceptanceCriteria;
-            }
+            get { return _AcceptanceCriteria; }
             set
             {
                 if (_AcceptanceCriteria != value)
@@ -147,7 +117,5 @@ namespace CSC3045.Agile.Client.Entities
                 }
             }
         }
-
-     
     }
 }

@@ -1,20 +1,19 @@
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using Core.Common.Contracts;
 
 namespace Core.Common.Core
 {
     public class CollectionBase<T> : ObservableCollection<T>, IDirtyCapable
-           where T : ObjectBase
+        where T : ObjectBase
     {
         #region Property change notification
-        
-        event ItemPropertyChangedEventHandler<T> _ItemPropertyChangedEvent;
 
-        protected List<ItemPropertyChangedEventHandler<T>> _ItemPropertyChangedSubscribers = new List<ItemPropertyChangedEventHandler<T>>();
+        private event ItemPropertyChangedEventHandler<T> _ItemPropertyChangedEvent;
+
+        protected List<ItemPropertyChangedEventHandler<T>> _ItemPropertyChangedSubscribers =
+            new List<ItemPropertyChangedEventHandler<T>>();
 
         public event ItemPropertyChangedEventHandler<T> ItemPropertyChanged
         {
@@ -34,9 +33,9 @@ namespace Core.Common.Core
         }
 
 
-        void item_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void item_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            OnItemPropertyChanged((T)sender, e.PropertyName);
+            OnItemPropertyChanged((T) sender, e.PropertyName);
         }
 
         protected virtual void OnItemPropertyChanged(T item, string propertyName)
@@ -54,8 +53,8 @@ namespace Core.Common.Core
         {
             get
             {
-                bool isDirty = false;
-                
+                var isDirty = false;
+
                 foreach (var item in this)
                 {
                     if (item.IsDirty)
@@ -71,7 +70,7 @@ namespace Core.Common.Core
 
         public virtual bool IsAnythingDirty()
         {
-            bool isDirty = false;
+            var isDirty = false;
 
             foreach (var item in this)
             {
@@ -87,7 +86,7 @@ namespace Core.Common.Core
 
         public List<IDirtyCapable> GetDirtyObjects()
         {
-            List<IDirtyCapable> dirtyObjects = new List<IDirtyCapable>();
+            var dirtyObjects = new List<IDirtyCapable>();
 
             foreach (var item in this)
                 dirtyObjects.AddRange(item.GetDirtyObjects());

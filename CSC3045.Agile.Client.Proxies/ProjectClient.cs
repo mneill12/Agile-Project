@@ -1,16 +1,12 @@
-﻿using CSC3045.Agile.Client.Contracts;
-using CSC3045.Agile.Client.Entities;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Linq;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
+using CSC3045.Agile.Client.Contracts;
+using CSC3045.Agile.Client.Entities;
 
 namespace CSC3045.Agile.Client.Proxies
 {
-    [Export(typeof(IProjectService))]
+    [Export(typeof (IProjectService))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class ProjectClient : ClientBase<IProjectService>, IProjectService
     {

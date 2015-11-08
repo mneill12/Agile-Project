@@ -1,24 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Markup;
 
 namespace Core.Common.UI.Util
 {
     /// <summary>
-    /// Source - http://stackoverflow.com/questions/1594357/wpf-how-to-use-2-converters-in-1-binding
-    /// Represents a chain of <see cref="IValueConverter"/>s to be executed in succession.
+    ///     Source - http://stackoverflow.com/questions/1594357/wpf-how-to-use-2-converters-in-1-binding
+    ///     Represents a chain of <see cref="IValueConverter" />s to be executed in succession.
     /// </summary>
     [ContentProperty("Converters")]
-    [ContentWrapper(typeof(ValueConverterCollection))]
+    [ContentWrapper(typeof (ValueConverterCollection))]
     public class ConverterChain : IValueConverter
     {
-        ValueConverterCollection _converters;
+        private ValueConverterCollection _converters;
+
         /// <summary>Gets the converters to execute.</summary>
         public ValueConverterCollection Converters
         {
@@ -44,6 +41,8 @@ namespace Core.Common.UI.Util
         #endregion
     }
 
-    /// <summary>Represents a collection of <see cref="IValueConverter"/>s.</summary>
-    public sealed class ValueConverterCollection : Collection<IValueConverter> { }
+    /// <summary>Represents a collection of <see cref="IValueConverter" />s.</summary>
+    public sealed class ValueConverterCollection : Collection<IValueConverter>
+    {
+    }
 }
