@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Core.Common.UI.Core;
-using Prism.Regions;
+﻿using Core.Common.UI.Core;
 
 namespace ClientDesktop
 {
-    class ShellViewModel : ViewModelBase, IShellViewModel
+    internal class ShellViewModel : ViewModelBase, IShellViewModel
     {
-
     }
 }

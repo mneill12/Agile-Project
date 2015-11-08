@@ -20,8 +20,9 @@ namespace Core.Common.Extensions
                     if (ExportDef.ContractName == type.FullName)
                     {
                         var contract = AttributedModelServices.GetContractName(type);
-                        var definition = new ContractBasedImportDefinition(contract, contract, null, ImportCardinality.ExactlyOne,
-                                                                           false, false, CreationPolicy.Any);
+                        var definition = new ContractBasedImportDefinition(contract, contract, null,
+                            ImportCardinality.ExactlyOne,
+                            false, false, CreationPolicy.Any);
                         return container.GetExports(definition).FirstOrDefault().Value;
                     }
                 }
@@ -39,8 +40,9 @@ namespace Core.Common.Extensions
                     if (ExportDef.ContractName == type.FullName)
                     {
                         var contract = AttributedModelServices.GetContractName(type);
-                        var definition = new ContractBasedImportDefinition(contract, contract, null, ImportCardinality.ExactlyOne,
-                                                                           false, false, CreationPolicy.Any);
+                        var definition = new ContractBasedImportDefinition(contract, contract, null,
+                            ImportCardinality.ExactlyOne,
+                            false, false, CreationPolicy.Any);
                         return container.GetExports(definition);
                     }
                 }
@@ -56,10 +58,10 @@ namespace Core.Common.Extensions
             {
                 foreach (var ExportDef in PartDef.ExportDefinitions)
                 {
-                    if (ExportDef.ContractName == typeof(T).FullName)
+                    if (ExportDef.ContractName == typeof (T).FullName)
                     {
                         if (predicate(ExportDef.Metadata))
-                            return (T)PartDef.CreatePart().GetExportedValue(ExportDef);
+                            return (T) PartDef.CreatePart().GetExportedValue(ExportDef);
                     }
                 }
             }
@@ -73,7 +75,7 @@ namespace Core.Common.Extensions
                 foreach (var ExportDef in PartDef.ExportDefinitions)
                 {
                     if (ExportDef.ContractName == type)
-                        return (T)PartDef.CreatePart().GetExportedValue(ExportDef);
+                        return (T) PartDef.CreatePart().GetExportedValue(ExportDef);
                 }
             }
             return default(T);

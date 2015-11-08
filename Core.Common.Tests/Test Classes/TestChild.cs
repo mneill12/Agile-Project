@@ -1,12 +1,10 @@
-using System;
-using System.Collections.Generic;
 using Core.Common.Core;
 
 namespace Core.Common.Tests
 {
     internal class TestChild : ObjectBase
     {
-        string _ChildName = string.Empty;
+        private string _ChildName = string.Empty;
 
         public string ChildName
         {

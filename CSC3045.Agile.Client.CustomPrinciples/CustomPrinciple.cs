@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Security.Principal;
-using CSC3045.Agile.Client.Entities;
-
+﻿using System.Security.Principal;
 
 namespace CSC3045.Agile.Client.CustomPrinciples
 {
@@ -21,20 +14,19 @@ namespace CSC3045.Agile.Client.CustomPrinciples
 
         IIdentity IPrincipal.Identity
         {
-            get { return this.Identity; }
+            get { return Identity; }
         }
 
         public bool IsInRole(string role)
         {
-            bool roleFound = false;
-            foreach(UserRole userRole in _identity.Roles){
-
+            var roleFound = false;
+            foreach (var userRole in _identity.Roles)
+            {
                 if (userRole.UserRoleName == role)
                     roleFound = true;
             }
 
             return roleFound;
         }
-  
     }
 }

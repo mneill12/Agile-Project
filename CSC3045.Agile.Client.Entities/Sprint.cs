@@ -1,32 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Core.Common.Core;
-using FluentValidation;
 
 namespace CSC3045.Agile.Client.Entities
 {
     public class Sprint : ObjectBase
     {
+        private Backlog _Backlog;
+        private ICollection<Burndown> _Burndowns;
+        private DateTime _EndDate;
+        private Account _ScrumMaster;
 
         private int _SprintId;
-        private Account _ScrumMaster;
-        private Backlog _Backlog;
-        private int _SprintNumber;
         private string _SprintName;
+        private int _SprintNumber;
         private DateTime _StartDate;
-        private DateTime _EndDate;
-        private ICollection<Burndown> _Burndowns;
-        private ICollection<Account> _TeamMembers; 
+        private ICollection<Account> _TeamMembers;
 
         public int SprintId
         {
-            get
-            {
-                return _SprintId;
-            }
+            get { return _SprintId; }
             set
             {
                 if (_SprintId != value)
@@ -52,10 +45,7 @@ namespace CSC3045.Agile.Client.Entities
 
         public Backlog Backlog
         {
-            get
-            {
-                return _Backlog;
-            }
+            get { return _Backlog; }
             set
             {
                 if (_Backlog != value)
@@ -68,10 +58,7 @@ namespace CSC3045.Agile.Client.Entities
 
         public int SprintNumber
         {
-            get
-            {
-                return _SprintNumber;
-            }
+            get { return _SprintNumber; }
             set
             {
                 if (_SprintNumber != value)
@@ -84,10 +71,7 @@ namespace CSC3045.Agile.Client.Entities
 
         public string SprintName
         {
-            get
-            {
-                return _SprintName;
-            }
+            get { return _SprintName; }
             set
             {
                 if (_SprintName != value)
@@ -100,10 +84,7 @@ namespace CSC3045.Agile.Client.Entities
 
         public DateTime StartDate
         {
-            get
-            {
-                return _StartDate;
-            }
+            get { return _StartDate; }
             set
             {
                 if (_StartDate != value)
@@ -116,10 +97,7 @@ namespace CSC3045.Agile.Client.Entities
 
         public DateTime EndDate
         {
-            get
-            {
-                return _EndDate;
-            }
+            get { return _EndDate; }
             set
             {
                 if (_EndDate != value)
@@ -132,10 +110,7 @@ namespace CSC3045.Agile.Client.Entities
 
         public ICollection<Burndown> Burndowns
         {
-            get
-            {
-                return _Burndowns;
-            }
+            get { return _Burndowns; }
             set
             {
                 if (_Burndowns != value)
@@ -148,15 +123,12 @@ namespace CSC3045.Agile.Client.Entities
 
         public ICollection<Account> TeamMembers
         {
-            get
-            {
-                return _TeamMembers;
-            }
+            get { return _TeamMembers; }
             set
             {
                 if (_TeamMembers != value)
                 {
-                    _TeamMembers= value;
+                    _TeamMembers = value;
                     OnPropertyChanged(() => TeamMembers);
                 }
             }

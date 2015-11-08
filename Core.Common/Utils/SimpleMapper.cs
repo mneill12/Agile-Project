@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 
 namespace Core.Common.Utils
 {
@@ -11,12 +9,12 @@ namespace Core.Common.Utils
             where T : class, new()
             where U : class, new()
         {
-            List<PropertyInfo> sourceProperties = source.GetType().GetProperties().ToList<PropertyInfo>();
-            List<PropertyInfo> destinationProperties = destination.GetType().GetProperties().ToList<PropertyInfo>();
+            var sourceProperties = source.GetType().GetProperties().ToList();
+            var destinationProperties = destination.GetType().GetProperties().ToList();
 
-            foreach (PropertyInfo sourceProperty in sourceProperties)
+            foreach (var sourceProperty in sourceProperties)
             {
-                PropertyInfo destinationProperty = destinationProperties.Find(item => item.Name == sourceProperty.Name);
+                var destinationProperty = destinationProperties.Find(item => item.Name == sourceProperty.Name);
 
                 if (destinationProperty != null)
                 {

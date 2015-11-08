@@ -1,27 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Data.Entity.Core.Objects;
-using System.Data.Entity.Migrations;
+using System.Data.Entity;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
-using Core.Common.Data;
 using CSC3045.Agile.Business.Entities;
 using CSC3045.Agile.Data.Contracts.Repository_Interfaces;
-using CSC3045.Agile.Data;
-using System.Data.Entity;
-
 
 namespace CSC3045.Agile.Data.Data_Repositories
 {
     // UserStory LINQ Entity Queries
-    [Export(typeof(IUserStoryRepository))]
+    [Export(typeof (IUserStoryRepository))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class UserStoryRepository : DataRepositoryBase<UserStory>
     {
-      
         protected override UserStory AddEntity(Csc3045AgileContext entityContext, UserStory entity)
         {
             return entityContext.UserStorySet.Add(entity);
@@ -30,21 +20,21 @@ namespace CSC3045.Agile.Data.Data_Repositories
         protected override UserStory UpdateEntity(Csc3045AgileContext entityContext, UserStory entity)
         {
             return (from e in entityContext.UserStorySet
-                    where e.UserStoryId == entity.UserStoryId
-                    select e).FirstOrDefault();
+                where e.UserStoryId == entity.UserStoryId
+                select e).FirstOrDefault();
         }
 
         protected override IEnumerable<UserStory> GetEntities(Csc3045AgileContext entityContext)
         {
             return from e in entityContext.UserStorySet
-                   select e;
+                select e;
         }
 
         protected override UserStory GetEntity(Csc3045AgileContext entityContext, int id)
         {
             var query = (from e in entityContext.UserStorySet
-                         where e.UserStoryId == id
-                         select e);
+                where e.UserStoryId == id
+                select e);
 
             var results = query.FirstOrDefault();
 
@@ -86,6 +76,5 @@ namespace CSC3045.Agile.Data.Data_Repositories
                     .ToList();
             }
         }
-
     }
 }

@@ -1,10 +1,6 @@
 ﻿using System.ComponentModel.Composition;
-using System.Windows.Controls;
-using ClientDesktop.Views;
 using Core.Common.Contracts;
-using Core.Common.Core;
 using Core.Common.UI.Core;
-using Microsoft.Practices.ServiceLocation;
 using Prism.Regions;
 
 namespace ClientDesktop.ViewModels
@@ -13,8 +9,8 @@ namespace ClientDesktop.ViewModels
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class EditAccountViewModel : ViewModelBase
     {
-        IServiceFactory _ServiceFactory;
-        IRegionManager _RegionManager;
+        private IRegionManager _RegionManager;
+        private IServiceFactory _ServiceFactory;
 
         [ImportingConstructor]
         public EditAccountViewModel(IServiceFactory serviceFactory, IRegionManager regionManager)
@@ -25,7 +21,6 @@ namespace ClientDesktop.ViewModels
 
         protected override void OnViewLoaded()
         {
-
         }
     }
 }

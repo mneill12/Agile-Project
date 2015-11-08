@@ -1,22 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Core.Common.Core;
-using CSC3045.Agile.Client.Entities;
 
 namespace CSC3045.Agile.Client.Entities
 {
     public class Account : ObjectBase
     {
         private int _AccountId;
-        private string _LoginEmail;
-        private string _Password;
+        private ICollection<PlanningPokerSession> _AssociatedPlanningPokerSessions;
+        private ICollection<Sprint> _AssociatedSprints;
+        private ICollection<Project> _AssocicatedProjects;
         private string _FirstName;
         private string _LastName;
+        private string _LoginEmail;
+        private string _Password;
         private IList<UserRole> _UserRoles;
-        private ICollection<Project> _AssocicatedProjects;
-        private ICollection<Sprint> _AssociatedSprints;
-        private ICollection<PlanningPokerSession> _AssociatedPlanningPokerSessions;
 
         public int AccountId
         {
@@ -134,6 +131,5 @@ namespace CSC3045.Agile.Client.Entities
                 }
             }
         }
-
     }
 }

@@ -1,12 +1,10 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 
 namespace Core.Common.Core
 {
     public class ItemPropertyChangedEventArgs<T> : EventArgs
-           where T : INotifyPropertyChanged
+        where T : INotifyPropertyChanged
     {
         public ItemPropertyChangedEventArgs(T item, string propertyName)
         {

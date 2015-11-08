@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Core.Common.Core;
-using CSC3045.Agile.Client.Entities;
-
 
 namespace CSC3045.Agile.Client.Entities
 {
     public class BurndownPoint : ObjectBase
     {
-        private int _BurndownPointId;
         private DateTime _BurndownPointDate;
-        private int _PointsRemaining;
+        private int _BurndownPointId;
         private int _HoursRemaining;
+        private int _PointsRemaining;
 
         public int BurndownPointId
         {
@@ -65,7 +61,5 @@ namespace CSC3045.Agile.Client.Entities
                 }
             }
         }
-
-
     }
 }

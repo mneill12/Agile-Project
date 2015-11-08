@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 using Core.Common.Contracts;
 using Core.Common.Core;
 
@@ -31,12 +26,10 @@ namespace CSC3045.Agile.Business.Entities
         public CurrentStatus CurrentStatus { get; set; }
 
         [DataMember]
-        public Boolean IsBlocked { get; set; }
+        public bool IsBlocked { get; set; }
 
         [DataMember]
         public string UserNotes { get; set; }
-
-       
 
         #region IIdentifiableEntity members
 

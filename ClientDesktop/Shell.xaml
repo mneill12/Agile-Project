@@ -1,26 +1,29 @@
 ﻿<Controls:MetroWindow x:Class="ClientDesktop.Shell"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:v="clr-namespace:ClientDesktop.Views"
-        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-		xmlns:regions="http://prismlibrary.com/"
-        Title="JELLO - Client Desktop" Height="960" Width="1280" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background="LightSteelBlue" Foreground="Black">
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:v="clr-namespace:ClientDesktop.Views"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:regions="http://prismlibrary.com/"
+                      Title="JELLO - Client Desktop" Height="960" Width="1280" ResizeMode="NoResize"
+                      WindowStartupLocation="CenterScreen" Background="LightSteelBlue" Foreground="Black">
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             <Button Content="settings" />
             <Button>
-                <Hyperlink NavigateUri="https://www.youtube.com/watch?v=oLmDe8pAc6I&amp;list=PLX4Y2n2d1-uUlu6lRwOYDRd0AgSu1cSMt" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="none" Foreground="Red">
+                <Hyperlink
+                    NavigateUri="https://www.youtube.com/watch?v=oLmDe8pAc6I&amp;list=PLX4Y2n2d1-uUlu6lRwOYDRd0AgSu1cSMt"
+                    RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="none" Foreground="Red">
                     <StackPanel Orientation="Horizontal">
                         <Rectangle Width="20" Height="20"
-                       Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
+                                   Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
                             <Rectangle.OpacityMask>
                                 <VisualBrush Stretch="Fill"
-                             Visual="{StaticResource appbar_youtube}" />
+                                             Visual="{StaticResource appbar_youtube}" />
                             </Rectangle.OpacityMask>
                         </Rectangle>
                         <TextBlock Margin="4 0 0 0"
-                       VerticalAlignment="Center"
-                       Text="Click Me" />
+                                   VerticalAlignment="Center"
+                                   Text="Click Me" />
                     </StackPanel>
                 </Hyperlink>
             </Button>
@@ -28,12 +31,12 @@
     </Controls:MetroWindow.RightWindowCommands>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="20" />
         </Grid.RowDefinitions>
         <ContentControl x:Name="TopBarRegion" regions:RegionManager.RegionName="TopBarRegion" Grid.Row="0" />
-        <ContentControl x:Name="ContentRegion" regions:RegionManager.RegionName="ContentRegion" Grid.Row="1"/>
-        <ContentControl x:Name="StatusRegion" regions:RegionManager.RegionName="StatusRegion" Grid.Row="2"/>
+        <ContentControl x:Name="ContentRegion" regions:RegionManager.RegionName="ContentRegion" Grid.Row="1" />
+        <ContentControl x:Name="StatusRegion" regions:RegionManager.RegionName="StatusRegion" Grid.Row="2" />
     </Grid>
 </Controls:MetroWindow>

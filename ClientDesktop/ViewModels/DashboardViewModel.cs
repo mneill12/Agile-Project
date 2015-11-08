@@ -1,10 +1,7 @@
 ﻿using System.ComponentModel.Composition;
-using System.Windows.Controls;
 using ClientDesktop.Views;
 using Core.Common.Contracts;
-using Core.Common.Core;
 using Core.Common.UI.Core;
-using Microsoft.Practices.ServiceLocation;
 using Prism.Regions;
 
 namespace ClientDesktop.ViewModels
@@ -13,12 +10,9 @@ namespace ClientDesktop.ViewModels
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class DashboardViewModel : ViewModelBase
     {
-        private readonly DelegateCommand<object> _AddProjectCommand;
+        private readonly IRegionManager _RegionManager;
 
-        public DelegateCommand<object> AddProjectCommand { get { return _AddProjectCommand; } }
-
-        IServiceFactory _ServiceFactory;
-        IRegionManager _RegionManager;
+        private IServiceFactory _ServiceFactory;
 
         [ImportingConstructor]
         public DashboardViewModel(IServiceFactory serviceFactory, IRegionManager regionManager)
@@ -26,17 +20,18 @@ namespace ClientDesktop.ViewModels
             _ServiceFactory = serviceFactory;
             _RegionManager = regionManager;
 
-            _AddProjectCommand = new DelegateCommand<object>(OnAddProject);
+            AddProjectCommand = new DelegateCommand<object>(OnAddProject);
         }
+
+        public DelegateCommand<object> AddProjectCommand { get; }
 
         private void OnAddProject(object obj)
         {
-            _RegionManager.RequestNavigate(RegionNames.Content, typeof(CreateProjectView).FullName);
+            _RegionManager.RequestNavigate(RegionNames.Content, typeof (CreateProjectView).FullName);
         }
 
         protected override void OnViewLoaded()
         {
-
         }
     }
 }

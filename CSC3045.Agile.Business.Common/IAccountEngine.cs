@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Core.Common.Contracts;
+﻿using Core.Common.Contracts;
 
 namespace CSC3045.Agile.Business.Common
 {

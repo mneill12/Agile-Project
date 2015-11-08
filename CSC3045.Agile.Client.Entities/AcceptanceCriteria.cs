@@ -1,26 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Core.Common.Core;
-using FluentValidation;
 
 namespace CSC3045.Agile.Client.Entities
 {
     public class AcceptanceCriteria : ObjectBase
     {
         private int _acceptanceCriteriaId;
-        private string _scenario;
         private ICollection<Criteria> _criteria;
         private bool _isSatisfied;
+        private string _scenario;
 
         public int AcceptanceCriteriaId
         {
-            get
-            {
-                return _acceptanceCriteriaId;
-            }
+            get { return _acceptanceCriteriaId; }
             set
             {
                 if (_acceptanceCriteriaId != value)
@@ -33,10 +25,7 @@ namespace CSC3045.Agile.Client.Entities
 
         public string Scenario
         {
-            get
-            {
-                return _scenario;
-            }
+            get { return _scenario; }
             set
             {
                 if (_scenario != value)
@@ -49,10 +38,7 @@ namespace CSC3045.Agile.Client.Entities
 
         public ICollection<Criteria> Criteria
         {
-            get
-            {
-                return _criteria;
-            }
+            get { return _criteria; }
             set
             {
                 if (_criteria != value)
@@ -63,12 +49,9 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public Boolean IsSatisfied
+        public bool IsSatisfied
         {
-            get
-            {
-                return _isSatisfied;
-            }
+            get { return _isSatisfied; }
             set
             {
                 if (_isSatisfied != value)
@@ -78,6 +61,5 @@ namespace CSC3045.Agile.Client.Entities
                 }
             }
         }
-
     }
 }

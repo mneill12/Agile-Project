@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Linq;
 using System.ServiceModel;
-using System.Threading.Tasks;
 using CSC3045.Agile.Client.Contracts;
 using CSC3045.Agile.Client.Entities;
-using Core.Common.ServiceModel;
 
 namespace CSC3045.Agile.Client.Proxies
 {
-    [Export(typeof(IAccountService))]
+    [Export(typeof (IAccountService))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class AccountClient : ClientBase<IAccountService>, IAccountService
     {
@@ -45,7 +41,7 @@ namespace CSC3045.Agile.Client.Proxies
         }
 
         /// <summary>
-        /// List user roles set on db init
+        ///     List user roles set on db init
         /// </summary>
         /// <returns>[0] Developer, [1] Product Owner, [2] Scrum Master</returns>
         public IList<UserRole> GetAllUserRoles()

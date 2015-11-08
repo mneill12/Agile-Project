@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.Composition;
-using System.Linq;
-using System.Text;
-using ClientDesktop.ViewModels;
+﻿using System.ComponentModel.Composition;
 using ClientDesktop.Views;
-using Core.Common.Contracts;
 using Core.Common.Core;
 using Microsoft.Practices.ServiceLocation;
 using Prism.Mef.Modularity;
@@ -17,15 +10,15 @@ namespace ClientDesktop
 {
     // Collection of view and view models wrapped in a Prism module
     [Module(ModuleName = "MainModule")]
-    [ModuleExport(typeof(MainModule))]
+    [ModuleExport(typeof (MainModule))]
     public class MainModule : ObjectBase, IModule
     {
-        private IRegionManager _RegionManager;
+        private readonly IRegionManager _RegionManager;
 
         [ImportingConstructor]
         public MainModule(IRegionManager regionManager)
         {
-            this._RegionManager = regionManager;
+            _RegionManager = regionManager;
         }
 
         #region IModule Members
@@ -39,7 +32,5 @@ namespace ClientDesktop
         }
 
         #endregion
-
     }
-
 }

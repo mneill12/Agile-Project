@@ -1,25 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Core.Common.Core;
-using FluentValidation;
+﻿using Core.Common.Core;
 
 namespace CSC3045.Agile.Client.Entities
 {
     public class CurrentStatus : ObjectBase
     {
-        int _StoryStatusId;
-        string _StoryStatusName;
-      
+        private int _StoryStatusId;
+        private string _StoryStatusName;
+
 
         public int StoryStatusId
         {
-            get
-            {
-                return _StoryStatusId;
-            }
+            get { return _StoryStatusId; }
             set
             {
                 if (_StoryStatusId != value)
@@ -32,10 +23,7 @@ namespace CSC3045.Agile.Client.Entities
 
         public string StoryStatusName
         {
-            get
-            {
-                return _StoryStatusName;
-            }
+            get { return _StoryStatusName; }
             set
             {
                 if (_StoryStatusName != value)

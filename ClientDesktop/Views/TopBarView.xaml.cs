@@ -1,12 +1,11 @@
 ﻿using System.ComponentModel.Composition;
-using System.Windows.Controls;
 using ClientDesktop.ViewModels;
 using Core.Common.UI.Core;
 
 namespace ClientDesktop.Views
 {
     /// <summary>
-    /// Interaction logic for TopBarView.xaml
+    ///     Interaction logic for TopBarView.xaml
     /// </summary>
     [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]

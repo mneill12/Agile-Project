@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.Serialization;
 using Core.Common.Contracts;
 using Core.Common.Core;
 
 // DTO For Sprints
+
 namespace CSC3045.Agile.Business.Entities
 {
     [DataContract]
@@ -38,7 +36,7 @@ namespace CSC3045.Agile.Business.Entities
         public ICollection<Burndown> Burndowns { get; set; }
 
         [DataMember]
-        public ICollection<Account> SprintMembers { get; set; } 
+        public ICollection<Account> SprintMembers { get; set; }
 
         #region IIdentifiableEntity members
 

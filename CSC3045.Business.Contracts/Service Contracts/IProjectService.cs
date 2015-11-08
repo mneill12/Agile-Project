@@ -1,10 +1,6 @@
-﻿using Core.Common.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
+using Core.Common.Exceptions;
 using CSC3045.Agile.Business.Entities;
 
 namespace CSC3045.Agile.Business.Contracts
@@ -17,7 +13,7 @@ namespace CSC3045.Agile.Business.Contracts
         Project AddProject(Project project);
 
         [OperationContract]
-        [FaultContract(typeof(NotFoundException))]
+        [FaultContract(typeof (NotFoundException))]
         Project GetProjectInfo(int projectId);
 
         [OperationContract]
@@ -31,7 +27,7 @@ namespace CSC3045.Agile.Business.Contracts
         void UpdateProjectInfo(Project project);
 
         [OperationContract]
-        [FaultContract(typeof(NotFoundException))]
+        [FaultContract(typeof (NotFoundException))]
         IEnumerable<Project> GetProjectsByAccount(int accountId);
     }
 }

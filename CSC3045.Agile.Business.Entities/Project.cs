@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.Serialization;
 using Core.Common.Contracts;
 using Core.Common.Core;
@@ -31,13 +28,13 @@ namespace CSC3045.Agile.Business.Entities
         public DateTime ProjectDeadline { get; set; }
 
         [DataMember]
-        public ICollection<Sprint> Sprints { get; set; } 
+        public ICollection<Sprint> Sprints { get; set; }
 
         [DataMember]
         public ICollection<Burndown> Burndowns { get; set; }
 
         [DataMember]
-        public ICollection<Account> ProjectMembers { get; set; } 
+        public ICollection<Account> ProjectMembers { get; set; }
 
         [DataMember]
         public ICollection<Account> AssociatedUsers { get; set; }
@@ -51,6 +48,5 @@ namespace CSC3045.Agile.Business.Entities
         }
 
         #endregion
-
     }
 }
