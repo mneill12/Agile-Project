@@ -59,12 +59,12 @@ namespace CSC3045.Agile.Data.Data_Repositories
         }
 
         // Get tasks by status
-        public IEnumerable<StoryTask> GetTasksByStatus(CurrentStatus status)
+        public IEnumerable<StoryTask> GetTasksByStatus(string status)
         {
             using (var entityContext = new Csc3045AgileContext())
             return entityContext.StoryTaskSet
                .Include(a => a.Owner)
-               .Where(a => a.CurrentStatus.StoryStatusName.Equals(status.StoryStatusName))
+               .Where(a => a.CurrentStatus.StoryStatusName.Equals(status))
                .ToList();
 
         } 

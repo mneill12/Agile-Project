@@ -9,6 +9,6 @@ namespace CSC3045.Agile.Data.Contracts.Repository_Interfaces
     {
         IEnumerable<StoryTask> GetTasksByOwner(int ownerId);
         IEnumerable<StoryTask> GetBlockedTasks();
-        IEnumerable<StoryTask> GetTasksByStatus(CurrentStatus status);
+        IEnumerable<StoryTask> GetTasksByStatus(string status);
     }
 }

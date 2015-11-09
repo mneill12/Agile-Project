@@ -101,6 +101,7 @@
     <Compile Include="GlobalCommands.cs" />
     <Compile Include="IShellViewModel.cs" />
     <Compile Include="MainModule.cs" />
+    <Compile Include="ViewModelConstants.cs" />
     <Compile Include="RegionNames.cs" />
     <Compile Include="Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>

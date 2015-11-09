@@ -9,6 +9,7 @@ using Core.Common.Contracts;
 using Core.Common.UI.Core;
 using CSC3045.Agile.Client.Contracts;
 using CSC3045.Agile.Client.Entities;
+using ClientDesktop;
 
 namespace ClientDesktop.ViewModels
 {
@@ -16,8 +17,6 @@ namespace ClientDesktop.ViewModels
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class CreateProjectViewModel : ViewModelBase
     {
-        private const string SCRUMMASTER = "Scrum Master";
-        private const string PRODUCT_OWNER = "Product Owner";
 
         private List<ProductOwnerScrumMasterInfo> _ProductOwners;
         private string _ProjectDeadline;
@@ -107,8 +106,8 @@ namespace ClientDesktop.ViewModels
             WithClient(_ServiceFactory.CreateClient<IAccountService>(), accountClient =>
             {
                
-                var productOwners = accountClient.GetByUserRole(PRODUCT_OWNER);
-                var scrumMasters = accountClient.GetByUserRole(SCRUMMASTER);
+                var productOwners = accountClient.GetByUserRole(ViewModelConstants.ProductOwner);
+                var scrumMasters = accountClient.GetByUserRole(ViewModelConstants.Scrummaster);
                 var allUsers = accountClient.GetAllAccounts();
 
                 if (allUsers != null)
