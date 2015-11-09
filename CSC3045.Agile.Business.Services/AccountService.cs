@@ -42,13 +42,13 @@ namespace CSC3045.Agile.Business.Services
         }
 
 
-        public IEnumerable<Account> GetByUserRole(int roleId)
+        public IEnumerable<Account> GetByUserRole(string role)
         {
             return ExecuteFaultHandledOperation(() =>
             {
                 var accountRepository = _DataRepositoryFactory.GetDataRepository<IAccountRepository>();
 
-                var accounts = accountRepository.GetByUserRole(roleId);
+                var accounts = accountRepository.GetByUserRole(role);
                 if (accounts == null)
                 {
                     var ex = new NotFoundException("Error retrieving Accounts from database");
@@ -222,20 +222,20 @@ namespace CSC3045.Agile.Business.Services
 
         #endregion
 
-        public ICollection<StoryTask> GetOwnedTasks(Account account)
+        public ICollection<StoryTask> GetOwnedTasks(int accountId)
         {
             return ExecuteFaultHandledOperation(() =>
             {
-                IStoryTaskRepository userRoleRepository = _DataRepositoryFactory.GetDataRepository<IStoryTaskRepository>();
+                IStoryTaskRepository taskRepository = _DataRepositoryFactory.GetDataRepository<IStoryTaskRepository>();
 
-                IEnumerable<StoryTask> userRoles = userRoleRepository.GetTasksByOwner(account);
-                if (userRoles == null)
+                IEnumerable<StoryTask> ownedTasks = taskRepository.GetTasksByOwner(accountId);
+                if (ownedTasks == null)
                 {
                     NotFoundException ex = new NotFoundException("Error - There are no tasks to get");
                     throw new FaultException<NotFoundException>(ex, ex.Message);
                 }
 
-                return userRoles.ToList();
+                return ownedTasks.ToList();
             });
         }
     }

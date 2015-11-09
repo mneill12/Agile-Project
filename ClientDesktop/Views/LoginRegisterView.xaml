@@ -60,7 +60,7 @@
 
                     <TextBox controls:TextBoxHelper.ClearTextButton="True" controls:TextBoxHelper.Watermark="Username" Grid.Row="0" Margin="10,26,10.001,148" Text ="{Binding LoginEmail}" Name="UsernameLoginTxt" Height="20" ></TextBox>
                     <PasswordBox controls:TextBoxHelper.ClearTextButton="True" controls:TextBoxHelper.Watermark="Password" x:Name="PasswordLoginBox" Margin="10,85,10,89" Height="20" Password="4nt1t7!"/>
-
+                     
                     <Button Width="100" Height="30" FontFamily="pack://application:,,,/Resources/#AquaWax" BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" FontSize="10" Command="{Binding AccountLogin, Mode=OneTime}" CommandParameter="{Binding ElementName=PasswordLoginBox}" Grid.Row="0" Margin="10,138,246,32">Login</Button>
                     <Border 
                             Grid.Row="2"

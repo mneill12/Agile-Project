@@ -77,21 +77,16 @@
             </StackPanel>
 
         </DockPanel>
-        <DockPanel Dock="Left" Width="220" HorizontalAlignment="Left">
-            <Border BorderThickness="0" BorderBrush="Black" CornerRadius="0" Width="254" Margin="0 0 0 0">
+        <DockPanel LastChildFill="True" Dock="Left" Width="220" HorizontalAlignment="Left">
+            <Border BorderThickness="0" BorderBrush="Black" CornerRadius="0" Width="220">
                 <Border.Background>
                     <SolidColorBrush Color="Black" Opacity="0.4" />
                 </Border.Background>
-                <StackPanel>
-                    <TextBlock FontFamily="pack://application:,,,/Resources/#AquaWax" FontWeight="Bold" Foreground="White" Margin="10,0,43.714,935" FontSize="15">
-                        <TextBlock.Text>
-                            <MultiBinding StringFormat="{}{0} {1}">
-                                <Binding Path="FirstName" />
-                                <Binding Path="LastName" />
-                            </MultiBinding>
-                        </TextBlock.Text>
-                    </TextBlock>
-                    <TextBlock Margin="10,20,43.714,935" Text="{Binding EmailAddress}"></TextBlock>
+                <StackPanel Margin="0,0,28.714,0" VerticalAlignment="Top">
+                    <TextBlock FontFamily="pack://application:,,,/Resources/#AquaWax" FontWeight="Bold" Foreground="White" Margin="20,20,41.714,935" FontSize="15" Height="27" Text="{Binding FullName}" />
+                    <TextBlock Margin="20,-925,55.714,935" Text="{Binding EmailAddress}" Height="30" Foreground="White"/>
+                    <Button x:Name="CreateProjectButton" Background="Transparent" BorderBrush="Transparent" Foreground="White" Content="+ Add New Project" Width="195" HorizontalAlignment="Left" Command="{Binding CreateProjectCommand}" Margin="0,-900,-13.571,935"/>
+
                 </StackPanel>
             </Border>
         </DockPanel>

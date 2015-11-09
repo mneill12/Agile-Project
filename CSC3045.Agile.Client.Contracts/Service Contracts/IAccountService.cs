@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ServiceModel;
 using Core.Common.Contracts;
 using Core.Common.Exceptions;
@@ -40,10 +41,10 @@ namespace CSC3045.Agile.Client.Contracts
 
         [OperationContract]
         [FaultContract(typeof(NotFoundException))]
-        ICollection<StoryTask> GetOwnedTasks(Account account);
+        ICollection<StoryTask> GetOwnedTasks(int accountId);
 
         [OperationContract]
         [FaultContract(typeof(NotFoundException))]
-        IEnumerable<Account> GetByUserRole(int permissionLevel);
+        IEnumerable<Account> GetByUserRole(string role);
     }
 }

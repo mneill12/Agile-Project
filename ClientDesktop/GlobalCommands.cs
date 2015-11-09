@@ -10,8 +10,6 @@ namespace ClientDesktop
 
         public static IList<StoryTask> MyOwnedTasks; 
 
-        public static CompositeCommand NavigateCommand = new CompositeCommand();
-
         public static CompositeCommand IsLoggedIn = new CompositeCommand();
     }
 }

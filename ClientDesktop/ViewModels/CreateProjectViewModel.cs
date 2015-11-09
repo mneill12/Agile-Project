@@ -16,11 +16,15 @@ namespace ClientDesktop.ViewModels
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class CreateProjectViewModel : ViewModelBase
     {
+        private const string SCRUMMASTER = "Scrum Master";
+        private const string PRODUCT_OWNER = "Product Owner";
+
         private List<ProductOwnerScrumMasterInfo> _ProductOwners;
         private string _ProjectDeadline;
 
         private string _ProjectName;
         private List<ProductOwnerScrumMasterInfo> _ScrumMasters;
+        private List<ProductOwnerScrumMasterInfo> _AllUsers;
         private readonly IServiceFactory _ServiceFactory;
 
         [ImportingConstructor]
@@ -30,6 +34,7 @@ namespace ClientDesktop.ViewModels
             CreateProject = new DelegateCommand<TextBox>(OnCreateProject);
             _ProductOwners = new List<ProductOwnerScrumMasterInfo>();
             _ScrumMasters = new List<ProductOwnerScrumMasterInfo>();
+            _AllUsers = new List<ProductOwnerScrumMasterInfo>();
         }
 
         public DelegateCommand<TextBox> CreateProject { get; private set; }
@@ -67,6 +72,17 @@ namespace ClientDesktop.ViewModels
             }
         }
 
+        public List<ProductOwnerScrumMasterInfo> AllUsers
+        {
+            get { return _AllUsers; }
+            set
+            {
+                if (_AllUsers == value) return;
+                _AllUsers = value;
+                OnPropertyChanged("AllUsers");
+            }
+        }
+
         public List<ProductOwnerScrumMasterInfo> ScrumMasters
         {
             get { return _ScrumMasters; }
@@ -90,11 +106,18 @@ namespace ClientDesktop.ViewModels
         {
             WithClient(_ServiceFactory.CreateClient<IAccountService>(), accountClient =>
             {
-                var productOwnerRole = new UserRole {UserRoleName = "Product Owner"};
-                var scrumMasterRole = new UserRole {UserRoleName = "Scrum Master"};
+               
+                var productOwners = accountClient.GetByUserRole(PRODUCT_OWNER);
+                var scrumMasters = accountClient.GetByUserRole(SCRUMMASTER);
+                var allUsers = accountClient.GetAllAccounts();
 
-                var productOwners = accountClient.GetByUserRole(1);
-                var scrumMasters = accountClient.GetByUserRole(2);
+                if (allUsers != null)
+                {
+                    foreach (var a in allUsers)
+                    {
+                        _AllUsers.Add(new ProductOwnerScrumMasterInfo(a.FirstName, a.LastName, a.LoginEmail));
+                    }
+                }
 
                 if (productOwners != null)
                 {

@@ -39,12 +39,12 @@ namespace CSC3045.Agile.Data.Data_Repositories
         }
 
         // Get StoryTasks by Owner
-        public IEnumerable<StoryTask> GetTasksByOwner(Account owner)
+        public IEnumerable<StoryTask> GetTasksByOwner(int accountId)
         {
             using (var entityContext = new Csc3045AgileContext())
             return entityContext.StoryTaskSet
                 .Include(a => a.Owner)
-                .Where(a => a.Owner.AccountId == owner.AccountId)
+                .Where(a => a.Owner.AccountId == accountId)
                 .ToList();
         }
 

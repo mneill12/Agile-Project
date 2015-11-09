@@ -23,6 +23,7 @@ namespace ClientDesktop.ViewModels
         private string _FirstName;
         private string _Surname;
         private string _EmailAddress;
+        private string _FullName;
 
         public string FirstName
         {
@@ -66,10 +67,28 @@ namespace ClientDesktop.ViewModels
             }
         }
 
+        public string FullName
+        {
+            get { return _FullName; }
+            set
+            {
+                if (_FullName == value) return;
+                _FullName = value;
+                OnPropertyChanged("FullName");
+            }
+        }
+
         #endregion
 
         IServiceFactory _ServiceFactory;
         IRegionManager _RegionManager;
+
+        public DelegateCommand<object> CreateProjectCommand { get; set; }
+
+        private void CreateProject(object parameter)
+        {
+            _RegionManager.RequestNavigate(RegionNames.Content, typeof(CreateProjectView).FullName);
+        }
 
         [ImportingConstructor]
         public DashboardViewModel(IServiceFactory serviceFactory, IRegionManager regionManager)
@@ -77,14 +96,7 @@ namespace ClientDesktop.ViewModels
             _ServiceFactory = serviceFactory;
             _RegionManager = regionManager;
 
-            AddProjectCommand = new DelegateCommand<object>(OnAddProject);
-        }
-
-        public DelegateCommand<object> AddProjectCommand { get; set; }
-
-        private void OnAddProject(object obj)
-        {
-            _RegionManager.RequestNavigate(RegionNames.Content, typeof (CreateProjectView).FullName);
+            CreateProjectCommand = new DelegateCommand<object>(CreateProject);
         }
 
         protected override void OnViewLoaded()
@@ -92,6 +104,7 @@ namespace ClientDesktop.ViewModels
             FirstName = GlobalCommands.MyAccount.FirstName;
             Surname = GlobalCommands.MyAccount.LastName;
             EmailAddress = GlobalCommands.MyAccount.LoginEmail;
+            FullName = GlobalCommands.MyAccount.FirstName + " " + GlobalCommands.MyAccount.LastName;
         }
     }
 }

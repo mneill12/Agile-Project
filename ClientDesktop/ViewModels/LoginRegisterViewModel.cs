@@ -152,7 +152,6 @@ namespace ClientDesktop.ViewModels
             }
         }
 
-
         public string Status
         {
             get
@@ -187,12 +186,10 @@ namespace ClientDesktop.ViewModels
 
         private readonly DelegateCommand<PasswordBox> _RegisterAccount;
         private readonly DelegateCommand<PasswordBox> _AccountLogin;
-        private readonly DelegateCommand<object> _LogoutCommand;
         private readonly DelegateCommand<TextBox> _XMLFilePath; 
 
         public DelegateCommand<PasswordBox> RegisterAccount { get { return _RegisterAccount; } }
         public DelegateCommand<PasswordBox> AccountLogin { get { return _AccountLogin; } }
-        public DelegateCommand<object> LogoutCommand { get { return _LogoutCommand; } }
         public DelegateCommand<TextBox> XMLFilePath { get { return _XMLFilePath; } }
 
             #endregion
@@ -212,7 +209,6 @@ namespace ClientDesktop.ViewModels
             _RegionManager = regionManager;
             _RegisterAccount = new DelegateCommand<PasswordBox>(OnRegisterAccount);
             _AccountLogin = new DelegateCommand<PasswordBox>(OnAccountLogin);
-            _LogoutCommand = new DelegateCommand<object>(Logout, CanLogout);
             _XMLFilePath = new DelegateCommand<TextBox>(XMLButtonClick);
 
         }
@@ -284,11 +280,6 @@ namespace ClientDesktop.ViewModels
                             throw new UnauthorizedAccessException();
                         }
                     });
-
-                    WithClient<IAccountService>(_ServiceFactory.CreateClient<IAccountService>(), accountClient =>
-                    {
-                        GlobalCommands.MyOwnedTasks = accountClient.GetOwnedTasks(GlobalCommands.MyAccount).ToList();
-                    });
                 }
                 catch (FaultException ex)
                 {
@@ -338,23 +329,6 @@ namespace ClientDesktop.ViewModels
                 // Open document 
                 string filename = dlg.FileName;
             }
-        }
-
-        private void Logout(object parameter)
-        {
-            var customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
-            if (customPrincipal != null)
-            {
-                customPrincipal.Identity = new AnonymousIdentity();
-                OnPropertyChanged("AuthenticatedUser");
-                OnPropertyChanged("IsAuthenticated");
-                Status = string.Empty;
-            }
-        }
-
-        private bool CanLogout(object parameter)
-        {
-            return IsAuthenticated;
         }
 
         protected void OnRegisterAccount(PasswordBox passwordBox)
