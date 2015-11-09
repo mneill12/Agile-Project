@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -24,6 +25,7 @@ namespace ClientDesktop.ViewModels
         private string _Surname;
         private string _EmailAddress;
         private string _FullName;
+        private List<UserRole> _AvailableRoles; 
 
         public string FirstName
         {
@@ -78,6 +80,17 @@ namespace ClientDesktop.ViewModels
             }
         }
 
+        public List<UserRole> AvailableRoles
+        {
+            get { return _AvailableRoles; }
+            set
+            {
+                if (_AvailableRoles == value) return;
+                _AvailableRoles = value;
+                OnPropertyChanged("AvailableRoles");
+            }
+        }
+
         #endregion
 
         IServiceFactory _ServiceFactory;
@@ -105,6 +118,8 @@ namespace ClientDesktop.ViewModels
             Surname = GlobalCommands.MyAccount.LastName;
             EmailAddress = GlobalCommands.MyAccount.LoginEmail;
             FullName = GlobalCommands.MyAccount.FirstName + " " + GlobalCommands.MyAccount.LastName;
+            AvailableRoles = GlobalCommands.MyAccount.UserRoles.ToList();
+
         }
     }
 }

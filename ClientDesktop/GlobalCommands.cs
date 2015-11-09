@@ -8,8 +8,6 @@ namespace ClientDesktop
     {
         public static Account MyAccount;
 
-        public static IList<StoryTask> MyOwnedTasks; 
-
         public static CompositeCommand IsLoggedIn = new CompositeCommand();
     }
 }

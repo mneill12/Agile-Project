@@ -83,9 +83,39 @@
                     <SolidColorBrush Color="Black" Opacity="0.4" />
                 </Border.Background>
                 <StackPanel Margin="0,0,28.714,0" VerticalAlignment="Top">
-                    <TextBlock FontFamily="pack://application:,,,/Resources/#AquaWax" FontWeight="Bold" Foreground="White" Margin="20,20,41.714,935" FontSize="15" Height="27" Text="{Binding FullName}" />
-                    <TextBlock Margin="20,-925,55.714,935" Text="{Binding EmailAddress}" Height="30" Foreground="White"/>
-                    <Button x:Name="CreateProjectButton" Background="Transparent" BorderBrush="Transparent" Foreground="White" Content="+ Add New Project" Width="195" HorizontalAlignment="Left" Command="{Binding CreateProjectCommand}" Margin="0,-900,-13.571,935"/>
+                    <TextBlock FontFamily="pack://application:,,,/Resources/#AquaWax" FontWeight="Bold" Foreground="White" Margin="50,00,26.429,935" FontSize="15" Height="30" Width="150" HorizontalAlignment="Left" Text="{Binding FullName}" />
+                    <TextBlock Margin="50,-945,0,935" Text="{Binding EmailAddress}" Height="30" Width="150" HorizontalAlignment="Left" Foreground="White"/>
+                    <ListView BorderThickness="0"  Background="Transparent" Foreground="White" x:Name="AvailableRolesListView" HorizontalContentAlignment="Stretch"
+                    	ItemsSource="{Binding AvailableRoles}" Margin="40,-1695,10.429,130" HorizontalAlignment="Left" Width="150" Height="60">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListViewItem}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="Transparent"></Setter>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="BorderThickness" Value="0"/>
+                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Transparent"></Setter>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="BorderThickness" Value="0"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                                <Setter Property="Padding" Value="0 5"></Setter>
+                                <Setter Property="VerticalAlignment" Value="Top"></Setter>
+                                <Setter Property="Focusable" Value="false"/>
+                                <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+                                <Setter Property="MaxWidth" Value="150"></Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="150" Header="Surname" DisplayMemberBinding="{Binding UserRoleName}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Button x:Name="CreateProjectButton" Background="Transparent" BorderBrush="Transparent" Foreground="White" Content="+ Add New Project" Height="30" Width="150" HorizontalAlignment="Left" Command="{Binding CreateProjectCommand}" Margin="20,-800,-13.571,935"/>
+
 
                 </StackPanel>
             </Border>

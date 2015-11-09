@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Globalization;
+using System.Linq;
 using System.ServiceModel;
 using System.Windows.Controls;
 using Core.Common;
@@ -99,7 +100,9 @@ namespace ClientDesktop.ViewModels
         protected override void OnViewLoaded()
         {
             getProductOwnersAndScrumMasters();
+            
         }
+
 
         protected void getProductOwnersAndScrumMasters()
         {
