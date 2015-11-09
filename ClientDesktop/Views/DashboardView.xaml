@@ -10,9 +10,29 @@
                           d:DesignHeight="960" d:DesignWidth="1280">
     <Grid>
         <DockPanel LastChildFill="True" Margin="0,0,0,237" Dock="Right" HorizontalAlignment="Right">
-            <StackPanel Margin="20,0,0,-0.143" Width="1034" >
-                <TextBlock FontFamily="pack://application:,,,/Resources/#AquaWax" Text="My Projects: " FontWeight="Bold" Foreground="White" Height="25" Margin="16,0,-5.286,0" FontSize="15"/>
-                <TabControl Foreground="White" Margin="0,0,-0.286,0">
+            <StackPanel Margin="20,30,0,-0.143" Width="1034" >
+                <TextBlock FontFamily="pack://application:,,,/Resources/#AquaWax" Text="MY PROJECTS" FontWeight="Bold" Foreground="White" Height="25" Margin="16,0,896.714,0" FontSize="15"/>
+                <Button 
+            		x:Name="CreateProjectButton"
+            		Command="{Binding CreateProjectCommand}"
+            		Foreground="White"
+            		Width="40" Panel.ZIndex="99"
+            		Height="40"
+                    BorderBrush="White"
+            		HorizontalAlignment="Right"
+            		VerticalAlignment="Top"
+            		Style="{DynamicResource MetroCircleButtonStyle}" Margin="409,-45,170,0">
+                    <Rectangle Fill="White" Width="15"
+            			Height="15">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Stretch="Fill"
+            					Visual="{StaticResource appbar_add}"/>
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                </Button>
+                <TextBlock FontSize="15" FontFamily="pack://application:,,,/Resources/#AquaWax" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="489,-50,20,0" Text="ADD NEW PROJECT" Foreground="White"/>
+
+                <TabControl Foreground="White" Margin="0,20,-0.286,0">
                     <!-- Tab 1 @TODO - Make dynamic! -->
                     <TabItem Header="Project V" Margin="8,2,-7.857,-1.286" Foreground="White" >
                         <StackPanel>
@@ -82,11 +102,18 @@
                 <Border.Background>
                     <SolidColorBrush Color="Black" Opacity="0.4" />
                 </Border.Background>
-                <StackPanel Margin="0,0,28.714,0" VerticalAlignment="Top">
-                    <TextBlock FontFamily="pack://application:,,,/Resources/#AquaWax" FontWeight="Bold" Foreground="White" Margin="50,00,26.429,935" FontSize="15" Height="30" Width="150" HorizontalAlignment="Left" Text="{Binding FullName}" />
-                    <TextBlock Margin="50,-945,0,935" Text="{Binding EmailAddress}" Height="30" Width="150" HorizontalAlignment="Left" Foreground="White"/>
+                <StackPanel Margin="0,30,28.714,0" VerticalAlignment="Top">
+                    <Rectangle Margin="50 0 0 0" Fill="White" Width="125"
+                    	Height="100">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Stretch="Fill"
+                    			Visual="{StaticResource appbar_people_profile}"/>
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock FontFamily="pack://application:,,,/Resources/#AquaWax" FontWeight="Bold" Foreground="White" Margin="50,20,26.429,935" FontSize="15" Height="30" Width="150" HorizontalAlignment="Left" Text="{Binding FullName}" />
+                    <TextBlock Margin="50,-935,0,935" Text="{Binding EmailAddress}" Height="30" Width="150" HorizontalAlignment="Left" Foreground="White"/>
                     <ListView BorderThickness="0"  Background="Transparent" Foreground="White" x:Name="AvailableRolesListView" HorizontalContentAlignment="Stretch"
-                    	ItemsSource="{Binding AvailableRoles}" Margin="40,-1695,10.429,130" HorizontalAlignment="Left" Width="150" Height="60">
+                    	ItemsSource="{Binding AvailableRoles}" Margin="42,-1685,10.429,130" HorizontalAlignment="Left" Width="150" Height="60">
                         <ListView.ItemContainerStyle>
                             <Style TargetType="{x:Type ListViewItem}">
                                 <Style.Triggers>
@@ -114,9 +141,6 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    <Button x:Name="CreateProjectButton" Background="Transparent" BorderBrush="Transparent" Foreground="White" Content="+ Add New Project" Height="30" Width="150" HorizontalAlignment="Left" Command="{Binding CreateProjectCommand}" Margin="20,-800,-13.571,935"/>
-
-
                 </StackPanel>
             </Border>
         </DockPanel>
