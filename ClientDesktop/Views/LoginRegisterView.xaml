@@ -40,9 +40,9 @@
                     <PasswordBox controls:TextBoxHelper.ClearTextButton="True" controls:TextBoxHelper.Watermark="Confirm Password" Grid.Row="5" Margin="10,30,10,0" Name="ConfirmPasswordRegBox" Height="20"  />
 
                     <TextBlock Grid.Row="6" Margin="10,20.429,10.286,51.714" FontSize="15" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White" Grid.RowSpan="2" ><Run Language="en-gb" Text="Available Roles:"/></TextBlock>
-                    <CheckBox Grid.Row="6" Margin="10,45,0,0" Content="Product Owner" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White"></CheckBox>
-                    <CheckBox Grid.Row="6" Margin="130,45,0,0" Content="Scrummaster" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White"></CheckBox>
-                    <CheckBox Grid.Row="6" Margin="240,45,0,0" Content="Developer" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White"></CheckBox>
+                    <CheckBox Grid.Row="6" Margin="10,45,0,0" Content="Developer" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White" IsChecked="{Binding RegisterIsDeveloper}"></CheckBox>
+                    <CheckBox Grid.Row="6" Margin="130,45,0,0" Content="Product Owner" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White" IsChecked="{Binding RegisterIsProductOwner}"></CheckBox>
+                    <CheckBox Grid.Row="6" Margin="240,45,0,0" Content="Scrum Master" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White" IsChecked="{Binding RegisterIsScrumMaster}"></CheckBox>
 
                     <Button Width="100" Grid.Row="7" Margin="10,20.286,236.286,9.714" FontFamily="pack://application:,,,/Resources/#AquaWax" BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" FontSize="10" Command="{Binding RegisterAccount}" CommandParameter="{Binding ElementName=ConfirmPasswordRegBox}">Register</Button>
                 </Grid>
