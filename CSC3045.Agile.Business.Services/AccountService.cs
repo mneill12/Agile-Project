@@ -238,5 +238,22 @@ namespace CSC3045.Agile.Business.Services
                 return ownedTasks.ToList();
             });
         }
+
+        public ICollection<Account> GetByRoleAndEmail(string role, string email)
+        {
+            return ExecuteFaultHandledOperation(() =>
+            {
+                IAccountRepository taskRepository = _DataRepositoryFactory.GetDataRepository<IAccountRepository>();
+
+                ICollection<Account> foundUsers = taskRepository.GetUsersByRoleAndName(role, email);
+                if (foundUsers == null)
+                {
+                    NotFoundException ex = new NotFoundException("Error - There are no tasks to get");
+                    throw new FaultException<NotFoundException>(ex, ex.Message);
+                }
+
+                return foundUsers.ToList();
+            });
+        }
     }
 }
