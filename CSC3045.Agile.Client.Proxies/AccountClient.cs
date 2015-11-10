@@ -59,5 +59,10 @@ namespace CSC3045.Agile.Client.Proxies
         {
             return Channel.GetByUserRole(role);
         }
+
+        public ICollection<Account> GetByRoleAndEmail(string role, string email)
+        {
+            return Channel.GetByRoleAndEmail(role, email);
+        } 
     }
 }

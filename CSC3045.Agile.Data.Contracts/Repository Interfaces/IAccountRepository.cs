@@ -18,5 +18,7 @@ namespace CSC3045.Agile.Data.Contracts.Repository_Interfaces
         ICollection<Account> GetAllAccounts();
 
         ICollection<Account> GetAllAccountsWithUserRoles();
+
+        ICollection<Account> GetUsersByRoleAndName(string role, string email);
     }
 }

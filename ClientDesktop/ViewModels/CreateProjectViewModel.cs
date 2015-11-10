@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.ServiceModel;
 using System.Windows.Controls;
+using System.Windows.Data;
 using Core.Common;
 using Core.Common.Contracts;
 using Core.Common.UI.Core;
@@ -16,7 +19,7 @@ namespace ClientDesktop.ViewModels
 {
     [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class CreateProjectViewModel : ViewModelBase
+    public class ProjectOverviewViewModel : ViewModelBase, INotifyPropertyChanged 
     {
 
         private List<ProductOwnerScrumMasterInfo> _ProductOwners;
@@ -27,17 +30,21 @@ namespace ClientDesktop.ViewModels
         private List<ProductOwnerScrumMasterInfo> _AllUsers;
         private readonly IServiceFactory _ServiceFactory;
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
         [ImportingConstructor]
-        public CreateProjectViewModel(IServiceFactory serviceFactory)
+        public ProjectOverviewViewModel(IServiceFactory serviceFactory)
         {
             _ServiceFactory = serviceFactory;
             CreateProject = new DelegateCommand<TextBox>(OnCreateProject);
+            SearchScrumMasterCommand = new DelegateCommand<TextBox>(SearchScrumMasterByName);
             _ProductOwners = new List<ProductOwnerScrumMasterInfo>();
             _ScrumMasters = new List<ProductOwnerScrumMasterInfo>();
             _AllUsers = new List<ProductOwnerScrumMasterInfo>();
         }
 
         public DelegateCommand<TextBox> CreateProject { get; private set; }
+        public DelegateCommand<TextBox> SearchScrumMasterCommand { get; private set; } 
 
         public string ProjectName
         {
@@ -99,12 +106,40 @@ namespace ClientDesktop.ViewModels
         // This gets hit every time the page is loaded while the constructor only gets loaded initially, use for getting up-to-data from the database
         protected override void OnViewLoaded()
         {
-            getProductOwnersAndScrumMasters();
+            GetProductOwnersAndScrumMasters();
             
         }
 
+        protected void SearchScrumMasterByName(TextBox textBox)
+        {
+            WithClient(_ServiceFactory.CreateClient<IAccountService>(), accountClient =>
+            {
+                
+                var searchedScrumMasters = accountClient.GetByRoleAndEmail(ViewModelConstants.Scrummaster, textBox.Text);
+                
+                if (null != searchedScrumMasters && searchedScrumMasters.Count != 0)
+                {
+                    _ScrumMasters.Clear();
 
-        protected void getProductOwnersAndScrumMasters()
+                    foreach (var a in searchedScrumMasters)
+                    {
+                        _ScrumMasters.Add(new ProductOwnerScrumMasterInfo(a.FirstName, a.LastName, a.LoginEmail));
+                    }
+                }
+                else
+                {
+                    _ScrumMasters.Clear();
+                    _ScrumMasters.Add(new ProductOwnerScrumMasterInfo("No Users Found", "", ""));
+                }
+
+                ICollectionView view = CollectionViewSource.GetDefaultView(ScrumMasters);
+                view.Refresh();
+
+            });
+        }
+
+
+        protected void GetProductOwnersAndScrumMasters()
         {
             WithClient(_ServiceFactory.CreateClient<IAccountService>(), accountClient =>
             {
@@ -146,11 +181,12 @@ namespace ClientDesktop.ViewModels
             {
                 try
                 {
+                    
                     var _Project = new Project
                     {
                         ProjectName = textBox.Text,
-                        ProjectDeadline =
-                            DateTime.ParseExact(ProjectDeadline, "dd/mm/yyyy", CultureInfo.InvariantCulture)
+                        ProjectDeadline = DateTime.Now
+                            //DateTime.ParseExact(ProjectDeadline, "dd/mm/yyyy", CultureInfo.InvariantCulture)
                     };
 
                     WithClient(_ServiceFactory.CreateClient<IProjectService>(), projectClient =>
@@ -188,6 +224,8 @@ namespace ClientDesktop.ViewModels
             public string FirstName { get; set; }
             public string Surname { get; set; }
             public string EmailAddress { get; set; }
+
         }
+
     }
 }

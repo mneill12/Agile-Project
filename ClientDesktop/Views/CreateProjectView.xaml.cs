@@ -17,7 +17,7 @@ namespace ClientDesktop.Views
         }
 
         [Import]
-        public CreateProjectViewModel ViewModel
+        public ProjectOverviewViewModel ViewModel
         {
             set { DataContext = value; }
         }

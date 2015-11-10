@@ -49,7 +49,7 @@
                         Command="{Binding CreateProject}" CommandParameter="{Binding ElementName=ProjectNameTextBox}" Grid.RowSpan="2">
                     Create Project
                 </Button>
-
+               
                 <ComboBox Foreground="Black" Name="ProductOwner" ItemsSource="{Binding ProductOwners}" Margin="30,30.143,30,39.857" Grid.Row="2" Grid.RowSpan="2">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
@@ -81,7 +81,7 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
                 <ListView SelectionMode="Multiple" BorderThickness="0"  Background="Transparent" Foreground="White" Name="ScrumMastersListView" HorizontalContentAlignment="Stretch"
-                          ItemsSource="{Binding ScrumMasters}" Margin="0,26,10,130" Grid.RowSpan="2" HorizontalAlignment="Right" Width="397">
+                          ItemsSource="{Binding ScrumMasters, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,69,10,87" Grid.RowSpan="2" HorizontalAlignment="Right" Width="397">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Width="30">
@@ -99,6 +99,8 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
+                <TextBox Grid.Row="0" controls:TextBoxHelper.Watermark="Search Scrum Masters...." Margin="0,24,110,150" Name="ScrumSearchTxt" Height="20"/>
+                <Button Command="{Binding SearchScrumMasterCommand}" CommandParameter="{Binding ElementName=ScrumSearchTxt}" Margin="311,25,10,151.143" Content="Search" Height="30" FontFamily="pack://application:,,,/Resources/#AquaWax" BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White"></Button>
             </Grid>
             <ListView SelectionMode="Multiple" BorderThickness="0" Background="Transparent" Foreground="White" x:Name="AllUsersListView" HorizontalContentAlignment="Stretch"
             	ItemsSource="{Binding AllUsers}" Margin="0,20,10,-239.714" HorizontalAlignment="Right" Width="407" Grid.Column="2">
@@ -121,19 +123,7 @@
             </ListView>
         </Grid>
 
-        <!--This is the hidden helper Grid which does the resizing -->
-        <Grid Visibility="Hidden">
-            <Grid.ColumnDefinitions>
-                <!--Width is bound to width of the first GridViewColumn -->
-                <ColumnDefinition Width="{Binding ElementName=col1, Path=ActualWidth}" />
-                <!--Width is set to "Fill"-->
-                <ColumnDefinition Width="*" />
-                <!--Correction Width-->
-                <ColumnDefinition Width="10" />
-            </Grid.ColumnDefinitions>
-            <!--This is the hidden helper Field which is used to bind to, using the "Fill" column of the helper grid-->
-            <Grid Grid.Column="1" x:Name="helperField" />
-        </Grid>
+        
         <TextBlock Grid.Row="0" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White" TextAlignment="Left" FontSize="20" FontWeight="Bold" Margin="444,18,467,0.571" ><Run Language="en-gb" Text="Select Scrum Masters"/></TextBlock>
         <TextBlock Grid.Row="0" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White" TextAlignment="Left" FontSize="20" FontWeight="Bold" Margin="862,18,49,165.857" Grid.RowSpan="2" ><Run Language="en-gb" Text="Select Project Team"/></TextBlock>
 

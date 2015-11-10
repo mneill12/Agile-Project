@@ -105,5 +105,16 @@ namespace CSC3045.Agile.Data.Data_Repositories
                     .FirstOrDefault(a => a.AccountId == id);
             }
         }
+
+        public ICollection<Account> GetUsersByRoleAndName(string role, string email)
+        {
+            using (var entityContext = new Csc3045AgileContext())
+            {
+                return entityContext.AccountSet
+                    .Include(a => a.UserRoles)
+                    .Where(a => a.UserRoles.Select(r => r.UserRoleName).Contains(role)
+                    && a.LoginEmail.Contains(email)).ToList();
+            }
+        } 
     }
 }
