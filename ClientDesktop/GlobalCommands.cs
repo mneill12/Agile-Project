@@ -1,4 +1,5 @@
-﻿using CSC3045.Agile.Client.Entities;
+﻿using System.Collections.Generic;
+using CSC3045.Agile.Client.Entities;
 using Microsoft.Practices.Prism.Commands;
 
 namespace ClientDesktop

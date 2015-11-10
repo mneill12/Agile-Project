@@ -47,11 +47,11 @@ namespace Core.Common.Tests
             }
         }
 
-        public TestChild Child { get; } = new TestChild();
+        public TestChild Child { get; set; }
 
         [NotNavigable]
-        public TestChild NotNavigableChild { get; } = new TestChild();
+        public TestChild NotNavigableChild { get; set; }  
 
-        public CollectionBase<TestChild> Children { get; } = new CollectionBase<TestChild>();
+        public CollectionBase<TestChild> Children { get; set; }
     }
 }

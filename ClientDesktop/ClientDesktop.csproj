@@ -101,6 +101,7 @@
     <Compile Include="GlobalCommands.cs" />
     <Compile Include="IShellViewModel.cs" />
     <Compile Include="MainModule.cs" />
+    <Compile Include="ViewModelConstants.cs" />
     <Compile Include="RegionNames.cs" />
     <Compile Include="Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
@@ -191,6 +192,8 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <Resource Include="Resources\Aquawax Medium Trial.ttf" />
+    <Resource Include="Resources\fontawesome-webfont.ttf" />
     <Resource Include="Resources\Entypo.ttf" />
   </ItemGroup>
   <ItemGroup>
@@ -254,7 +257,12 @@
       <Name>CSC3045.Agile.Data</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\abstract.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\jello.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

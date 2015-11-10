@@ -11,7 +11,7 @@ namespace CSC3045.Agile.Client.CustomPrinciples
             Roles = roles;
         }
 
-        public string Email { get; }
+        public string Email { get; private set; }
         public UserRole[] Roles { get; private set; }
 
         public string Name { get; private set; }

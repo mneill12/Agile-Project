@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Windows;
+using System.ComponentModel;
+using System.Linq;
 using System.ServiceModel;
 using System.Threading;
 using System.Windows.Controls;
@@ -20,9 +23,183 @@ namespace ClientDesktop.ViewModels
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class LoginRegisterViewModel : ViewModelBase
     {
-        private readonly IRegionManager _RegionManager;
+        #region LoginRegisterView Bindings
 
-        private readonly IServiceFactory _ServiceFactory;
+        private string _LoginEmail = "jflyn07n@qub.ac.uk";
+        private string _RegisterFirstName;
+        private string _RegisterLastName;
+        private string _RegisterEmail;
+        private string _RegisterConfirmEmail;
+        private string _Status;
+        private bool _RegisterIsDeveloper;
+        private bool _RegisterIsScrumMaster;
+        private bool _RegisterIsProductOwner;
+        private ICollection<UserRole> _UserRoles;
+
+        public string AuthenticatedUser{
+            get
+            {
+                if (IsAuthenticated)
+                    return string.Format("Signed in as {0}. {1}",
+                          Thread.CurrentPrincipal.Identity.Name,
+                          Thread.CurrentPrincipal.IsInRole("Administrators") ? "You are an administrator!"
+                              : "You are NOT a member of the administrators group.");
+
+                return "Not authenticated!";
+            }
+        }
+
+        public string LoginEmail
+        {
+            get
+            {
+                return _LoginEmail;
+            }
+            set
+            {
+                if (_LoginEmail == value) return;
+                _LoginEmail = value;
+                OnPropertyChanged("LoginEmail");
+            }
+        }
+
+        public string RegisterFirstName
+        {
+            get
+            {
+                return _RegisterFirstName;
+            }
+            set
+            {
+                if (_RegisterFirstName == value) return;
+                _RegisterFirstName = value;
+                OnPropertyChanged("RegisterFirstName");
+            }
+        }
+
+        public string RegisterLastName
+        {
+            get
+            {
+                return _RegisterLastName;
+            }
+            set
+            {
+                if (_RegisterLastName == value) return;
+                _RegisterLastName = value;
+                OnPropertyChanged("RegisterLastName");
+            }
+        }
+
+        public string RegisterEmail
+        {
+            get
+            {
+                return _RegisterEmail;
+            }
+            set
+            {
+                if (_RegisterEmail == value) return;
+                _RegisterEmail = value;
+                OnPropertyChanged("RegisterEmail");
+            }
+        }
+
+        public string RegisterConfirmEmail
+        {
+            get
+            {
+                return _RegisterConfirmEmail;
+            }
+            set
+            {
+                if (_RegisterConfirmEmail == value) return;
+                _RegisterConfirmEmail = value;
+                OnPropertyChanged("RegisterConfirmEmail");
+            }
+        }
+
+        public bool RegisterIsDeveloper
+        {
+            get { return _RegisterIsDeveloper; }
+            set
+            {
+                if (_RegisterIsDeveloper == value) return;
+                _RegisterIsDeveloper = value;
+                OnPropertyChanged("RegisterIsDeveloper");
+            }
+        }
+
+        public bool RegisterIsScrumMaster
+        {
+            get { return _RegisterIsScrumMaster; }
+            set
+            {
+                if (_RegisterIsScrumMaster == value) return;
+                _RegisterIsScrumMaster = value;
+                OnPropertyChanged("RegisterIsScrumMaster");
+            }
+        }
+
+        public bool RegisterIsProductOwner
+        {
+            get { return _RegisterIsProductOwner; }
+            set
+            {
+                if (_RegisterIsProductOwner == value) return;
+                _RegisterIsProductOwner = value;
+                OnPropertyChanged("RegisterIsProductOwner");
+            }
+        }
+
+        public string Status
+        {
+            get
+            {
+                return _Status;
+            }
+            set
+            {
+                if (_Status == value) return;
+                _Status = value;
+                OnPropertyChanged("Status");
+            }
+        }
+
+        public ICollection<UserRole> UserRoles
+        {
+            get
+            {
+                return _UserRoles;
+            }
+            set
+            {
+                if (_UserRoles == value) return;
+                _UserRoles = value;
+                OnPropertyChanged("UserRoles");
+            }
+        }
+
+        #endregion
+
+        #region Delegate Commands
+
+        private readonly DelegateCommand<PasswordBox> _RegisterAccount;
+        private readonly DelegateCommand<PasswordBox> _AccountLogin;
+        private readonly DelegateCommand<TextBox> _XMLFilePath; 
+
+        public DelegateCommand<PasswordBox> RegisterAccount { get { return _RegisterAccount; } }
+        public DelegateCommand<PasswordBox> AccountLogin { get { return _AccountLogin; } }
+        public DelegateCommand<TextBox> XMLFilePath { get { return _XMLFilePath; } }
+
+            #endregion
+
+        [Import]
+        public DashboardViewModel DashboardViewModel { get; private set; }
+
+        private IServiceFactory _ServiceFactory;
+        private IRegionManager _RegionManager;
+
 
         // Import service factory so we can have 'stateful' contracts and closes proxies when service methods are finished
         [ImportingConstructor]
@@ -30,9 +207,10 @@ namespace ClientDesktop.ViewModels
         {
             _ServiceFactory = serviceFactory;
             _RegionManager = regionManager;
+            _RegisterAccount = new DelegateCommand<PasswordBox>(OnRegisterAccount);
+            _AccountLogin = new DelegateCommand<PasswordBox>(OnAccountLogin);
+            _XMLFilePath = new DelegateCommand<TextBox>(XMLButtonClick);
 
-            RegisterAccount = new DelegateCommand<PasswordBox>(OnRegisterAccount);
-            AccountLogin = new DelegateCommand<PasswordBox>(OnAccountLogin);
         }
 
         public bool IsAuthenticated
@@ -130,21 +308,27 @@ namespace ClientDesktop.ViewModels
             return !IsAuthenticated;
         }
 
-        private void Logout(object parameter)
-        {
-            var customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
-            if (customPrincipal != null)
-            {
-                customPrincipal.Identity = new AnonymousIdentity();
-                OnPropertyChanged("AuthenticatedUser");
-                OnPropertyChanged("IsAuthenticated");
-                Status = string.Empty;
-            }
-        }
 
-        private bool CanLogout(object parameter)
+        protected void XMLButtonClick(TextBox sender)
         {
-            return IsAuthenticated;
+            // Create OpenFileDialog 
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+
+            // Set filter for file extension and default file extension 
+            dlg.DefaultExt = ".png";
+            dlg.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif";
+
+
+            // Display OpenFileDialog by calling ShowDialog method 
+            Nullable<bool> result = dlg.ShowDialog();
+
+
+            // Get the selected file name and display in a TextBox 
+            if (result == true)
+            {
+                // Open document 
+                string filename = dlg.FileName;
+            }
         }
 
         protected void OnRegisterAccount(PasswordBox passwordBox)
@@ -206,140 +390,5 @@ namespace ClientDesktop.ViewModels
                 }
             }
         }
-
-        #region LoginRegisterView Bindings
-
-        private string _LoginEmail;
-        private string _RegisterFirstName;
-        private string _RegisterLastName;
-        private string _RegisterEmail;
-        private string _RegisterConfirmEmail;
-        private bool _RegisterIsDeveloper;
-        private bool _RegisterIsScrumMaster;
-        private bool _RegisterIsProductOwner;
-        private string _Status;
-
-        public string AuthenticatedUser
-        {
-            get
-            {
-                if (IsAuthenticated)
-                    return string.Format("Signed in as {0}. {1}",
-                        Thread.CurrentPrincipal.Identity.Name,
-                        Thread.CurrentPrincipal.IsInRole("Administrators")
-                            ? "You are an administrator!"
-                            : "You are NOT a member of the administrators group.");
-
-                return "Not authenticated!";
-            }
-        }
-
-        public string LoginEmail
-        {
-            get { return _LoginEmail; }
-            set
-            {
-                if (_LoginEmail == value) return;
-                _LoginEmail = value;
-                OnPropertyChanged("LoginEmail");
-            }
-        }
-
-        public string RegisterFirstName
-        {
-            get { return _RegisterFirstName; }
-            set
-            {
-                if (_RegisterFirstName == value) return;
-                _RegisterFirstName = value;
-                OnPropertyChanged("RegisterFirstName");
-            }
-        }
-
-        public string RegisterLastName
-        {
-            get { return _RegisterLastName; }
-            set
-            {
-                if (_RegisterLastName == value) return;
-                _RegisterLastName = value;
-                OnPropertyChanged("RegisterLastName");
-            }
-        }
-
-        public string RegisterEmail
-        {
-            get { return _RegisterEmail; }
-            set
-            {
-                if (_RegisterEmail == value) return;
-                _RegisterEmail = value;
-                OnPropertyChanged("RegisterEmail");
-            }
-        }
-
-        public string RegisterConfirmEmail
-        {
-            get { return _RegisterConfirmEmail; }
-            set
-            {
-                if (_RegisterConfirmEmail == value) return;
-                _RegisterConfirmEmail = value;
-                OnPropertyChanged("RegisterConfirmEmail");
-            }
-        }
-
-        public bool RegisterIsDeveloper
-        {
-            get { return _RegisterIsDeveloper; }
-            set
-            {
-                if (_RegisterIsDeveloper == value) return;
-                _RegisterIsDeveloper = value;
-                OnPropertyChanged("RegisterIsDeveloper");
-            }
-        }
-
-        public bool RegisterIsScrumMaster
-        {
-            get { return _RegisterIsScrumMaster; }
-            set
-            {
-                if (_RegisterIsScrumMaster == value) return;
-                _RegisterIsScrumMaster = value;
-                OnPropertyChanged("RegisterIsScrumMaster");
-            }
-        }
-
-        public bool RegisterIsProductOwner
-        {
-            get { return _RegisterIsProductOwner; }
-            set
-            {
-                if (_RegisterIsProductOwner == value) return;
-                _RegisterIsProductOwner = value;
-                OnPropertyChanged("RegisterIsProductOwner");
-            }
-        }
-
-        public string Status
-        {
-            get { return _Status; }
-            set
-            {
-                if (_Status == value) return;
-                _Status = value;
-                OnPropertyChanged("Status");
-            }
-        }
-
-        #endregion
-
-        #region Delegate Commands
-
-        public DelegateCommand<PasswordBox> RegisterAccount { get; }
-        public DelegateCommand<PasswordBox> AccountLogin { get; }
-
-        #endregion
     }
 }

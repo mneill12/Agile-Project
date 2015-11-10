@@ -49,10 +49,15 @@ namespace CSC3045.Agile.Client.Proxies
             return Channel.GetAllUserRoles();
         }
 
-
-        public IEnumerable<Account> GetByUserRole(int roleId)
+        public ICollection<StoryTask> GetOwnedTasks(int accountId)
         {
-            return Channel.GetByUserRole(roleId);
+            return Channel.GetOwnedTasks(accountId);
+        } 
+
+
+        public IEnumerable<Account> GetByUserRole(string role)
+        {
+            return Channel.GetByUserRole(role);
         }
     }
 }

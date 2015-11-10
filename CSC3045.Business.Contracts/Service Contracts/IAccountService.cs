@@ -38,7 +38,12 @@ namespace CSC3045.Agile.Business.Contracts
         IList<UserRole> GetAllUserRoles();
 
         [OperationContract]
-        [FaultContract(typeof (NotFoundException))]
-        IEnumerable<Account> GetByUserRole(int roleId);
+
+        [FaultContract(typeof(NotFoundException))]
+        ICollection<StoryTask> GetOwnedTasks(int accountId);
+
+        [OperationContract]
+        [FaultContract(typeof(NotFoundException))]
+        IEnumerable<Account> GetByUserRole(string role);
     }
 }

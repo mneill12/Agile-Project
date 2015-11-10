@@ -1,7 +1,15 @@
-﻿using System.ComponentModel.Composition;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Media;
 using ClientDesktop.Views;
 using Core.Common.Contracts;
 using Core.Common.UI.Core;
+using CSC3045.Agile.Client.Contracts;
+using CSC3045.Agile.Client.Entities;
 using Prism.Regions;
 
 namespace ClientDesktop.ViewModels
@@ -10,9 +18,90 @@ namespace ClientDesktop.ViewModels
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class DashboardViewModel : ViewModelBase
     {
-        private readonly IRegionManager _RegionManager;
 
-        private IServiceFactory _ServiceFactory;
+        #region LoginRegisterView Bindings
+
+        private string _FirstName;
+        private string _Surname;
+        private string _EmailAddress;
+        private string _FullName;
+        private List<UserRole> _AvailableRoles; 
+
+        public string FirstName
+        {
+            get
+            {
+                return _FirstName;
+            }
+            set
+            {
+                if (_FirstName == value) return;
+                _FirstName = value;
+                OnPropertyChanged("FirstName");
+            }
+        }
+
+        public string Surname
+        {
+            get
+            {
+                return _Surname;
+            }
+            set
+            {
+                if (_Surname == value) return;
+                _Surname = value;
+                OnPropertyChanged("Surname");
+            }
+        }
+
+        public string EmailAddress
+        {
+            get
+            {
+                return _EmailAddress;
+            }
+            set
+            {
+                if (_EmailAddress == value) return;
+                _EmailAddress = value;
+                OnPropertyChanged("EmailAddress");
+            }
+        }
+
+        public string FullName
+        {
+            get { return _FullName; }
+            set
+            {
+                if (_FullName == value) return;
+                _FullName = value;
+                OnPropertyChanged("FullName");
+            }
+        }
+
+        public List<UserRole> AvailableRoles
+        {
+            get { return _AvailableRoles; }
+            set
+            {
+                if (_AvailableRoles == value) return;
+                _AvailableRoles = value;
+                OnPropertyChanged("AvailableRoles");
+            }
+        }
+
+        #endregion
+
+        IServiceFactory _ServiceFactory;
+        IRegionManager _RegionManager;
+
+        public DelegateCommand<object> CreateProjectCommand { get; set; }
+
+        private void CreateProject(object parameter)
+        {
+            _RegionManager.RequestNavigate(RegionNames.Content, typeof(CreateProjectView).FullName);
+        }
 
         [ImportingConstructor]
         public DashboardViewModel(IServiceFactory serviceFactory, IRegionManager regionManager)
@@ -20,18 +109,17 @@ namespace ClientDesktop.ViewModels
             _ServiceFactory = serviceFactory;
             _RegionManager = regionManager;
 
-            AddProjectCommand = new DelegateCommand<object>(OnAddProject);
-        }
-
-        public DelegateCommand<object> AddProjectCommand { get; }
-
-        private void OnAddProject(object obj)
-        {
-            _RegionManager.RequestNavigate(RegionNames.Content, typeof (CreateProjectView).FullName);
+            CreateProjectCommand = new DelegateCommand<object>(CreateProject);
         }
 
         protected override void OnViewLoaded()
         {
+            FirstName = GlobalCommands.MyAccount.FirstName;
+            Surname = GlobalCommands.MyAccount.LastName;
+            EmailAddress = GlobalCommands.MyAccount.LoginEmail;
+            FullName = GlobalCommands.MyAccount.FirstName + " " + GlobalCommands.MyAccount.LastName;
+            AvailableRoles = GlobalCommands.MyAccount.UserRoles.ToList();
+
         }
     }
 }

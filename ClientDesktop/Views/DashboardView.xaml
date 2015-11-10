@@ -9,70 +9,140 @@
                           mc:Ignorable="d"
                           d:DesignHeight="960" d:DesignWidth="1280">
     <Grid>
-        <DockPanel LastChildFill="True">
-            <StackPanel DockPanel.Dock="Top" Height="50" Orientation="Horizontal" Background="Black">
-                <TextBox FontSize="30" FontWeight="Bold" Foreground="#FF57C8EA" Background="#FF070303"
-                         HorizontalAlignment="Left" Width="545" BorderThickness="0" Height="50">
-                    Hi, Joe!
-                </TextBox>
-                <Button x:Name="button" Content="Add Project" Background="#FF57C8EA" RenderTransformOrigin="3.614,0.46"
-                        Width="240" FontSize="30" FontWeight="Bold" Height="50" VerticalAlignment="Bottom"
-                        Command="{Binding AddProjectCommand}" />
+        <DockPanel LastChildFill="True" Margin="0,0,0,237" Dock="Right" HorizontalAlignment="Right">
+            <StackPanel Margin="20,30,0,-0.143" Width="1034" >
+                <TextBlock FontFamily="pack://application:,,,/Resources/#AquaWax" Text="MY PROJECTS" FontWeight="Bold" Foreground="White" Height="25" Margin="16,0,896.714,0" FontSize="15"/>
+                <Button 
+            		x:Name="CreateProjectButton"
+            		Command="{Binding CreateProjectCommand}"
+            		Foreground="White"
+            		Width="40" Panel.ZIndex="99"
+            		Height="40"
+                    BorderBrush="White"
+            		HorizontalAlignment="Right"
+            		VerticalAlignment="Top"
+            		Style="{DynamicResource MetroCircleButtonStyle}" Margin="409,-45,170,0">
+                    <Rectangle Fill="White" Width="15"
+            			Height="15">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Stretch="Fill"
+            					Visual="{StaticResource appbar_add}"/>
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                </Button>
+                <TextBlock FontSize="15" FontFamily="pack://application:,,,/Resources/#AquaWax" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="489,-50,20,0" Text="ADD NEW PROJECT" Foreground="White"/>
+
+                <TabControl Foreground="White" Margin="0,20,-0.286,0">
+                    <!-- Tab 1 @TODO - Make dynamic! -->
+                    <TabItem Header="Project V" Margin="8,2,-7.857,-1.286" Foreground="White" >
+                        <StackPanel>
+                            <Border Margin="2" Padding="0 5 0 15" BorderThickness="0" BorderBrush="Black" CornerRadius="0">
+                                <Border.Background>
+                                    <SolidColorBrush Color="Black" Opacity="0.4" />
+                                </Border.Background>
+                                <TextBlock Margin="20,10,20,0" Background="Transparent" Foreground="White" Text="CSC-001 - As a user of the scrum client program I can register so that I can connect to the scrum management server"/>
+                            </Border>
+                            <Border Margin="2" Padding="0 5 0 15" BorderThickness="0" BorderBrush="Black" CornerRadius="0">
+                                <Border.Background>
+                                    <SolidColorBrush Color="Black" Opacity="0.4" />
+                                </Border.Background>
+                                <TextBlock Margin="20,10,20,0" Background="Transparent" Foreground="White" Text="CSC-002 - As a registering user I can select the scrum role(s) that I will potentially take (Product Owner, Scrum Master, Developer) so that I will be able to carry out those roles in projects"/>
+                            </Border>
+                            <Border Margin="2" Padding="0 5 0 15" BorderThickness="0" BorderBrush="Black" CornerRadius="0">
+                                <Border.Background>
+                                    <SolidColorBrush Color="Black" Opacity="0.4" />
+                                </Border.Background>
+                                <TextBlock Margin="20,10,20,0" Background="Transparent" Foreground="White" Text="CSC-003 - As a registered user I can log in with my username and  password so that I can begin using the system"/>
+                            </Border>
+                            <Border Margin="2,2,1.571,2" Padding="0 5 0 15" BorderThickness="0" BorderBrush="Black" CornerRadius="10">
+                                <Border.Background>
+                                    <SolidColorBrush Color="Black" Opacity="0.4" />
+                                </Border.Background>
+                                <TextBlock Margin="20,10,20,0" Background="Transparent" Foreground="White" Text="CSC-004 - As a logged in user I can create a new project so that I can be the Project Manager"/>
+                            </Border>
+                            <Border Margin="2" Padding="0 5 0 15" BorderThickness="0" BorderBrush="Black" CornerRadius="10">
+                                <Border.Background>
+                                    <SolidColorBrush Color="Black" Opacity="0.4" />
+                                </Border.Background>
+                                <TextBlock Margin="20,10,20,0" Background="Transparent" Foreground="White" Text="CSC-005 - As a Project Manager I can search for a specific registered Product Owner and assign them as a Product Owner for my project so they can begin to add stories to the ..."/>
+                            </Border>
+                        </StackPanel>
+                    </TabItem>
+
+                    <!-- Tab 2.... @TODO - Make dynamic! -->
+                    <TabItem Header="Project W" Margin="1.857,2,-1.143,-1.286" Foreground="White">
+                        <StackPanel>
+                            <Border Margin="2" Padding="0 5 0 15" BorderThickness="0" BorderBrush="Black" CornerRadius="0">
+                                <Border.Background>
+                                    <SolidColorBrush Color="Black" Opacity="0.4" />
+                                </Border.Background>
+                                <TextBlock Margin="20,10,20,0" Background="Transparent" Foreground="White" Text="CSC-001 - As a user of the scrum client program I can register so that I can connect to the scrum management server"/>
+                            </Border>
+                            <Border Margin="2" Padding="0 5 0 15" BorderThickness="0" BorderBrush="Black" CornerRadius="0">
+                                <Border.Background>
+                                    <SolidColorBrush Color="Black" Opacity="0.4" />
+                                </Border.Background>
+                                <TextBlock Margin="20,10,20,0" Background="Transparent" Foreground="White" Text="CSC-002 - As a registering user I can select the scrum role(s) that I will potentially take (Product Owner, Scrum Master, Developer) so that I will be able to carry out those roles in projects"/>
+                            </Border>
+                            <Border Margin="2" Padding="0 5 0 15" BorderThickness="0" BorderBrush="Black" CornerRadius="0">
+                                <Border.Background>
+                                    <SolidColorBrush Color="Black" Opacity="0.4" />
+                                </Border.Background>
+                                <TextBlock Margin="20,10,20,0" Background="Transparent" Foreground="White" Text="CSC-003 - As a registered user I can log in with my username and  password so that I can begin using the system"/>
+                            </Border>
+
+                        </StackPanel>
+                    </TabItem>
+                </TabControl>
             </StackPanel>
-            <StackPanel DockPanel.Dock="Left" Background="Black">
-                <Border BorderBrush="Black" BorderThickness="1">
-                    <StackPanel MinWidth="100">
-                        <Button Content="Project V" Height="50" />
-                        <Button Content="Project W" Height="50" />
-                        <Button Content="Project x" Height="50" />
-                        <Button Content="Project Y" Height="50" />
-                        <Button Content="Project z" Height="50" />
 
-
-                    </StackPanel>
-                </Border>
-                <Button Content="Logout" Margin="10,40,10,0" Background="#FF75081E" />
-            </StackPanel>
-            <Border BorderBrush="Black" DockPanel.Dock="Right" BorderThickness="1">
-                <StackPanel MinWidth="150">
-                    <TextBox Background="#FF57C8EA">Project Owner: Darryl Stewart</TextBox>
-                    <TextBox Background="#FF57C8EA">Project Manager: Sarah Bell</TextBox>
-                    <TextBox Background="#FF57C8EA">Scrum Master: Lan Walson</TextBox>
-
-                    <TextBox>Add Team member</TextBox>
-
-                    <TextBox>Phil Connor</TextBox>
-                    <TextBox>Klye Molloy</TextBox>
-                    <TextBox>Luke Summer</TextBox>
-                    <TextBox>Anna Boyd</TextBox>
-                    <TextBox>Donna Sellar</TextBox>
-                    <TextBox>David Evergreen</TextBox>
-                    <TextBox>Katy Wellan</TextBox>
+        </DockPanel>
+        <DockPanel LastChildFill="True" Dock="Left" Width="220" HorizontalAlignment="Left">
+            <Border BorderThickness="0" BorderBrush="Black" CornerRadius="0" Width="220">
+                <Border.Background>
+                    <SolidColorBrush Color="Black" Opacity="0.4" />
+                </Border.Background>
+                <StackPanel Margin="0,30,28.714,0" VerticalAlignment="Top">
+                    <Rectangle Margin="50 0 0 0" Fill="White" Width="125"
+                    	Height="100">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Stretch="Fill"
+                    			Visual="{StaticResource appbar_people_profile}"/>
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock FontFamily="pack://application:,,,/Resources/#AquaWax" FontWeight="Bold" Foreground="White" Margin="50,20,26.429,935" FontSize="15" Height="30" Width="150" HorizontalAlignment="Left" Text="{Binding FullName}" />
+                    <TextBlock Margin="50,-935,0,935" Text="{Binding EmailAddress}" Height="30" Width="150" HorizontalAlignment="Left" Foreground="White"/>
+                    <ListView BorderThickness="0"  Background="Transparent" Foreground="White" x:Name="AvailableRolesListView" HorizontalContentAlignment="Stretch"
+                    	ItemsSource="{Binding AvailableRoles}" Margin="42,-1685,10.429,130" HorizontalAlignment="Left" Width="150" Height="60">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListViewItem}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="Transparent"></Setter>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="BorderThickness" Value="0"/>
+                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Transparent"></Setter>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="BorderThickness" Value="0"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                                <Setter Property="Padding" Value="0 5"></Setter>
+                                <Setter Property="VerticalAlignment" Value="Top"></Setter>
+                                <Setter Property="Focusable" Value="false"/>
+                                <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+                                <Setter Property="MaxWidth" Value="150"></Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="150" Header="Surname" DisplayMemberBinding="{Binding UserRoleName}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
                 </StackPanel>
             </Border>
-
-
-            <StackPanel Background="LightBlue">
-                <TextBox FontSize="20" FontWeight="DemiBold" Background="LightBlue">PROJECT X</TextBox>
-                <Border>
-
-                    <StackPanel>
-                        <TextBox BorderBrush="Black" BorderThickness="2" Margin="10,0,10,0" Background="AliceBlue">Project Backlog</TextBox>
-                        <TextBox BorderBrush="Black" BorderThickness="2" Margin="10,0,10,0">US1</TextBox>
-                        <TextBox BorderBrush="Black" BorderThickness="2" Margin="10,0,10,0">US2</TextBox>
-                        <TextBox BorderBrush="Black" BorderThickness="2" Margin="10,0,10,0">US3</TextBox>
-                        <TextBox BorderBrush="Black" BorderThickness="2" Margin="10,0,10,0">US4</TextBox>
-                        <TextBox BorderBrush="Black" BorderThickness="2" Margin="10,0,10,0">US5</TextBox>
-                        <TextBox BorderBrush="Black" BorderThickness="2" Margin="10,0,10,0">US6</TextBox>
-                        <TextBox BorderBrush="Black" BorderThickness="2" Margin="10,0,10,0">US7</TextBox>
-                        <TextBox BorderBrush="Black" BorderThickness="2" Margin="10,0,10,0">US8</TextBox>
-                    </StackPanel>
-
-                </Border>
-
-            </StackPanel>
-
-
         </DockPanel>
     </Grid>
 </core:UserControlViewBase>

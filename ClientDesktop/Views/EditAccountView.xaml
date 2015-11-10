@@ -8,7 +8,7 @@
                           xmlns:core="CSC3045AgileCore">
     <Grid>
         <!--Register block-->
-        <Grid Grid.Column="0" Background="White" MaxWidth="400" MaxHeight="700">
+        <Grid Grid.Column="0" Background="Transparent" MaxWidth="400" MaxHeight="700">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
@@ -25,30 +25,21 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" Text="First Name:" FontSize="15" />
-            <TextBox Grid.Row="1" Name="FirstNameRegTxt" Height="20" Text="{Binding FirstName}" />
+            <TextBox Margin="10" controls:TextBoxHelper.ClearTextButton="True" controls:TextBoxHelper.Watermark="First Name" Grid.Row="1" Name="FirstNameRegTxt" Height="20" Text="{Binding FirstName}" />
+            <TextBox Margin="10" controls:TextBoxHelper.ClearTextButton="True" controls:TextBoxHelper.Watermark="Surname" Grid.Row="3" Name="LastNameRegTxt" Height="20" Text="{Binding LastName}" />
+            <TextBox Margin="10" controls:TextBoxHelper.ClearTextButton="True" controls:TextBoxHelper.Watermark="Email" Grid.Row="5" Name="EmailAddressRegTxt" Height="20" Text="{Binding Email}" />
+            <PasswordBox  Margin="10" controls:TextBoxHelper.ClearTextButton="True" controls:TextBoxHelper.Watermark="Password" Grid.Row="7" Name="ConfirmCurrentPasswordBox" Height="20" />
 
-            <TextBlock Grid.Row="2" Text="Last Name:" FontSize="15" />
-            <TextBox Grid.Row="3" Name="LastNameRegTxt" Height="20" Text="{Binding LastName}" />
-
-            <TextBlock Grid.Row="4" Text="Email Address:" FontSize="15" />
-            <TextBox Grid.Row="5" Name="EmailAddressRegTxt" Height="20" Text="{Binding Email}" />
-
-            <TextBlock Grid.Row="6" Text="Current Password:" FontSize="15" />
-            <PasswordBox Grid.Row="7" Name="ConfirmCurrentPasswordBox" Height="20" />
-
-            <TextBlock Grid.Row="8" Text="Available Roles:" FontSize="15" />
+            <TextBlock Grid.Row="7" Text="Available Roles:" FontSize="15" Foreground="White" Margin="9,44.857,10.143,18.571" Grid.RowSpan="3"/>
             <CheckBox Grid.Row="9" Margin="10,0,0,0" Content="Developer"
-                      IsChecked="{Binding IsDeveloper}" />
+                      IsChecked="{Binding IsDeveloper}" Foreground="White"/>
             <CheckBox Grid.Row="9" Margin="130,0,0,0" Content="Product Owner"
-                      IsChecked="{Binding IsProductOwner}" />
+                      IsChecked="{Binding IsProductOwner}" Foreground="White" />
             <CheckBox Grid.Row="9" Margin="240,0,0,0" Content="Scrum Master"
-                      IsChecked="{Binding IsScrumMaster}" />
-            <Button Grid.Row="10" Height="50" Width="350" Margin="10,10,10,10" Background="White" Foreground="Black"
-                    FontSize="15" Command="{Binding UpdateAccount}"
+                      IsChecked="{Binding IsScrumMaster}" Foreground="White" />
+            <Button Grid.Row="10" Margin="10" Height="30" FontFamily="pack://application:,,,/Resources/#AquaWax" BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" FontSize="10" Command="{Binding UpdateAccount}"
                     CommandParameter="{Binding ElementName=ConfirmCurrentPasswordBox}" Content="Save" />
-            <Button Grid.Row="11" Height="50" Width="350" Margin="10,10,10,10" Background="White" Foreground="Black"
-                    FontSize="15" Command="{Binding UpdateAccount}"
+            <Button Grid.Row="11" Height="30" FontFamily="pack://application:,,,/Resources/#AquaWax" BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" FontSize="10" Margin="10" Command="{Binding UpdateAccount}"
                     CommandParameter="{Binding ElementName=ConfirmCurrentPasswordBox}" Content="Close" />
         </Grid>
     </Grid>

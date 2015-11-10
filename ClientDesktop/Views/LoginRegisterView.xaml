@@ -1,22 +1,17 @@
 <core:UserControlViewBase x:Class="ClientDesktop.Views.LoginRegisterView"
-                          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                          xmlns:local="clr-namespace:ClientDesktop.Views"
-                          xmlns:core="CSC3045AgileCore"
-                          xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls">
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:local="clr-namespace:ClientDesktop.Views"
+             xmlns:core="CSC3045AgileCore">
     <Grid>
-        <Grid Background="LightSlateGray" Margin="0,0,0,0" Grid.ColumnSpan="2">
+        <Grid Margin="0,0,0.286,0" Grid.ColumnSpan="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-
-            <!--Title row-->
-            <TextBlock Grid.Row="0" Margin="0,20,0,0" Text="Welcome to JELLO" TextAlignment="Center" Foreground="White"
-                       FontSize="40" />
-
             <!--Login and register area blocks-->
             <Grid Grid.Row="1" Margin="10,30,10,0">
                 <Grid.ColumnDefinitions>
@@ -25,7 +20,7 @@
                 </Grid.ColumnDefinitions>
 
                 <!--Register block-->
-                <Grid Grid.Column="0" Margin="30,0,30,0" Background="White">
+                <Grid Grid.Column="0" Margin="30,0,30,0" HorizontalAlignment="Left">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1*" />
                         <RowDefinition Height="1*" />
@@ -37,80 +32,55 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" Margin="10,10,10,0" Text="First Name:" FontSize="15" />
-                    <TextBox Grid.Row="0" Margin="10,30,10,0" Name="FirstNameRegTxt" Height="20"
-                             Text="{Binding RegisterFirstName}" controls:TextBoxHelper.ClearTextButton="True" />
+                    <TextBox controls:TextBoxHelper.ClearTextButton="True" controls:TextBoxHelper.Watermark="First Name"  Grid.Row="0" Margin="10,30,10,0" Name="FirstNameRegTxt" Height="20" Text="{Binding RegisterFirstName}"/>
+                    <TextBox controls:TextBoxHelper.ClearTextButton="True" controls:TextBoxHelper.Watermark="Last Name" Grid.Row="1" Margin="10,30,10,0" Name="LastNameRegTxt" Height="20" Text="{Binding RegisterLastName}"/>
+                    <TextBox controls:TextBoxHelper.ClearTextButton="True" controls:TextBoxHelper.Watermark="Email Address" Grid.Row="2" Margin="10,30,10,0" Name="EmailAddressRegTxt" Height="20" Text="{Binding RegisterEmail}"/>
+                    <TextBox controls:TextBoxHelper.ClearTextButton="True" controls:TextBoxHelper.Watermark="Confirm Email Address" Grid.Row="3" Margin="10,30,10,0" Name="ConfirmEmailAddressRegTxt" Height="20" Text="{Binding RegisterConfirmEmail}"/>
+                    <PasswordBox controls:TextBoxHelper.ClearTextButton="True" controls:TextBoxHelper.Watermark="Password" Grid.Row="4" Margin="10,30,10,0" Name="PasswordRegBox" Height="20" />
+                    <PasswordBox controls:TextBoxHelper.ClearTextButton="True" controls:TextBoxHelper.Watermark="Confirm Password" Grid.Row="5" Margin="10,30,10,0" Name="ConfirmPasswordRegBox" Height="20"  />
 
-                    <TextBlock Grid.Row="1" Margin="10,10,10,0" Text="Last Name:" FontSize="15" />
-                    <TextBox Grid.Row="1" Margin="10,30,10,0" Name="LastNameRegTxt" Height="20"
-                             Text="{Binding RegisterLastName}" controls:TextBoxHelper.ClearTextButton="True" />
+                    <TextBlock Grid.Row="6" Margin="10,20.429,10.286,51.714" FontSize="15" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White" Grid.RowSpan="2" ><Run Language="en-gb" Text="Available Roles:"/></TextBlock>
+                    <CheckBox Grid.Row="6" Margin="10,45,0,0" Content="Product Owner" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White"></CheckBox>
+                    <CheckBox Grid.Row="6" Margin="130,45,0,0" Content="Scrummaster" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White"></CheckBox>
+                    <CheckBox Grid.Row="6" Margin="240,45,0,0" Content="Developer" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White"></CheckBox>
 
-                    <TextBlock Grid.Row="2" Margin="10,10,10,0" Text="Email Address:" FontSize="15" />
-                    <TextBox Grid.Row="2" Margin="10,30,10,0" Name="EmailAddressRegTxt" Height="20"
-                             Text="{Binding RegisterEmail}" controls:TextBoxHelper.ClearTextButton="True" />
-
-                    <TextBlock Grid.Row="3" Margin="10,10,10,0" Text="Confirm Email Address:" FontSize="15" />
-                    <TextBox Grid.Row="3" Margin="10,30,10,0" Name="ConfirmEmailAddressRegTxt" Height="20"
-                             Text="{Binding RegisterConfirmEmail}" controls:TextBoxHelper.ClearTextButton="True" />
-
-                    <TextBlock Grid.Row="4" Margin="10,10,10,0" Text="Create New Password:" FontSize="15" />
-                    <PasswordBox Grid.Row="4" Margin="10,30,10,0" Name="PasswordRegBox" Height="20"
-                                 controls:TextBoxHelper.ClearTextButton="True" />
-
-                    <TextBlock Grid.Row="5" Margin="10,10,10,0" Text="Confirm Password:" FontSize="15" />
-                    <PasswordBox Grid.Row="5" Margin="10,30,10,0" Name="ConfirmPasswordRegBox" Height="20"
-                                 controls:TextBoxHelper.ClearTextButton="True" />
-
-                    <TextBlock Grid.Row="6" Margin="10,10,10,0" Text="Register as a" FontSize="15" />
-                    <CheckBox Grid.Row="6" Margin="10,45,0,0" Content="Developer"
-                              IsChecked="{Binding RegisterIsDeveloper}" />
-                    <CheckBox Grid.Row="6" Margin="130,45,0,0" Content="Product Owner"
-                              IsChecked="{Binding RegisterIsProductOwner}" />
-                    <CheckBox Grid.Row="6" Margin="240,45,0,0" Content="Scrum Master"
-                              IsChecked="{Binding RegisterIsScrumMaster}" />
-                    <Button Grid.Row="7" Height="50" Width="350" Margin="0,20,0,0" Padding="10" Background="White"
-                            Foreground="Black" FontSize="15" Command="{Binding RegisterAccount}"
-                            CommandParameter="{Binding ElementName=ConfirmPasswordRegBox}" Content="Register" />
+                    <Button Width="100" Grid.Row="7" Margin="10,20.286,236.286,9.714" FontFamily="pack://application:,,,/Resources/#AquaWax" BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" FontSize="10" Command="{Binding RegisterAccount}" CommandParameter="{Binding ElementName=ConfirmPasswordRegBox}">Register</Button>
                 </Grid>
 
                 <!--Login block-->
-                <Grid Grid.Column="1" Margin="20,0,30,0" Height="400" Background="DeepSkyBlue">
+                <Grid Grid.Column="1" Margin="20.714,6,29.571,0.429" HorizontalAlignment="Left">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="1*" />
-                        <RowDefinition Height="1*" />
-                        <RowDefinition Height="1*" />
-                        <RowDefinition Height="1*" />
-                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="200"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" Margin="10,10,10,0" Text="Username:" FontSize="15" />
-                    <TextBox Grid.Row="0" Margin="10,20,10,0" Text="{Binding LoginEmail}" Name="UsernameLoginTxt"
-                             Height="20" controls:TextBoxHelper.ClearTextButton="True" />
-
-                    <TextBlock Grid.Row="1" Margin="10,10,10,0" Text="Password:" FontSize="15" />
-                    <PasswordBox x:Name="PasswordLoginBox" Grid.Row="1" Margin="10,20,10,0" Height="20"
-                                 Password="4nt1t7!" controls:TextBoxHelper.ClearTextButton="True" />
-
-                    <Button Grid.Row="2" Height="50" Width="350" Margin="0,0,0,0" Padding="10" Background="White"
-                            Foreground="Black" FontSize="15" Command="{Binding AccountLogin, Mode=OneTime}"
-                            CommandParameter="{Binding ElementName=PasswordLoginBox}" Content="Login" />
-
-                    <Border Grid.Row="2"
-                            Margin="0,65,0,0"
-                            Height="10"
-                            VerticalAlignment="Top"
-                            BorderBrush="LightSlateGray"
+                    <TextBox controls:TextBoxHelper.ClearTextButton="True" controls:TextBoxHelper.Watermark="Username" Grid.Row="0" Margin="10,26,10.001,148" Text ="{Binding LoginEmail}" Name="UsernameLoginTxt" Height="20" ></TextBox>
+                    <PasswordBox controls:TextBoxHelper.ClearTextButton="True" controls:TextBoxHelper.Watermark="Password" x:Name="PasswordLoginBox" Margin="10,85,10,89" Height="20" Password="4nt1t7!"/>
+                     
+                    <Button Width="100" Height="30" FontFamily="pack://application:,,,/Resources/#AquaWax" BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" FontSize="10" Command="{Binding AccountLogin, Mode=OneTime}" CommandParameter="{Binding ElementName=PasswordLoginBox}" Grid.Row="0" Margin="10,138,246,32">Login</Button>
+                    <Border 
+                            Grid.Row="2"
+                            Margin="0,65,0,0" 
+                            Height="10" 
+                            VerticalAlignment="Top" 
+                
                             BorderThickness="10" />
 
-                    <TextBlock Grid.Row="3" Margin="10,10,10,0" Text="Work Offline" FontSize="20"
-                               VerticalAlignment="Top" HorizontalAlignment="Center" />
-                    <Button Grid.Row="3" Height="20" Width="100" Margin="210,60,0,0" Padding="0" Background="White"
-                            Foreground="Black" FontSize="10" Content="Choose XML File" />
-                    <TextBox Grid.Row="3" Margin="0,60,110,0" Name="XmlFileNameTxt" Height="20" Width="200" />
-                    <Button Grid.Row="4" Height="50" Width="350" Margin="0,30,0,0" Padding="10" Background="White"
-                            Foreground="Black" FontSize="15" Content="Upload" />
+                    <TextBlock Grid.Row="2" Margin="10,14,262,0" Text="Work Offline" FontSize="15" VerticalAlignment="Top" HorizontalAlignment="Center" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White"/>
+                    <Button Grid.Row="2" Height="20" Width="100" Margin="220,38,36,11.857" FontFamily="pack://application:,,,/Resources/#AquaWax" BorderBrush="White" BorderThickness="1" Padding="5" Background="Black" Foreground="White" FontSize="8" Command="{Binding XMLButtonClick}" CommandParameter="{Binding ElementName=XmlFileNameTxt}">Choose XML file</Button>
+                    <TextBox HorizontalAlignment="Left" Grid.Row="2" Margin="10,37,0,11.857" Name="XmlFileNameTxt" Height="20" Width="200"/>
+                    <TextBlock Grid.Row="3" Margin="11,36.571,9.001,-5.571" Text="Choose a Project XML file to load into the system" FontSize="10" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White" Grid.RowSpan="2"/>
+                    <TextBlock Grid.Row="3" Margin="11,50.571,9.001,43.429" Text="to continue working while offline." FontSize="10" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White"/>
+
+                    <Button Grid.Row="3"  Width="100" Margin="8,74.571,248,9.429" Padding="10" FontFamily="pack://application:,,,/Resources/#AquaWax" BorderBrush="White" BorderThickness="1" Background="Black" Foreground="White" FontSize="10">Upload</Button>
+                    <TextBlock Margin="13,2,292,0" Text="Log in..." FontSize="15" VerticalAlignment="Top" HorizontalAlignment="Center" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White"/>
                 </Grid>
             </Grid>
         </Grid>
+        <TextBlock Margin="51,38,731.143,0" Text="Register an account..." FontSize="15" VerticalAlignment="Top" HorizontalAlignment="Left" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White"/>
     </Grid>
 </core:UserControlViewBase>
