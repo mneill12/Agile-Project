@@ -340,7 +340,7 @@ namespace ClientDesktop.ViewModels
             }
             else
             {
-                var hashedPassword = new HashHelper().CalculateHash(passwordBox.Password, _LoginEmail);
+                var hashedPassword = new HashHelper().CalculateHash(passwordBox.Password, _RegisterEmail);
 
                 try
                 {
