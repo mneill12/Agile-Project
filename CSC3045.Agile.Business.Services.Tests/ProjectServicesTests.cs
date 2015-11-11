@@ -114,14 +114,14 @@ namespace CSC3045.Agile.Business.Services.Tests
         [TestMethod]
         public void test_get_projects_by_account()
         {
-            ICollection<Account> associatedAccounts1 = new HashSet<Account>
+            ICollection<Account> allUserAccounts1 = new HashSet<Account>
             {
                 new Account {AccountId = 100},
                 new Account {AccountId = 101},
                 new Account {AccountId = 102}
             };
 
-            ICollection<Account> associatedAccounts2 = new HashSet<Account>
+            ICollection<Account> allUserAccounts2 = new HashSet<Account>
             {
                 new Account {AccountId = 200},
                 new Account {AccountId = 201},
@@ -136,7 +136,7 @@ namespace CSC3045.Agile.Business.Services.Tests
                     ProductOwner = new Account {AccountId = 1},
                     ProjectManager = new Account {AccountId = 12},
                     ProjectName = "testproject1",
-                    AssociatedUsers = associatedAccounts1
+                    AllUsers = allUserAccounts1
                 },
                 new Project
                 {
@@ -144,7 +144,7 @@ namespace CSC3045.Agile.Business.Services.Tests
                     ProductOwner = new Account {AccountId = 2},
                     ProjectManager = new Account {AccountId = 12},
                     ProjectName = "testproject2",
-                    AssociatedUsers = associatedAccounts2
+                    AllUsers = allUserAccounts2
                 }
             };
 

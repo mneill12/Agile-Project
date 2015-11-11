@@ -126,7 +126,7 @@ namespace CSC3045.Agile.Data
                 ProjectManager = context.AccountSet.Local[0],
                 ProductOwner = context.AccountSet.Local[2],
                 ProjectName = "Project 1",
-                ProjectDeadline = new DateTime(2015, 1, 1)
+                ProjectStartDate = new DateTime(2015, 1, 1)
             });
 
             defaultProjects.Add(new Project
@@ -134,7 +134,7 @@ namespace CSC3045.Agile.Data
                 ProjectManager = context.AccountSet.Local[3],
                 ProductOwner = context.AccountSet.Local[4],
                 ProjectName = "Project 2",
-                ProjectDeadline = new DateTime(2015, 1, 1)
+                ProjectStartDate = new DateTime(2015, 1, 1)
             });
 
             foreach (var project in defaultProjects)

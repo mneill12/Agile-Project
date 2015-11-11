@@ -13,19 +13,25 @@ namespace CSC3045.Agile.Business.Entities
         public int ProjectId { get; set; }
 
         [DataMember]
-        public Backlog Backlog { get; set; }
-
-        [DataMember]
         public Account ProjectManager { get; set; }
 
         [DataMember]
         public Account ProductOwner { get; set; }
 
         [DataMember]
+        public ICollection<Account> ScrumMasters { get; set; }
+
+        [DataMember]
+        public ICollection<Account> Developers { get; set; }
+
+        [DataMember]
         public string ProjectName { get; set; }
 
         [DataMember]
-        public DateTime ProjectDeadline { get; set; }
+        public DateTime ProjectStartDate { get; set; }
+
+        [DataMember]
+        public Backlog Backlog { get; set; }
 
         [DataMember]
         public ICollection<Sprint> Sprints { get; set; }
@@ -34,10 +40,7 @@ namespace CSC3045.Agile.Business.Entities
         public ICollection<Burndown> Burndowns { get; set; }
 
         [DataMember]
-        public ICollection<Account> ProjectMembers { get; set; }
-
-        [DataMember]
-        public ICollection<Account> AssociatedUsers { get; set; }
+        public ICollection<Account> AllUsers { get; set; }
 
         #region IIdentifiableEntity members
 

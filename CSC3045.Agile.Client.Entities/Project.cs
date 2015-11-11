@@ -6,15 +6,20 @@ namespace CSC3045.Agile.Client.Entities
 {
     public class Project : ObjectBase
     {
-        private Backlog _Backlog;
-        private ICollection<Burndown> _Burndowns;
-        private Account _ProductOwner;
-        private DateTime _ProjectDeadline;
         private int _ProjectId;
         private Account _ProjectManager;
-        private ICollection<Account> _ProjectMembers;
+        private Account _ProductOwner;
+
+        private ICollection<Account> _ScrumMasters;
+        private ICollection<Account> _Developers;
+
         private string _ProjectName;
+        private DateTime _ProjectStartDate;
+        private Backlog _Backlog;
         private ICollection<Sprint> _Sprints;
+        private ICollection<Burndown> _Burndowns;
+
+        private ICollection<Account> _AllUsers;
 
         public int ProjectId
         {
@@ -25,19 +30,6 @@ namespace CSC3045.Agile.Client.Entities
                 {
                     _ProjectId = value;
                     OnPropertyChanged(() => ProjectId);
-                }
-            }
-        }
-
-        public Backlog Backlog
-        {
-            get { return _Backlog; }
-            set
-            {
-                if (_Backlog != value)
-                {
-                    _Backlog = value;
-                    OnPropertyChanged(() => Backlog);
                 }
             }
         }
@@ -68,6 +60,32 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
+        public ICollection<Account> ScrumMasters
+        {
+            get { return _ScrumMasters; }
+            set
+            {
+                if (_ScrumMasters != value)
+                {
+                    _ScrumMasters = value;
+                    OnPropertyChanged(() => ScrumMasters);
+                }
+            }
+        }
+
+        public ICollection<Account> Developers
+        {
+            get { return _Developers; }
+            set
+            {
+                if(_Developers != value)
+                {
+                    _Developers = value;
+                    OnPropertyChanged(() => Developers);
+                }
+            }
+        }
+
         public string ProjectName
         {
             get { return _ProjectName; }
@@ -81,15 +99,28 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public DateTime ProjectDeadline
+        public DateTime ProjectStartDate
         {
-            get { return _ProjectDeadline; }
+            get { return _ProjectStartDate; }
             set
             {
-                if (_ProjectDeadline != value)
+                if (_ProjectStartDate != value)
                 {
-                    _ProjectDeadline = value;
-                    OnPropertyChanged(() => ProjectDeadline);
+                    _ProjectStartDate = value;
+                    OnPropertyChanged(() => ProjectStartDate);
+                }
+            }
+        }
+
+        public Backlog Backlog
+        {
+            get { return _Backlog; }
+            set
+            {
+                if (_Backlog != value)
+                {
+                    _Backlog = value;
+                    OnPropertyChanged(() => Backlog);
                 }
             }
         }
@@ -120,15 +151,15 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public ICollection<Account> ProjectMembers
+        public ICollection<Account> AllUsers
         {
-            get { return _ProjectMembers; }
+            get { return _AllUsers; }
             set
             {
-                if (_ProjectMembers != value)
+                if (_AllUsers != value)
                 {
-                    _ProjectMembers = value;
-                    OnPropertyChanged(() => ProjectMembers);
+                    _AllUsers = value;
+                    OnPropertyChanged(() => AllUsers);
                 }
             }
         }

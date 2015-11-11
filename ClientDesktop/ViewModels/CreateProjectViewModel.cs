@@ -1,50 +1,63 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
-using System.Globalization;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.ServiceModel;
-using System.Windows.Controls;
 using System.Windows.Data;
 using Core.Common;
 using Core.Common.Contracts;
 using Core.Common.UI.Core;
 using CSC3045.Agile.Client.Contracts;
 using CSC3045.Agile.Client.Entities;
-using ClientDesktop;
 
 namespace ClientDesktop.ViewModels
 {
     [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class ProjectOverviewViewModel : ViewModelBase, INotifyPropertyChanged 
+    public class ProjectOverviewViewModel : ViewModelBase 
     {
-
-        private List<ProductOwnerScrumMasterInfo> _ProductOwners;
-        private string _ProjectDeadline;
-
+        private DateTime _ProjectStartDate;
         private string _ProjectName;
-        private List<ProductOwnerScrumMasterInfo> _ScrumMasters;
-        private List<ProductOwnerScrumMasterInfo> _AllUsers;
-        private readonly IServiceFactory _ServiceFactory;
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        private string _ProductOwnerSearchText;
+        private string _ScrumMasterSearchText;
+        private string _DeveloperSearchText;
+
+        private List<Account> _ProductOwners;
+        private List<Account> _ScrumMasters;
+        private List<Account> _Developers;
+
+        private Account _SelectedProductOwner;
+        private List<Account> _SelectedScrumMasters;
+        private List<Account> _SelectedDevelopers;
+
+        private readonly IServiceFactory _ServiceFactory;
 
         [ImportingConstructor]
         public ProjectOverviewViewModel(IServiceFactory serviceFactory)
         {
             _ServiceFactory = serviceFactory;
-            CreateProject = new DelegateCommand<TextBox>(OnCreateProject);
-            SearchScrumMasterCommand = new DelegateCommand<TextBox>(SearchScrumMasterByName);
-            _ProductOwners = new List<ProductOwnerScrumMasterInfo>();
-            _ScrumMasters = new List<ProductOwnerScrumMasterInfo>();
-            _AllUsers = new List<ProductOwnerScrumMasterInfo>();
+
+            CreateProjectCommand = new DelegateCommand<object>(OnCreateProject);
+            SearchScrumMasterCommand = new DelegateCommand<object>(SearchScrumMaster);
+            SearchProductOwnerCommand = new DelegateCommand<object>(SearchProductOwner);
+            SearchDeveloperCommand = new DelegateCommand<object>(SearchDeveloper);
+
+            ProductOwners = new List<Account>();
+            ScrumMasters = new List<Account>();
+            Developers = new List<Account>();
+
+            ProjectStartDate = DateTime.Now;
         }
 
-        public DelegateCommand<TextBox> CreateProject { get; private set; }
-        public DelegateCommand<TextBox> SearchScrumMasterCommand { get; private set; } 
+        public DelegateCommand<object> CreateProjectCommand { get; private set; }
+        public DelegateCommand<object> SearchProductOwnerCommand { get; private set; }
+        public DelegateCommand<object> SearchScrumMasterCommand { get; private set; }
+        public DelegateCommand<object> SearchDeveloperCommand { get; private set; }
+
+        #region View Bindings
 
         public string ProjectName
         {
@@ -57,18 +70,60 @@ namespace ClientDesktop.ViewModels
             }
         }
 
-        public string ProjectDeadline
+        public DateTime ProjectStartDate
         {
-            get { return _ProjectDeadline; }
+            get { return _ProjectStartDate; }
             set
             {
-                if (_ProjectDeadline == value) return;
-                _ProjectDeadline = value;
-                OnPropertyChanged("ProjectDeadline");
+                if (_ProjectStartDate == value) return;
+                _ProjectStartDate = value;
+                OnPropertyChanged("ProjectStartDate");
             }
         }
 
-        public List<ProductOwnerScrumMasterInfo> ProductOwners
+        public string ProductOwnerSearchText
+        {
+            get
+            {
+                return _ProductOwnerSearchText;
+            }
+            set
+            {
+                if (_ProductOwnerSearchText == value) return;
+                _ProductOwnerSearchText = value;
+                OnPropertyChanged("ProductOwnerSearchText");
+            }
+        }
+
+        public string ScrumMasterSearchText
+        {
+            get
+            {
+                return _ScrumMasterSearchText;
+            }
+            set
+            {
+                if (_ScrumMasterSearchText == value) return;
+                _ScrumMasterSearchText = value;
+                OnPropertyChanged("ScrumMasterSearchText");
+            }
+        }
+
+        public string DeveloperSearchText
+        {
+            get
+            {
+                return _DeveloperSearchText;
+            }
+            set
+            {
+                if (_DeveloperSearchText == value) return;
+                _DeveloperSearchText = value;
+                OnPropertyChanged("DeveloperSearchText");
+            }
+        }
+
+        public List<Account> ProductOwners
         {
             get { return _ProductOwners; }
             set
@@ -79,18 +134,18 @@ namespace ClientDesktop.ViewModels
             }
         }
 
-        public List<ProductOwnerScrumMasterInfo> AllUsers
+        public List<Account> Developers
         {
-            get { return _AllUsers; }
+            get { return _Developers; }
             set
             {
-                if (_AllUsers == value) return;
-                _AllUsers = value;
-                OnPropertyChanged("AllUsers");
+                if (_Developers == value) return;
+                _Developers = value;
+                OnPropertyChanged("Developers");
             }
         }
 
-        public List<ProductOwnerScrumMasterInfo> ScrumMasters
+        public List<Account> ScrumMasters
         {
             get { return _ScrumMasters; }
             set
@@ -101,35 +156,110 @@ namespace ClientDesktop.ViewModels
             }
         }
 
+        public Account SelectedProductOwner
+        {
+            get { return _SelectedProductOwner; }
+            set
+            {
+                if (_SelectedProductOwner == value) return;
+                _SelectedProductOwner = value;
+                OnPropertyChanged("SelectedProductOwner");
+            }
+        }
+
+        public List<Account> SelectedScrumMasters
+        {
+            get { return _SelectedScrumMasters; }
+            set
+            {
+                if (_SelectedScrumMasters == value) return;
+                _SelectedScrumMasters = value;
+                OnPropertyChanged("SelectedScrumMasters");
+            }
+        }
+
+        public List<Account> SelectedDevelopers
+        {
+            get { return _SelectedDevelopers; }
+            set
+            {
+                if (_SelectedDevelopers == value) return;
+                _SelectedDevelopers = value;
+                OnPropertyChanged("SelectedDevelopers");
+            }
+        }
+
+        #endregion
+
         public event EventHandler<ErrorMessageEventArgs> ErrorOccured;
 
         // This gets hit every time the page is loaded while the constructor only gets loaded initially, use for getting up-to-data from the database
         protected override void OnViewLoaded()
         {
-            GetProductOwnersAndScrumMasters();
-            
+            GetInitialUsers();
         }
 
-        protected void SearchScrumMasterByName(TextBox textBox)
+        protected void SearchScrumMaster(object obj)
         {
             WithClient(_ServiceFactory.CreateClient<IAccountService>(), accountClient =>
             {
-                
-                var searchedScrumMasters = accountClient.GetByRoleAndEmail(ViewModelConstants.Scrummaster, textBox.Text);
-                
+                var searchedScrumMasters = accountClient.GetByRoleAndEmail(ViewModelConstants.Scrummaster, ScrumMasterSearchText);
+
+                _ScrumMasters.Clear();
+
                 if (null != searchedScrumMasters && searchedScrumMasters.Count != 0)
                 {
-                    _ScrumMasters.Clear();
-
-                    foreach (var a in searchedScrumMasters)
-                    {
-                        _ScrumMasters.Add(new ProductOwnerScrumMasterInfo(a.FirstName, a.LastName, a.LoginEmail));
-                    }
+                    ScrumMasters.AddRange(searchedScrumMasters);
                 }
                 else
                 {
-                    _ScrumMasters.Clear();
-                    _ScrumMasters.Add(new ProductOwnerScrumMasterInfo("No Users Found", "", ""));
+                    ScrumMasters.Add(new Account() {FirstName = "No Users Found"});
+                }
+
+                ICollectionView view = CollectionViewSource.GetDefaultView(ScrumMasters);
+                view.Refresh();
+
+            });
+        }
+
+        protected void SearchProductOwner(object obj)
+        {
+            WithClient(_ServiceFactory.CreateClient<IAccountService>(), accountClient =>
+            {
+                var searchedProductOwners = accountClient.GetByRoleAndEmail(ViewModelConstants.ProductOwner, ProductOwnerSearchText);
+
+                _ScrumMasters.Clear();
+
+                if (null != searchedProductOwners && searchedProductOwners.Count != 0)
+                {
+                    ScrumMasters.AddRange(searchedProductOwners);
+                }
+                else
+                {
+                    ScrumMasters.Add(new Account() { FirstName = "No Users Found" });
+                }
+
+                ICollectionView view = CollectionViewSource.GetDefaultView(ScrumMasters);
+                view.Refresh();
+
+            });
+        }
+
+        protected void SearchDeveloper(object obj)
+        {
+            WithClient(_ServiceFactory.CreateClient<IAccountService>(), accountClient =>
+            {
+                var searchedDevelopers = accountClient.GetByRoleAndEmail(ViewModelConstants.Developer, DeveloperSearchText);
+
+                _ScrumMasters.Clear();
+
+                if (null != searchedDevelopers && searchedDevelopers.Count != 0)
+                {
+                    ScrumMasters.AddRange(searchedDevelopers);
+                }
+                else
+                {
+                    ScrumMasters.Add(new Account() { FirstName = "No Users Found" });
                 }
 
                 ICollectionView view = CollectionViewSource.GetDefaultView(ScrumMasters);
@@ -139,64 +269,56 @@ namespace ClientDesktop.ViewModels
         }
 
 
-        protected void GetProductOwnersAndScrumMasters()
+        protected void GetInitialUsers()
         {
             WithClient(_ServiceFactory.CreateClient<IAccountService>(), accountClient =>
             {
-               
                 var productOwners = accountClient.GetByUserRole(ViewModelConstants.ProductOwner);
                 var scrumMasters = accountClient.GetByUserRole(ViewModelConstants.Scrummaster);
-                var allUsers = accountClient.GetAllAccounts();
-
-                if (allUsers != null)
+                var developers = accountClient.GetByUserRole(ViewModelConstants.Developer);
+                
+                if (null != productOwners && productOwners.Any())
                 {
-                    foreach (var a in allUsers)
-                    {
-                        _AllUsers.Add(new ProductOwnerScrumMasterInfo(a.FirstName, a.LastName, a.LoginEmail));
-                    }
+                    ProductOwners.AddRange(productOwners);
                 }
 
-                if (productOwners != null)
+                if (scrumMasters != null && scrumMasters.Any())
                 {
-                    foreach (var a in productOwners)
-                    {
-                        _ProductOwners.Add(new ProductOwnerScrumMasterInfo(a.FirstName, a.LastName, a.LoginEmail));
-                    }
+                    ScrumMasters.AddRange(scrumMasters);
                 }
 
-                if (scrumMasters != null)
+                if (developers != null && developers.Any())
                 {
-                    foreach (var a in scrumMasters)
-                    {
-                        _ScrumMasters.Add(new ProductOwnerScrumMasterInfo(a.FirstName, a.LastName, a.LoginEmail));
-                    }
+                    Developers.AddRange(developers);
                 }
             });
         }
 
-
-        protected void OnCreateProject(TextBox textBox)
+        protected void OnCreateProject(object obj)
         {
-            if (ProjectName != null && ProjectDeadline != null)
+            if (ProjectName != null && SelectedProductOwner != null && SelectedScrumMasters.Any() && SelectedDevelopers.Any())
             {
+                var allUsers = new Collection<Account> {SelectedProductOwner};
+                allUsers.AddRange(SelectedDevelopers);
+                allUsers.AddRange(SelectedScrumMasters);
+
                 try
                 {
-                    
-                    var _Project = new Project
+                    var project = new Project
                     {
-                        ProjectName = textBox.Text,
-                        ProjectDeadline = DateTime.Now
-                            //DateTime.ParseExact(ProjectDeadline, "dd/mm/yyyy", CultureInfo.InvariantCulture)
+                        ProjectName = ProjectName,
+                        ProjectStartDate = ProjectStartDate,
+                        ProjectManager = GlobalCommands.MyAccount,
+                        ProductOwner = SelectedProductOwner,
+                        ScrumMasters = SelectedScrumMasters,
+                        Developers = SelectedDevelopers,
+                        AllUsers = allUsers,
+                        Backlog = new Backlog()
                     };
 
                     WithClient(_ServiceFactory.CreateClient<IProjectService>(), projectClient =>
                     {
-                        var myProject = projectClient.AddProject(_Project);
-
-                        if (myProject != null)
-                        {
-                            //ObjectBase.Container.GetExportedValue<DashboardViewModel>();
-                        }
+                        projectClient.AddProject(project);
                     });
                 }
                 catch (FaultException ex)
@@ -211,21 +333,5 @@ namespace ClientDesktop.ViewModels
                 }
             }
         }
-
-        public class ProductOwnerScrumMasterInfo
-        {
-            public ProductOwnerScrumMasterInfo(string fname, string sname, string email)
-            {
-                FirstName = fname;
-                Surname = sname;
-                EmailAddress = email;
-            }
-
-            public string FirstName { get; set; }
-            public string Surname { get; set; }
-            public string EmailAddress { get; set; }
-
-        }
-
     }
 }
