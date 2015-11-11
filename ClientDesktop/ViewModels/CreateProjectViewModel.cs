@@ -205,7 +205,7 @@ namespace ClientDesktop.ViewModels
             {
                 var searchedScrumMasters = accountClient.GetByRoleAndEmail(ViewModelConstants.Scrummaster, ScrumMasterSearchText);
 
-                _ScrumMasters.Clear();
+                ScrumMasters.Clear();
 
                 if (null != searchedScrumMasters && searchedScrumMasters.Count != 0)
                 {
@@ -216,9 +216,7 @@ namespace ClientDesktop.ViewModels
                     ScrumMasters.Add(new Account() {FirstName = "No Users Found"});
                 }
 
-                ICollectionView view = CollectionViewSource.GetDefaultView(ScrumMasters);
-                view.Refresh();
-
+                CollectionViewSource.GetDefaultView(ScrumMasters).Refresh();
             });
         }
 
@@ -228,20 +226,18 @@ namespace ClientDesktop.ViewModels
             {
                 var searchedProductOwners = accountClient.GetByRoleAndEmail(ViewModelConstants.ProductOwner, ProductOwnerSearchText);
 
-                _ScrumMasters.Clear();
+                ProductOwners.Clear();
 
                 if (null != searchedProductOwners && searchedProductOwners.Count != 0)
                 {
-                    ScrumMasters.AddRange(searchedProductOwners);
+                    ProductOwners.AddRange(searchedProductOwners);
                 }
                 else
                 {
-                    ScrumMasters.Add(new Account() { FirstName = "No Users Found" });
+                    ProductOwners.Add(new Account() { FirstName = "No Users Found" });
                 }
 
-                ICollectionView view = CollectionViewSource.GetDefaultView(ScrumMasters);
-                view.Refresh();
-
+                CollectionViewSource.GetDefaultView(ProductOwners).Refresh();
             });
         }
 
@@ -251,19 +247,18 @@ namespace ClientDesktop.ViewModels
             {
                 var searchedDevelopers = accountClient.GetByRoleAndEmail(ViewModelConstants.Developer, DeveloperSearchText);
 
-                _ScrumMasters.Clear();
+                Developers.Clear();
 
                 if (null != searchedDevelopers && searchedDevelopers.Count != 0)
                 {
-                    ScrumMasters.AddRange(searchedDevelopers);
+                    Developers.AddRange(searchedDevelopers);
                 }
                 else
                 {
-                    ScrumMasters.Add(new Account() { FirstName = "No Users Found" });
+                    Developers.Add(new Account() { FirstName = "No Users Found" });
                 }
 
-                ICollectionView view = CollectionViewSource.GetDefaultView(ScrumMasters);
-                view.Refresh();
+                CollectionViewSource.GetDefaultView(Developers).Refresh();
 
             });
         }

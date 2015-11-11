@@ -35,9 +35,9 @@
             <TextBox Grid.Column="0" controls:TextBoxHelper.Watermark="Search Product Owners...." Name="ProductOwnerSearchTxt" Text="{Binding ProductOwnerSearchText}"/>
             <Button Grid.Column="1" Command="{Binding SearchProductOwnerCommand}" Content="Search" FontFamily="pack://application:,,,/Resources/#AquaWax" BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" />
         </Grid>
-
-        <ListView Grid.Row="4" Grid.Column="1" SelectionMode="Multiple" BorderThickness="0"  Background="Transparent" Foreground="White" Name="ProductOwnersListView" HorizontalContentAlignment="Stretch"
-                          ItemsSource="{Binding ProductOwners, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right">
+        
+        <ListView Grid.Row="4" Grid.Column="0" SelectionMode="Single" BorderThickness="0"  Background="Transparent" Foreground="White" Name="ProductOwnersListView" HorizontalContentAlignment="Stretch"
+                          ItemsSource="{Binding ProductOwners, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn>
@@ -53,6 +53,8 @@
                 </GridView>
             </ListView.View>
         </ListView>
+
+
         <!-- Column 1 End -->
 
         <!-- Column 2 -->
@@ -69,8 +71,8 @@
             <Button Grid.Column="1" Command="{Binding SearchScrumMasterCommand}" Content="Search" FontFamily="pack://application:,,,/Resources/#AquaWax" BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" />
         </Grid>
         
-        <ListView Grid.Row="4" Grid.Column="1" SelectionMode="Multiple" BorderThickness="0"  Background="Transparent" Foreground="White" Name="ScrumMastersListView" HorizontalContentAlignment="Stretch"
-                          ItemsSource="{Binding ScrumMasters, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right">
+        <ListView Grid.Row="4" Grid.Column="1" SelectionMode="Multiple" BorderThickness="0"  Background="Transparent" Foreground="White" Name="ScrumMastersListView"
+                          ItemsSource="{Binding ScrumMasters, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn>
@@ -104,7 +106,7 @@
 
         </Grid>
         <ListView  Grid.Row="4" Grid.Column="2" SelectionMode="Multiple" BorderThickness="0" Background="Transparent" Foreground="White" x:Name="DevelopersListView" HorizontalContentAlignment="Stretch"
-            	ItemsSource="{Binding Developers}" HorizontalAlignment="Right">
+            	ItemsSource="{Binding Developers}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn>
