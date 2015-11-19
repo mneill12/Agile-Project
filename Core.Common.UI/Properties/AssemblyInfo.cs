@@ -39,4 +39,5 @@ using System.Windows.Markup;
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
 [assembly: XmlnsDefinition("CSC3045AgileCore", "Core.Common.UI.Core")]
+[assembly: XmlnsDefinition("CSC3045AgileCore", "Core.Common.UI.Util")]
 [assembly: XmlnsDefinition("CSC3045AgileCore", "Core.Common.UI.Controls")]

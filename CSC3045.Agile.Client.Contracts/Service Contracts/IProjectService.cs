@@ -10,25 +10,25 @@ namespace CSC3045.Agile.Client.Contracts
     public interface IProjectService : IServiceContract
     {
         [OperationContract]
+        IEnumerable<Project> GetProjectsForProjectManager(int projectManagerId);
+
+        [OperationContract]
+        IEnumerable<Project> GetProjectsForProductOwner(int productOwnerId);
+
+        [OperationContract]
+        [FaultContract(typeof(NotFoundException))]
+        IEnumerable<Project> GetProjectsForAccount(int accountId);
+
+        [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
-        Project AddProject(Project project);
-
-        [OperationContract]
-        [FaultContract(typeof (NotFoundException))]
-        Project GetProjectInfo(int projectId);
-
-        [OperationContract]
-        IEnumerable<Project> GetProjectsByProjectManager(int projectManagerId);
-
-        [OperationContract]
-        IEnumerable<Project> GetProjectsByProductOwner(int productOwnerId);
+        Project CreateProject(Project project);
 
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
         void UpdateProjectInfo(Project project);
 
         [OperationContract]
-        [FaultContract(typeof (NotFoundException))]
-        IEnumerable<Project> GetProjectsByAccount(int accountId);
+        [FaultContract(typeof(NotFoundException))]
+        Project GetProjectInfo(int projectId);
     }
 }

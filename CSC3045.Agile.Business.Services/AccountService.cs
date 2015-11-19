@@ -25,23 +25,40 @@ namespace CSC3045.Agile.Business.Services
         {
         }
 
+        /// <summary>
+        /// Used for testing, this service has the data repository initialized through dependency injection
+        /// </summary>
+        /// <param name="dataRepositoryFactory"></param>
         public AccountService(IDataRepositoryFactory dataRepositoryFactory)
         {
             _DataRepositoryFactory = dataRepositoryFactory;
         }
 
+        /// <summary>
+        /// Used for testing, this service has the business engine initialized through dependency injection
+        /// </summary>
+        /// <param name="businessEngineFactory"></param>
         public AccountService(IBusinessEngineFactory businessEngineFactory)
         {
             _BusinessEngineFactory = businessEngineFactory;
         }
 
+        /// <summary>
+        /// Used for testing, this service has the data repository & business engine initialized through dependency injection
+        /// </summary>
+        /// <param name="dataRepositoryFactory"></param>
+        /// <param name="businessEngineFactory"></param>
         public AccountService(IDataRepositoryFactory dataRepositoryFactory, IBusinessEngineFactory businessEngineFactory)
         {
             _DataRepositoryFactory = dataRepositoryFactory;
             _BusinessEngineFactory = businessEngineFactory;
         }
 
-
+        /// <summary>
+        /// Get all accounts with for a specific userrole id
+        /// </summary>
+        /// <param name="role">The id of the userrole</param>
+        /// <returns>A list of account entities</returns>
         public IEnumerable<Account> GetByUserRole(string role)
         {
             return ExecuteFaultHandledOperation(() =>
@@ -59,13 +76,10 @@ namespace CSC3045.Agile.Business.Services
             });
         }
 
-        #region IAccountService operations
-
-        /**
-         * Get all accounts
-         * @return accounts - A collection of Account objects
-         */
-
+        /// <summary>
+        /// Get all accounts
+        /// </summary>
+        /// <returns>A collection of account entities</returns>
         public ICollection<Account> GetAllAccounts()
         {
             return ExecuteFaultHandledOperation(() =>
@@ -83,11 +97,10 @@ namespace CSC3045.Agile.Business.Services
             });
         }
 
-        /**
-         * Get all accounts, along with associated user roles
-         * @return accounts - A collection of Account objects, with user roles
-         */
-
+        /// <summary>
+        /// Get all accounts, along with associated user roles
+        /// </summary>
+        /// <returns>A collection of Account entities with user roles</returns>
         public ICollection<Account> GetAllAccountsWithUserRoles()
         {
             return ExecuteFaultHandledOperation(() =>
@@ -105,11 +118,11 @@ namespace CSC3045.Agile.Business.Services
             });
         }
 
-        /**
-         * Get a single account by login (email address)
-         * @parameter loginEmail - the email to retrieve account for
-         */
-
+        /// <summary>
+        /// Get a single account by login email address
+        /// </summary>
+        /// <param name="loginEmail">A unique login email address for the account</param>
+        /// <returns>An account entity</returns>
         public Account GetAccountInfo(string loginEmail)
         {
             return ExecuteFaultHandledOperation(() =>
@@ -128,12 +141,12 @@ namespace CSC3045.Agile.Business.Services
             });
         }
 
-        /**
-         * Get a single account be login (email) and password combined
-         * @parameter loginEmail - the login email to check
-         * @parameter password - the password that should match a stored one
-         */
-
+        /// <summary>
+        /// Get a single account with login email address and password
+        /// </summary>
+        /// <param name="loginEmail">The login email to check</param>
+        /// <param name="password">The password that should match the stored one</param>
+        /// <returns>An account entity</returns>
         public Account GetAccountInfoWithPasswordAndUserRoles(string loginEmail, string password)
         {
             return ExecuteFaultHandledOperation(() =>
@@ -152,11 +165,11 @@ namespace CSC3045.Agile.Business.Services
             });
         }
 
-        /**
-         * Register a new account
-         * @parameter account - the new account object to store
-         */
-
+        /// <summary>
+        /// Register a new account
+        /// </summary>
+        /// <param name="account">The account entity to add to the database</param>
+        /// <returns>The account entity from the database with the generated account Id</returns>
         public Account RegisterAccount(Account account)
         {
             if (!IsAccountAlreadyCreated(account.LoginEmail))
@@ -172,27 +185,32 @@ namespace CSC3045.Agile.Business.Services
             return null;
         }
 
-        /**
-         * Update an account
-         * @parameter account - the updated account object to store
-         */
-
+        /// <summary>
+        /// Updates an account with a matching account id
+        /// </summary>
+        /// <param name="account">The account entity to update</param>
         [OperationBehavior(TransactionScopeRequired = true)]
         public void UpdateAccountInfo(Account account)
         {
             ExecuteFaultHandledOperation(() =>
             {
                 var accountRepository = _DataRepositoryFactory.GetDataRepository<IAccountRepository>();
-
+                
                 var updatedAccount = accountRepository.Update(account);
+
+                if (updatedAccount == null)
+                {
+                    var ex = new NotFoundException(string.Format("Account {0} could not be updated or found", account.LoginEmail));
+                    throw new FaultException<NotFoundException>(ex, ex.Message);
+                }
             });
         }
 
-        /**
-         * Check if an account already exists
-         * @parameter loginEmail - The email address to check for existence
-         */
-
+        /// <summary>
+        /// Checks if an account already exists
+        /// </summary>
+        /// <param name="loginEmail">The email address to check</param>
+        /// <returns>Returns true if the account already exists to prevent accounts being overwritten</returns>
         public bool IsAccountAlreadyCreated(string loginEmail)
         {
             return ExecuteFaultHandledOperation(() =>
@@ -203,6 +221,10 @@ namespace CSC3045.Agile.Business.Services
             });
         }
 
+        /// <summary>
+        /// Gets a list of available user roles
+        /// </summary>
+        /// <returns>A list of user roles</returns>
         public IList<UserRole> GetAllUserRoles()
         {
             return ExecuteFaultHandledOperation(() =>
@@ -220,8 +242,12 @@ namespace CSC3045.Agile.Business.Services
             });
         }
 
-        #endregion
-
+        //TODO: Move to tasks service
+        /// <summary>
+        /// Gets a list of owned tasks for an account id
+        /// </summary>
+        /// <param name="accountId">The account id to get a list of tasks for</param>
+        /// <returns>A list of story tasks</returns>
         public ICollection<StoryTask> GetOwnedTasks(int accountId)
         {
             return ExecuteFaultHandledOperation(() =>
@@ -239,20 +265,26 @@ namespace CSC3045.Agile.Business.Services
             });
         }
 
+        /// <summary>
+        /// Gets a list of accounts based on a role and email address
+        /// </summary>
+        /// <param name="role">The role address to check</param>
+        /// <param name="email">The email address to check</param>
+        /// <returns>A list of accounts</returns>
         public ICollection<Account> GetByRoleAndEmail(string role, string email)
         {
             return ExecuteFaultHandledOperation(() =>
             {
-                IAccountRepository taskRepository = _DataRepositoryFactory.GetDataRepository<IAccountRepository>();
+                IAccountRepository accountRepository = _DataRepositoryFactory.GetDataRepository<IAccountRepository>();
 
-                ICollection<Account> foundUsers = taskRepository.GetUsersByRoleAndName(role, email);
-                if (foundUsers == null)
+                ICollection<Account> foundAccounts = accountRepository.GetUsersByRoleAndName(role, email);
+                if (foundAccounts == null)
                 {
-                    NotFoundException ex = new NotFoundException("Error - There are no tasks to get");
+                    NotFoundException ex = new NotFoundException("Error - There are no accounts to get");
                     throw new FaultException<NotFoundException>(ex, ex.Message);
                 }
 
-                return foundUsers.ToList();
+                return foundAccounts.ToList();
             });
         }
     }

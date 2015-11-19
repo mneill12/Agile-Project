@@ -167,28 +167,6 @@ namespace ClientDesktop.ViewModels
             }
         }
 
-        public List<Account> SelectedScrumMasters
-        {
-            get { return _SelectedScrumMasters; }
-            set
-            {
-                if (_SelectedScrumMasters == value) return;
-                _SelectedScrumMasters = value;
-                OnPropertyChanged("SelectedScrumMasters");
-            }
-        }
-
-        public List<Account> SelectedDevelopers
-        {
-            get { return _SelectedDevelopers; }
-            set
-            {
-                if (_SelectedDevelopers == value) return;
-                _SelectedDevelopers = value;
-                OnPropertyChanged("SelectedDevelopers");
-            }
-        }
-
         #endregion
 
         public event EventHandler<ErrorMessageEventArgs> ErrorOccured;
@@ -289,13 +267,22 @@ namespace ClientDesktop.ViewModels
             });
         }
 
-        protected void OnCreateProject(object obj)
+        protected void OnCreateProject(object parameter)
         {
-            if (ProjectName != null && SelectedProductOwner != null && SelectedScrumMasters.Any() && SelectedDevelopers.Any())
+            // Hackiest code ever, WPF does not support passing multiple arrays in one command with MVVM so we
+            // use a shallow copy of an array converted using the MultiValueConverter to allow a deletgate
+            // command then convert back here to an array, values changed here must be updated in the View.xaml
+            var values = (object[])parameter;
+            List<Account> scrumMasters = (List<Account>) values[0];
+            List<Account> developers = (List<Account>) values[1];
+
+            if (ProjectName != null && SelectedProductOwner != null && scrumMasters.Any() && developers.Any())
             {
+                // Add PO, PM, SMs and Devs to all project users
                 var allUsers = new Collection<Account> {SelectedProductOwner};
-                allUsers.AddRange(SelectedDevelopers);
-                allUsers.AddRange(SelectedScrumMasters);
+                allUsers.Add(GlobalCommands.MyAccount);
+                allUsers.AddRange(scrumMasters);
+                allUsers.AddRange(developers);
 
                 try
                 {
@@ -305,15 +292,17 @@ namespace ClientDesktop.ViewModels
                         ProjectStartDate = ProjectStartDate,
                         ProjectManager = GlobalCommands.MyAccount,
                         ProductOwner = SelectedProductOwner,
-                        ScrumMasters = SelectedScrumMasters,
-                        Developers = SelectedDevelopers,
+                        ScrumMasters = scrumMasters,
+                        Developers = developers,
                         AllUsers = allUsers,
                         Backlog = new Backlog()
                     };
 
                     WithClient(_ServiceFactory.CreateClient<IProjectService>(), projectClient =>
                     {
-                        projectClient.AddProject(project);
+                        Project createdProject = projectClient.CreateProject(project);
+
+                        //Navigate to main page passing in param projectId here to load the correct project page
                     });
                 }
                 catch (FaultException ex)

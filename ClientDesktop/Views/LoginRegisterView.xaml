@@ -40,9 +40,9 @@
                     <PasswordBox controls:TextBoxHelper.ClearTextButton="True" controls:TextBoxHelper.Watermark="Confirm Password" Grid.Row="5" Margin="10,30,10,0" Name="ConfirmPasswordRegBox" Height="20"  />
 
                     <TextBlock Grid.Row="6" Margin="10,20.429,10.286,51.714" FontSize="15" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White" Grid.RowSpan="2" ><Run Language="en-gb" Text="Available Roles:"/></TextBlock>
-                    <CheckBox Grid.Row="6" Margin="10,45,0,0" Content="Developer" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White" IsChecked="{Binding RegisterIsDeveloper}"></CheckBox>
-                    <CheckBox Grid.Row="6" Margin="130,45,0,0" Content="Product Owner" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White" IsChecked="{Binding RegisterIsProductOwner}"></CheckBox>
-                    <CheckBox Grid.Row="6" Margin="240,45,0,0" Content="Scrum Master" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White" IsChecked="{Binding RegisterIsScrumMaster}"></CheckBox>
+                    <CheckBox Grid.Row="6" Margin="10,45,0,0" Content="Developer" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White" IsChecked="{Binding RegisterIsDeveloper}" />
+                    <CheckBox Grid.Row="6" Margin="130,45,0,0" Content="Product Owner" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White" IsChecked="{Binding RegisterIsProductOwner}" />
+                    <CheckBox Grid.Row="6" Margin="240,45,0,0" Content="Scrum Master" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White" IsChecked="{Binding RegisterIsScrumMaster}" />
 
                     <Button Width="100" Grid.Row="7" Margin="10,20.286,236.286,9.714" FontFamily="pack://application:,,,/Resources/#AquaWax" BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" FontSize="10" Command="{Binding RegisterAccount}" CommandParameter="{Binding ElementName=ConfirmPasswordRegBox}">Register</Button>
                 </Grid>
@@ -55,19 +55,16 @@
                         <RowDefinition Height="1*"></RowDefinition>
                         <RowDefinition Height="1*"></RowDefinition>
                         <RowDefinition Height="1*"></RowDefinition>
-
                     </Grid.RowDefinitions>
 
                     <TextBox controls:TextBoxHelper.ClearTextButton="True" controls:TextBoxHelper.Watermark="Username" Grid.Row="0" Margin="10,26,10.001,148" Text ="{Binding LoginEmail}" Name="UsernameLoginTxt" Height="20" ></TextBox>
                     <PasswordBox controls:TextBoxHelper.ClearTextButton="True" controls:TextBoxHelper.Watermark="Password" x:Name="PasswordLoginBox" Margin="10,85,10,89" Height="20" Password="4nt1t7!"/>
                      
                     <Button Width="100" Height="30" FontFamily="pack://application:,,,/Resources/#AquaWax" BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" FontSize="10" Command="{Binding AccountLogin, Mode=OneTime}" CommandParameter="{Binding ElementName=PasswordLoginBox}" Grid.Row="0" Margin="10,138,246,32">Login</Button>
-                    <Border 
-                            Grid.Row="2"
+                    <Border Grid.Row="2"
                             Margin="0,65,0,0" 
                             Height="10" 
                             VerticalAlignment="Top" 
-                
                             BorderThickness="10" />
 
                     <TextBlock Grid.Row="2" Margin="10,14,262,0" Text="Work Offline" FontSize="15" VerticalAlignment="Top" HorizontalAlignment="Center" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White"/>

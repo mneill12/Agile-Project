@@ -51,7 +51,7 @@ namespace CSC3045.Agile.Business.Services.Tests
 
             var service = new ProjectService(mockDataRepositoryFactory.Object);
 
-            var returnedProject = service.AddProject(projectToAdd);
+            var returnedProject = service.CreateProject(projectToAdd);
 
             Assert.IsTrue(returnedProject != null);
         }
@@ -68,7 +68,7 @@ namespace CSC3045.Agile.Business.Services.Tests
             };
 
             var mockDataRepositoryFactory = new Mock<IDataRepositoryFactory>();
-            mockDataRepositoryFactory.Setup(mock => mock.GetDataRepository<IProjectRepository>().GetByProjectId(45))
+            mockDataRepositoryFactory.Setup(mock => mock.GetDataRepository<IProjectRepository>().Get(45))
                 .Returns(projectToGet);
 
             var service = new ProjectService(mockDataRepositoryFactory.Object);
@@ -101,12 +101,12 @@ namespace CSC3045.Agile.Business.Services.Tests
 
             var mockDataRepositoryFactory = new Mock<IDataRepositoryFactory>();
             mockDataRepositoryFactory.Setup(
-                mock => mock.GetDataRepository<IProjectRepository>().GetManagedProjectsByAccount(1))
+                mock => mock.GetDataRepository<IProjectRepository>().GetProjectsForProjectManager(1))
                 .Returns(projectsToGet);
 
             var service = new ProjectService(mockDataRepositoryFactory.Object);
 
-            var projects = service.GetProjectsByProjectManager(1);
+            var projects = service.GetProjectsForProjectManager(1);
 
             Assert.IsTrue(projects == projectsToGet);
         }
@@ -150,13 +150,13 @@ namespace CSC3045.Agile.Business.Services.Tests
 
             var mockDataRepositoryFactory = new Mock<IDataRepositoryFactory>();
             mockDataRepositoryFactory.Setup(
-                mock => mock.GetDataRepository<IProjectRepository>().GetProjectsByAccount(200)).Returns(projectsToGet);
+                mock => mock.GetDataRepository<IProjectRepository>().GetProjectsForAccount(200)).Returns(projectsToGet);
 
             var service = new ProjectService(mockDataRepositoryFactory.Object);
 
-            var projects = service.GetProjectsByAccount(200);
+            var projects = service.GetProjectsForAccount(200);
 
-            Assert.IsTrue(projects == projectsToGet);
+            Assert.IsTrue(projects.Equals(projectsToGet));
         }
     }
 }

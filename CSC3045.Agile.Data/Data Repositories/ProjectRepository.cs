@@ -11,55 +11,42 @@ namespace CSC3045.Agile.Data.Data_Repositories
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class ProjectRepository : DataRepositoryBase<Project>, IProjectRepository
     {
-        //TODO @Marty - Is there a reason for this? GetEntity above does the same thing, as we override EntityId with ProjectId?
-        //Gets project based on Project Id
-        public Project GetByProjectId(int projectId)
+
+        #region Specific Methods
+
+        public IEnumerable<Project> GetProjectsForProjectManager(int projectManagerId)
         {
             using (var entityContext = new Csc3045AgileContext())
             {
-                return GetEntity(entityContext, projectId);
+                return (from p in entityContext.ProjectSet
+                        where p.ProjectManager.AccountId == projectManagerId
+                        select p).ToList();
             }
         }
 
-
-        public IEnumerable<Project> GetManagedProjectsByAccount(int projectManagerId)
+        public IEnumerable<Project> GetProjectsForProductOwner(int productOwnerId)
         {
             using (var entityContext = new Csc3045AgileContext())
             {
-                var query = (from p in entityContext.ProjectSet
-                    where p.ProjectManager.AccountId == projectManagerId
-                    select p);
-
-                var results = query.ToList();
-
-                return results;
+                return (from p in entityContext.ProjectSet
+                        where p.ProductOwner.AccountId == productOwnerId
+                        select p).ToList();
             }
         }
 
-        public IEnumerable<Project> GetOwnedProjectsByAccount(int productOwnerId)
+        public IEnumerable<Project> GetProjectsForAccount(int accountId)
         {
             using (var entityContext = new Csc3045AgileContext())
             {
-                var query = (from p in entityContext.ProjectSet
-                    where p.ProductOwner.AccountId == productOwnerId
-                    select p);
-
-                return query.ToList();
-            }
-        }
-
-
-        public IEnumerable<Project> GetProjectsByAccount(int accountId)
-        {
-            using (var entityContext = new Csc3045AgileContext())
-            {
-                var query = (from p in entityContext.ProjectSet
+                return (from p in entityContext.ProjectSet
                     where p.AllUsers.Select(a => a.AccountId).Contains(accountId)
-                    select p
-                    );
-                return query.ToList();
+                    select p).ToList();
             }
         }
+
+        #endregion
+
+        #region CRUD Methods
 
         protected override Project AddEntity(Csc3045AgileContext entityContext, Project entity)
         {
@@ -75,19 +62,16 @@ namespace CSC3045.Agile.Data.Data_Repositories
 
         protected override IEnumerable<Project> GetEntities(Csc3045AgileContext entityContext)
         {
-            return from e in entityContext.ProjectSet
-                select e;
+            return entityContext.ProjectSet
+                    .ToList();
         }
 
         protected override Project GetEntity(Csc3045AgileContext entityContext, int id)
         {
-            var query = (from e in entityContext.ProjectSet
-                where e.ProjectId == id
-                select e);
-
-            var results = query.FirstOrDefault();
-
-            return results;
+            return entityContext.ProjectSet
+                    .FirstOrDefault(p => p.ProjectId == id);
         }
+
+        #endregion
     }
 }
