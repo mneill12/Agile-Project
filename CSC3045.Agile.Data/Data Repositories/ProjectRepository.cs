@@ -14,7 +14,7 @@ namespace CSC3045.Agile.Data.Data_Repositories
 
         #region Specific Methods
 
-        public IEnumerable<Project> GetProjectsForProjectManager(int projectManagerId)
+        public ICollection<Project> GetProjectsForProjectManager(int projectManagerId)
         {
             using (var entityContext = new Csc3045AgileContext())
             {
@@ -24,7 +24,7 @@ namespace CSC3045.Agile.Data.Data_Repositories
             }
         }
 
-        public IEnumerable<Project> GetProjectsForProductOwner(int productOwnerId)
+        public ICollection<Project> GetProjectsForProductOwner(int productOwnerId)
         {
             using (var entityContext = new Csc3045AgileContext())
             {
@@ -34,7 +34,7 @@ namespace CSC3045.Agile.Data.Data_Repositories
             }
         }
 
-        public IEnumerable<Project> GetProjectsForAccount(int accountId)
+        public ICollection<Project> GetProjectsForAccount(int accountId)
         {
             using (var entityContext = new Csc3045AgileContext())
             {

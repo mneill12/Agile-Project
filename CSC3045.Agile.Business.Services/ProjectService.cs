@@ -30,7 +30,7 @@ namespace CSC3045.Agile.Business.Services
             _DataRepositoryFactory = dataRepositoryFactory;
         }
 
-        public IEnumerable<Project> GetProjectsForProjectManager(int projectManagerId)
+        public ICollection<Project> GetProjectsForProjectManager(int projectManagerId)
         {
             return ExecuteFaultHandledOperation(() =>
             {
@@ -40,7 +40,7 @@ namespace CSC3045.Agile.Business.Services
             });
         }
 
-        public IEnumerable<Project> GetProjectsForProductOwner(int productOwnerId)
+        public ICollection<Project> GetProjectsForProductOwner(int productOwnerId)
         {
             return ExecuteFaultHandledOperation(() =>
             {
@@ -50,7 +50,7 @@ namespace CSC3045.Agile.Business.Services
             });
         }
 
-        public IEnumerable<Project> GetProjectsForAccount(int accountId)
+        public ICollection<Project> GetProjectsForAccount(int accountId)
         {
             return ExecuteFaultHandledOperation(() =>
             {

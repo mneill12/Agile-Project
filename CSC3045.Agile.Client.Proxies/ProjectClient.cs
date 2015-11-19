@@ -10,17 +10,17 @@ namespace CSC3045.Agile.Client.Proxies
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class ProjectClient : ClientBase<IProjectService>, IProjectService
     {
-        public IEnumerable<Project> GetProjectsForProjectManager(int projectManagerId)
+        public ICollection<Project> GetProjectsForProjectManager(int projectManagerId)
         {
             return Channel.GetProjectsForProjectManager(projectManagerId);
         }
 
-        public IEnumerable<Project> GetProjectsForProductOwner(int productOwnerId)
+        public ICollection<Project> GetProjectsForProductOwner(int productOwnerId)
         {
             return Channel.GetProjectsForProductOwner(productOwnerId);
         }
 
-        public IEnumerable<Project> GetProjectsForAccount(int accountId)
+        public ICollection<Project> GetProjectsForAccount(int accountId)
         {
             return Channel.GetProjectsForAccount(accountId);
         }

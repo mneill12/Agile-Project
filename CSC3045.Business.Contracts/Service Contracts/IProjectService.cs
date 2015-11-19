@@ -9,14 +9,14 @@ namespace CSC3045.Agile.Business.Contracts
     public interface IProjectService
     {
         [OperationContract]
-        IEnumerable<Project> GetProjectsForProjectManager(int projectManagerId);
+        ICollection<Project> GetProjectsForProjectManager(int projectManagerId);
 
         [OperationContract]
-        IEnumerable<Project> GetProjectsForProductOwner(int productOwnerId);
+        ICollection<Project> GetProjectsForProductOwner(int productOwnerId);
 
         [OperationContract]
         [FaultContract(typeof(NotFoundException))]
-        IEnumerable<Project> GetProjectsForAccount(int accountId);
+        ICollection<Project> GetProjectsForAccount(int accountId);
 
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]

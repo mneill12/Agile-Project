@@ -7,8 +7,8 @@ namespace CSC3045.Agile.Data.Contracts.Repository_Interfaces
     // Interface for custom methods of ProjectRepository
     public interface IProjectRepository : IDataRepository<Project>
     {
-        IEnumerable<Project> GetProjectsForProjectManager(int projectManagerId);
-        IEnumerable<Project> GetProjectsForProductOwner(int productOwnderId);
-        IEnumerable<Project> GetProjectsForAccount(int accountId);
+        ICollection<Project> GetProjectsForProjectManager(int projectManagerId);
+        ICollection<Project> GetProjectsForProductOwner(int productOwnderId);
+        ICollection<Project> GetProjectsForAccount(int accountId);
     }
 }

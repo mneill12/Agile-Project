@@ -345,7 +345,6 @@ namespace ClientDesktop.ViewModels
 
                 try
                 {
-                    ;
                     WithClient(_ServiceFactory.CreateClient<IAccountService>(), accountClient =>
                     {
                         var allUserRoles = accountClient.GetAllUserRoles();

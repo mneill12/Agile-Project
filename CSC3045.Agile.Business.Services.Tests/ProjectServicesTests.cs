@@ -81,7 +81,7 @@ namespace CSC3045.Agile.Business.Services.Tests
         [TestMethod]
         public void test_get_projects_by_project_manager()
         {
-            IEnumerable<Project> projectsToGet = new List<Project>
+            ICollection<Project> projectsToGet = new List<Project>
             {
                 new Project
                 {
@@ -128,7 +128,7 @@ namespace CSC3045.Agile.Business.Services.Tests
                 new Account {AccountId = 202}
             };
 
-            IEnumerable<Project> projectsToGet = new List<Project>
+            ICollection<Project> projectsToGet = new List<Project>
             {
                 new Project
                 {
