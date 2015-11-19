@@ -30,8 +30,6 @@ namespace ClientDesktop.ViewModels
         private List<Account> _Developers;
 
         private Account _SelectedProductOwner;
-        private List<Account> _SelectedScrumMasters;
-        private List<Account> _SelectedDevelopers;
 
         private readonly IServiceFactory _ServiceFactory;
 

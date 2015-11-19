@@ -21,9 +21,9 @@
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="30"/>
-            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="30"/>
-            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
         <!-- Logo Section -->
@@ -44,8 +44,8 @@
         
         <!-- Right bar section -->
         <TextBlock Grid.Column="6" Text="&#xf085;" Visibility="{Binding IsLoggedIn, Converter={StaticResource BoolToVis}}" FontFamily="pack://application:,,,/Resources/#FontAwesome" Foreground="White" TextAlignment="Center" FontSize="20" Height="24" VerticalAlignment="Center" />
-        <Button Grid.Column="7" Height="40" x:Name="MyAccountButton" Background="Transparent" BorderBrush="Transparent" Foreground="White" Content="My Account" HorizontalAlignment="Center" FontSize="10" Visibility="{Binding IsLoggedIn, Converter={StaticResource BoolToVis}}" Command="{Binding EditAccount}" />
+        <Button Grid.Column="7" Margin="10"  Height="40" x:Name="MyAccountButton" Background="Transparent" BorderBrush="Transparent" Foreground="White" Content="My Account" HorizontalAlignment="Center" FontSize="10" Visibility="{Binding IsLoggedIn, Converter={StaticResource BoolToVis}}" Command="{Binding EditAccount}" />
         <TextBlock Grid.Column="8" Text="&#xf052;" Visibility="{Binding IsLoggedIn, Converter={StaticResource BoolToVis}}" FontFamily="pack://application:,,,/Resources/#FontAwesome" Foreground="White" TextAlignment="Center" FontSize="20" Height="24" VerticalAlignment="Center"/>
-        <Button Grid.Column="9" Height="40" x:Name="LogoutButton" Background="Transparent" BorderBrush="Transparent" Foreground="White" Content="Logout" Width="75" HorizontalAlignment="Center" Visibility="{Binding IsLoggedIn, Converter={StaticResource BoolToVis}}" Command="{Binding LogoutCommand}"/>
+        <Button Grid.Column="9" Margin="10" Height="40" x:Name="LogoutButton" Background="Transparent" BorderBrush="Transparent" Foreground="White" Content="Logout" HorizontalAlignment="Center" Visibility="{Binding IsLoggedIn, Converter={StaticResource BoolToVis}}" Command="{Binding LogoutCommand}"/>
     </Grid>
 </core:UserControlViewBase>

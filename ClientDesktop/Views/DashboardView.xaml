@@ -6,7 +6,7 @@
                           xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
                           xmlns:core="CSC3045AgileCore"
                           mc:Ignorable="d"
-                          d:DesignHeight="590" d:DesignWidth="1280">
+                          d:DesignHeight="560" d:DesignWidth="1280">
     <Grid>
         <DockPanel LastChildFill="True" Dock="Right" HorizontalAlignment="Right">
             <StackPanel Width="1040" Margin="10" >
@@ -63,9 +63,9 @@
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
 
-                                <TextBlock Grid.Column="0" Grid.Row="0" Margin="10" Text="Project Start Date: 11/11/15" HorizontalAlignment="Left" FontSize="15" VerticalAlignment="Center" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White"/>
-                                <TextBlock Grid.Column="1" Grid.Row="0" Margin="10" Text="Remaining Points: 30" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White"/>
-                                <TextBlock Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="0" Margin="10" Text="Role: Project Manager, Product Owner" HorizontalAlignment="Left" FontSize="15" VerticalAlignment="Center" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White"/>
+                                <TextBlock Grid.Column="0" Grid.Row="0" Margin="10" Text="Project Start Date: 11/11/15" HorizontalAlignment="Left" FontSize="15" VerticalAlignment="Center"  Foreground="White"/>
+                                <TextBlock Grid.Column="1" Grid.Row="0" Margin="10" Text="Remaining Points: 30" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White"/>
+                                <TextBlock Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="0" Margin="10" Text="Role: Project Manager, Product Owner" HorizontalAlignment="Left" FontSize="15" VerticalAlignment="Center" Foreground="White"/>
 
 
                                 <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4">
@@ -75,10 +75,10 @@
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <Button Grid.Column="0" HorizontalAlignment="Left" Margin="5" Command="{Binding ManageProjectBacklog}" Content="Manage Project Backlog (PO Only)" FontFamily="pack://application:,,,/Resources/#AquaWax" BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" />
-                                    <Button Grid.Column="1" HorizontalAlignment="Left" Margin="5" Command="{Binding AddSprint}" Content="Add Sprint (SM Only)" FontFamily="pack://application:,,,/Resources/#AquaWax" BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" />
-                                    <Button Grid.Column="2" HorizontalAlignment="Left" Margin="5" Command="{Binding SaveProjectXML}" Content="Save Project XML" FontFamily="pack://application:,,,/Resources/#AquaWax" BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" />
-                                    <Button Grid.Column="4" HorizontalAlignment="Left" Margin="5" Command="{Binding ProjectBurndown}" Content="Project Burndown" FontFamily="pack://application:,,,/Resources/#AquaWax" BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" />
+                                    <Button Grid.Column="0" HorizontalAlignment="Left" Margin="5" Command="{Binding ManageProjectBacklog}" Content="Manage Project Backlog (PO Only)" BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" />
+                                    <Button Grid.Column="1" HorizontalAlignment="Left" Margin="5" Command="{Binding AddSprint}" Content="Add Sprint (SM Only)"  BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" />
+                                    <Button Grid.Column="2" HorizontalAlignment="Left" Margin="5" Command="{Binding SaveProjectXML}" Content="Save Project XML"  BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" />
+                                    <Button Grid.Column="4" HorizontalAlignment="Left" Margin="5" Command="{Binding ProjectBurndown}" Content="Project Burndown"  BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" />
                                 </Grid>
 
                                 <TabControl Grid.Row="2" Grid.ColumnSpan="4" Grid.Column="0" Controls:TabControlHelper.IsUnderlined="True">
@@ -98,10 +98,10 @@
                                                 <ColumnDefinition Width="*" />
                                             </Grid.ColumnDefinitions>
 
-                                            <TextBlock Grid.Column="0" Grid.Row="0" Margin="5" Text="Sprint Start Date: 11/11/15" FontSize="15" VerticalAlignment="Center" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White"/>
-                                            <TextBlock Grid.Column="1" Grid.Row="0" Margin="5" Text="Remaining Hours: 82" FontSize="15" VerticalAlignment="Center" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White"/>
-                                            <TextBlock Grid.Column="2" Grid.Row="0" Margin="5" Text="Scrum Master: test@test.com" FontSize="15" VerticalAlignment="Center" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White"/>
-                                            <TextBlock Grid.Column="3" Grid.Row="0" Margin="5" Text="Sprint End Date: 25/11/15" FontSize="15" VerticalAlignment="Center" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White"/>
+                                            <TextBlock Grid.Column="0" Grid.Row="0" Margin="5" Text="Sprint Start Date: 11/11/15" FontSize="15" VerticalAlignment="Center" Foreground="White"/>
+                                            <TextBlock Grid.Column="1" Grid.Row="0" Margin="5" Text="Remaining Hours: 82" FontSize="15" VerticalAlignment="Center" Foreground="White"/>
+                                            <TextBlock Grid.Column="2" Grid.Row="0" Margin="5" Text="Scrum Master: test@test.com" FontSize="15" VerticalAlignment="Center" Foreground="White"/>
+                                            <TextBlock Grid.Column="3" Grid.Row="0" Margin="5" Text="Sprint End Date: 25/11/15" FontSize="15" VerticalAlignment="Center" Foreground="White"/>
 
 
                                             <Grid Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="1">
@@ -112,48 +112,50 @@
                                                     <ColumnDefinition Width="Auto" />
                                                     <ColumnDefinition Width="Auto" />
                                                 </Grid.ColumnDefinitions>
-                                                <Button Grid.Column="0" HorizontalAlignment="Left" Margin="5" Command="{Binding ManageSprintTeam}" Content="Team Memebers" FontFamily="pack://application:,,,/Resources/#AquaWax" BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" />
-                                                <Button Grid.Column="1" HorizontalAlignment="Left" Margin="5" Command="{Binding AddSprint}" Content="Manage Sprint Backlog (SM Only)" FontFamily="pack://application:,,,/Resources/#AquaWax" BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" />
-                                                <Button Grid.Column="2" HorizontalAlignment="Left" Margin="5" Command="{Binding PlanningPoker}" Content="Planning Poker" FontFamily="pack://application:,,,/Resources/#AquaWax" BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" />
-                                                <Button Grid.Column="3" HorizontalAlignment="Left" Margin="5" Command="{Binding SprintBurndown}" Content="Sprint Burndown" FontFamily="pack://application:,,,/Resources/#AquaWax" BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" />
-                                                <Button Grid.Column="4" HorizontalAlignment="Left" Margin="5" Command="{Binding ViewTaskKanban}" Content="Task Kanban" FontFamily="pack://application:,,,/Resources/#AquaWax" BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" />
+                                                <Button Grid.Column="0" HorizontalAlignment="Left" Margin="5" Command="{Binding ManageSprintTeam}" Content="Team Memebers"  BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" />
+                                                <Button Grid.Column="1" HorizontalAlignment="Left" Margin="5" Command="{Binding AddSprint}" Content="Manage Sprint Backlog (SM Only)"  BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" />
+                                                <Button Grid.Column="2" HorizontalAlignment="Left" Margin="5" Command="{Binding PlanningPoker}" Content="Planning Poker"  BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" />
+                                                <Button Grid.Column="3" HorizontalAlignment="Left" Margin="5" Command="{Binding SprintBurndown}" Content="Sprint Burndown"  BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" />
+                                                <Button Grid.Column="4" HorizontalAlignment="Left" Margin="5" Command="{Binding ViewTaskKanban}" Content="Task Kanban"  BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" />
 
                                             </Grid>
 
-                                            <TextBlock Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="2" Margin="5" Text="Sprint Userstories" FontSize="22" VerticalAlignment="Center" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White"/>
+                                            <TextBlock Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="2" Margin="5" Text="Sprint Userstories" FontSize="22" VerticalAlignment="Center"  Foreground="White"/>
 
-                                            <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4">
-                                                <Border Margin="2" Padding="0 5 0 15" BorderThickness="0" BorderBrush="Black" CornerRadius="0">
-                                                    <Border.Background>
-                                                        <SolidColorBrush Color="Black" Opacity="0.4" />
-                                                    </Border.Background>
-                                                    <TextBlock Margin="20,10,20,0" Background="Transparent" Foreground="White" Text="CSC-001 - As a user of the scrum client program I can register so that I can connect to the scrum management server"/>
-                                                </Border>
-                                                <Border Margin="2" Padding="0 5 0 15" BorderThickness="0" BorderBrush="Black" CornerRadius="0">
-                                                    <Border.Background>
-                                                        <SolidColorBrush Color="Black" Opacity="0.4" />
-                                                    </Border.Background>
-                                                    <TextBlock Margin="20,10,20,0" Background="Transparent" Foreground="White" Text="CSC-002 - As a registering user I can select the scrum role(s) that I will potentially take (Product Owner, Scrum Master, Developer) so that I will be able to carry out those roles in projects"/>
-                                                </Border>
-                                                <Border Margin="2" Padding="0 5 0 15" BorderThickness="0" BorderBrush="Black" CornerRadius="0">
-                                                    <Border.Background>
-                                                        <SolidColorBrush Color="Black" Opacity="0.4" />
-                                                    </Border.Background>
-                                                    <TextBlock Margin="20,10,20,0" Background="Transparent" Foreground="White" Text="CSC-003 - As a registered user I can log in with my username and  password so that I can begin using the system"/>
-                                                </Border>
-                                                <Border Margin="2,2,1.571,2" Padding="0 5 0 15" BorderThickness="0" BorderBrush="Black" CornerRadius="10">
-                                                    <Border.Background>
-                                                        <SolidColorBrush Color="Black" Opacity="0.4" />
-                                                    </Border.Background>
-                                                    <TextBlock Margin="20,10,20,0" Background="Transparent" Foreground="White" Text="CSC-004 - As a logged in user I can create a new project so that I can be the Project Manager"/>
-                                                </Border>
-                                                <Border Margin="2" Padding="0 5 0 15" BorderThickness="0" BorderBrush="Black" CornerRadius="10">
-                                                    <Border.Background>
-                                                        <SolidColorBrush Color="Black" Opacity="0.4" />
-                                                    </Border.Background>
-                                                    <TextBlock Margin="20,10,20,0" Background="Transparent" Foreground="White" Text="CSC-005 - As a Project Manager I can search for a specific registered Product Owner and assign them as a Product Owner for my project so they can begin to add stories to the ..."/>
-                                                </Border>
-                                            </StackPanel>
+                                            <ScrollViewer Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" Height="200" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled">
+                                                <StackPanel >
+                                                    <Border Margin="2" Padding="0 5 0 15" BorderThickness="0" BorderBrush="Black" CornerRadius="0">
+                                                        <Border.Background>
+                                                            <SolidColorBrush Color="Black" Opacity="0.4" />
+                                                        </Border.Background>
+                                                        <TextBlock Margin="20,10,20,0" Background="Transparent" Foreground="White" Text="CSC-001 - As a user of the scrum client program I can register so that I can connect to the scrum management server"/>
+                                                    </Border>
+                                                    <Border Margin="2" Padding="0 5 0 15" BorderThickness="0" BorderBrush="Black" CornerRadius="0">
+                                                        <Border.Background>
+                                                            <SolidColorBrush Color="Black" Opacity="0.4" />
+                                                        </Border.Background>
+                                                        <TextBlock Margin="20,10,20,0" Background="Transparent" Foreground="White" Text="CSC-002 - As a registering user I can select the scrum role(s) that I will potentially take (Product Owner, Scrum Master, Developer) so that I will be able to carry out those roles in projects"/>
+                                                    </Border>
+                                                    <Border Margin="2" Padding="0 5 0 15" BorderThickness="0" BorderBrush="Black" CornerRadius="0">
+                                                        <Border.Background>
+                                                            <SolidColorBrush Color="Black" Opacity="0.4" />
+                                                        </Border.Background>
+                                                        <TextBlock Margin="20,10,20,0" Background="Transparent" Foreground="White" Text="CSC-003 - As a registered user I can log in with my username and  password so that I can begin using the system"/>
+                                                    </Border>
+                                                    <Border Margin="2,2,1.571,2" Padding="0 5 0 15" BorderThickness="0" BorderBrush="Black" CornerRadius="10">
+                                                        <Border.Background>
+                                                            <SolidColorBrush Color="Black" Opacity="0.4" />
+                                                        </Border.Background>
+                                                        <TextBlock Margin="20,10,20,0" Background="Transparent" Foreground="White" Text="CSC-004 - As a logged in user I can create a new project so that I can be the Project Manager"/>
+                                                    </Border>
+                                                    <Border Margin="2" Padding="0 5 0 15" BorderThickness="0" BorderBrush="Black" CornerRadius="10">
+                                                        <Border.Background>
+                                                            <SolidColorBrush Color="Black" Opacity="0.4" />
+                                                        </Border.Background>
+                                                        <TextBlock Margin="20,10,20,0" Background="Transparent" Foreground="White" Text="CSC-005 - As a Project Manager I can search for a specific registered Product Owner and assign them as a Product Owner for my project so they can begin to add stories to the ..."/>
+                                                    </Border>
+                                                </StackPanel>
+                                            </ScrollViewer>
                                         </Grid>
                                     </TabItem>
                                     <TabItem Header="Sprint 2" Controls:ControlsHelper.HeaderFontSize="25">
