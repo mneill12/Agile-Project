@@ -26,7 +26,9 @@ namespace ClientDesktop.ViewModels
         private string _FullName;
         private List<UserRole> _AvailableRoles;
 
-        private ICollection<Project> _AllProjects;
+        private List<Project> _AllProjects;
+        private List<ProjectViewModel> _ProjectViewModels;
+        private ProjectViewModel _CurrentProjectViewModel;
 
         public string FirstName
         {
@@ -92,7 +94,7 @@ namespace ClientDesktop.ViewModels
             }
         }
 
-        public ICollection<Project> AllProjects
+        public List<Project> AllProjects
         {
             get { return _AllProjects; }
             set
@@ -100,6 +102,28 @@ namespace ClientDesktop.ViewModels
                 if (_AllProjects == value) return;
                 _AllProjects = value;
                 OnPropertyChanged("AllProjects");
+            }
+        }
+
+        public List<ProjectViewModel> ProjectViewModels
+        {
+            get { return _ProjectViewModels; }
+            set
+            {
+                if (_ProjectViewModels == value) return;
+                _ProjectViewModels = value;
+                OnPropertyChanged("ProjectViewModels");
+            }
+        }
+
+        public ProjectViewModel CurrentProjectViewModel
+        {
+            get { return _CurrentProjectViewModel; }
+            set
+            {
+                if (_CurrentProjectViewModel == value) return;
+                _CurrentProjectViewModel = value;
+                OnPropertyChanged("CurrentProjectViewModel");
             }
         }
 
@@ -134,10 +158,10 @@ namespace ClientDesktop.ViewModels
             FullName = GlobalCommands.MyAccount.FirstName + " " + GlobalCommands.MyAccount.LastName;
             AvailableRoles = GlobalCommands.MyAccount.UserRoles.ToList();
 
-            AllProjects = OnGetProjectsForAccount();
+            UpdateProjectsForAccount();
         }
 
-        protected ICollection<Project> OnGetProjectsForAccount()
+        protected void UpdateProjectsForAccount()
         {
             ICollection<Project> allProjects = null;
 
@@ -154,7 +178,17 @@ namespace ClientDesktop.ViewModels
                     ErrorOccured(this, new ErrorMessageEventArgs(ex.Message));
             }
 
-            return allProjects;
+            if (allProjects != null)
+            {
+                List<Project> projects = new List<Project>();
+
+                projects.AddRange(allProjects);
+
+                foreach (var project in projects)
+                {
+                    ProjectViewModels.Add(new ProjectViewModel(_ServiceFactory, _RegionManager, project));
+                }
+            }
         }
     }
 }

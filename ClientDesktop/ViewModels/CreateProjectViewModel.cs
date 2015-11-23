@@ -239,7 +239,6 @@ namespace ClientDesktop.ViewModels
             });
         }
 
-
         protected void GetInitialUsers()
         {
             WithClient(_ServiceFactory.CreateClient<IAccountService>(), accountClient =>

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 using Core.Common.Contracts;
 using Core.Common.Core;
@@ -10,7 +11,7 @@ namespace CSC3045.Agile.Business.Entities
     {
         [DataMember]
         public int AccountId { get; set; }
-
+        
         [DataMember]
         public string LoginEmail { get; set; }
 

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Data.Entity;
 using System.Linq;
 using CSC3045.Agile.Business.Entities;
 using CSC3045.Agile.Data.Contracts.Repository_Interfaces;
@@ -39,8 +40,8 @@ namespace CSC3045.Agile.Data.Data_Repositories
             using (var entityContext = new Csc3045AgileContext())
             {
                 return (from p in entityContext.ProjectSet
-                    where p.AllUsers.Select(a => a.AccountId).Contains(accountId)
-                    select p).ToList();
+                        where p.AllUsers.Select(a => a.AccountId == accountId))
+                        select p).ToList();
             }
         }
 

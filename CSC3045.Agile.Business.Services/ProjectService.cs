@@ -104,5 +104,15 @@ namespace CSC3045.Agile.Business.Services
                 return projectEntity;
             });
         }
+
+        public IEnumerable<Project> GetAllProjects()
+        {
+            return ExecuteFaultHandledOperation(() =>
+            {
+                var projectRepository = _DataRepositoryFactory.GetDataRepository<IProjectRepository>();
+
+                return projectRepository.Get();
+            });
+        }
     }
 }
