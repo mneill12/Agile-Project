@@ -39,10 +39,13 @@ namespace CSC3045.Agile.Data.Data_Repositories
         {
             using (var entityContext = new Csc3045AgileContext())
             {
-                return (from p in entityContext.ProjectSet
-                        where p.AllUsers.Select(a => a.AccountId == accountId))
-                        select p).ToList();
+                var query = (from p in entityContext.ProjectSet
+                             .Include(a => a.AllUsers)
+                             where p.AllUsers.Select(a => a.AccountId).Contains(accountId)
+                             select p);
+                return query.ToList<Project>();
             }
+
         }
 
         #endregion
