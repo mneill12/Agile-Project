@@ -86,34 +86,34 @@ namespace CSC3045.Agile.ServiceHost.Console
         private static void LoadSampleData()
         {
             // Load project sample data
-            ProjectService projectService = new ProjectService();
-            AccountService accountService = new AccountService();
+            //ProjectService projectService = new ProjectService();
+            //AccountService accountService = new AccountService();
 
-            var project1 = projectService.GetProjectInfo(1);
-            var project2 = projectService.GetProjectInfo(2);
+            //var project1 = projectService.GetProjectInfo(1);
+            //var project2 = projectService.GetProjectInfo(2);
 
-            var account1 = accountService.GetAccountInfo("jflyn07n@qub.ac.uk");
-            var account2 = accountService.GetAccountInfo("zeadie01@qub.ac.uk");
-            var account3 = accountService.GetAccountInfo("rmeharg01@qub.ac.uk");
-            var account4 = accountService.GetAccountInfo("nreid11@qub.ac.uk");
-            var account5 = accountService.GetAccountInfo("zshen01@qub.ac.uk");
-            var account6 = accountService.GetAccountInfo("mmcann71@qub.ac.uk");
-            var account7 = accountService.GetAccountInfo("mneil12@qub.ac.uk");
+            //var account1 = accountService.GetAccountInfo("jflyn07n@qub.ac.uk");
+            //var account2 = accountService.GetAccountInfo("zeadie01@qub.ac.uk");
+            //var account3 = accountService.GetAccountInfo("rmeharg01@qub.ac.uk");
+            //var account4 = accountService.GetAccountInfo("nreid11@qub.ac.uk");
+            //var account5 = accountService.GetAccountInfo("zshen01@qub.ac.uk");
+            //var account6 = accountService.GetAccountInfo("mmcann71@qub.ac.uk");
+            //var account7 = accountService.GetAccountInfo("mneil12@qub.ac.uk");
 
-            project1.ProjectManager = account1;
-            project1.ProductOwner = account2;
-            project1.ScrumMasters = new List<Account>() { account3 };
-            project1.Developers = new List<Account>() { account4 , account5 , account6 , account7 };
-            project1.AllUsers = new List<Account>() { account1, account2, account3, account4, account5, account6, account7};
+            //project1.ProjectManager = account1;
+            //project1.ProductOwner = account2;
+            //project1.ScrumMasters = new List<Account>() { account3 };
+            //project1.Developers = new List<Account>() { account4 , account5 , account6 , account7 };
+            //project1.AllUsers = new List<Account>() { account1, account2, account3, account4, account5, account6, account7};
 
-            project2.ProjectManager = account7;
-            project2.ProductOwner = account6;
-            project2.ScrumMasters = new List<Account>() { account5 };
-            project2.Developers = new List<Account>() { account4, account3, account2, account1 };
-            project2.AllUsers = new List<Account>() { account1, account2, account3, account4, account5, account6, account7 };
+            //project2.ProjectManager = account7;
+            //project2.ProductOwner = account6;
+            //project2.ScrumMasters = new List<Account>() { account5 };
+            //project2.Developers = new List<Account>() { account4, account3, account2, account1 };
+            //project2.AllUsers = new List<Account>() { account1, account2, account3, account4, account5, account6, account7 };
 
-            projectService.UpdateProjectInfo(project1);
-            projectService.UpdateProjectInfo(project2);
+            //projectService.UpdateProjectInfo(project1);
+            //projectService.UpdateProjectInfo(project2);
             // End load project sample data
         }
 

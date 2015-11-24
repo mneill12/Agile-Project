@@ -67,12 +67,22 @@ namespace CSC3045.Agile.Data.Data_Repositories
         protected override IEnumerable<Project> GetEntities(Csc3045AgileContext entityContext)
         {
             return entityContext.ProjectSet
+                    .Include(a => a.AllUsers)
+                    .Include(a => a.Developers)
+                    .Include(a => a.ScrumMasters)
+                    .Include(a => a.Sprints)
+                    .Include(a => a.Burndowns)
                     .ToList();
         }
 
         protected override Project GetEntity(Csc3045AgileContext entityContext, int id)
         {
             return entityContext.ProjectSet
+                    .Include(a => a.AllUsers)
+                    .Include(a => a.Developers)
+                    .Include(a => a.ScrumMasters)
+                    .Include(a => a.Sprints)
+                    .Include(a => a.Burndowns)
                     .FirstOrDefault(p => p.ProjectId == id);
         }
 
