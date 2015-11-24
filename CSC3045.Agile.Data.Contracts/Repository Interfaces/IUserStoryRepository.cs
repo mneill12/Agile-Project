@@ -9,6 +9,6 @@ namespace CSC3045.Agile.Data.Contracts.Repository_Interfaces
     {
         ICollection<UserStory> GetUserStories();
         ICollection<UserStory> GetUserStoriesByStatus(CurrentStatus status);
-        UserStory GerUserStoryById(int id);
+        UserStory GetUserStoryById(int id);
     }
 }
