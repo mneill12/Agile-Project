@@ -63,6 +63,7 @@
     <Compile Include="Repository Interfaces\IAccountRepository.cs" />
     <Compile Include="Repository Interfaces\IProjectRepository.cs" />
     <Compile Include="Repository Interfaces\ISkillRepository.cs" />
+    <Compile Include="Repository Interfaces\ITaskBurndownPointRepository.cs" />
     <Compile Include="Repository Interfaces\IUserStoryRepository.cs" />
     <Compile Include="Repository Interfaces\IUserRoleRepository.cs" />
     <Compile Include="Repository Interfaces\IStoryStatusRepository.cs" />

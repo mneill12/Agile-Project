@@ -24,40 +24,38 @@
                     <TextBlock Grid.Column="1" FontSize="15" Padding="10" FontFamily="pack://application:,,,/Resources/#AquaWax" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right" Text="ADD NEW PROJECT" Foreground="White"/>
 
                     <Button Grid.Column="0"
-            		x:Name="RefreshProjectsButton"
-            		Command="{Binding RefreshProjectsCommand}"
-            		Foreground="White"
-            		Width="40"
-            		Height="40"
-                    Margin="110,0,0,0"
-                    BorderBrush="White"
-            		HorizontalAlignment="Left"
-            		VerticalAlignment="Center"
-            		Style="{DynamicResource MetroCircleButtonStyle}">
+            		    x:Name="RefreshProjectsButton"
+            		    Command="{Binding RefreshProjectsCommand}"
+            		    Foreground="White"
+            		    Width="40"
+            		    Height="40"
+                        Margin="110,0,0,0"
+                        BorderBrush="White"
+            		    HorizontalAlignment="Left"
+            		    VerticalAlignment="Center"
+            		    Style="{DynamicResource MetroCircleButtonStyle}">
                         <Rectangle Fill="White" Width="15"
-            			Height="15">
+            			    Height="15">
                             <Rectangle.OpacityMask>
                                 <VisualBrush Stretch="Fill"
-            					Visual="{StaticResource appbar_refresh}"/>
+            					    Visual="{StaticResource appbar_refresh}"/>
                             </Rectangle.OpacityMask>
                         </Rectangle>
                     </Button>
-                    
-                    <Button Grid.Column="2"
-            		x:Name="CreateProjectButton"
-            		Command="{Binding CreateProjectCommand}"
-            		Foreground="White"
-            		Width="40"
-            		Height="40"
-                    BorderBrush="White"
-            		HorizontalAlignment="Center"
-            		VerticalAlignment="Center"
-            		Style="{DynamicResource MetroCircleButtonStyle}">
-                        <Rectangle Fill="White" Width="15"
-            			Height="15">
+
+                    <Button Grid.Column="2" 
+            		    x:Name="CreateProjectButton"
+            		    Command="{Binding CreateProjectCommand}"
+            		    Foreground="White"
+            		    Width="40"
+            		    Height="40"
+                        BorderBrush="White"
+            		    HorizontalAlignment="Center"
+            		    VerticalAlignment="Center"
+            		    Style="{DynamicResource MetroCircleButtonStyle}">
+                        <Rectangle Fill="White" Width="15" Height="15">
                             <Rectangle.OpacityMask>
-                                <VisualBrush Stretch="Fill"
-            					Visual="{StaticResource appbar_add}"/>
+                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}"/>
                             </Rectangle.OpacityMask>
                         </Rectangle>
                     </Button>
@@ -103,7 +101,7 @@
                                             <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
-                                        
+
                                         <Button Grid.Column="0" HorizontalAlignment="Left" Margin="5" Command="{Binding ManageProjectBacklogCommand}" Content="Manage Project Backlog (PO Only)" BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" />
                                         <Button Grid.Column="0" HorizontalAlignment="Left" Margin="5" Command="{Binding ManageProjectBacklog}" Content="Manage Project Backlog (PO Only)" BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" />
                                         <Button Grid.Column="1" HorizontalAlignment="Left" Margin="5" Command="{Binding AddSprint}" Content="Add Sprint (SM Only)"  BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" />
@@ -240,9 +238,7 @@
                         </TabControl.ContentTemplate>
                     </TabControl>
                 </Grid>
-
             </StackPanel>
-
         </DockPanel>
         <DockPanel LastChildFill="True" Dock="Left" Width="220" HorizontalAlignment="Left">
             <Border BorderThickness="0" BorderBrush="Black" CornerRadius="0" Width="220">
@@ -318,7 +314,6 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
-
                 </StackPanel>
             </Border>
         </DockPanel>

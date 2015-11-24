@@ -35,6 +35,8 @@ namespace CSC3045.Agile.Data
 
         public DbSet<BurndownPoint> BurndownPointSet { get; set; }
 
+        public DbSet<TaskBurndownPoint> TaskBurndownPointSet { get; set; }
+
         public DbSet<PlanningPokerSession> PlanningPokerSessionSet { get; set; }
 
         public DbSet<CurrentStatus> StoryStatusSet { get; set; }
@@ -120,6 +122,9 @@ namespace CSC3045.Agile.Data
 
             modelBuilder.Entity<StoryTask>()
                 .HasKey(e => e.StoryTaskId).Ignore(e => e.EntityId);
+
+            modelBuilder.Entity<TaskBurndownPoint>()
+               .HasKey(e => e.TaskBurndownPointId).Ignore(e => e.EntityId);
 
             modelBuilder.Entity<UserRole>()
                 .HasKey(e => e.UserRoleId).Ignore(e => e.EntityId);

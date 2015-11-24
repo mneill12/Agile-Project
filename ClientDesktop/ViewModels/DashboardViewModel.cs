@@ -134,8 +134,8 @@ namespace ClientDesktop.ViewModels
 
         public DelegateCommand<object> CreateProjectCommand { get; set; }
         public DelegateCommand<object> ManageProjectBacklogCommand { get; set; } 
-
         public DelegateCommand<object> RefreshProjectsCommand { get; set; }
+        public DelegateCommand<object> ViewBurndownCommand { get; set; }
 
         private void CreateProject(object parameter)
         {
@@ -146,13 +146,21 @@ namespace ClientDesktop.ViewModels
         {
             UpdateProjectsForAccount();
         }
+
         private void ManageProjectBacklog(object parameter)
         {
             NavigationParameters navigationParameters = new NavigationParameters();
-            navigationParameters.Add("projectId", ServiceLocator.Current.GetInstance<DashboardViewModel>().CurrentProjectId);
+            navigationParameters.Add("projectId",
+                ServiceLocator.Current.GetInstance<DashboardViewModel>().CurrentProjectId);
 
-            _RegionManager.RequestNavigate(RegionNames.Content, typeof(ProductBacklogManagementView).FullName, navigationParameters);
+            _RegionManager.RequestNavigate(RegionNames.Content, typeof (ProductBacklogManagementView).FullName,
+                navigationParameters);
 
+        }
+
+        private void ViewBurndown(object parameter)
+        {
+            _RegionManager.RequestNavigate(RegionNames.Content, typeof(SprintBurndownChartView).FullName);
         }
 
         [ImportingConstructor]
@@ -166,6 +174,7 @@ namespace ClientDesktop.ViewModels
             CreateProjectCommand = new DelegateCommand<object>(CreateProject);
             RefreshProjectsCommand = new DelegateCommand<object>(RefreshProjects);
             ManageProjectBacklogCommand = new DelegateCommand<object>(ManageProjectBacklog);
+            ViewBurndownCommand = new DelegateCommand<object>(ViewBurndown);
         }
 
         public event EventHandler<ErrorMessageEventArgs> ErrorOccured;
