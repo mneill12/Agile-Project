@@ -93,9 +93,6 @@ namespace CSC3045.Agile.Data
 
             modelBuilder.Entity<UserStory>()
                 .HasKey(e => e.UserStoryId).Ignore(e => e.EntityId);
-
-            modelBuilder.Entity<UserStory>()
-                .HasKey(e => e.UserStoryId).Ignore(e => e.EntityId);
         }
     }
 }

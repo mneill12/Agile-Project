@@ -19,12 +19,6 @@ namespace CSC3045.Agile.Business.Entities
         public Account ProductOwner { get; set; }
 
         [DataMember]
-        public ICollection<Account> ScrumMasters { get; set; }
-
-        [DataMember]
-        public ICollection<Account> Developers { get; set; }
-
-        [DataMember]
         public string ProjectName { get; set; }
 
         [DataMember]
@@ -41,6 +35,12 @@ namespace CSC3045.Agile.Business.Entities
 
         [DataMember]
         public ICollection<Account> AllUsers { get; set; }
+
+        [DataMember]
+        public ICollection<Account> ScrumMasters { get; set; }
+
+        [DataMember]
+        public ICollection<Account> Developers { get; set; }
 
         #region IIdentifiableEntity members
 

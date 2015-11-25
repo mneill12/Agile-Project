@@ -4,6 +4,7 @@ using System.ComponentModel.Composition;
 using System.ServiceModel;
 using Core.Common.Contracts;
 using Core.Common.Exceptions;
+using Core.Common.Utils;
 using CSC3045.Agile.Business.Contracts;
 using CSC3045.Agile.Business.Entities;
 using CSC3045.Agile.Data.Contracts.Repository_Interfaces;
@@ -70,14 +71,21 @@ namespace CSC3045.Agile.Business.Services
             });
         }
 
+        /// <summary>
+        /// Updates the project by getting the latest project from the database and updating it in the same context
+        /// </summary>
+        /// <param name="project">The updated project details from the client</param>
         [OperationBehavior(TransactionScopeRequired = true)]
         public void UpdateProjectInfo(Project project)
         {
             ExecuteFaultHandledOperation(() =>
             {
                 var projectRepository = _DataRepositoryFactory.GetDataRepository<IProjectRepository>();
+                var dbProject = projectRepository.Get(project.ProjectId);
 
-                var updatedProject = projectRepository.Update(project);
+                SimpleMapper.PropertyMap(project, dbProject);
+
+                var updatedProject = projectRepository.Update(dbProject);
 
                 if (updatedProject == null)
                 {
