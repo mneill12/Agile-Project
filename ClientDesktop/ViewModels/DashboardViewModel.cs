@@ -145,6 +145,8 @@ namespace ClientDesktop.ViewModels
             _ServiceFactory = serviceFactory;
             _RegionManager = regionManager;
 
+            ProjectViewModels = new List<ProjectViewModel>();
+
             CreateProjectCommand = new DelegateCommand<object>(CreateProject);
         }
 
@@ -187,6 +189,7 @@ namespace ClientDesktop.ViewModels
                 foreach (var project in projects)
                 {
                     ProjectViewModels.Add(new ProjectViewModel(_ServiceFactory, _RegionManager, project));
+                    CurrentProjectViewModel = ProjectViewModels[0];
                 }
             }
         }
