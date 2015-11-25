@@ -81,11 +81,8 @@ namespace CSC3045.Agile.Business.Services
             ExecuteFaultHandledOperation(() =>
             {
                 var projectRepository = _DataRepositoryFactory.GetDataRepository<IProjectRepository>();
-                var dbProject = projectRepository.Get(project.ProjectId);
 
-                SimpleMapper.PropertyMap(project, dbProject);
-
-                var updatedProject = projectRepository.Update(dbProject);
+                var updatedProject = projectRepository.UpdateProjectWithUsers(project);
 
                 if (updatedProject == null)
                 {

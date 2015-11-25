@@ -2,6 +2,7 @@
 using System.ComponentModel.Composition;
 using System.Data.Entity;
 using System.Linq;
+using Core.Common.Utils;
 using CSC3045.Agile.Business.Entities;
 using CSC3045.Agile.Data.Contracts.Repository_Interfaces;
 
@@ -41,11 +42,37 @@ namespace CSC3045.Agile.Data.Data_Repositories
             {
                 var query = (from p in entityContext.ProjectSet
                              .Include(a => a.AllUsers)
+                             .Include(a => a.Developers)
+                             .Include(a => a.ScrumMasters)
                              where p.AllUsers.Select(a => a.AccountId).Contains(accountId)
                              select p);
                 return query.ToList<Project>();
             }
 
+        }
+
+        public Project UpdateProjectWithUsers(Project project)
+        {
+            using (var entityContext = new Csc3045AgileContext())
+            {
+                // The worst, the ABSOLUTE WORST!!!!!
+                var updatedProject = entityContext.ProjectSet.Single(p => p.ProjectId == project.ProjectId);
+
+                updatedProject.ProjectName = project.ProjectName;
+                updatedProject.ProjectStartDate = project.ProjectStartDate;
+                updatedProject.ProductOwner = entityContext.AccountSet.Single(a => a.AccountId == project.ProductOwner.AccountId);
+                updatedProject.ProjectManager = entityContext.AccountSet.Single(a => a.AccountId == project.ProjectManager.AccountId);
+                updatedProject.Backlog = project.Backlog;
+                updatedProject.Burndowns = project.Burndowns;
+                updatedProject.Sprints = project.Sprints;
+                updatedProject.ScrumMasters = project.ScrumMasters.Select(scrumMaster => entityContext.AccountSet.Single(a => a.AccountId == scrumMaster.AccountId)).ToList();
+                updatedProject.Developers = project.Developers.Select(developer => entityContext.AccountSet.Single(a => a.AccountId == developer.AccountId)).ToList();
+                updatedProject.AllUsers = project.AllUsers.Select(user => entityContext.AccountSet.Single(a => a.AccountId == user.AccountId)).ToList();
+
+                entityContext.SaveChanges();
+
+                return updatedProject;
+            }
         }
 
         #endregion

@@ -92,25 +92,29 @@ namespace CSC3045.Agile.ServiceHost.Console
             var project1 = projectService.GetProjectInfo(1);
             var project2 = projectService.GetProjectInfo(2);
 
-            var account1 = accountService.GetAccountInfo("jflyn07n@qub.ac.uk");
-            var account2 = accountService.GetAccountInfo("zeadie01@qub.ac.uk");
-            var account3 = accountService.GetAccountInfo("rmeharg01@qub.ac.uk");
-            var account4 = accountService.GetAccountInfo("nreid11@qub.ac.uk");
-            var account5 = accountService.GetAccountInfo("zshen01@qub.ac.uk");
-            var account6 = accountService.GetAccountInfo("mmcann71@qub.ac.uk");
-            var account7 = accountService.GetAccountInfo("mneil12@qub.ac.uk");
+            var accounts = accountService.GetAllAccounts();
 
-            project1.ProjectManager = account1;
-            project1.ProductOwner = account2;
-            project1.ScrumMasters = new List<Account>() { account3 };
-            project1.Developers = new List<Account>() { account4 , account5 , account6 , account7 };
-            project1.AllUsers = new List<Account>() { account1, account2, account3, account4, account5, account6, account7};
+            project1.ProjectManager = accounts.Single(a => a.AccountId == 1);
+            project1.ProductOwner = accounts.Single(a => a.AccountId == 2);
+            project1.ScrumMasters = new List<Account>() {  accounts.Single(a => a.AccountId == 3) };
+            project1.Developers = new List<Account>() {
+                accounts.Single(a => a.AccountId == 4),
+                accounts.Single(a => a.AccountId == 5),
+                accounts.Single(a => a.AccountId == 6),
+                accounts.Single(a => a.AccountId == 7)
+            };
+            project1.AllUsers = accounts;
 
-            project2.ProjectManager = account7;
-            project2.ProductOwner = account6;
-            project2.ScrumMasters = new List<Account>() { account5 };
-            project2.Developers = new List<Account>() { account4, account3, account2, account1 };
-            project2.AllUsers = new List<Account>() { account1, account2, account3, account4, account5, account6, account7 };
+            project2.ProjectManager = accounts.Single(a => a.AccountId == 7);
+            project2.ProductOwner = accounts.Single(a => a.AccountId == 6);
+            project2.ScrumMasters = new List<Account>() { accounts.Single(a => a.AccountId == 5) };
+            project2.Developers = new List<Account>() {
+                accounts.Single(a => a.AccountId == 4),
+                accounts.Single(a => a.AccountId == 3),
+                accounts.Single(a => a.AccountId == 2),
+                accounts.Single(a => a.AccountId == 1)
+            };
+            project2.AllUsers = accounts;
 
             projectService.UpdateProjectInfo(project1);
             projectService.UpdateProjectInfo(project2);

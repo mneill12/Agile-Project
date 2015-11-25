@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 using Core.Common.Contracts;
 using Core.Common.Core;
@@ -34,12 +35,15 @@ namespace CSC3045.Agile.Business.Entities
         public ICollection<Burndown> Burndowns { get; set; }
 
         [DataMember]
+        [InverseProperty("UserFor")]
         public ICollection<Account> AllUsers { get; set; }
 
         [DataMember]
+        [InverseProperty("ScrumMasterFor")]
         public ICollection<Account> ScrumMasters { get; set; }
 
         [DataMember]
+        [InverseProperty("DeveloperFor")]
         public ICollection<Account> Developers { get; set; }
 
         #region IIdentifiableEntity members

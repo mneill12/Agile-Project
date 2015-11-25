@@ -64,6 +64,37 @@ namespace CSC3045.Agile.Data
             modelBuilder.Entity<Project>()
                 .HasKey(e => e.ProjectId).Ignore(e => e.EntityId);
 
+            // 25/11/15 - The day I hated entity framework...
+            modelBuilder.Entity<Project>()
+                .HasMany(q => q.AllUsers)
+                .WithMany(q => q.UserFor)
+                .Map(q =>
+                {
+                    q.ToTable("AllUsers");
+                    q.MapLeftKey("ProjectId");
+                    q.MapRightKey("AccountId");
+                });
+
+            modelBuilder.Entity<Project>()
+                .HasMany(q => q.ScrumMasters)
+                .WithMany(q => q.ScrumMasterFor)
+                .Map(q =>
+                {
+                    q.ToTable("ScrumMasters");
+                    q.MapLeftKey("ProjectId");
+                    q.MapRightKey("AccountId");
+                });
+
+            modelBuilder.Entity<Project>()
+                .HasMany(q => q.Developers)
+                .WithMany(q => q.DeveloperFor)
+                .Map(q =>
+                {
+                    q.ToTable("Developers");
+                    q.MapLeftKey("ProjectId");
+                    q.MapRightKey("AccountId");
+                });
+
             modelBuilder.Entity<Sprint>()
                 .HasKey(e => e.SprintId).Ignore(e => e.EntityId);
 
