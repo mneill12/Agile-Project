@@ -51,6 +51,30 @@ namespace CSC3045.Agile.Data.Data_Repositories
 
         }
 
+        public Project AddProjectWithUsers(Project project)
+        {
+            using (var entityContext = new Csc3045AgileContext())
+            {
+                // The worst, the ABSOLUTE WORST!!!!!
+                project.ProjectName = project.ProjectName;
+                project.ProjectStartDate = project.ProjectStartDate;
+                project.ProductOwner = entityContext.AccountSet.Single(a => a.AccountId == project.ProductOwner.AccountId);
+                project.ProjectManager = entityContext.AccountSet.Single(a => a.AccountId == project.ProjectManager.AccountId);
+                project.Backlog = project.Backlog;
+                project.Burndowns = project.Burndowns;
+                project.Sprints = project.Sprints;
+                project.ScrumMasters = project.ScrumMasters.Select(scrumMaster => entityContext.AccountSet.Single(a => a.AccountId == scrumMaster.AccountId)).ToList();
+                project.Developers = project.Developers.Select(developer => entityContext.AccountSet.Single(a => a.AccountId == developer.AccountId)).ToList();
+                project.AllUsers = project.AllUsers.Select(user => entityContext.AccountSet.Single(a => a.AccountId == user.AccountId)).ToList();
+
+                Project addedProject = AddEntity(entityContext, project);
+                entityContext.SaveChanges();
+
+                return addedProject;
+            }
+
+        }
+
         public Project UpdateProjectWithUsers(Project project)
         {
             using (var entityContext = new Csc3045AgileContext())

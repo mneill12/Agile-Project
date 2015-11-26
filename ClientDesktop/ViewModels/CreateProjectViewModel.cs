@@ -1,16 +1,20 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.ServiceModel;
 using System.Windows.Data;
+using ClientDesktop.Views;
 using Core.Common;
 using Core.Common.Contracts;
+using Core.Common.Core;
 using Core.Common.UI.Core;
 using CSC3045.Agile.Client.Contracts;
 using CSC3045.Agile.Client.Entities;
+using Microsoft.Practices.ServiceLocation;
+using Prism.Regions;
 
 namespace ClientDesktop.ViewModels
 {
@@ -32,11 +36,13 @@ namespace ClientDesktop.ViewModels
         private Account _SelectedProductOwner;
 
         private readonly IServiceFactory _ServiceFactory;
+        private readonly IRegionManager _RegionManager;
 
         [ImportingConstructor]
-        public ProjectOverviewViewModel(IServiceFactory serviceFactory)
+        public ProjectOverviewViewModel(IServiceFactory serviceFactory, IRegionManager regionManager)
         {
             _ServiceFactory = serviceFactory;
+            _RegionManager = regionManager;
 
             CreateProjectCommand = new DelegateCommand<object>(OnCreateProject);
             SearchScrumMasterCommand = new DelegateCommand<object>(SearchScrumMaster);
@@ -189,7 +195,8 @@ namespace ClientDesktop.ViewModels
                 }
                 else
                 {
-                    ScrumMasters.Add(new Account() {FirstName = "No Users Found"});
+                    ScrumMasters.Add(new Account() {FirstName = "No Users Found", LastName = "Displaying all users"});
+                    ScrumMasters.AddRange(accountClient.GetByUserRole(ViewModelConstants.Scrummaster));
                 }
 
                 CollectionViewSource.GetDefaultView(ScrumMasters).Refresh();
@@ -210,7 +217,8 @@ namespace ClientDesktop.ViewModels
                 }
                 else
                 {
-                    ProductOwners.Add(new Account() { FirstName = "No Users Found" });
+                    ProductOwners.Add(new Account() { FirstName = "No Users Found", LastName = "Displaying all users" });
+                    ProductOwners.AddRange(accountClient.GetByUserRole(ViewModelConstants.ProductOwner));
                 }
 
                 CollectionViewSource.GetDefaultView(ProductOwners).Refresh();
@@ -231,7 +239,8 @@ namespace ClientDesktop.ViewModels
                 }
                 else
                 {
-                    Developers.Add(new Account() { FirstName = "No Users Found" });
+                    Developers.Add(new Account() { FirstName = "No Users Found", LastName = "Displaying all users" });
+                    Developers.AddRange(accountClient.GetByUserRole(ViewModelConstants.Developer));
                 }
 
                 CollectionViewSource.GetDefaultView(Developers).Refresh();
@@ -270,14 +279,23 @@ namespace ClientDesktop.ViewModels
             // use a shallow copy of an array converted using the MultiValueConverter to allow a deletgate
             // command then convert back here to an array, values changed here must be updated in the View.xaml
             var values = (object[])parameter;
-            List<Account> scrumMasters = (List<Account>) values[0];
-            List<Account> developers = (List<Account>) values[1];
+
+            IList selectedScrumMasters = values[0] as IList;
+            IList selectedDevelopers = values[1] as IList;
+
+            List<Account> scrumMasters = new List<Account>();
+            List<Account> developers = new List<Account>();
+
+            if (selectedScrumMasters != null && selectedDevelopers != null)
+            {
+                scrumMasters = selectedScrumMasters.Cast<Account>().ToList();
+                developers = selectedDevelopers.Cast<Account>().ToList();
+            }
 
             if (ProjectName != null && SelectedProductOwner != null && scrumMasters.Any() && developers.Any())
             {
                 // Add PO, PM, SMs and Devs to all project users
-                var allUsers = new Collection<Account> {SelectedProductOwner};
-                allUsers.Add(GlobalCommands.MyAccount);
+                var allUsers = new Collection<Account> {SelectedProductOwner, GlobalCommands.MyAccount};
                 allUsers.AddRange(scrumMasters);
                 allUsers.AddRange(developers);
 
@@ -295,12 +313,19 @@ namespace ClientDesktop.ViewModels
                         Backlog = new Backlog()
                     };
 
+                    Project createdProject = null;
+
                     WithClient(_ServiceFactory.CreateClient<IProjectService>(), projectClient =>
                     {
-                        Project createdProject = projectClient.CreateProject(project);
-
-                        //Navigate to main page passing in param projectId here to load the correct project page
+                        createdProject = projectClient.CreateProject(project);
                     });
+                    
+                    if (createdProject != null)
+                    {
+                        ServiceLocator.Current.GetInstance<DashboardViewModel>().CurrentProjectId = createdProject.ProjectId;
+                    }
+                    
+                    _RegionManager.RequestNavigate(RegionNames.Content, typeof(DashboardView).FullName);
                 }
                 catch (FaultException ex)
                 {

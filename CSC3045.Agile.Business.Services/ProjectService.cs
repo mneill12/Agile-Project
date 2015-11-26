@@ -67,7 +67,7 @@ namespace CSC3045.Agile.Business.Services
             {
                 var projectRepository = _DataRepositoryFactory.GetDataRepository<IProjectRepository>();
 
-                return projectRepository.Add(project);
+                return projectRepository.AddProjectWithUsers(project);
             });
         }
 

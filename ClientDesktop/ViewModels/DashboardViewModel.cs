@@ -16,7 +16,6 @@ namespace ClientDesktop.ViewModels
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class DashboardViewModel : ViewModelBase
     {
-
         //TODO: Move these to top bar or a region of its own, not needed as account info is stored globally
         #region DashboardView Bindings
 
@@ -29,6 +28,7 @@ namespace ClientDesktop.ViewModels
         private List<Project> _AllProjects;
         private List<ProjectViewModel> _ProjectViewModels;
         private ProjectViewModel _CurrentProjectViewModel;
+        private int _CurrentProjectId;
 
         public string FirstName
         {
@@ -127,6 +127,17 @@ namespace ClientDesktop.ViewModels
             }
         }
 
+        public int CurrentProjectId
+        {
+            get { return _CurrentProjectId; }
+            set
+            {
+                if (_CurrentProjectId == value) return;
+                _CurrentProjectId = value;
+                OnPropertyChanged("CurrentProjectId");
+            }
+        }
+
         #endregion
 
         IServiceFactory _ServiceFactory;
@@ -189,7 +200,24 @@ namespace ClientDesktop.ViewModels
                 foreach (var project in projects)
                 {
                     ProjectViewModels.Add(new ProjectViewModel(_ServiceFactory, _RegionManager, project));
-                    CurrentProjectViewModel = ProjectViewModels[0];
+
+                    // TODO: Set focus on created project after navigation after ProjectViewModel has been finished
+                    //if (CurrentProjectId != 0)
+                    //{
+                    //    ProjectViewModel createdProjectViewModel = ProjectViewModels.Find(p => p.ProjectId == CurrentProjectId);
+
+                    //    if (createdProjectViewModel != null)
+                    //    {
+                    //        CurrentProjectViewModel = createdProjectViewModel;
+                    //    }
+
+                    //    CurrentProjectId = 0;
+                    //}
+
+                    if (CurrentProjectViewModel == null)
+                    {
+                        CurrentProjectViewModel = ProjectViewModels[0];
+                    }
                 }
             }
         }
