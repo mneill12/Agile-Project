@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.Entity;
+using System.Linq;
 using CSC3045.Agile.Business.Entities;
 
 namespace CSC3045.Agile.Data
 {
-    internal class Csc3045AgileCustomDatabaseInitialiser : DropCreateDatabaseIfModelChanges<Csc3045AgileContext>
+    internal class Csc3045AgileCustomDatabaseInitialiser : DropCreateDatabaseAlways<Csc3045AgileContext>
     {
         protected override void Seed(Csc3045AgileContext context)
         {
@@ -123,18 +125,22 @@ namespace CSC3045.Agile.Data
 
             defaultProjects.Add(new Project
             {
-                ProjectManager = context.AccountSet.Local[0],
-                ProductOwner = context.AccountSet.Local[2],
                 ProjectName = "Project 1",
-                ProjectDeadline = new DateTime(2015, 1, 1)
+                ProjectStartDate = new DateTime(2015, 11, 11),
+                ScrumMasters = new List<Account>() { },
+                Developers = new List<Account>() {  },
+                AllUsers = new List<Account>() { },
+                Backlog = new Backlog()
             });
 
             defaultProjects.Add(new Project
             {
-                ProjectManager = context.AccountSet.Local[3],
-                ProductOwner = context.AccountSet.Local[4],
                 ProjectName = "Project 2",
-                ProjectDeadline = new DateTime(2015, 1, 1)
+                ProjectStartDate = new DateTime(2015, 12, 11),
+                ScrumMasters = new List<Account>() { },
+                Developers = new List<Account>() { },
+                AllUsers = new List<Account>() { },
+                Backlog = new Backlog()
             });
 
             foreach (var project in defaultProjects)

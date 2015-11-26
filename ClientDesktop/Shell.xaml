@@ -5,7 +5,7 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
 		xmlns:regions="http://prismlibrary.com/"
 		xmlns:sys="clr-namespace:System;assembly=mscorlib"
-		Title="" Height="800" Width="1280" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Foreground="Black"
+		Title="JELLO - Agile Project Management" Height="720" Width="1280" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
         BorderBrush="Black"
         GlowBrush="{DynamicResource AccentColorBrush}">
     <Window.Background>
@@ -14,7 +14,7 @@
     </Window.Background>
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
-            <Button Content="settings" />
+            <Button Content="Settings" />
             <Button>
                 <Hyperlink NavigateUri="https://www.youtube.com/watch?v=oLmDe8pAc6I&amp;list=PLX4Y2n2d1-uUlu6lRwOYDRd0AgSu1cSMt" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="none" Background="Black" Foreground="Red">
                     <StackPanel Orientation="Horizontal">
@@ -36,10 +36,10 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
-            <RowDefinition Height="960"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
-        <TextBlock Foreground="White" Grid.Row="1" FontWeight="Bold" Text="{Binding Source={x:Static sys:DateTime.Now},  StringFormat=dd / MMM / yyyy}" TextAlignment="Right" VerticalAlignment="Center" Margin="487,705,26.286,10.429"/>
+        <TextBlock Foreground="White" Grid.Row="1" FontWeight="Bold" Text="{Binding Source={x:Static sys:DateTime.Now},  StringFormat=dd / MMM / yyyy}" TextAlignment="Right" VerticalAlignment="Bottom" Margin="10"/>
         <ContentControl x:Name="TopBarRegion" regions:RegionManager.RegionName="TopBarRegion" Grid.Row="0" />
         <ContentControl x:Name="ContentRegion" regions:RegionManager.RegionName="ContentRegion" Grid.Row="1" />
         <ContentControl x:Name="StatusRegion" regions:RegionManager.RegionName="StatusRegion" Grid.Row="2" />

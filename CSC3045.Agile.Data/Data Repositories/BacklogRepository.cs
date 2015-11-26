@@ -27,15 +27,15 @@ namespace CSC3045.Agile.Data.Data_Repositories
         protected override IEnumerable<Backlog> GetEntities(Csc3045AgileContext entityContext)
         {
             return entityContext.BacklogSet
-                .Include(a => a.AssociatedUserStories)
+                .Include(b => b.UserStories)
                 .ToList();
         }
 
         protected override Backlog GetEntity(Csc3045AgileContext entityContext, int id)
         {
             return entityContext.BacklogSet
-                .Include(a => a.AssociatedUserStories)
-                .FirstOrDefault();
+                .Include(b => b.UserStories)
+                .FirstOrDefault(b => b.BacklogId == id);
         }
     }
 }

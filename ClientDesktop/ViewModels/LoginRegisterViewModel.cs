@@ -25,6 +25,7 @@ namespace ClientDesktop.ViewModels
     {
         #region LoginRegisterView Bindings
 
+        //TODO: Remove hardcoding from release version
         private string _LoginEmail = "jflyn07n@qub.ac.uk";
         private string _RegisterFirstName;
         private string _RegisterLastName;
@@ -344,7 +345,6 @@ namespace ClientDesktop.ViewModels
 
                 try
                 {
-                    ;
                     WithClient(_ServiceFactory.CreateClient<IAccountService>(), accountClient =>
                     {
                         var allUserRoles = accountClient.GetAllUserRoles();

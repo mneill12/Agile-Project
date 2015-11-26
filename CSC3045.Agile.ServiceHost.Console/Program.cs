@@ -50,6 +50,7 @@ namespace CSC3045.Agile.ServiceHost.Console
                 System.Console.WriteLine("");
             }
 
+            LoadSampleData();
             RunDatabaseTests();
 
             System.Console.WriteLine("Press [Enter] to exit.");
@@ -80,6 +81,44 @@ namespace CSC3045.Agile.ServiceHost.Console
         {
             host.Close();
             System.Console.WriteLine("Service {0} stopped.", serviceDescription);
+        }
+
+        private static void LoadSampleData()
+        {
+            // Load project sample data
+            ProjectService projectService = new ProjectService();
+            AccountService accountService = new AccountService();
+
+            var project1 = projectService.GetProjectInfo(1);
+            var project2 = projectService.GetProjectInfo(2);
+
+            var accounts = accountService.GetAllAccounts();
+
+            project1.ProjectManager = accounts.Single(a => a.AccountId == 1);
+            project1.ProductOwner = accounts.Single(a => a.AccountId == 2);
+            project1.ScrumMasters = new List<Account>() {  accounts.Single(a => a.AccountId == 3) };
+            project1.Developers = new List<Account>() {
+                accounts.Single(a => a.AccountId == 4),
+                accounts.Single(a => a.AccountId == 5),
+                accounts.Single(a => a.AccountId == 6),
+                accounts.Single(a => a.AccountId == 7)
+            };
+            project1.AllUsers = accounts;
+
+            project2.ProjectManager = accounts.Single(a => a.AccountId == 7);
+            project2.ProductOwner = accounts.Single(a => a.AccountId == 6);
+            project2.ScrumMasters = new List<Account>() { accounts.Single(a => a.AccountId == 5) };
+            project2.Developers = new List<Account>() {
+                accounts.Single(a => a.AccountId == 4),
+                accounts.Single(a => a.AccountId == 3),
+                accounts.Single(a => a.AccountId == 2),
+                accounts.Single(a => a.AccountId == 1)
+            };
+            project2.AllUsers = accounts;
+
+            projectService.UpdateProjectInfo(project1);
+            projectService.UpdateProjectInfo(project2);
+            // End load project sample data
         }
 
         //TODO: Move account and userrole repository tests out of servicehost

@@ -12,7 +12,7 @@ namespace CSC3045.Agile.Business.Entities
         public int BacklogId { get; set; }
 
         [DataMember]
-        public ICollection<UserStory> AssociatedUserStories { get; set; }
+        public ICollection<UserStory> UserStories { get; set; }
 
         #region IIdentifiableEntity members
 

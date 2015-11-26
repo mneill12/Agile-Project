@@ -22,7 +22,6 @@ namespace CSC3045.Agile.Data.Data_Repositories
             }
         }
 
-
         public Account GetByLoginAndPasswordWithUserRoles(string login, string password)
         {
             using (var entityContext = new Csc3045AgileContext())
@@ -74,6 +73,19 @@ namespace CSC3045.Agile.Data.Data_Repositories
             }
         }
 
+        public ICollection<Account> GetUsersByRoleAndName(string role, string email)
+        {
+            using (var entityContext = new Csc3045AgileContext())
+            {
+                return entityContext.AccountSet
+                    .Include(a => a.UserRoles)
+                    .Where(a => a.UserRoles.Select(r => r.UserRoleName).Contains(role)
+                    && a.LoginEmail.Contains(email)).ToList();
+            }
+        }
+
+        #region CRUD Methods
+
         protected override Account AddEntity(Csc3045AgileContext entityContext, Account entity)
         {
             return entityContext.AccountSet.Add(entity);
@@ -88,33 +100,19 @@ namespace CSC3045.Agile.Data.Data_Repositories
 
         protected override IEnumerable<Account> GetEntities(Csc3045AgileContext entityContext)
         {
-            using (var db = new Csc3045AgileContext())
-            {
-                return db.AccountSet
+                return entityContext.AccountSet
                     .Include(a => a.UserRoles)
                     .ToList();
-            }
         }
 
         protected override Account GetEntity(Csc3045AgileContext entityContext, int id)
         {
-            using (var db = new Csc3045AgileContext())
-            {
-                return db.AccountSet
-                    .Include(a => a.UserRoles)
-                    .FirstOrDefault(a => a.AccountId == id);
-            }
-        }
-
-        public ICollection<Account> GetUsersByRoleAndName(string role, string email)
-        {
-            using (var entityContext = new Csc3045AgileContext())
-            {
                 return entityContext.AccountSet
                     .Include(a => a.UserRoles)
-                    .Where(a => a.UserRoles.Select(r => r.UserRoleName).Contains(role)
-                    && a.LoginEmail.Contains(email)).ToList();
-            }
-        } 
+                    .FirstOrDefault(a => a.AccountId == id);
+        }
+
+        #endregion
+
     }
 }

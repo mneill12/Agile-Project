@@ -82,6 +82,7 @@
     <Compile Include="Core\ViewModelBase.cs" />
     <Compile Include="Util\BoolToInverseConverter.cs" />
     <Compile Include="Util\ConverterChain.cs" />
+    <Compile Include="Util\MultiValueConverter.cs" />
     <Compile Include="Util\UserRoleListToStringConverter.cs" />
   </ItemGroup>
   <ItemGroup>
