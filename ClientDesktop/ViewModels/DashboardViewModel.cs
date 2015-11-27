@@ -24,10 +24,7 @@ namespace ClientDesktop.ViewModels
         private string _EmailAddress;
         private string _FullName;
         private List<UserRole> _AvailableRoles;
-
         private List<Project> _AllProjects;
-        private List<ProjectViewModel> _ProjectViewModels;
-        private ProjectViewModel _CurrentProjectViewModel;
         private int _CurrentProjectId;
 
         public string FirstName
@@ -105,28 +102,6 @@ namespace ClientDesktop.ViewModels
             }
         }
 
-        public List<ProjectViewModel> ProjectViewModels
-        {
-            get { return _ProjectViewModels; }
-            set
-            {
-                if (_ProjectViewModels == value) return;
-                _ProjectViewModels = value;
-                OnPropertyChanged("ProjectViewModels");
-            }
-        }
-
-        public ProjectViewModel CurrentProjectViewModel
-        {
-            get { return _CurrentProjectViewModel; }
-            set
-            {
-                if (_CurrentProjectViewModel == value) return;
-                _CurrentProjectViewModel = value;
-                OnPropertyChanged("CurrentProjectViewModel");
-            }
-        }
-
         public int CurrentProjectId
         {
             get { return _CurrentProjectId; }
@@ -156,7 +131,7 @@ namespace ClientDesktop.ViewModels
             _ServiceFactory = serviceFactory;
             _RegionManager = regionManager;
 
-            ProjectViewModels = new List<ProjectViewModel>();
+            AllProjects = new List<Project>();
 
             CreateProjectCommand = new DelegateCommand<object>(CreateProject);
         }
@@ -170,11 +145,20 @@ namespace ClientDesktop.ViewModels
             EmailAddress = GlobalCommands.MyAccount.LoginEmail;
             FullName = GlobalCommands.MyAccount.FirstName + " " + GlobalCommands.MyAccount.LastName;
             AvailableRoles = GlobalCommands.MyAccount.UserRoles.ToList();
-
-            UpdateProjectsForAccount();
         }
 
-        protected void UpdateProjectsForAccount()
+        // Event triggered when view is navigated to
+        public override void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            UpdateProjectsForAccount();
+        }
+        
+        public override bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            return true;
+        }
+
+        public void UpdateProjectsForAccount()
         {
             ICollection<Project> allProjects = null;
 
@@ -184,22 +168,16 @@ namespace ClientDesktop.ViewModels
                 {
                      allProjects = projectClient.GetProjectsForAccount(GlobalCommands.MyAccount.AccountId);
                 });
-            }
-            catch (Exception ex)
-            {
-                if (ErrorOccured != null)
-                    ErrorOccured(this, new ErrorMessageEventArgs(ex.Message));
-            }
 
-            if (allProjects != null)
-            {
-                List<Project> projects = new List<Project>();
-
-                projects.AddRange(allProjects);
-
-                foreach (var project in projects)
+                if (allProjects != null)
                 {
-                    ProjectViewModels.Add(new ProjectViewModel(_ServiceFactory, _RegionManager, project));
+                    AllProjects.Clear();
+                    AllProjects.AddRange(allProjects);
+
+                    if (CurrentProjectId == 0)
+                    {
+                        CurrentProjectId = AllProjects[0].ProjectId;
+                    }
 
                     // TODO: Set focus on created project after navigation after ProjectViewModel has been finished
                     //if (CurrentProjectId != 0)
@@ -213,12 +191,12 @@ namespace ClientDesktop.ViewModels
 
                     //    CurrentProjectId = 0;
                     //}
-
-                    if (CurrentProjectViewModel == null)
-                    {
-                        CurrentProjectViewModel = ProjectViewModels[0];
-                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                if (ErrorOccured != null)
+                    ErrorOccured(this, new ErrorMessageEventArgs(ex.Message));
             }
         }
     }

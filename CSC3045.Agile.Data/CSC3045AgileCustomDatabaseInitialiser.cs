@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Data.Entity;
-using System.Linq;
 using CSC3045.Agile.Business.Entities;
 
 namespace CSC3045.Agile.Data
 {
-    internal class Csc3045AgileCustomDatabaseInitialiser : DropCreateDatabaseAlways<Csc3045AgileContext>
+    internal class Csc3045AgileCustomDatabaseInitialiser : DropCreateDatabaseIfModelChanges<Csc3045AgileContext>
     {
         protected override void Seed(Csc3045AgileContext context)
         {

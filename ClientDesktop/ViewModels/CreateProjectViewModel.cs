@@ -48,6 +48,7 @@ namespace ClientDesktop.ViewModels
             SearchScrumMasterCommand = new DelegateCommand<object>(SearchScrumMaster);
             SearchProductOwnerCommand = new DelegateCommand<object>(SearchProductOwner);
             SearchDeveloperCommand = new DelegateCommand<object>(SearchDeveloper);
+            NavigateDashboardCommand = new DelegateCommand<object>(NavigateDashboard);
 
             ProductOwners = new List<Account>();
             ScrumMasters = new List<Account>();
@@ -60,6 +61,13 @@ namespace ClientDesktop.ViewModels
         public DelegateCommand<object> SearchProductOwnerCommand { get; private set; }
         public DelegateCommand<object> SearchScrumMasterCommand { get; private set; }
         public DelegateCommand<object> SearchDeveloperCommand { get; private set; }
+        public DelegateCommand<object> NavigateDashboardCommand { get; set; }
+
+        private void NavigateDashboard(object parameter)
+        {
+            _RegionManager.RequestNavigate(RegionNames.Content, typeof(DashboardView).FullName);
+        }
+
 
         #region View Bindings
 
@@ -195,7 +203,6 @@ namespace ClientDesktop.ViewModels
                 }
                 else
                 {
-                    ScrumMasters.Add(new Account() {FirstName = "No Users Found", LastName = "Displaying all users"});
                     ScrumMasters.AddRange(accountClient.GetByUserRole(ViewModelConstants.Scrummaster));
                 }
 
@@ -217,7 +224,6 @@ namespace ClientDesktop.ViewModels
                 }
                 else
                 {
-                    ProductOwners.Add(new Account() { FirstName = "No Users Found", LastName = "Displaying all users" });
                     ProductOwners.AddRange(accountClient.GetByUserRole(ViewModelConstants.ProductOwner));
                 }
 
@@ -239,7 +245,6 @@ namespace ClientDesktop.ViewModels
                 }
                 else
                 {
-                    Developers.Add(new Account() { FirstName = "No Users Found", LastName = "Displaying all users" });
                     Developers.AddRange(accountClient.GetByUserRole(ViewModelConstants.Developer));
                 }
 
@@ -320,10 +325,10 @@ namespace ClientDesktop.ViewModels
                         createdProject = projectClient.CreateProject(project);
                     });
                     
-                    if (createdProject != null)
-                    {
-                        ServiceLocator.Current.GetInstance<DashboardViewModel>().CurrentProjectId = createdProject.ProjectId;
-                    }
+                    //if (createdProject != null)
+                    //{
+                    //    ServiceLocator.Current.GetInstance<DashboardViewModel>().CurrentProjectId = createdProject.ProjectId;
+                    //}
                     
                     _RegionManager.RequestNavigate(RegionNames.Content, typeof(DashboardView).FullName);
                 }

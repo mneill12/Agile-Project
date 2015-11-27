@@ -23,7 +23,28 @@
         </Grid.ColumnDefinitions>
 
         <!-- Column 1 -->
-        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="10 0 0 0" Text="Project Information" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White" TextAlignment="Left" FontSize="20" FontWeight="Bold" />
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="10 0 0 0" Text="Project Information" VerticalAlignment="Center" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White" TextAlignment="Left" FontSize="20" FontWeight="Bold" />
+
+        <TextBlock Grid.Column="2" FontSize="15" Padding="10" FontFamily="pack://application:,,,/Resources/#AquaWax" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right" Text="BACK" Foreground="White" Margin="0,0,50,0"/>
+
+        <Button Grid.Row="0" Grid.Column="2" Command="{Binding NavigateDashboardCommand}" x:Name="BackButton" DockPanel.Dock="Left" Style="{DynamicResource MetroCircleButtonStyle}" Height="40" Width="40" FontFamily="Segoe UI Symbol" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0">
+            <Rectangle Width="20" Height="15">
+                <Rectangle.Fill>
+                    <VisualBrush Stretch="Fill">
+                        <VisualBrush.Visual>
+                            <Canvas Width="48" Height="48" Clip="F1 M 0,0L 48,0L 48,48L 0,48L 0,0" UseLayoutRounding="False">
+                                <Path Width="25" Height="18" Canvas.Left="12" Canvas.Top="15" Stretch="Fill" Fill="{DynamicResource BlackBrush}" Data="F1 M 12,22L 12,26L 28.25,26L 21,33L 27.5,33L 37,24L 27.5,15L 21,15L 28.25,22L 12,22 Z " />
+                            </Canvas>
+                        </VisualBrush.Visual>
+                    </VisualBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Button.LayoutTransform>
+                <ScaleTransform ScaleX="-1" />
+            </Button.LayoutTransform>
+        </Button>
+
+
 
         <TextBox Margin="10" Grid.Row="1" Grid.Column="0" controls:TextBoxHelper.ClearTextButton="True" controls:TextBoxHelper.Watermark="Enter project name..." Name="ProjectNameTextBox" FontSize="14"
                          Text="{Binding ProjectName}" />
