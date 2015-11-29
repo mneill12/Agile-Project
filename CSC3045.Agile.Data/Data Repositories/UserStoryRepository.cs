@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Data.Entity;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace CSC3045.Agile.Data.Data_Repositories
     // UserStory LINQ Entity Queries
     [Export(typeof (IUserStoryRepository))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class UserStoryRepository : DataRepositoryBase<UserStory>
+    public class UserStoryRepository : DataRepositoryBase<UserStory>, IUserStoryRepository
     {
         protected override UserStory AddEntity(Csc3045AgileContext entityContext, UserStory entity)
         {
@@ -41,7 +42,8 @@ namespace CSC3045.Agile.Data.Data_Repositories
             return results;
         }
 
-        protected ICollection<UserStory> GetUserStories()
+
+        ICollection<UserStory> IUserStoryRepository.GetUserStories()
         {
             using (var entityContext = new Csc3045AgileContext())
             {
@@ -52,19 +54,7 @@ namespace CSC3045.Agile.Data.Data_Repositories
             }
         }
 
-        protected UserStory GetUserStoryById(int id)
-        {
-            using (var entityContext = new Csc3045AgileContext())
-            {
-                return entityContext.UserStorySet
-                    .Include(s => s.Status)
-                    .Include(s => s.AssociatedTasks.Select(p => p.CurrentStatus))
-                    .Include(s => s.AcceptanceCriteria.Select(p => p.Criteria))
-                    .FirstOrDefault(s => s.UserStoryId == id);
-            }
-        }
-
-        protected ICollection<UserStory> GetUserStoriesByStatus(CurrentStatus status)
+        ICollection<UserStory> IUserStoryRepository.GetUserStoriesByStatus(CurrentStatus status)
         {
             using (var entityContext = new Csc3045AgileContext())
             {
@@ -74,6 +64,18 @@ namespace CSC3045.Agile.Data.Data_Repositories
                     .Include(s => s.AcceptanceCriteria.Select(p => p.Criteria))
                     .Where(s => s.Status == status)
                     .ToList();
+            }
+        }
+
+        public UserStory GetUserStoryById(int id)
+        {
+            using (var entityContext = new Csc3045AgileContext())
+            {
+                return entityContext.UserStorySet
+                    .Include(s => s.Status)
+                    .Include(s => s.AssociatedTasks.Select(p => p.CurrentStatus))
+                    .Include(s => s.AcceptanceCriteria.Select(p => p.Criteria))
+                    .FirstOrDefault(s => s.UserStoryId == id);
             }
         }
     }

@@ -103,6 +103,8 @@
                                             <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
+                                        
+                                        <Button Grid.Column="0" HorizontalAlignment="Left" Margin="5" Command="{Binding ManageProjectBacklogCommand}" Content="Manage Project Backlog (PO Only)" BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" />
                                         <Button Grid.Column="0" HorizontalAlignment="Left" Margin="5" Command="{Binding ManageProjectBacklog}" Content="Manage Project Backlog (PO Only)" BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" />
                                         <Button Grid.Column="1" HorizontalAlignment="Left" Margin="5" Command="{Binding AddSprint}" Content="Add Sprint (SM Only)"  BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" />
                                         <Button Grid.Column="2" HorizontalAlignment="Left" Margin="5" Command="{Binding SaveProjectXML}" Content="Save Project XML"  BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" />

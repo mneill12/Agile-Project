@@ -2,12 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Windows.Navigation;
 using ClientDesktop.Views;
 using Core.Common;
 using Core.Common.Contracts;
 using Core.Common.UI.Core;
 using CSC3045.Agile.Client.Contracts;
 using CSC3045.Agile.Client.Entities;
+using Microsoft.Practices.ServiceLocation;
 using Prism.Regions;
 
 namespace ClientDesktop.ViewModels
@@ -131,6 +133,7 @@ namespace ClientDesktop.ViewModels
         IRegionManager _RegionManager;
 
         public DelegateCommand<object> CreateProjectCommand { get; set; }
+        public DelegateCommand<object> ManageProjectBacklogCommand { get; set; } 
 
         public DelegateCommand<object> RefreshProjectsCommand { get; set; }
 
@@ -143,6 +146,14 @@ namespace ClientDesktop.ViewModels
         {
             UpdateProjectsForAccount();
         }
+        private void ManageProjectBacklog(object parameter)
+        {
+            NavigationParameters navigationParameters = new NavigationParameters();
+            navigationParameters.Add("projectId", ServiceLocator.Current.GetInstance<DashboardViewModel>().CurrentProjectId);
+
+            _RegionManager.RequestNavigate(RegionNames.Content, typeof(ProductBacklogManagementView).FullName, navigationParameters);
+
+        }
 
         [ImportingConstructor]
         public DashboardViewModel(IServiceFactory serviceFactory, IRegionManager regionManager)
@@ -153,8 +164,8 @@ namespace ClientDesktop.ViewModels
             AllProjects = new List<Project>();
 
             CreateProjectCommand = new DelegateCommand<object>(CreateProject);
-
             RefreshProjectsCommand = new DelegateCommand<object>(RefreshProjects);
+            ManageProjectBacklogCommand = new DelegateCommand<object>(ManageProjectBacklog);
         }
 
         public event EventHandler<ErrorMessageEventArgs> ErrorOccured;

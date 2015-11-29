@@ -116,6 +116,7 @@
     <Compile Include="ViewModels\LoginRegisterViewModel.cs" />
     <Compile Include="ViewModels\NewSprintViewModel.cs" />
     <Compile Include="ViewModels\SprintViewModel.cs" />
+    <Compile Include="ViewModels\ProductBacklogManagementViewModel.cs" />
     <Compile Include="ViewModels\StatusBarViewModel.cs" />
     <Compile Include="ViewModels\TopBarViewModel.cs" />
     <Compile Include="Views\CreateProjectView.xaml.cs">
@@ -139,6 +140,9 @@
     </Compile>
     <Compile Include="Views\SprintView.xaml.cs">
       <DependentUpon>SprintView.xaml</DependentUpon>
+	</Compile>
+    <Compile Include="Views\ProductBacklogManagementView.xaml.cs">
+      <DependentUpon>ProductBacklogManagementView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\StatusBarView.xaml.cs">
       <DependentUpon>StatusBarView.xaml</DependentUpon>
@@ -175,6 +179,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SprintView.xaml">
+	  <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProductBacklogManagementView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

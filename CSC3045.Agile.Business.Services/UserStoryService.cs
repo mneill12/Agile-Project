@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Core.Common;
-using Core.Common.Exceptions;
-using System.Security.Permissions;
-using System.ServiceProcess;
+﻿using Core.Common.Exceptions;
 using CSC3045.Agile.Data.Contracts.Repository_Interfaces;
 using System.ServiceModel;
 using Core.Common.Contracts;
@@ -21,19 +13,17 @@ namespace CSC3045.Agile.Business.Services
                      ReleaseServiceInstanceOnTransactionComplete = false)]
     public class UserStoryService : ServiceBase, IUserStoryService
     {
+        [Import]
+        private IDataRepositoryFactory _DataRepositoryFactory;
+
         public UserStoryService()
         {
-
         }
 
         public UserStoryService(IDataRepositoryFactory dataRepositoryFactory)
         {
             _DataRepositoryFactory = dataRepositoryFactory;
         }
-
-        [Import]
-        IDataRepositoryFactory _DataRepositoryFactory;
-
 
         public UserStory GetUserStoryById(int userStoryId)
         {
@@ -60,7 +50,17 @@ namespace CSC3045.Agile.Business.Services
                 IUserStoryRepository userStoryRepository = _DataRepositoryFactory.GetDataRepository<IUserStoryRepository>();
 
                 UserStory updatedUserStory = userStoryRepository.Update(userStory);
+            });
+        }
 
+        [OperationBehavior(TransactionScopeRequired = true)]
+        public UserStory AddNewUserStory(UserStory userStory)
+        {
+            return ExecuteFaultHandledOperation(() =>
+            {
+                var userStoryRepository = _DataRepositoryFactory.GetDataRepository<IUserStoryRepository>();
+
+                return userStoryRepository.Add(userStory);
             });
         }
     }

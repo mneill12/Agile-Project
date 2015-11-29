@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ServiceModel;
 using Core.Common.Exceptions;
+
 using CSC3045.Agile.Business.Entities;
 
 namespace CSC3045.Agile.Business.Contracts.Service_Contracts
@@ -19,5 +20,10 @@ namespace CSC3045.Agile.Business.Contracts.Service_Contracts
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
         void UpdateUserStoryById(UserStory userStory);
+
+        [OperationContract]
+        [FaultContract(typeof(NotFoundException))]
+        [TransactionFlow(TransactionFlowOption.Allowed)]
+        UserStory AddNewUserStory(UserStory userStory);
     }
 }
