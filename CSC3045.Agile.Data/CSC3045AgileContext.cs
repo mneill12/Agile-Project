@@ -43,6 +43,8 @@ namespace CSC3045.Agile.Data
 
         public DbSet<UserRole> UserRoleSet { get; set; }
 
+        public DbSet<Skill> SkillSet { get; set; }
+
         public DbSet<UserStory> UserStorySet { get; set; }
 
         // Entity by default links to plural tables (e.g. Account to Accounts) so we disable this
@@ -121,6 +123,9 @@ namespace CSC3045.Agile.Data
 
             modelBuilder.Entity<UserRole>()
                 .HasKey(e => e.UserRoleId).Ignore(e => e.EntityId);
+
+            modelBuilder.Entity<Skill>()
+                .HasKey(e => e.SkillId).Ignore(e => e.EntityId);
 
             modelBuilder.Entity<UserStory>()
                 .HasKey(e => e.UserStoryId).Ignore(e => e.EntityId);

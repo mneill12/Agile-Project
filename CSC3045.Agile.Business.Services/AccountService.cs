@@ -242,6 +242,27 @@ namespace CSC3045.Agile.Business.Services
             });
         }
 
+        /// <summary>
+        /// Gets a list of available skills
+        /// </summary>
+        /// <returns>A list of skills</returns>
+        public IList<Skill> GetAllSkills()
+        {
+            return ExecuteFaultHandledOperation(() =>
+            {
+                var skillRepository = _DataRepositoryFactory.GetDataRepository<ISkillRepository>();
+
+                var skills = skillRepository.GetAllSkills();
+                if (skills == null)
+                {
+                    var ex = new NotFoundException("Error - There are no user roles to get");
+                    throw new FaultException<NotFoundException>(ex, ex.Message);
+                }
+
+                return skills;
+            });
+        }
+
         //TODO: Move to tasks service
         /// <summary>
         /// Gets a list of owned tasks for an account id
@@ -278,6 +299,41 @@ namespace CSC3045.Agile.Business.Services
                 IAccountRepository accountRepository = _DataRepositoryFactory.GetDataRepository<IAccountRepository>();
 
                 ICollection<Account> foundAccounts = accountRepository.GetUsersByRoleAndName(role, email);
+                if (foundAccounts == null)
+                {
+                    NotFoundException ex = new NotFoundException("Error - There are no accounts to get");
+                    throw new FaultException<NotFoundException>(ex, ex.Message);
+                }
+
+                return foundAccounts.ToList();
+            });
+        }
+
+        public ICollection<Account> GetDevelopersBySkill(string skillName)
+        {
+            return ExecuteFaultHandledOperation(() =>
+            {
+                IAccountRepository accountRepository = _DataRepositoryFactory.GetDataRepository<IAccountRepository>();
+
+                ICollection<Account> foundAccounts = accountRepository.GetDevelopersBySkill(skillName);
+
+                if (foundAccounts == null)
+                {
+                    NotFoundException ex = new NotFoundException("Error - There are no accounts to get");
+                    throw new FaultException<NotFoundException>(ex, ex.Message);
+                }
+
+                return foundAccounts.ToList();
+            });
+        }
+
+        public List<Account> GetDevelopersBySkills(List<string> skillNames)
+        {
+            return ExecuteFaultHandledOperation(() =>
+            {
+                IAccountRepository accountRepository = _DataRepositoryFactory.GetDataRepository<IAccountRepository>();
+
+                ICollection<Account> foundAccounts = accountRepository.GetDevelopersBySkills(skillNames);
                 if (foundAccounts == null)
                 {
                     NotFoundException ex = new NotFoundException("Error - There are no accounts to get");

@@ -258,7 +258,7 @@
                     <TextBlock FontFamily="pack://application:,,,/Resources/#AquaWax" FontWeight="Bold" Foreground="White" Margin="50,20,26.429,935" FontSize="15" Height="30" Width="150" HorizontalAlignment="Left" Text="{Binding FullName}" />
                     <TextBlock Margin="50,-935,0,935" Text="{Binding EmailAddress}" Height="30" Width="150" HorizontalAlignment="Left" Foreground="White"/>
                     <ListView BorderThickness="0"  Background="Transparent" Foreground="White" x:Name="AvailableRolesListView" HorizontalContentAlignment="Stretch"
-                    	ItemsSource="{Binding AvailableRoles}" Margin="42,-1685,10.429,130" HorizontalAlignment="Left" Width="150" Height="60">
+                    	ItemsSource="{Binding AvailableRoles}" Margin="42,-1600,10.429,130" HorizontalAlignment="Left" Width="150" Height="120">
                         <ListView.ItemContainerStyle>
                             <Style TargetType="{x:Type ListViewItem}">
                                 <Style.Triggers>
@@ -286,6 +286,37 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
+
+                    <ListView BorderThickness="0"  Background="Transparent" Foreground="White" x:Name="AvailableSkillsListView" HorizontalContentAlignment="Stretch"
+                    	ItemsSource="{Binding AvailableSkills}" Margin="42,-1300,10.429,130" HorizontalAlignment="Left" Width="150" Height="220">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListViewItem}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="Transparent"></Setter>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="BorderThickness" Value="0"/>
+                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Transparent"></Setter>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="BorderThickness" Value="0"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                                <Setter Property="Padding" Value="0 5"></Setter>
+                                <Setter Property="VerticalAlignment" Value="Top"></Setter>
+                                <Setter Property="Focusable" Value="false"/>
+                                <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+                                <Setter Property="MaxWidth" Value="150"></Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="150" Header="Skill" DisplayMemberBinding="{Binding SkillName}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
                 </StackPanel>
             </Border>
         </DockPanel>

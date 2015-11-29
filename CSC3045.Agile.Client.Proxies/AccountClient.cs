@@ -49,6 +49,11 @@ namespace CSC3045.Agile.Client.Proxies
             return Channel.GetAllUserRoles();
         }
 
+        public IList<Skill> GetAllSkills()
+        {
+            return Channel.GetAllSkills();
+        }
+
         public ICollection<StoryTask> GetOwnedTasks(int accountId)
         {
             return Channel.GetOwnedTasks(accountId);
@@ -63,6 +68,16 @@ namespace CSC3045.Agile.Client.Proxies
         public ICollection<Account> GetByRoleAndEmail(string role, string email)
         {
             return Channel.GetByRoleAndEmail(role, email);
-        } 
+        }
+
+        public ICollection<Account> GetDevelopersBySkill(string skillName)
+        {
+            return Channel.GetDevelopersBySkill(skillName);
+        }
+
+        public List<Account> GetDevelopersBySkills(List<string> skillNames)
+        {
+            return Channel.GetDevelopersBySkills(skillNames);
+        }
     }
 }

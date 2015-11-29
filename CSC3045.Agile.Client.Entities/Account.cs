@@ -14,6 +14,7 @@ namespace CSC3045.Agile.Client.Entities
         private string _LoginEmail;
         private string _Password;
         private IList<UserRole> _UserRoles;
+        private IList<Skill> _Skills;
 
         public int AccountId
         {
@@ -89,6 +90,19 @@ namespace CSC3045.Agile.Client.Entities
                 {
                     _UserRoles = value;
                     OnPropertyChanged(() => UserRoles);
+                }
+            }
+        }
+
+        public IList<Skill> Skills
+        {
+            get { return _Skills; }
+            set
+            {
+                if (_Skills != value)
+                {
+                    _Skills = value;
+                    OnPropertyChanged(() => Skills);
                 }
             }
         }

@@ -24,6 +24,7 @@ namespace ClientDesktop.ViewModels
         private string _EmailAddress;
         private string _FullName;
         private List<UserRole> _AvailableRoles;
+        private List<Skill> _AvailableSkills;
         private List<Project> _AllProjects;
         private int _CurrentProjectId;
 
@@ -91,6 +92,17 @@ namespace ClientDesktop.ViewModels
             }
         }
 
+        public List<Skill> AvailableSkills
+        {
+            get { return _AvailableSkills; }
+            set
+            {
+                if (_AvailableSkills == value) return;
+                _AvailableSkills = value;
+                OnPropertyChanged("AvailableSkills");
+            }
+        }
+
         public List<Project> AllProjects
         {
             get { return _AllProjects; }
@@ -153,7 +165,16 @@ namespace ClientDesktop.ViewModels
             Surname = GlobalCommands.MyAccount.LastName;
             EmailAddress = GlobalCommands.MyAccount.LoginEmail;
             FullName = GlobalCommands.MyAccount.FirstName + " " + GlobalCommands.MyAccount.LastName;
-            AvailableRoles = GlobalCommands.MyAccount.UserRoles.ToList();
+
+            if (GlobalCommands.MyAccount.UserRoles != null && GlobalCommands.MyAccount.UserRoles.Count > 0)
+            {
+                AvailableRoles = GlobalCommands.MyAccount.UserRoles.ToList();
+            }
+
+            if (GlobalCommands.MyAccount.Skills != null && GlobalCommands.MyAccount.Skills.Count > 0)
+            {
+                AvailableSkills = GlobalCommands.MyAccount.Skills.ToList();
+            }
 
             UpdateProjectsForAccount();
         }

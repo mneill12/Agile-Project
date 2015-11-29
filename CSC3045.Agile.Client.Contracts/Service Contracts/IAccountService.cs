@@ -41,6 +41,10 @@ namespace CSC3045.Agile.Client.Contracts
 
         [OperationContract]
         [FaultContract(typeof(NotFoundException))]
+        IList<Skill> GetAllSkills();
+
+        [OperationContract]
+        [FaultContract(typeof(NotFoundException))]
         ICollection<StoryTask> GetOwnedTasks(int accountId);
 
         [OperationContract]
@@ -50,5 +54,13 @@ namespace CSC3045.Agile.Client.Contracts
         [OperationContract]
         [FaultContract(typeof(NotFoundException))]
         ICollection<Account> GetByRoleAndEmail(string role, string email);
+
+        [OperationContract]
+        [FaultContract(typeof(NotFoundException))]
+        ICollection<Account> GetDevelopersBySkill(string skillName);
+
+        [OperationContract]
+        [FaultContract(typeof(NotFoundException))]
+        List<Account> GetDevelopersBySkills(List<string> skillNames);
     }
 }

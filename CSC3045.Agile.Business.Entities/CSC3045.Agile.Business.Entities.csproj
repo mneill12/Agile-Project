@@ -61,6 +61,7 @@
     <Compile Include="PlanningPokerSession.cs" />
     <Compile Include="Criteria.cs" />
     <Compile Include="CurrentStatus.cs" />
+    <Compile Include="Skill.cs" />
     <Compile Include="StoryTask.cs" />
     <Compile Include="Backlog.cs" />
     <Compile Include="UserStory.cs" />

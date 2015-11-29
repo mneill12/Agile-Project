@@ -31,6 +31,7 @@ namespace ClientDesktop.ViewModels
         private string _RegisterLastName;
         private string _RegisterEmail;
         private string _RegisterConfirmEmail;
+        private string _RegisterSkills;
         private string _Status;
         private bool _RegisterIsDeveloper;
         private bool _RegisterIsScrumMaster;
@@ -178,6 +179,20 @@ namespace ClientDesktop.ViewModels
                 if (_UserRoles == value) return;
                 _UserRoles = value;
                 OnPropertyChanged("UserRoles");
+            }
+        }
+
+        public string RegisterSkills
+        {
+            get
+            {
+                return _RegisterSkills;
+            }
+            set
+            {
+                if (_RegisterSkills == value) return;
+                _RegisterSkills = value;
+                OnPropertyChanged("RegisterSkills");
             }
         }
 
@@ -347,6 +362,31 @@ namespace ClientDesktop.ViewModels
                 {
                     WithClient(_ServiceFactory.CreateClient<IAccountService>(), accountClient =>
                     {
+                        //Add skills to account
+                        var dbSkills = accountClient.GetAllSkills();
+                        ISet<string> inputSkills = ParseSkillString();
+                        IList<Skill> addedSkills = new List<Skill>();
+
+                        foreach (var inputSkill in inputSkills)
+                        {
+                            bool skillFound = false;
+
+                            foreach (var skill in dbSkills)
+                            {
+                                if (skill.SkillName.Equals(inputSkill))
+                                {
+                                    addedSkills.Add(skill);
+                                    skillFound = true;
+                                }
+                            }
+
+                            if (!skillFound)
+                            {
+                                addedSkills.Add(new Skill() {SkillName = inputSkill});
+                            }
+                        }
+
+                        // Get Userroles
                         var allUserRoles = accountClient.GetAllUserRoles();
                         IList<UserRole> selectedUserRoles = new List<UserRole>();
 
@@ -371,6 +411,7 @@ namespace ClientDesktop.ViewModels
                             Password = hashedPassword,
                             FirstName = _RegisterFirstName,
                             LastName = _RegisterLastName,
+                            Skills = addedSkills,
                             UserRoles = selectedUserRoles
                         };
 
@@ -389,6 +430,30 @@ namespace ClientDesktop.ViewModels
                         ErrorOccured(this, new ErrorMessageEventArgs(ex.Message));
                 }
             }
+        }
+
+        /// <summary>
+        /// Separates skills that have a string or comma and checks for duplicates to prevent exceptions
+        /// </summary>
+        /// <returns>A set of unique skill strings</returns>
+        private ISet<string> ParseSkillString()
+        {
+            if (RegisterSkills.Length > 0)
+            {
+                IList<string> skillNames = RegisterSkills.Split(new string[] { ",", " " },
+                StringSplitOptions.RemoveEmptyEntries);
+
+                ISet<string> skillSet = new HashSet<string>();
+
+                foreach (var skill in skillNames)
+                {
+                    skillSet.Add(skill);
+                }
+
+                return skillSet;
+            }
+
+            return null;
         }
     }
 }

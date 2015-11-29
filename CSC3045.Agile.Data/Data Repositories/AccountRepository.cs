@@ -84,6 +84,40 @@ namespace CSC3045.Agile.Data.Data_Repositories
             }
         }
 
+        public ICollection<Account> GetDevelopersBySkill(string skill)
+        {
+            using (var entityContext = new Csc3045AgileContext())
+            {
+                return entityContext.AccountSet
+                    .Include(a => a.Skills)
+                    .Where(a => a.UserRoles.Select(r => r.UserRoleName).Contains("Developer")
+                    && a.Skills.Select(s => s.SkillName).Contains(skill.ToLower())).ToList();
+            }
+        }
+
+        public List<Account> GetDevelopersBySkills(List<string> skills)
+        {
+            using (var entityContext = new Csc3045AgileContext())
+            {
+                List<Account> accountSet = new List<Account>();
+
+                foreach (var skill in skills)
+                {
+                    accountSet.AddRange(entityContext.AccountSet
+                        .Include(a => a.Skills)
+                        .Where(a => a.UserRoles.Select(r => r.UserRoleName).Contains("Developer")
+                                    && a.Skills.Select(s => s.SkillName).Contains(skill.ToLower())).ToList());
+                }
+
+                if (accountSet.Count > 0)
+                {
+                    return accountSet;
+                }
+
+                return null;
+            }
+        }
+
         #region CRUD Methods
 
         protected override Account AddEntity(Csc3045AgileContext entityContext, Account entity)
@@ -109,6 +143,7 @@ namespace CSC3045.Agile.Data.Data_Repositories
         {
                 return entityContext.AccountSet
                     .Include(a => a.UserRoles)
+                    .Include(a => a.Skills)
                     .FirstOrDefault(a => a.AccountId == id);
         }
 

@@ -28,6 +28,7 @@ namespace ClientDesktop.ViewModels
         private string _ProductOwnerSearchText;
         private string _ScrumMasterSearchText;
         private string _DeveloperSearchText;
+        private string _DeveloperSkillSearchText;
 
         private List<Account> _ProductOwners;
         private List<Account> _ScrumMasters;
@@ -135,6 +136,20 @@ namespace ClientDesktop.ViewModels
             }
         }
 
+        public string DeveloperSkillSearchText
+        {
+            get
+            {
+                return _DeveloperSkillSearchText;
+            }
+            set
+            {
+                if (_DeveloperSkillSearchText == value) return;
+                _DeveloperSkillSearchText = value;
+                OnPropertyChanged("DeveloperSkillSearchText");
+            }
+        }
+
         public List<Account> ProductOwners
         {
             get { return _ProductOwners; }
@@ -231,6 +246,9 @@ namespace ClientDesktop.ViewModels
             });
         }
 
+        /// <summary>
+        /// Special developer search method to allow searching by skill set.
+        /// </summary>
         protected void SearchDeveloper(object obj)
         {
             WithClient(_ServiceFactory.CreateClient<IAccountService>(), accountClient =>
