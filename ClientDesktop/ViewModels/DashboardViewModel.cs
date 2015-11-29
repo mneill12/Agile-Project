@@ -120,9 +120,16 @@ namespace ClientDesktop.ViewModels
 
         public DelegateCommand<object> CreateProjectCommand { get; set; }
 
+        public DelegateCommand<object> RefreshProjectsCommand { get; set; }
+
         private void CreateProject(object parameter)
         {
             _RegionManager.RequestNavigate(RegionNames.Content, typeof(CreateProjectView).FullName);
+        }
+
+        private void RefreshProjects(object parameter)
+        {
+            UpdateProjectsForAccount();
         }
 
         [ImportingConstructor]
@@ -134,6 +141,8 @@ namespace ClientDesktop.ViewModels
             AllProjects = new List<Project>();
 
             CreateProjectCommand = new DelegateCommand<object>(CreateProject);
+
+            RefreshProjectsCommand = new DelegateCommand<object>(RefreshProjects);
         }
 
         public event EventHandler<ErrorMessageEventArgs> ErrorOccured;
@@ -145,17 +154,8 @@ namespace ClientDesktop.ViewModels
             EmailAddress = GlobalCommands.MyAccount.LoginEmail;
             FullName = GlobalCommands.MyAccount.FirstName + " " + GlobalCommands.MyAccount.LastName;
             AvailableRoles = GlobalCommands.MyAccount.UserRoles.ToList();
-        }
 
-        // Event triggered when view is navigated to
-        public override void OnNavigatedTo(NavigationContext navigationContext)
-        {
             UpdateProjectsForAccount();
-        }
-        
-        public override bool IsNavigationTarget(NavigationContext navigationContext)
-        {
-            return true;
         }
 
         public void UpdateProjectsForAccount()
@@ -171,8 +171,9 @@ namespace ClientDesktop.ViewModels
 
                 if (allProjects != null)
                 {
-                    AllProjects.Clear();
-                    AllProjects.AddRange(allProjects);
+                    List<Project> updatedProjectList = new List<Project>();
+                    updatedProjectList.AddRange(allProjects);
+                    AllProjects = updatedProjectList;
 
                     if (CurrentProjectId == 0)
                     {

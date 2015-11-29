@@ -31,6 +31,7 @@ namespace CSC3045.Agile.Business.Entities
         [DataMember]
         public ICollection<UserRole> UserRoles { get; set; }
 
+
         // Multi-Many-To-Many Entity Join Table Association
 
         public ICollection<Project> UserFor { get; set; }

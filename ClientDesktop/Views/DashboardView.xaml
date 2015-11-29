@@ -23,6 +23,26 @@
 
                     <TextBlock Grid.Column="1" FontSize="15" Padding="10" FontFamily="pack://application:,,,/Resources/#AquaWax" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right" Text="ADD NEW PROJECT" Foreground="White"/>
 
+                    <Button Grid.Column="0"
+            		x:Name="RefreshProjectsButton"
+            		Command="{Binding RefreshProjectsCommand}"
+            		Foreground="White"
+            		Width="40"
+            		Height="40"
+                    Margin="110,0,0,0"
+                    BorderBrush="White"
+            		HorizontalAlignment="Left"
+            		VerticalAlignment="Center"
+            		Style="{DynamicResource MetroCircleButtonStyle}">
+                        <Rectangle Fill="White" Width="15"
+            			Height="15">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Stretch="Fill"
+            					Visual="{StaticResource appbar_refresh}"/>
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                    </Button>
+                    
                     <Button Grid.Column="2"
             		x:Name="CreateProjectButton"
             		Command="{Binding CreateProjectCommand}"
