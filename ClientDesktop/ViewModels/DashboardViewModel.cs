@@ -2,12 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Windows.Navigation;
 using ClientDesktop.Views;
 using Core.Common;
 using Core.Common.Contracts;
 using Core.Common.UI.Core;
 using CSC3045.Agile.Client.Contracts;
 using CSC3045.Agile.Client.Entities;
+using Microsoft.Practices.ServiceLocation;
 using Prism.Regions;
 
 namespace ClientDesktop.ViewModels
@@ -144,10 +146,20 @@ namespace ClientDesktop.ViewModels
         IRegionManager _RegionManager;
 
         public DelegateCommand<object> CreateProjectCommand { get; set; }
+        public DelegateCommand<object> ManageProjectBacklogCommand { get; set; } 
 
         private void CreateProject(object parameter)
         {
             _RegionManager.RequestNavigate(RegionNames.Content, typeof(CreateProjectView).FullName);
+        }
+
+        private void ManageProjectBacklog(object parameter)
+        {
+            NavigationParameters navigationParameters = new NavigationParameters();
+            navigationParameters.Add("projectId", ServiceLocator.Current.GetInstance<DashboardViewModel>().CurrentProjectId);
+
+            _RegionManager.RequestNavigate(RegionNames.Content, typeof(ProductBacklogManagementView).FullName, navigationParameters);
+                );
         }
 
         [ImportingConstructor]
@@ -159,6 +171,8 @@ namespace ClientDesktop.ViewModels
             ProjectViewModels = new List<ProjectViewModel>();
 
             CreateProjectCommand = new DelegateCommand<object>(CreateProject);
+
+            ManageProjectBacklogCommand = new DelegateCommand<object>(ManageProjectBacklog);
         }
 
         public event EventHandler<ErrorMessageEventArgs> ErrorOccured;
