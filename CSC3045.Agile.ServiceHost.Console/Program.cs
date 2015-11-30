@@ -95,7 +95,7 @@ namespace CSC3045.Agile.ServiceHost.Console
             var accounts = accountService.GetAllAccounts();
 
             //Check if data has already been loaded before
-            if (project1.ProjectManager == null)
+            if (project1.ProjectManager == null || project2.ProjectManager == null || project1.AllUsers.Count == 0 || project2.AllUsers.Count == 0)
             {
                 project1.ProjectManager = accounts.Single(a => a.AccountId == 1);
                 project1.ProductOwner = accounts.Single(a => a.AccountId == 2);
