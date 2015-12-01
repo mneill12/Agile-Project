@@ -58,6 +58,7 @@
     <Compile Include="Burndown.cs" />
     <Compile Include="BurndownPoint.cs" />
     <Compile Include="Account.cs" />
+    <Compile Include="ChatMessage.cs" />
     <Compile Include="PlanningPokerSession.cs" />
     <Compile Include="Criteria.cs" />
     <Compile Include="CurrentStatus.cs" />

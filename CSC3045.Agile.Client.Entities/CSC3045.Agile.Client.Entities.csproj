@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Burndown.cs" />
+    <Compile Include="ChatMessage.cs" />
     <Compile Include="Criteria.cs" />
     <Compile Include="AcceptanceCriteria.cs" />
     <Compile Include="Account.cs" />
