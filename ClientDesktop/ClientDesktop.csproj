@@ -189,6 +189,7 @@
     <Compile Include="ViewModels\PlanningPoker\CreatePlanningPokerSessionViewModel.cs" />
     <Compile Include="ViewModels\CreateProjectViewModel.cs" />
     <Compile Include="ShellViewModel.cs" />
+    <Compile Include="ViewModels\Tasks\CreateTaskViewModel.cs" />
     <Compile Include="ViewModels\DashboardViewModel.cs" />
     <Compile Include="ViewModels\EditAccountViewModel.cs" />
     <Compile Include="ViewModels\LoginRegisterViewModel.cs" />
@@ -199,6 +200,8 @@
     <Compile Include="ViewModels\ProductBacklogManagementViewModel.cs" />
     <Compile Include="ViewModels\SprintBurndownChartViewModel.cs" />
     <Compile Include="ViewModels\StatusBarViewModel.cs" />
+    <Compile Include="ViewModels\Tasks\TaskDashboardViewModel.cs" />
+    <Compile Include="ViewModels\Tasks\TaskDetailsViewModel.cs" />
     <Compile Include="ViewModels\TopBarViewModel.cs" />
     <Compile Include="Views\PlanningPoker\CreatePlanningPokerSessionView.xaml.cs">
       <DependentUpon>CreatePlanningPokerSessionView.xaml</DependentUpon>
@@ -209,6 +212,7 @@
     <Compile Include="Views\PlanningPoker\PlanningPokerSessionView.xaml.cs">
       <DependentUpon>PlanningPokerSessionView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\Tasks\TaskListViewModel.cs" />
     <Compile Include="Views\SprintBurndownChartView.xaml.cs">
       <DependentUpon>SprintBurndownChartView.xaml</DependentUpon>
     </Compile>
@@ -239,6 +243,18 @@
     </Compile>
     <Compile Include="Views\StatusBarView.xaml.cs">
       <DependentUpon>StatusBarView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tasks\CreateTaskView.xaml.cs">
+      <DependentUpon>CreateTaskView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tasks\TaskDashboardView.xaml.cs">
+      <DependentUpon>TaskDashboardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tasks\TaskDetailsView.xaml.cs">
+      <DependentUpon>TaskDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tasks\TaskListView.xaml.cs">
+      <DependentUpon>TaskListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TopBarView.xaml.cs">
       <DependentUpon>TopBarView.xaml</DependentUpon>
@@ -298,6 +314,22 @@
     <Page Include="Views\StatusBarView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Tasks\CreateTaskView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tasks\TaskDashboardView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tasks\TaskDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tasks\TaskListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\TopBarView.xaml">
       <SubType>Designer</SubType>

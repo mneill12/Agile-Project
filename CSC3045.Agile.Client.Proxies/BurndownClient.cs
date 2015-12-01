@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ServiceModel;
 using CSC3045.Agile.Client.Contracts;
-using CSC3045.Agile.Client.Contracts;
 using CSC3045.Agile.Client.Entities;
 
 namespace CSC3045.Agile.Client.Proxies
