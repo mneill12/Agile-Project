@@ -159,7 +159,6 @@ namespace ClientDesktop.ViewModels
             navigationParameters.Add("projectId", ServiceLocator.Current.GetInstance<DashboardViewModel>().CurrentProjectId);
 
             _RegionManager.RequestNavigate(RegionNames.Content, typeof(ProductBacklogManagementView).FullName, navigationParameters);
-                );
         }
 
         [ImportingConstructor]
