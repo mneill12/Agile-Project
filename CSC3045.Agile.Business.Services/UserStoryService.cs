@@ -35,7 +35,7 @@ namespace CSC3045.Agile.Business.Services
         IDataRepositoryFactory _DataRepositoryFactory;
 
 
-        public UserStory GetByUserStoryId(int userStoryId)
+        public UserStory GetUserStoryById(int userStoryId)
         {
             return ExecuteFaultHandledOperation(() =>
             {
@@ -53,7 +53,7 @@ namespace CSC3045.Agile.Business.Services
         }
 
         [OperationBehavior(TransactionScopeRequired = true)]
-        public void UpdateUserStoryId(UserStory userStory)
+        public void UpdateUserStoryById(UserStory userStory)
         {
             ExecuteFaultHandledOperation(() =>
             {
@@ -62,17 +62,6 @@ namespace CSC3045.Agile.Business.Services
                 UserStory updatedUserStory = userStoryRepository.Update(userStory);
 
             });
-        }
-
-
-        public UserStory GetUserStoryInfo(int userStoryId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateUserStoryInfo(UserStory userStory)
-        {
-            throw new NotImplementedException();
         }
     }
 }

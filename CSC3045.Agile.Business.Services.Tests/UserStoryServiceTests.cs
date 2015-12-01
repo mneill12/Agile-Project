@@ -1,14 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ServiceModel;
-using System.Threading;
-using CSC3045.Agile.Data.Contracts;
+﻿using System.ServiceModel;
 using Core.Common.Contracts;
-using Core.Common.Exceptions;
-using CSC3045.Agile.Business.Services;
 using CSC3045.Agile.Data.Contracts.Repository_Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CSC3045.Agile.Business.Entities;
@@ -30,7 +21,7 @@ namespace CSC3045.Agile.Business.Services.Tests
 
             UserStoryService userService = new UserStoryService(mockDataRepositoryFactory.Object);
 
-            UserStory userStory = userService.GetByUserStoryId(1);
+            UserStory userStory = userService.GetUserStoryById(1);
 
             Assert.IsTrue(userStory == userStoryToGet);
         }
@@ -41,7 +32,7 @@ namespace CSC3045.Agile.Business.Services.Tests
         {
             Mock<IDataRepositoryFactory> mockDataRepositoryFactory = new Mock<IDataRepositoryFactory>();
 
-            new UserStoryService(mockDataRepositoryFactory.Object).GetUserStoryInfo(1);
+            new UserStoryService(mockDataRepositoryFactory.Object).GetUserStoryById(1);
         }
 
     }

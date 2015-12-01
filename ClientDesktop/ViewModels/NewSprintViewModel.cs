@@ -1,28 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.Composition;
-using System.Globalization;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.ServiceModel;
-using System.Windows.Controls;
-using System.Windows.Data;
-using Core.Common;
+﻿using System.ComponentModel.Composition;
 using Core.Common.Contracts;
 using Core.Common.UI.Core;
-using CSC3045.Agile.Client.Contracts;
-using CSC3045.Agile.Client.Entities;
-using ClientDesktop;
-
+using Prism.Regions;
 
 namespace ClientDesktop.ViewModels
 {
     [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    class NewSprintViewModel : ViewModelBase, INotifyPropertyChanged 
+    public class NewSprintViewModel : ViewModelBase
     {
-        private string 
-    }
+        private IRegionManager _RegionManager;
+        private IServiceFactory _ServiceFactory;
 
+        [ImportingConstructor]
+        public NewSprintViewModel(IServiceFactory serviceFactory, IRegionManager regionManager)
+        {
+            _ServiceFactory = serviceFactory;
+            _RegionManager = regionManager;
+        }
+
+        protected override void OnViewLoaded()
+        {
+        }
+    }
 }

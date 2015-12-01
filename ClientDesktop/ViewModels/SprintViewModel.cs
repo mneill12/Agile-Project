@@ -22,18 +22,16 @@ namespace ClientDesktop.ViewModels
 {
     [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    class ScrumMasterViewModel : ViewModelBase
+    public class SprintViewModel : ViewModelBase
     {
 
-        #region ScrumMasterView Bindings
+        #region SprintView Bindings
 
         private int _UserStoryId;
         private string _StoryNumber;
         private string _Description;
         private int _StoryPoint;
         private string _UserNotes;
-
-        private List<UserRole> _AvailableRoles;
 
         public int UserStoryId
         {
@@ -114,7 +112,7 @@ namespace ClientDesktop.ViewModels
 
 
         [ImportingConstructor]
-        public ScrumMasterViewModel(IServiceFactory serviceFactory, IRegionManager regionManager)
+        public SprintViewModel(IServiceFactory serviceFactory, IRegionManager regionManager)
         {
             _ServiceFactory = serviceFactory;
             _RegionManager = regionManager;

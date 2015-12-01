@@ -115,7 +115,7 @@
     <Compile Include="ViewModels\EditAccountViewModel.cs" />
     <Compile Include="ViewModels\LoginRegisterViewModel.cs" />
     <Compile Include="ViewModels\NewSprintViewModel.cs" />
-    <Compile Include="ViewModels\ScrumMasterViewModel.cs" />
+    <Compile Include="ViewModels\SprintViewModel.cs" />
     <Compile Include="ViewModels\StatusBarViewModel.cs" />
     <Compile Include="ViewModels\TopBarViewModel.cs" />
     <Compile Include="Views\CreateProjectView.xaml.cs">
@@ -137,8 +137,8 @@
     <Compile Include="Views\NewSprintView.xaml.cs">
       <DependentUpon>NewSprintView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ScrumMasterView.xaml.cs">
-      <DependentUpon>ScrumMasterView.xaml</DependentUpon>
+    <Compile Include="Views\SprintView.xaml.cs">
+      <DependentUpon>SprintView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\StatusBarView.xaml.cs">
       <DependentUpon>StatusBarView.xaml</DependentUpon>
@@ -174,7 +174,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ScrumMasterView.xaml">
+    <Page Include="Views\SprintView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

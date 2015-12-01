@@ -5,14 +5,14 @@ using Core.Common.UI.Core;
 namespace ClientDesktop.Views
 {
     /// <summary>
-    /// Interaction logic for ScrumMasterView.xaml
+    /// Interaction logic for SprintView.xaml
     /// </summary> 
     [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public partial class ScrumMasterView : UserControlViewBase
+    public partial class SprintView : UserControlViewBase
     {
 
-        public ScrumMasterView()
+        public SprintView()
         {
             InitializeComponent();
         }
@@ -20,7 +20,7 @@ namespace ClientDesktop.Views
 
 
         [Import]
-        public LoginRegisterViewModel ViewModel
+        public SprintViewModel ViewModel
         {
             set { DataContext = value; }
         }

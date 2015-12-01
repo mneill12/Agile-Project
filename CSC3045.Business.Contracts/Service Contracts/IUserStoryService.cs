@@ -14,10 +14,10 @@ namespace CSC3045.Agile.Business.Contracts.Service_Contracts
     {
         [OperationContract]
         [FaultContract(typeof(NotFoundException))]
-        UserStory GetUserStoryInfo(int userStoryId);
+        UserStory GetUserStoryById(int userStoryId);
 
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
-        void UpdateUserStoryInfo(UserStory userStory);
+        void UpdateUserStoryById(UserStory userStory);
     }
 }
