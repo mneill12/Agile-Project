@@ -1,8 +1,6 @@
-﻿
-using System.ComponentModel.Composition;
+﻿using System.ComponentModel.Composition;
 using ClientDesktop.ViewModels;
 using Core.Common.UI.Core;
-using Microsoft.Research.DynamicDataDisplay;
 
 namespace ClientDesktop.Views
 {
