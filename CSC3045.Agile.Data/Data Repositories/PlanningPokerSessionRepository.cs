@@ -10,7 +10,7 @@ namespace CSC3045.Agile.Data.Data_Repositories
     // PlanningPokerSession LINQ Entity Queries
     [Export(typeof (IPlanningPokerSessionRepository))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class PlanningPokerSessionRepository : DataRepositoryBase<PlanningPokerSession>
+    public class PlanningPokerSessionRepository : DataRepositoryBase<PlanningPokerSession>, IPlanningPokerSessionRepository
     {
         protected override PlanningPokerSession AddEntity(Csc3045AgileContext entityContext, PlanningPokerSession entity)
         {
@@ -39,6 +39,30 @@ namespace CSC3045.Agile.Data.Data_Repositories
                 .Include(a => a.InvitedAccountSet)
                 .Include(b => b.UserStories.Select(c => c.Status))
                 .FirstOrDefault();
+        }
+
+        public PlanningPokerSession GetByAttendeeId(int accountId)
+        {
+            using (var entityContext = new Csc3045AgileContext())
+            {
+                var query = (from p in entityContext.PlanningPokerSessionSet
+                    where p.InvitedAccountSet.Select(a => a.AccountId).Equals(accountId)
+                    select p);
+
+                return query.FirstOrDefault();
+            }
+        }
+
+        public PlanningPokerSession GetByScrumMasterId(int scrumMasterId)
+        {
+            using (var entityContext = new Csc3045AgileContext())
+            {
+                var query = (from p in entityContext.PlanningPokerSessionSet
+                             where p.ScrumMaster.AccountId.Equals(scrumMasterId)
+                             select p);
+
+                return query.FirstOrDefault();
+            }
         }
     }
 }
