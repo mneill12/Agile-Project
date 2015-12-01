@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="AccountClient.cs" />
     <Compile Include="BurndownClient.cs" />
+    <Compile Include="PlanningPokerSessionClient.cs" />
     <Compile Include="ProjectClient.cs" />
     <Compile Include="AuthenticationClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
