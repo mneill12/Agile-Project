@@ -45,6 +45,7 @@
     <Compile Include="Service Contracts\IBurndownService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service Contracts\IAccountService.cs" />
+    <Compile Include="Service Contracts\IPlanningPokerSessionService.cs" />
     <Compile Include="Service Contracts\IProjectService.cs" />
     <Compile Include="Service Contracts\IAuthenticationService.cs" />
     <Compile Include="Service Contracts\IUserStoryService.cs" />

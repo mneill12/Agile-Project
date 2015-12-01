@@ -2,9 +2,9 @@
 using System.ServiceModel;
 using Core.Common.Exceptions;
 using Core.Common.Utils;
-using CSC3045.Agile.Business.Entities;
+using CSC3045.Agile.Client.Entities;
 
-namespace CSC3045.Agile.Business.Contracts
+namespace CSC3045.Agile.Client.Contracts
 {
     [ServiceContract]
     public interface IPlanningPokerSessionService
@@ -45,11 +45,7 @@ namespace CSC3045.Agile.Business.Contracts
 
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
-        void SendVote(int accountId);
-
-
-
-
+        void SendVote(int accountId, int pointNumber);
 
     }
 }
