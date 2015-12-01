@@ -70,6 +70,7 @@
     <Compile Include="Sprint.cs" />
     <Compile Include="CurrentStatus.cs" />
     <Compile Include="StoryTask.cs" />
+    <Compile Include="TaskBurndownPoint.cs" />
     <Compile Include="UserRole.cs" />
     <Compile Include="UserStory.cs" />
   </ItemGroup>

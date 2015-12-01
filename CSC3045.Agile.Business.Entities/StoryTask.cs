@@ -23,6 +23,9 @@ namespace CSC3045.Agile.Business.Entities
         public int Hours { get; set; }
 
         [DataMember]
+        public TaskBurndownPoint TaskBurndownPoint { get; set; }
+
+        [DataMember]
         public CurrentStatus CurrentStatus { get; set; }
 
         [DataMember]

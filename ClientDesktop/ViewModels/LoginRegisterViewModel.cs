@@ -208,7 +208,7 @@ namespace ClientDesktop.ViewModels
         public DelegateCommand<PasswordBox> AccountLogin { get { return _AccountLogin; } }
         public DelegateCommand<TextBox> XMLFilePath { get { return _XMLFilePath; } }
 
-            #endregion
+        #endregion
 
         [Import]
         public DashboardViewModel DashboardViewModel { get; private set; }

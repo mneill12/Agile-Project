@@ -9,6 +9,91 @@ namespace CSC3045.Agile.Data
     {
         protected override void Seed(Csc3045AgileContext context)
         {
+
+            Dictionary<DateTime, int> hoursDictionary1 = new Dictionary<DateTime, int>();
+            hoursDictionary1.Add( new DateTime(2015, 10, 5), 10);
+            hoursDictionary1.Add( new DateTime(2015, 10, 6), 9);
+            hoursDictionary1.Add( new DateTime(2015, 10, 7), 8);
+            hoursDictionary1.Add( new DateTime(2015, 10, 8), 7);
+            hoursDictionary1.Add( new DateTime(2015, 10, 9), 6);
+
+            hoursDictionary1.Add( new DateTime(2015, 10, 12), 5);
+            hoursDictionary1.Add( new DateTime(2015, 10, 13), 4);
+            hoursDictionary1.Add( new DateTime(2015, 10, 14), 4);
+            hoursDictionary1.Add( new DateTime(2015, 10, 15), 4);
+            hoursDictionary1.Add( new DateTime(2015, 10, 16), 1);
+
+            TaskBurndownPoint tbp1 = new TaskBurndownPoint()
+            {
+                HoursRemaining = hoursDictionary1
+            };
+
+            Dictionary<DateTime, int> hoursDictionary2 = new Dictionary<DateTime, int>();
+            hoursDictionary2.Add( new DateTime(2015, 10, 5), 8);
+            hoursDictionary2.Add( new DateTime(2015, 10, 6), 8);
+            hoursDictionary2.Add( new DateTime(2015, 10, 7), 8);
+            hoursDictionary2.Add( new DateTime(2015, 10, 8), 7);
+            hoursDictionary2.Add( new DateTime(2015, 10, 9), 6);
+
+            hoursDictionary2.Add( new DateTime(2015, 10, 12), 5);
+            hoursDictionary2.Add( new DateTime(2015, 10, 13), 4);
+            hoursDictionary2.Add( new DateTime(2015, 10, 14), 4);
+            hoursDictionary2.Add( new DateTime(2015, 10, 15), 4);
+            hoursDictionary2.Add( new DateTime(2015, 10, 16), 1);
+
+            TaskBurndownPoint tbp2 = new TaskBurndownPoint()
+            {
+                HoursRemaining = hoursDictionary2
+            };
+
+            Dictionary<DateTime, int> hoursDictionary3 = new Dictionary<DateTime, int>();
+            hoursDictionary3.Add( new DateTime(2015, 10, 5), 12);
+            hoursDictionary3.Add( new DateTime(2015, 10, 6), 10);
+            hoursDictionary3.Add( new DateTime(2015, 10, 7), 8);
+            hoursDictionary3.Add( new DateTime(2015, 10, 8), 7);
+            hoursDictionary3.Add( new DateTime(2015, 10, 9), 6);
+
+            hoursDictionary3.Add( new DateTime(2015, 10, 12), 5);
+            hoursDictionary3.Add( new DateTime(2015, 10, 13), 4);
+            hoursDictionary3.Add( new DateTime(2015, 10, 14), 4);
+            hoursDictionary3.Add( new DateTime(2015, 10, 15), 4);
+            hoursDictionary3.Add( new DateTime(2015, 10, 16), 1);
+
+            TaskBurndownPoint tbp3 = new TaskBurndownPoint()
+            {
+                HoursRemaining = hoursDictionary3
+            };
+
+            IList<TaskBurndownPoint> taskBurndownPoint1 = new List<TaskBurndownPoint>();
+
+            taskBurndownPoint1.Add(new TaskBurndownPoint
+            {
+                TaskBurndownPointId = 1,
+                StoryTaskId = 1,
+                HoursRemaining = hoursDictionary1,            
+ 
+            });
+
+             IList<TaskBurndownPoint> taskBurndownPoint2 = new List<TaskBurndownPoint>();
+
+            taskBurndownPoint2.Add(new TaskBurndownPoint
+            {
+                TaskBurndownPointId = 2,
+                StoryTaskId = 1,
+                HoursRemaining = hoursDictionary2,            
+ 
+            });
+
+            IList<TaskBurndownPoint> taskBurndownPoint3 = new List<TaskBurndownPoint>();
+
+            taskBurndownPoint3.Add(new TaskBurndownPoint
+            {
+                TaskBurndownPointId = 3,
+                StoryTaskId = 1,
+                HoursRemaining = hoursDictionary3,            
+ 
+            });
+               
             IList<UserRole> defaultRoles = new List<UserRole>();
 
             defaultRoles.Add(new UserRole
@@ -195,9 +280,10 @@ namespace CSC3045.Agile.Data
                         {
                             Title = "TSK-001",
                             Description = "Setup database for server application, to include user management tables.",
-                            Hours = 6,
+                            Hours = 10,
                             CurrentStatus = new CurrentStatus {StoryStatusName = "To-Do"},
-                            IsBlocked = false
+                            IsBlocked = false,
+                            TaskBurndownPoint = tbp1
                         },
                         new StoryTask
                         {
@@ -205,17 +291,20 @@ namespace CSC3045.Agile.Data
                             Description = "Develop server application to accept client connections for user management.",
                             Hours = 8,
                             CurrentStatus = new CurrentStatus {StoryStatusName = "BA-QA"},
-                            IsBlocked = false
+                            IsBlocked = false,
+                            TaskBurndownPoint = tbp2
                         },
                         new StoryTask
                         {
                             Title = "TSK-003",
                             Description =
                                 "Develop client application to make connection to server and call database CRUD methods.",
-                            Hours = 4,
+                            Hours = 12,
                             CurrentStatus = new CurrentStatus {StoryStatusName = "Tech QA"},
-                            IsBlocked = false
-                        },
+                            //TaskBurndownPoint = new TaskBurndownPoint{ TaskBurndownPointId = };
+                            IsBlocked = false,
+                            TaskBurndownPoint = tbp3
+                        }/*,
                         new StoryTask
                         {
                             Title = "TSK-004",
@@ -240,7 +329,7 @@ namespace CSC3045.Agile.Data
                             Hours = 14,
                             CurrentStatus = new CurrentStatus {StoryStatusName = "Done"},
                             IsBlocked = false
-                        }
+                        }*/
                     }
                 }
             };

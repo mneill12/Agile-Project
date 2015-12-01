@@ -10,8 +10,11 @@ namespace CSC3045.Agile.Client.Entities
         private bool _IsBlocked;
         private Account _Owner;
         private int _StoryTaskId;
+        private TaskBurndownPoint _TaskBurndownPoint;
         private string _Title;
         private string _UserNotes;
+
+
 
         public int StoryTaskId
         {
@@ -35,6 +38,19 @@ namespace CSC3045.Agile.Client.Entities
                 {
                     _Owner = value;
                     OnPropertyChanged(() => Owner);
+                }
+            }
+        }
+
+        public TaskBurndownPoint TaskBurnDownPoint
+        {
+            get { return _TaskBurndownPoint; }
+            set
+            {
+                if (_TaskBurndownPoint != value)
+                {
+                    _TaskBurndownPoint = value;
+                    OnPropertyChanged(() =>  TaskBurnDownPoint);
                 }
             }
         }
