@@ -136,6 +136,7 @@ namespace ClientDesktop.ViewModels
         public DelegateCommand<object> ManageProjectBacklogCommand { get; set; } 
         public DelegateCommand<object> RefreshProjectsCommand { get; set; }
         public DelegateCommand<object> ViewBurndownCommand { get; set; }
+        public DelegateCommand<object> CreateNewSprintCommand { get; set; }
 
         private void CreateProject(object parameter)
         {
@@ -163,6 +164,11 @@ namespace ClientDesktop.ViewModels
             _RegionManager.RequestNavigate(RegionNames.Content, typeof(SprintBurndownChartView).FullName);
         }
 
+        private void NewSprint(object parameter)
+        {
+            _RegionManager.RequestNavigate(RegionNames.Content, typeof(NewSprintView).FullName);
+        }
+
         [ImportingConstructor]
         public DashboardViewModel(IServiceFactory serviceFactory, IRegionManager regionManager)
         {
@@ -175,6 +181,7 @@ namespace ClientDesktop.ViewModels
             RefreshProjectsCommand = new DelegateCommand<object>(RefreshProjects);
             ManageProjectBacklogCommand = new DelegateCommand<object>(ManageProjectBacklog);
             ViewBurndownCommand = new DelegateCommand<object>(ViewBurndown);
+            CreateNewSprintCommand = new DelegateCommand<object>(NewSprint);
         }
 
         public event EventHandler<ErrorMessageEventArgs> ErrorOccured;

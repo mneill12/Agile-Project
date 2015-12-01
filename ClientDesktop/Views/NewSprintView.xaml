@@ -50,24 +50,20 @@
                             controls:TextBoxHelper.Watermark="Select a finish date...." />
 
 
+                <TextBox Margin="30 10" Grid.Row ="3" controls:TextBoxHelper.ClearTextButton="True" controls:TextBoxHelper.Watermark="Enter sprint number..." Name="SprintNumberTextBox" FontSize="14"
+                         Text="{Binding SprintNumber}" />
 
-                <ComboBox Foreground="Black" Name="SprintNumber" ItemsSource="{Binding SprintNumbers}" Margin="30,30.143,30,39.857" Grid.Row="3" Grid.RowSpan="2">
-                    <ComboBoxItem>1</ComboBoxItem>
-                    <ComboBoxItem>2</ComboBoxItem>
-                    <ComboBoxItem>3</ComboBoxItem>
-                    <ComboBoxItem>4</ComboBoxItem>
-                    <ComboBoxItem>5</ComboBoxItem>
-                </ComboBox>
+
 
                 <Button Grid.Row="4" Name="CreateSprintButton" FontSize="10" Margin="30,18.143,30,47.571" Height="30" FontFamily="pack://application:,,,/Resources/#AquaWax" BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White"
                         Command="{Binding CreateSprint}" CommandParameter="{Binding ElementName=SprintNameTextBox}" Grid.RowSpan="2">
                     Create Sprint
                 </Button>
 
-                <TextBlock  FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White" Grid.Row="2" Text="Select a product owner: " Margin="30,10,-10,15.429" />
+                
             </Grid>
             <ListView SelectionMode="Multiple" BorderThickness="0" Background="Transparent" Foreground="White" x:Name="AllUsersListView" HorizontalContentAlignment="Stretch"
-            	ItemsSource="{Binding AllUsers}" Margin="0,20,10,-78.8" HorizontalAlignment="Right" Width="607" Grid.Column="1">
+            	ItemsSource="{Binding ListAllTeamMembers}" Margin="0,20,10,-78.8" HorizontalAlignment="Right" Width="607" Grid.Column="1">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Width="30">
@@ -84,6 +80,7 @@
             </ListView>
         </Grid>
         <TextBlock Grid.Row="0" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White" TextAlignment="Left" FontSize="20" FontWeight="Bold" Margin="862,18,49,165.857" Grid.RowSpan="2" ><Run Language="en-gb" Text="Select Sprint Team"/></TextBlock>
+
     </Grid>
 
 
