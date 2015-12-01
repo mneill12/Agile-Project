@@ -21,6 +21,15 @@ namespace CSC3045.Agile.Business.Entities
         [DataMember]
         public ICollection<UserStory> UserStories { get; set; }
 
+        [DataMember]
+        public ICollection<UserStory> CompletedUserStories { get; set; }
+
+        [DataMember]
+        public Account ScrumMaster { get; set; }
+
+        [DataMember]
+        public ICollection<ChatMessage> Messages { get; set; }
+
         #region IIdentifiableEntity members
 
         public int EntityId
