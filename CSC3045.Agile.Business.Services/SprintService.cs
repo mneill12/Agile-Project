@@ -49,6 +49,26 @@ namespace CSC3045.Agile.Business.Services
             });
         }
 
+        public ICollection<Sprint> GetSprintStartDate(int sprintId)
+        {
+            return ExecuteFaultHandledOperation(() =>
+            {
+                var sprintRepository = _DataRepositoryFactory.GetDataRepository<ISprintRepository>();
+
+                return sprintRepository.GetSprintStartDate(sprintId);
+            });
+        }
+
+        public ICollection<Sprint> GetSprintEndDate(int sprintId)
+        {
+            return ExecuteFaultHandledOperation(() =>
+            {
+                var sprintRepository = _DataRepositoryFactory.GetDataRepository<ISprintRepository>();
+
+                return sprintRepository.GetSprintEndDate(sprintId);
+            });
+        }
+
 
         public ICollection<Sprint> GetSprintForAccount(int accountId)
         {
@@ -61,7 +81,7 @@ namespace CSC3045.Agile.Business.Services
         }
 
 
-        public Sprint CreateSprint(Sprint sprint)
+        public Sprint AddSprint(Sprint sprint)
         {
             return ExecuteFaultHandledOperation(() =>
             {
@@ -93,7 +113,7 @@ namespace CSC3045.Agile.Business.Services
 
 
 
-        public Sprint GetSprintForProject(int sprintId)
+        public Sprint GetSprintInfo(int sprintId)
         {
             return ExecuteFaultHandledOperation(() =>
             {
