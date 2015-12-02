@@ -101,10 +101,11 @@ namespace Core.Common.Core
         #region IDirtyCapable members
 
         [NotNavigable]
+        [XmlIgnore]
         public virtual bool IsDirty
         {
             get { return _IsDirty; }
-            set
+            protected set
             {
                 _IsDirty = value;
                 OnPropertyChanged("IsDirty", false);

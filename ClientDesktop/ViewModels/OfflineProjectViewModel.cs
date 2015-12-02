@@ -47,11 +47,6 @@ namespace ClientDesktop.ViewModels
         IServiceFactory _ServiceFactory;
         IRegionManager _RegionManager;
 
-        public DelegateCommand<object> CreateProjectCommand { get; set; }
-        public DelegateCommand<object> ManageProjectBacklogCommand { get; set; } 
-        public DelegateCommand<object> RefreshProjectsCommand { get; set; }
-        public DelegateCommand<object> ViewBurndownCommand { get; set; }
-
         [ImportingConstructor]
         public OfflineProjectViewModel(IServiceFactory serviceFactory, IRegionManager regionManager)
         {
@@ -71,6 +66,7 @@ namespace ClientDesktop.ViewModels
         private void BindOfflineProject(XMLProject loadedProject)
         {
             // Logic to bind info goes here...... later.
+            Console.Out.WriteLine(loadedProject.ProjectName + "loaded successfully!");
         }
 
         public XMLProject LoadProject(string serialisedProjectFilePath)
