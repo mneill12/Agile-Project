@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
+using System.Xml.Serialization;
 using Core.Common.Contracts;
 using Core.Common.Core;
 
@@ -15,6 +16,7 @@ namespace CSC3045.Agile.Business.Entities
         [DataMember]
         public string UserRoleName { get; set; }
 
+        [XmlIgnore]
         public ICollection<Account> Accounts { get; set; }
 
         #region IIdentifiableEntity members

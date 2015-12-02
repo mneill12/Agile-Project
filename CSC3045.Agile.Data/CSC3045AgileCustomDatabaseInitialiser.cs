@@ -131,7 +131,7 @@ namespace CSC3045.Agile.Data
                 defaultRoles[1]
             };
 
-            var developerUserRoleSetWithScrumMaster = new HashSet<UserRole>
+            var developerUserRoleSetWithScrumMaster = new List<UserRole>
             {
                 defaultRoles[0],
                 defaultRoles[2]

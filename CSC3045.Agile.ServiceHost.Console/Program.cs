@@ -55,6 +55,7 @@ namespace CSC3045.Agile.ServiceHost.Console
 
             LoadSampleData();
             RunDatabaseTests();
+            TestXMLSerialisation();
 
             System.Console.WriteLine("Press [Enter] to exit.");
             System.Console.ReadLine();
@@ -85,6 +86,19 @@ namespace CSC3045.Agile.ServiceHost.Console
         {
             host.Close();
             System.Console.WriteLine("Service {0} stopped.", serviceDescription);
+        }
+
+        private static void TestXMLSerialisation()
+        {
+            ProjectService projectService = new ProjectService();
+            XMLSerialisationService xmlSerialisationService = new XMLSerialisationService();
+
+            var project = projectService.GetProjectInfo(1);
+
+            String filePath = xmlSerialisationService.SerialiseProject(project);
+
+            System.Console.WriteLine("Path to XML File: {0}", filePath);
+
         }
 
         private static void LoadSampleData()

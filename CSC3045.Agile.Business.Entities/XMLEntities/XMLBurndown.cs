@@ -6,7 +6,7 @@ using Core.Common.Core;
 namespace CSC3045.Agile.Business.Entities
 {
     [DataContract]
-    public class Burndown : EntityBase, IIdentifiableEntity
+    public class XMLBurndown : EntityBase, IIdentifiableEntity
     {
         [DataMember]
         public int BurndownId { get; set; }

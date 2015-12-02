@@ -2,15 +2,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
-using System.Xml;
-using System.Xml.Serialization;
 using Core.Common.Contracts;
 using Core.Common.Core;
 
-namespace CSC3045.Agile.Business.Entities
+namespace CSC3045.Agile.Business.Entities.XMLEntities
 {
     [DataContract]
-    public class Account : EntityBase, IIdentifiableEntity
+    public class XMLAccount : EntityBase, IIdentifiableEntity
     {
         [DataMember]
         public int AccountId { get; set; }
@@ -30,18 +28,12 @@ namespace CSC3045.Agile.Business.Entities
         public string LastName { get; set; }
 
         [DataMember]
-        public ICollection<UserRole> UserRoles { get; set; }
+        public List<UserRole> UserRoles { get; set; }
 
         [DataMember]
-        public ICollection<Skill> Skills { get; set; }
+        public List<Skill> Skills { get; set; }
 
-        // Multi-Many-To-Many Entity Join Table Association
-
-        public ICollection<Project> UserFor { get; set; }
-
-        public ICollection<Project> DeveloperFor { get; set; }
-
-        public ICollection<Project> ScrumMasterFor { get; set; }
+    
 
         #region IIdentifiableEntity members
 
