@@ -32,6 +32,9 @@ namespace CSC3045.Agile.ServiceHost.Console
             var hostBurndownService = new System.ServiceModel.ServiceHost(typeof (BurndownService));
             StartService(hostBurndownService, "BurndownService");
 
+            var hostUserStoryService = new System.ServiceModel.ServiceHost(typeof(UserStoryService));
+            StartService(hostUserStoryService, "UserStoryService");
+
             System.Console.WriteLine("Initialising CodeFirst Database");
 
             try
@@ -63,6 +66,7 @@ namespace CSC3045.Agile.ServiceHost.Console
             StopService(hostAuthenticationService, "AuthenticationService");
             StopService(hostProjectService, "ProjectService");
             StopService(hostBurndownService, "BurndownService");
+            StopService(hostUserStoryService, "UserStoryService");
         }
 
         private static void StartService(System.ServiceModel.ServiceHost host, string serviceDescription)
@@ -92,11 +96,14 @@ namespace CSC3045.Agile.ServiceHost.Console
             // Load project sample data
             ProjectService projectService = new ProjectService();
             AccountService accountService = new AccountService();
+            UserStoryService userStoryService = new UserStoryService();
 
             var project1 = projectService.GetProjectInfo(1);
             var project2 = projectService.GetProjectInfo(2);
 
             var accounts = accountService.GetAllAccounts();
+
+            var userStories = userStoryService.GetAllUserStories();
 
             //Check if data has already been loaded before
             if (project1.ProjectManager == null || project2.ProjectManager == null || project1.AllUsers.Count == 0 || project2.AllUsers.Count == 0)
@@ -111,6 +118,12 @@ namespace CSC3045.Agile.ServiceHost.Console
                     accounts.Single(a => a.AccountId == 7)
                 };
                 project1.AllUsers = accounts;
+                project1.BacklogStories = new List<UserStory>()
+                {
+                    userStories.Single(s => s.UserStoryId == 2),
+                    userStories.Single(s => s.UserStoryId == 3)
+                };
+                
 
                 project2.ProjectManager = accounts.Single(a => a.AccountId == 7);
                 project2.ProductOwner = accounts.Single(a => a.AccountId == 6);
@@ -122,6 +135,11 @@ namespace CSC3045.Agile.ServiceHost.Console
                     accounts.Single(a => a.AccountId == 1)
                 };
                 project2.AllUsers = accounts;
+                project2.BacklogStories = new List<UserStory>()
+                {
+                    userStories.Single(s => s.UserStoryId == 4),
+                    userStories.Single(s => s.UserStoryId == 5)
+                };
 
                 projectService.UpdateProjectInfo(project1);
                 projectService.UpdateProjectInfo(project2);
