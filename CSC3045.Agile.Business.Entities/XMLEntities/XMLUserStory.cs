@@ -3,6 +3,7 @@ using System.Runtime.Serialization;
 using System.Xml.Serialization;
 using Core.Common.Contracts;
 using Core.Common.Core;
+using CSC3045.Agile.Business.Entities.XMLEntities;
 
 namespace CSC3045.Agile.Business.Entities
 {
@@ -28,7 +29,7 @@ namespace CSC3045.Agile.Business.Entities
         public CurrentStatus Status { get; set; }
 
         [DataMember]
-        public List<StoryTask> AssociatedTasks { get; set; }
+        public List<XMLStoryTask> AssociatedTasks { get; set; }
 
         [DataMember]
         public List<XMLAcceptanceCriteria> AcceptanceCriteria { get; set; }

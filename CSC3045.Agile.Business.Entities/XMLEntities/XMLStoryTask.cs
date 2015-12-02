@@ -1,18 +1,17 @@
 ﻿using System.Runtime.Serialization;
-using System.Xml.Serialization;
 using Core.Common.Contracts;
 using Core.Common.Core;
 
-namespace CSC3045.Agile.Business.Entities
+namespace CSC3045.Agile.Business.Entities.XMLEntities
 {
     [DataContract]
-    public class StoryTask : EntityBase, IIdentifiableEntity
+    public class XMLStoryTask : EntityBase, IIdentifiableEntity
     {
         [DataMember]
         public int StoryTaskId { get; set; }
 
         [DataMember]
-        public Account Owner { get; set; }
+        public XMLAccount Owner { get; set; }
 
         [DataMember]
         public string Title { get; set; }
@@ -22,10 +21,6 @@ namespace CSC3045.Agile.Business.Entities
 
         [DataMember]
         public int Hours { get; set; }
-
-        [DataMember]
-        [XmlIgnore]
-        public TaskBurndownPoint TaskBurndownPoint { get; set; }
 
         [DataMember]
         public CurrentStatus CurrentStatus { get; set; }

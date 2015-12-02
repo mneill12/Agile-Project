@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using System.Xml.Serialization;
 using Core.Common.Contracts;
 using Core.Common.Core;
 
@@ -14,8 +15,10 @@ namespace CSC3045.Agile.Business.Entities
         [DataMember]
         public string StoryStatusName { get; set; }
 
-        // Many to many declarationa
+        // Many to many declarations
+        [XmlIgnore]
         public virtual ICollection<UserStory> AssociatedUserStories { get; set; }
+        [XmlIgnore]
         public virtual ICollection<StoryTask> AssociatedStoryTasks { get; set; }
 
         #region IIdentifiableEntity members

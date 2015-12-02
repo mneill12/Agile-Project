@@ -70,6 +70,14 @@
     <Compile Include="Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sprint.cs" />
+    <Compile Include="XMLEntities\XMLStoryTask.cs" />
+    <Compile Include="XMLEntities\XMLAcceptanceCriteria.cs" />
+    <Compile Include="XMLEntities\XMLBurndown.cs" />
+    <Compile Include="XMLEntities\XMLUserStory.cs" />
+    <Compile Include="XMLEntities\XMLBacklog.cs" />
+    <Compile Include="XMLEntities\XMLSprint.cs" />
+    <Compile Include="XMLEntities\XMLAccount.cs" />
+    <Compile Include="XMLEntities\XMLProject.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core.Common.Contracts\Core.Common.Contracts.csproj">
