@@ -74,8 +74,10 @@ namespace CSC3045.Agile.Business.Services
                     serializer.Serialize(stream, xmlProject);
                     stream.Position = 0;
                     xmlDocument.Load(stream);
-                    xmlDocument.Save(xmlProject.ProjectName + "_XML");
+                    
+                    string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
+                    xmlDocument.Save(path + "/" + xmlProject.ProjectName + "_XML");
                     System.Diagnostics.Process.Start(xmlProject.ProjectName + "_XML");
                     stream.Close();
                 }
@@ -94,6 +96,7 @@ namespace CSC3045.Agile.Business.Services
             XMLProject xmlProject = new XMLProject();
 
             // Remap simple types
+            xmlProject.ProjectId = project.ProjectId;
             xmlProject.ProjectName = project.ProjectName;
             xmlProject.ProjectStartDate = project.ProjectStartDate;
 
@@ -144,10 +147,10 @@ namespace CSC3045.Agile.Business.Services
 
             XMLAccount xmlAccount = new XMLAccount
             {
+                AccountId = account.AccountId,
                 FirstName = account.FirstName,
                 LastName = account.LastName,
-                LoginEmail = account.LoginEmail,
-                Password = account.Password
+                LoginEmail = account.LoginEmail
             };
 
             // Remap collections of complex types
@@ -171,9 +174,10 @@ namespace CSC3045.Agile.Business.Services
 
         private XMLBacklog RemapBacklogEntity(Backlog backlog)
         {
-            XMLBacklog xmlBacklog = new XMLBacklog();
+            
+            if (null == backlog) return new XMLBacklog();
 
-            if (null == backlog) return xmlBacklog;
+            XMLBacklog xmlBacklog = new XMLBacklog {BacklogId = backlog.BacklogId};
             if (null == backlog.UserStories) return xmlBacklog;
             
             foreach (UserStory story in backlog.UserStories)
@@ -191,6 +195,7 @@ namespace CSC3045.Agile.Business.Services
 
             XMLAcceptanceCriteria xmlAcceptanceCriteria = new XMLAcceptanceCriteria
             {
+                AcceptanceCriteriaId = acceptanceCriteria.AcceptanceCriteriaId,
                 Scenario = acceptanceCriteria.Scenario,
                 IsSatisfied = acceptanceCriteria.IsSatisfied
             };
@@ -208,7 +213,7 @@ namespace CSC3045.Agile.Business.Services
         {
             if (null == burndown) return new XMLBurndown();
 
-            XMLBurndown xmlBurndown = new XMLBurndown {BurndownName = burndown.BurndownName};
+            XMLBurndown xmlBurndown = new XMLBurndown {BurndownName = burndown.BurndownName, BurndownId = burndown.BurndownId};
 
             if (null == burndown.BurndownPoints) return xmlBurndown;
             foreach (BurndownPoint burndownPoint in burndown.BurndownPoints)
@@ -225,6 +230,7 @@ namespace CSC3045.Agile.Business.Services
 
             XMLSprint xmlSprint = new XMLSprint
             {
+                SprintId = sprint.SprintId,
                 SprintName = sprint.SprintName,
                 SprintNumber = sprint.SprintNumber,
                 EndDate = sprint.EndDate,
@@ -257,6 +263,7 @@ namespace CSC3045.Agile.Business.Services
 
             XMLUserStory xmlUserStory = new XMLUserStory
             {
+                UserStoryId = userStory.UserStoryId,
                 Description = userStory.Description,
                 Status = userStory.Status,
                 StoryPoints = userStory.StoryPoints,
@@ -279,6 +286,7 @@ namespace CSC3045.Agile.Business.Services
 
             XMLStoryTask xmlStoryTask = new XMLStoryTask
             {
+                StoryTaskId = task.StoryTaskId,
                 Description = task.Description,
                 CurrentStatus = task.CurrentStatus,
                 Hours = task.Hours,
@@ -299,7 +307,6 @@ namespace CSC3045.Agile.Business.Services
 
             try
             {
-                string attributeXml = string.Empty;
 
                 XmlDocument xmlDocument = new XmlDocument();
                 xmlDocument.Load(serialisedProjectFilePath);
@@ -321,7 +328,7 @@ namespace CSC3045.Agile.Business.Services
             }
             catch (Exception ex)
             {
-               Console.Out.WriteLine("Error loading XML document.");
+               Console.Out.WriteLine("Error loading XML document: " + ex.Message);
 
             }
 

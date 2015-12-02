@@ -19,9 +19,6 @@ namespace CSC3045.Agile.Business.Entities.XMLEntities
         public string LoginEmail { get; set; }
 
         [DataMember]
-        public string Password { get; set; }
-
-        [DataMember]
         public string FirstName { get; set; }
 
         [DataMember]
