@@ -5,7 +5,7 @@ using CSC3045.Agile.Business.Entities;
 
 namespace CSC3045.Agile.Data
 {
-    internal class Csc3045AgileCustomDatabaseInitialiser : DropCreateDatabaseIfModelChanges<Csc3045AgileContext>
+    internal class Csc3045AgileCustomDatabaseInitialiser : DropCreateDatabaseAlways<Csc3045AgileContext>
     {
         protected override void Seed(Csc3045AgileContext context)
         {
@@ -213,7 +213,7 @@ namespace CSC3045.Agile.Data
                 ScrumMasters = new List<Account>() { },
                 Developers = new List<Account>() {  },
                 AllUsers = new List<Account>() { },
-                Backlog = new Backlog()
+                BacklogStories = new List<UserStory>() { }
             });
 
             defaultProjects.Add(new Project
@@ -223,7 +223,7 @@ namespace CSC3045.Agile.Data
                 ScrumMasters = new List<Account>() { },
                 Developers = new List<Account>() { },
                 AllUsers = new List<Account>() { },
-                Backlog = new Backlog()
+                BacklogStories = new List<UserStory>() { }
             });
 
             foreach (var project in defaultProjects)
@@ -235,6 +235,28 @@ namespace CSC3045.Agile.Data
 
             IList<UserStory> defaultUserStories = new List<UserStory>
             {
+                new UserStory
+                {
+                    StoryNumber = "P1B1Story",
+                    Description = "Project1Backlog1Story"
+                },
+                new UserStory
+                {
+                    StoryNumber = "P1B2Story",
+                    Description = "Project1Backlog1Story"
+                },
+                   
+                new UserStory
+                {
+                    StoryNumber = "P2B1Story",
+                    Description = "Project2Backlog1Story"
+                },
+                new UserStory
+                {
+                    StoryNumber = "P2B2Story",
+                    Description = "Project2Backlog2Story"
+                },
+
                 new UserStory
                 {
                     Status = new CurrentStatus

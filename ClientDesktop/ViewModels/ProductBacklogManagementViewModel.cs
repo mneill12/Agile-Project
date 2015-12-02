@@ -31,6 +31,8 @@ namespace ClientDesktop.ViewModels
         private string _StoryNameText;
         private string _StoryDescText;
 
+        private int currentProjectId;
+
         [ImportingConstructor]
         public ProductBacklogManagementViewModel(IServiceFactory serviceFactory, IRegionManager regionManager)
         {
@@ -38,13 +40,12 @@ namespace ClientDesktop.ViewModels
             _RegionManager = regionManager;
 
             _BacklogStories = new List<UserStory>();
-            _BacklogStories.Add(new UserStory() { StoryName = "CSC-001", Description = "desc for user story 1" });
-            _BacklogStories.Add(new UserStory() { StoryName = "CSC-002", Description = "desc for user story 2" });
-            _BacklogStories.Add(new UserStory() { StoryName = "CSC-003", Description = "desc for user story 3" });
 
             AddNewStoryCommand = new DelegateCommand<object>(OnAddNewStory);
             UpdateStoryCommand = new DelegateCommand<object>(OnUpdateStory);
             RemoveStoryCommand = new DelegateCommand<object>(OnRemoveStory);
+
+            
         }
 
         public DelegateCommand<object> AddNewStoryCommand { get; private set; }
@@ -104,30 +105,19 @@ namespace ClientDesktop.ViewModels
 
         protected void GetUserStories()
         {
-            /*
-             * Database logic still needs to be implemented 
 
-            /*ICollection<int> userStoryIds;
-
-            WithClient(_ServiceFactory.CreateClient<IProjectService>(), projectClient =>
+            /*WithClient(_ServiceFactory.CreateClient<IProjectService>(), projectClient =>
             {
-                Project project =  projectClient.GetProjectInfo(ServiceLocator.Current.GetInstance<DashboardViewModel>().CurrentProjectId);
-                
-                userStoryIds = project.Backlog.AssociatedUserStoryIdSet;
-            });
+                Project project = projectClient.GetProjectInfo(1);
+                BacklogStories = project.BacklogStories.ToList();
+            });*/
+            
 
             WithClient(_ServiceFactory.CreateClient<IUserStoryService>(), userStoryClient =>
             {
-                int currentProjectId = ServiceLocator.Current.GetInstance<DashboardViewModel>().CurrentProjectId;
-                var userStories = userStoryClient.
-
-                if (null != userStories && userStories.Any())
-                {
-                    BacklogStories.AddRange(userStories);
-                }
-            });*/
-
-            
+                ICollection<UserStory> stories = userStoryClient.GetAllStoriesForProject(1);
+                BacklogStories = stories.ToList();
+            });
         }
 
         protected void OnRemoveStory(object parameter)
@@ -154,37 +144,18 @@ namespace ClientDesktop.ViewModels
 
         protected void OnAddNewStory(object parameter)
         {
-
-            List<UserStory> newBacklog = _BacklogStories;
-            newBacklog.Add(new UserStory{Description = "Add Story Description", StoryName = "Add Story Name"});
-            BacklogStories = newBacklog;
-
-            /*
-             * Database logic still needs to be implemented
-
-            /*var newUserStory = new UserStory
-            {
-                StoryName = "New Story Name",
-                Description = "New Story Description"
-            };
-
-            UserStory createdUserStory = null;
-            Project currentProject = null;
-
             WithClient(_ServiceFactory.CreateClient<IProjectService>(), projectClient =>
             {
-                currentProject =
-                    projectClient.GetProjectInfo(
-                        ServiceLocator.Current.GetInstance<DashboardViewModel>().CurrentProjectId);
+                var newUserStory = new UserStory
+                {
+                    StoryName = "New Story Name",
+                    Description = "New Story Description"
+                };
+
+                projectClient.AddUserStoryToProject(1, newUserStory);
             });
 
-
-            WithClient(_ServiceFactory.CreateClient<IUserStoryService>(), userStoryClient =>
-            {
-                createdUserStory = userStoryClient.AddNewUserStory(newUserStory);
-            });
-
-            currentProject.Backlog.AssociatedUserStoryIdSet.Add(createdUserStory.UserStoryId);*/
+            GetUserStories();
         }
     }
 }

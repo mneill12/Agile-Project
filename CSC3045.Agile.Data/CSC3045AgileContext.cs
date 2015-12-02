@@ -21,8 +21,6 @@ namespace CSC3045.Agile.Data
 
         public DbSet<Account> AccountSet { get; set; }
 
-        public DbSet<Backlog> BacklogSet { get; set; }
-
         public DbSet<Project> ProjectSet { get; set; }
 
         public DbSet<Sprint> SprintSet { get; set; }
@@ -61,9 +59,6 @@ namespace CSC3045.Agile.Data
 
             modelBuilder.Entity<Account>()
                 .HasKey(e => e.AccountId).Ignore(e => e.EntityId);
-
-            modelBuilder.Entity<Backlog>()
-                .HasKey(e => e.BacklogId).Ignore(e => e.EntityId);
 
             modelBuilder.Entity<Project>()
                 .HasKey(e => e.ProjectId).Ignore(e => e.EntityId);
