@@ -76,7 +76,7 @@
                     <TextBlock Grid.Row="3" Margin="11,36.571,9.001,-5.571" Text="Choose a Project XML file to load into the system" FontSize="10" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White" Grid.RowSpan="2"/>
                     <TextBlock Grid.Row="3" Margin="11,50.571,9.001,43.429" Text="to continue working while offline." FontSize="10" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White"/>
 
-                    <Button Grid.Row="3"  Width="100" Margin="8,74.571,248,9.429" Padding="10" FontFamily="pack://application:,,,/Resources/#AquaWax" BorderBrush="White" BorderThickness="1" Background="Black" Foreground="White" FontSize="10">Upload</Button>
+                    <Button Grid.Row="3"  Width="100" Margin="8,74.571,248,9.429" Padding="10" FontFamily="pack://application:,,,/Resources/#AquaWax" BorderBrush="White" BorderThickness="1" Background="Black" Foreground="White" FontSize="10" Command="{Binding Path = UploadXMLDocument}" CommandParameter="{Binding ElementName=XmlFileNameTxt}">Upload</Button>
                     <TextBlock Margin="13,2,292,0" Text="Log in..." FontSize="15" VerticalAlignment="Top" HorizontalAlignment="Center" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White"/>
                 </Grid>
             </Grid>
