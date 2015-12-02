@@ -5,7 +5,7 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
 		xmlns:regions="http://prismlibrary.com/"
 		xmlns:sys="clr-namespace:System;assembly=mscorlib"
-		Title="JELLO - Agile Project Management" Height="720" Width="1280" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
+		Title="JELLO - Agile Project Management - Powered By Red Bull" Height="720" Width="1280" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
         BorderBrush="Black"
         GlowBrush="{DynamicResource AccentColorBrush}">
     <Window.Background>

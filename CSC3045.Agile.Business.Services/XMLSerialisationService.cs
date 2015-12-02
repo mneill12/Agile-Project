@@ -75,11 +75,11 @@ namespace CSC3045.Agile.Business.Services
                     serializer.Serialize(stream, xmlProject);
                     stream.Position = 0;
                     xmlDocument.Load(stream);
-                    xmlDocument.Save(path + "/" + xmlProject.ProjectName + "_XML");
+                    xmlDocument.Save(path + "/" + xmlProject.ProjectName + "_XML.xml");
                     stream.Close();
                 }
 
-                return path + "/" + xmlProject.ProjectName + "_XML";
+                return path + "/" + xmlProject.ProjectName + "_XML.xml";
             }
             catch (Exception ex)
             {

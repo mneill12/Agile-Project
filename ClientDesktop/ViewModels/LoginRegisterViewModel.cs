@@ -38,6 +38,22 @@ namespace ClientDesktop.ViewModels
         private bool _RegisterIsProductOwner;
         private ICollection<UserRole> _UserRoles;
 
+        private String _ChosenFilePath;
+
+        public string ChosenFilePath
+        {
+            get
+            {
+                return _ChosenFilePath;
+            }
+            set
+            {
+                if (_ChosenFilePath == value) return;
+                _ChosenFilePath = value;
+                OnPropertyChanged("ChosenFilePath");
+            }
+        }
+
         public string AuthenticatedUser{
             get
             {
@@ -325,14 +341,14 @@ namespace ClientDesktop.ViewModels
         }
 
 
-        protected void XMLButtonClick(TextBox sender)
+        protected void XMLButtonClick(object sender)
         {
             // Create OpenFileDialog 
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
 
             // Set filter for file extension and default file extension 
-            dlg.DefaultExt = ".png";
-            dlg.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif";
+            dlg.DefaultExt = ".xml";
+            dlg.Filter = "XML Files (*.xml)|*.xml";
 
 
             // Display OpenFileDialog by calling ShowDialog method 
@@ -344,6 +360,7 @@ namespace ClientDesktop.ViewModels
             {
                 // Open document 
                 string filename = dlg.FileName;
+                ChosenFilePath = filename;
             }
         }
 
