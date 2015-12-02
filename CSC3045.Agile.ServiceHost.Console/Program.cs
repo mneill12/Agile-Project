@@ -118,16 +118,7 @@ namespace CSC3045.Agile.ServiceHost.Console
             System.Console.WriteLine("Path to XML File for project 2: {0}", filePath2);
             System.Console.WriteLine(
                             "=============================================================================================");
-            System.Console.WriteLine("Testing deserialisation for Project 1");
-
-            XMLProject deserialisedXmlProject = xmlSerialisationService.LoadProject(filePath1);
-
-            System.Console.WriteLine("Project Id: \t\t\t\t\t\t\t" + deserialisedXmlProject.ProjectId);
-            System.Console.WriteLine("Project Name: \t\t\t\t\t\t" + deserialisedXmlProject.ProjectName);
-            System.Console.WriteLine("Project Manager: \t\t\t\t\t" + deserialisedXmlProject.ProjectManager.FirstName + " " + deserialisedXmlProject.ProjectManager.LastName);
-            System.Console.WriteLine(
-                            "=============================================================================================");
-
+           
             System.Console.WriteLine("Serialisation Tests complete. View XML files? \t\t\t[y = Yes, n = No]");
                 var answer = System.Console.ReadLine();
             if (null != answer && answer.Contains("y"))

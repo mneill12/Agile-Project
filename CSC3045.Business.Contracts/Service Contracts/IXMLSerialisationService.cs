@@ -15,9 +15,5 @@ namespace CSC3045.Agile.Business.Contracts
         [FaultContract(typeof (NotFoundException))]
         String SerialiseProject(Project project);
 
-        [OperationContract]
-        [FaultContract(typeof(NotFoundException))]
-        XMLProject LoadProject(String serialisedProjectFilePath);
-
     }
 }

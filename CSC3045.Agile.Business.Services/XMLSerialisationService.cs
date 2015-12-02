@@ -296,40 +296,5 @@ namespace CSC3045.Agile.Business.Services
             return xmlStoryTask;
         }
 
-        public XMLProject LoadProject(string serialisedProjectFilePath)
-        {
-            if (string.IsNullOrEmpty(serialisedProjectFilePath)) { return default(XMLProject); }
-
-            XMLProject deserialisedProject = default(XMLProject);
-
-            try
-            {
-
-                XmlDocument xmlDocument = new XmlDocument();
-                xmlDocument.Load(serialisedProjectFilePath);
-                string xmlString = xmlDocument.OuterXml;
-
-                using (StringReader read = new StringReader(xmlString))
-                {
-                    Type outType = typeof(XMLProject);
-
-                    XmlSerializer serializer = new XmlSerializer(outType);
-                    using (XmlReader reader = new XmlTextReader(read))
-                    {
-                        deserialisedProject = (XMLProject)serializer.Deserialize(reader);
-                        reader.Close();
-                    }
-
-                    read.Close();
-                }
-            }
-            catch (Exception ex)
-            {
-               Console.Out.WriteLine("Error loading XML document: " + ex.Message);
-
-            }
-
-            return deserialisedProject;
-        }
     }
 }
