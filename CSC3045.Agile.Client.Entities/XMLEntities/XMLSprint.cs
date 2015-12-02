@@ -4,7 +4,7 @@ using Core.Common.Core;
 
 namespace CSC3045.Agile.Client.Entities.XMLEntities
 {
-    public class XMLSprint : ObjectBase
+    public class XMLSprint 
     {
         private XMLBacklog _Backlog;
         private List<XMLBurndown> _Burndowns;
@@ -25,7 +25,7 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_SprintId != value)
                 {
                     _SprintId = value;
-                    OnPropertyChanged(() => SprintId);
+                   
                 }
             }
         }
@@ -38,7 +38,7 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_ScrumMaster != value)
                 {
                     _ScrumMaster = value;
-                    OnPropertyChanged(() => ScrumMaster);
+                    
                 }
             }
         }
@@ -51,7 +51,7 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_Backlog != value)
                 {
                     _Backlog = value;
-                    OnPropertyChanged(() => Backlog);
+                   
                 }
             }
         }
@@ -64,7 +64,7 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_SprintNumber != value)
                 {
                     _SprintNumber = value;
-                    OnPropertyChanged(() => SprintNumber);
+                    
                 }
             }
         }
@@ -77,7 +77,7 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_SprintName != value)
                 {
                     _SprintName = value;
-                    OnPropertyChanged(() => SprintName);
+                    
                 }
             }
         }
@@ -90,7 +90,7 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_StartDate != value)
                 {
                     _StartDate = value;
-                    OnPropertyChanged(() => StartDate);
+                    
                 }
             }
         }
@@ -103,7 +103,7 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_EndDate != value)
                 {
                     _EndDate = value;
-                    OnPropertyChanged(() => EndDate);
+                    
                 }
             }
         }
@@ -116,7 +116,7 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_Burndowns != value)
                 {
                     _Burndowns = value;
-                    OnPropertyChanged(() => Burndowns);
+                   
                 }
             }
         }
@@ -129,7 +129,7 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_TeamMembers != value)
                 {
                     _TeamMembers = value;
-                    OnPropertyChanged(() => TeamMembers);
+                    
                 }
             }
         }

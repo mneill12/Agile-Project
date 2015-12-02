@@ -3,7 +3,7 @@ using Core.Common.Core;
 
 namespace CSC3045.Agile.Client.Entities.XMLEntities
 {
-    public class XMLBurndown : ObjectBase
+    public class XMLBurndown 
     {
         private int _BurndownId;
         private string _BurndownName;
@@ -17,7 +17,7 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_BurndownId != value)
                 {
                     _BurndownId = value;
-                    OnPropertyChanged(() => BurndownId);
+                   
                 }
             }
         }
@@ -30,7 +30,7 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_BurndownName != value)
                 {
                     _BurndownName = value;
-                    OnPropertyChanged(() => BurndownName);
+                  
                 }
             }
         }
@@ -43,7 +43,7 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_BurndownPoints != value)
                 {
                     _BurndownPoints = value;
-                    OnPropertyChanged(() => BurndownPoints);
+                    
                 }
             }
         }

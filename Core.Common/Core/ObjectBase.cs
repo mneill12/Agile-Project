@@ -7,6 +7,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
 using System.Text;
+using System.Xml.Serialization;
 using Core.Common.Contracts;
 using Core.Common.Extensions;
 using Core.Common.Utils;
@@ -17,9 +18,12 @@ namespace Core.Common.Core
 {
     public abstract class ObjectBase : NotificationObject, IDirtyCapable, IExtensibleDataObject, IDataErrorInfo
     {
+
         protected bool _IsDirty;
 
+       
         protected IEnumerable<ValidationFailure> _ValidationErrors;
+
         protected IValidator _Validator;
 
         public ObjectBase()
@@ -100,7 +104,7 @@ namespace Core.Common.Core
         public virtual bool IsDirty
         {
             get { return _IsDirty; }
-            protected set
+            set
             {
                 _IsDirty = value;
                 OnPropertyChanged("IsDirty", false);
@@ -190,6 +194,7 @@ namespace Core.Common.Core
         }
 
         [NotNavigable]
+        [XmlIgnore]
         public IEnumerable<ValidationFailure> ValidationErrors
         {
             get { return _ValidationErrors; }

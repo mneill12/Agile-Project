@@ -3,7 +3,7 @@ using Core.Common.Core;
 
 namespace CSC3045.Agile.Client.Entities.XMLEntities
 {
-    public class XMLBacklog : ObjectBase
+    public class XMLBacklog
     {
         private List<int> _AssociatedUserStoryIdSet;
         private int _BacklogId;
@@ -16,7 +16,7 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_BacklogId != value)
                 {
                     _BacklogId = value;
-                    OnPropertyChanged(() => BacklogId);
+                  
                 }
             }
         }
@@ -29,7 +29,7 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_AssociatedUserStoryIdSet != value)
                 {
                     _AssociatedUserStoryIdSet = value;
-                    OnPropertyChanged(() => AssociatedUserStoryIdSet);
+                   
                 }
             }
         }

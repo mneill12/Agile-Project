@@ -188,6 +188,7 @@
     </Compile>
     <Compile Include="ViewModels\CreateProjectViewModel.cs" />
     <Compile Include="ShellViewModel.cs" />
+    <Compile Include="ViewModels\OfflineProjectViewModel.cs" />
     <Compile Include="ViewModels\DashboardViewModel.cs" />
     <Compile Include="ViewModels\EditAccountViewModel.cs" />
     <Compile Include="ViewModels\LoginRegisterViewModel.cs" />
@@ -197,6 +198,9 @@
     <Compile Include="ViewModels\SprintBurndownChartViewModel.cs" />
     <Compile Include="ViewModels\StatusBarViewModel.cs" />
     <Compile Include="ViewModels\TopBarViewModel.cs" />
+    <Compile Include="Views\OfflineProjectView.xaml.cs">
+      <DependentUpon>OfflineProjectView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SprintBurndownChartView.xaml.cs">
       <DependentUpon>SprintBurndownChartView.xaml</DependentUpon>
     </Compile>
@@ -221,7 +225,7 @@
     </Compile>
     <Compile Include="Views\SprintView.xaml.cs">
       <DependentUpon>SprintView.xaml</DependentUpon>
-	</Compile>
+    </Compile>
     <Compile Include="Views\ProductBacklogManagementView.xaml.cs">
       <DependentUpon>ProductBacklogManagementView.xaml</DependentUpon>
     </Compile>
@@ -238,6 +242,10 @@
     <Page Include="Shell.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OfflineProjectView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\SprintBurndownChartView.xaml">
       <SubType>Designer</SubType>
@@ -264,7 +272,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SprintView.xaml">
-	  <SubType>Designer</SubType>
+      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ProductBacklogManagementView.xaml">

@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Xml.Serialization;
 using Core.Common.Core;
 
 namespace CSC3045.Agile.Client.Entities
 {
     public class UserRole : ObjectBase
     {
+        [XmlIgnore]
         private ICollection<Account> _Accounts;
         private int _UserRoleId;
         private string _UserRoleName;
@@ -34,7 +36,7 @@ namespace CSC3045.Agile.Client.Entities
                 }
             }
         }
-
+        [XmlIgnore]
         public ICollection<Account> Accounts
         {
             get { return _Accounts; }

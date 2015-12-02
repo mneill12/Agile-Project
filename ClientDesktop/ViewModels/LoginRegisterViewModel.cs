@@ -369,15 +369,13 @@ namespace ClientDesktop.ViewModels
         {
             if (string.IsNullOrEmpty(_ChosenFilePath) || string.IsNullOrEmpty(sender.Text))
             {
-                Status = "You haven't selected a file!";
-            }
-            else
-            {
-                Status = sender.Text;
+                MessageBox.Show("You haven't selected a file!", "XML Upload Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
 
-            MessageBox.Show(Status, "Selected File");
-            
+            GlobalCommands.LoadedXMLFilePath = sender.Text;
+            _RegionManager.RequestNavigate(RegionNames.Content, typeof(OfflineProjectView).FullName);
+
         }
 
         protected void OnRegisterAccount(PasswordBox passwordBox)

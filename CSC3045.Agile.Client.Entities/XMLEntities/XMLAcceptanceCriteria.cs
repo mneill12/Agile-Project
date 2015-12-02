@@ -3,7 +3,7 @@ using Core.Common.Core;
 
 namespace CSC3045.Agile.Client.Entities.XMLEntities
 {
-    public class XMLAcceptanceCriteria : ObjectBase
+    public class XMLAcceptanceCriteria
     {
         private int _acceptanceCriteriaId;
         private List<Criteria> _criteria;
@@ -18,7 +18,7 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_acceptanceCriteriaId != value)
                 {
                     _acceptanceCriteriaId = value;
-                    OnPropertyChanged(() => AcceptanceCriteriaId);
+                    
                 }
             }
         }
@@ -31,7 +31,7 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_scenario != value)
                 {
                     _scenario = value;
-                    OnPropertyChanged(() => Scenario);
+                    
                 }
             }
         }
@@ -44,7 +44,7 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_criteria != value)
                 {
                     _criteria = value;
-                    OnPropertyChanged(() => Criteria);
+                   
                 }
             }
         }
@@ -57,7 +57,7 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_isSatisfied != value)
                 {
                     _isSatisfied = value;
-                    OnPropertyChanged(() => IsSatisfied);
+                   
                 }
             }
         }

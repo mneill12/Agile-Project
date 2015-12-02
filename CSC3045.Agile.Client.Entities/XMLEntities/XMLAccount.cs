@@ -3,7 +3,7 @@ using Core.Common.Core;
 
 namespace CSC3045.Agile.Client.Entities.XMLEntities
 {
-    public class XMLAccount : ObjectBase
+    public class XMLAccount
     {
         private int _AccountId;
         
@@ -24,7 +24,7 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_AccountId != value)
                 {
                     _AccountId = value;
-                    OnPropertyChanged(() => AccountId);
+                  
                 }
             }
         }
@@ -37,7 +37,6 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_LoginEmail != value)
                 {
                     _LoginEmail = value;
-                    OnPropertyChanged(() => LoginEmail);
                 }
             }
         }
@@ -50,7 +49,7 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_Password != value)
                 {
                     _Password = value;
-                    OnPropertyChanged(() => Password);
+              
                 }
             }
         }
@@ -63,7 +62,7 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_FirstName != value)
                 {
                     _FirstName = value;
-                    OnPropertyChanged(() => FirstName);
+                    
                 }
             }
         }
@@ -76,7 +75,7 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_LastName != value)
                 {
                     _LastName = value;
-                    OnPropertyChanged(() => LastName);
+                   
                 }
             }
         }
@@ -89,7 +88,7 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_UserRoles != value)
                 {
                     _UserRoles = value;
-                    OnPropertyChanged(() => UserRoles);
+                    
                 }
             }
         }
@@ -102,7 +101,7 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_Skills != value)
                 {
                     _Skills = value;
-                    OnPropertyChanged(() => Skills);
+                   
                 }
             }
         }
@@ -115,7 +114,7 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_AssocicatedProjects != value)
                 {
                     _AssocicatedProjects = value;
-                    OnPropertyChanged(() => AssocicatedProjects);
+                   
                 }
             }
         }
@@ -128,7 +127,7 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_AssociatedSprints != value)
                 {
                     _AssociatedSprints = value;
-                    OnPropertyChanged(() => AssociatedSprints);
+                    
                 }
             }
         }

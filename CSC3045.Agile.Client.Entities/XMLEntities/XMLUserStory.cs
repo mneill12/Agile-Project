@@ -4,7 +4,7 @@ using CSC3045.Agile.Client.Entities.XMLEntities;
 
 namespace CSC3045.Agile.Client.Entities
 {
-    public class XMLUserStory : ObjectBase
+    public class XMLUserStory
     {
         private List<XMLAcceptanceCriteria> _AcceptanceCriteria;
         private List<XMLStoryTask> _AssociatedTasks;
@@ -23,7 +23,7 @@ namespace CSC3045.Agile.Client.Entities
                 if (_UserStoryId != value)
                 {
                     _UserStoryId = value;
-                    OnPropertyChanged(() => UserStoryId);
+                    
                 }
             }
         }
@@ -36,7 +36,7 @@ namespace CSC3045.Agile.Client.Entities
                 if (_StoryName != value)
                 {
                     _StoryName = value;
-                    OnPropertyChanged(() => StoryName);
+                    
                 }
             }
         }
@@ -49,7 +49,7 @@ namespace CSC3045.Agile.Client.Entities
                 if (_Description != value)
                 {
                     _Description = value;
-                    OnPropertyChanged(() => Description);
+                    
                 }
             }
         }
@@ -62,7 +62,7 @@ namespace CSC3045.Agile.Client.Entities
                 if (_StoryPoints != value)
                 {
                     _StoryPoints = value;
-                    OnPropertyChanged(() => StoryPoints);
+                   
                 }
             }
         }
@@ -75,7 +75,7 @@ namespace CSC3045.Agile.Client.Entities
                 if (_UserNotes != value)
                 {
                     _UserNotes = value;
-                    OnPropertyChanged(() => UserNotes);
+                    
                 }
             }
         }
@@ -88,7 +88,7 @@ namespace CSC3045.Agile.Client.Entities
                 if (_CurrentStatus != value)
                 {
                     _CurrentStatus = value;
-                    OnPropertyChanged(() => CurrentStatus);
+                    
                 }
             }
         }
@@ -101,7 +101,7 @@ namespace CSC3045.Agile.Client.Entities
                 if (_AssociatedTasks != value)
                 {
                     _AssociatedTasks = value;
-                    OnPropertyChanged(() => AssociatedTasks);
+                   
                 }
             }
         }
@@ -114,7 +114,7 @@ namespace CSC3045.Agile.Client.Entities
                 if (_AcceptanceCriteria != value)
                 {
                     _AcceptanceCriteria = value;
-                    OnPropertyChanged(() => AcceptanceCriteria);
+                   
                 }
             }
         }

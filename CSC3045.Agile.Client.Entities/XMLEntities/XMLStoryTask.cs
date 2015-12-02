@@ -2,7 +2,7 @@
 
 namespace CSC3045.Agile.Client.Entities.XMLEntities
 {
-    public class XMLStoryTask : ObjectBase
+    public class XMLStoryTask
     {
         private CurrentStatus _CurrentStatus;
         private string _Description;
@@ -23,7 +23,7 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_StoryTaskId != value)
                 {
                     _StoryTaskId = value;
-                    OnPropertyChanged(() => StoryTaskId);
+                   
                 }
             }
         }
@@ -36,7 +36,7 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_Owner != value)
                 {
                     _Owner = value;
-                    OnPropertyChanged(() => Owner);
+                    
                 }
             }
         }
@@ -49,7 +49,7 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_Title != value)
                 {
                     _Title = value;
-                    OnPropertyChanged(() => Title);
+                    
                 }
             }
         }
@@ -63,7 +63,7 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_Description != value)
                 {
                     _Description = value;
-                    OnPropertyChanged(() => Description);
+                    
                 }
             }
         }
@@ -76,7 +76,7 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_Hours != value)
                 {
                     _Hours = value;
-                    OnPropertyChanged(() => Hours);
+                   
                 }
             }
         }
@@ -89,7 +89,7 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_CurrentStatus != value)
                 {
                     _CurrentStatus = value;
-                    OnPropertyChanged(() => CurrentStatus);
+                    
                 }
             }
         }
@@ -102,7 +102,7 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_IsBlocked != value)
                 {
                     _IsBlocked = value;
-                    OnPropertyChanged(() => IsBlocked);
+                   
                 }
             }
         }
@@ -115,7 +115,7 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_UserNotes != value)
                 {
                     _UserNotes = value;
-                    OnPropertyChanged(() => UserNotes);
+                    
                 }
             }
         }

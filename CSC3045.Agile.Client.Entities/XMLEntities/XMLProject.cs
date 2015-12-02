@@ -4,7 +4,7 @@ using Core.Common.Core;
 
 namespace CSC3045.Agile.Client.Entities.XMLEntities
 {
-    public class XMLProject : ObjectBase
+    public class XMLProject
     {
         private int _ProjectId;
         private XMLAccount _ProjectManager;
@@ -29,7 +29,6 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_ProjectId != value)
                 {
                     _ProjectId = value;
-                    OnPropertyChanged(() => ProjectId);
                 }
             }
         }
@@ -42,7 +41,6 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_ProjectManager != value)
                 {
                     _ProjectManager = value;
-                    OnPropertyChanged(() => ProjectManager);
                 }
             }
         }
@@ -55,7 +53,6 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_ProductOwner != value)
                 {
                     _ProductOwner = value;
-                    OnPropertyChanged(() => ProductOwner);
                 }
             }
         }
@@ -68,7 +65,6 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_ScrumMasters != value)
                 {
                     _ScrumMasters = value;
-                    OnPropertyChanged(() => ScrumMasters);
                 }
             }
         }
@@ -81,7 +77,6 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if(_Developers != value)
                 {
                     _Developers = value;
-                    OnPropertyChanged(() => Developers);
                 }
             }
         }
@@ -94,7 +89,6 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_ProjectName != value)
                 {
                     _ProjectName = value;
-                    OnPropertyChanged(() => ProjectName);
                 }
             }
         }
@@ -107,7 +101,6 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_ProjectStartDate != value)
                 {
                     _ProjectStartDate = value;
-                    OnPropertyChanged(() => ProjectStartDate);
                 }
             }
         }
@@ -120,7 +113,6 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_Backlog != value)
                 {
                     _Backlog = value;
-                    OnPropertyChanged(() => Backlog);
                 }
             }
         }
@@ -133,7 +125,6 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_Sprints != value)
                 {
                     _Sprints = value;
-                    OnPropertyChanged(() => Sprints);
                 }
             }
         }
@@ -146,7 +137,6 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_Burndowns != value)
                 {
                     _Burndowns = value;
-                    OnPropertyChanged(() => Burndowns);
                 }
             }
         }
@@ -159,7 +149,6 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_AllUsers != value)
                 {
                     _AllUsers = value;
-                    OnPropertyChanged(() => AllUsers);
                 }
             }
         }
