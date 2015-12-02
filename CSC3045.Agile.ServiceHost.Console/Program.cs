@@ -5,6 +5,7 @@ using System.Linq;
 using Core.Common.Core;
 using CSC3045.Agile.Business.Bootstrapper;
 using CSC3045.Agile.Business.Entities;
+using CSC3045.Agile.Business.Entities.XMLEntities;
 using CSC3045.Agile.Business.Services;
 using CSC3045.Agile.Data;
 
@@ -54,8 +55,11 @@ namespace CSC3045.Agile.ServiceHost.Console
             }
 
             LoadSampleData();
-            RunDatabaseTests();
+
             TestXMLSerialisation();
+            
+            RunDatabaseTests();
+            
 
             System.Console.WriteLine("Press [Enter] to exit.");
             System.Console.ReadLine();
@@ -93,12 +97,47 @@ namespace CSC3045.Agile.ServiceHost.Console
             ProjectService projectService = new ProjectService();
             XMLSerialisationService xmlSerialisationService = new XMLSerialisationService();
 
-            var project = projectService.GetProjectInfo(1);
+            List<String> fileList = new List<string>();
 
-            String filePath = xmlSerialisationService.SerialiseProject(project);
+            System.Console.WriteLine("Testing XML Serialisation for Project 1!");
+            var project1 = projectService.GetProjectInfo(1);
 
-            System.Console.WriteLine("Path to XML File: {0}", filePath);
+            String filePath1 = xmlSerialisationService.SerialiseProject(project1);
+            fileList.Add(filePath1);
 
+            System.Console.WriteLine("Path to XML File for project 1: {0}", filePath1);
+            System.Console.WriteLine(
+                            "=============================================================================================");
+            System.Console.WriteLine("Testing XML Serialisation for Project 2!");
+
+            var project2 = projectService.GetProjectInfo(2);
+
+            String filePath2 = xmlSerialisationService.SerialiseProject(project2);
+            fileList.Add(filePath2);
+
+            System.Console.WriteLine("Path to XML File for project 2: {0}", filePath2);
+            System.Console.WriteLine(
+                            "=============================================================================================");
+            System.Console.WriteLine("Testing deserialisation for Project 1");
+
+            XMLProject deserialisedXmlProject = xmlSerialisationService.LoadProject(filePath1);
+
+            System.Console.WriteLine("Project Id: \t\t\t\t\t\t\t" + deserialisedXmlProject.ProjectId);
+            System.Console.WriteLine("Project Name: \t\t\t\t\t\t" + deserialisedXmlProject.ProjectName);
+            System.Console.WriteLine("Project Manager: \t\t\t\t\t" + deserialisedXmlProject.ProjectManager.FirstName + " " + deserialisedXmlProject.ProjectManager.LastName);
+            System.Console.WriteLine(
+                            "=============================================================================================");
+
+            System.Console.WriteLine("Serialisation Tests complete. View XML files? \t\t\t[y = Yes, n = No]");
+                var answer = System.Console.ReadLine();
+            if (null != answer && answer.Contains("y"))
+            
+            {
+                foreach (String path in fileList)
+                {
+                    System.Diagnostics.Process.Start("notepad.exe", path);
+                }
+            }
         }
 
         private static void LoadSampleData()

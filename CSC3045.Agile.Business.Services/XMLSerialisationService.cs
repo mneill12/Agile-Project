@@ -64,6 +64,7 @@ namespace CSC3045.Agile.Business.Services
             if (project == null) { return "Supplied parameter is null!"; }
 
             XMLProject xmlProject = RemapProjectEntity(project);
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
             try
             {
@@ -74,15 +75,11 @@ namespace CSC3045.Agile.Business.Services
                     serializer.Serialize(stream, xmlProject);
                     stream.Position = 0;
                     xmlDocument.Load(stream);
-                    
-                    string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-
                     xmlDocument.Save(path + "/" + xmlProject.ProjectName + "_XML");
-                    System.Diagnostics.Process.Start(xmlProject.ProjectName + "_XML");
                     stream.Close();
                 }
 
-                return xmlDocument.BaseURI;
+                return path + "/" + xmlProject.ProjectName + "_XML";
             }
             catch (Exception ex)
             {
@@ -299,11 +296,11 @@ namespace CSC3045.Agile.Business.Services
             return xmlStoryTask;
         }
 
-        public Project LoadProject(string serialisedProjectFilePath)
+        public XMLProject LoadProject(string serialisedProjectFilePath)
         {
-            if (string.IsNullOrEmpty(serialisedProjectFilePath)) { return default(Project); }
+            if (string.IsNullOrEmpty(serialisedProjectFilePath)) { return default(XMLProject); }
 
-            Project deserialisedProject = default(Project);
+            XMLProject deserialisedProject = default(XMLProject);
 
             try
             {
@@ -314,12 +311,12 @@ namespace CSC3045.Agile.Business.Services
 
                 using (StringReader read = new StringReader(xmlString))
                 {
-                    Type outType = typeof(Project);
+                    Type outType = typeof(XMLProject);
 
                     XmlSerializer serializer = new XmlSerializer(outType);
                     using (XmlReader reader = new XmlTextReader(read))
                     {
-                        deserialisedProject = (Project)serializer.Deserialize(reader);
+                        deserialisedProject = (XMLProject)serializer.Deserialize(reader);
                         reader.Close();
                     }
 

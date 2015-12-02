@@ -4,6 +4,7 @@ using System.IO;
 using System.ServiceModel;
 using Core.Common.Exceptions;
 using CSC3045.Agile.Business.Entities;
+using CSC3045.Agile.Business.Entities.XMLEntities;
 
 namespace CSC3045.Agile.Business.Contracts
 {
@@ -16,7 +17,7 @@ namespace CSC3045.Agile.Business.Contracts
 
         [OperationContract]
         [FaultContract(typeof(NotFoundException))]
-        Project LoadProject(String serialisedProjectFilePath);
+        XMLProject LoadProject(String serialisedProjectFilePath);
 
     }
 }
