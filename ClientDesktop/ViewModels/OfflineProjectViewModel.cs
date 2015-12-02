@@ -24,25 +24,15 @@ namespace ClientDesktop.ViewModels
     public class OfflineProjectViewModel : ViewModelBase
     {
         #region OfflineProjectView Bindings
+        public const String nbsp = " ";
 
-        private XMLProject _Project;
-       
-        public XMLProject Project
-        {
-            get
-            {
-                return _Project;
-            }
-            set
-            {
-                if (_Project == value) return;
-                _Project = value;
-                OnPropertyChanged("Project");
-            }
-        }
+        public XMLProject Project { get; set; }
+        public String ProductOwner { get; set; }
+        public String ProjectManager { get; set; }
+        public List<String> DeveloperList { get; set; }
+        public List<String> ScrummasterList { get; set; }
 
-
-        #endregion
+            #endregion
 
         IServiceFactory _ServiceFactory;
         IRegionManager _RegionManager;
@@ -60,13 +50,23 @@ namespace ClientDesktop.ViewModels
         protected override void OnViewLoaded()
         {
             XMLProject loadedProject = LoadProject(GlobalCommands.LoadedXMLFilePath);
-            BindOfflineProject(loadedProject);
-        }
+            ScrummasterList = new List<string>();
+            DeveloperList = new List<string>();
 
-        private void BindOfflineProject(XMLProject loadedProject)
-        {
-            // Logic to bind info goes here...... later.
-            Console.Out.WriteLine(loadedProject.ProjectName + "loaded successfully!");
+            Project = loadedProject;
+            ProductOwner = loadedProject.ProductOwner.FirstName + nbsp + loadedProject.ProductOwner.LastName;
+            ProjectManager = loadedProject.ProjectManager.FirstName + nbsp + loadedProject.ProjectManager.LastName;
+
+            foreach (XMLAccount user in loadedProject.Developers)
+            {
+                DeveloperList.Add(user.FirstName + nbsp + user.LastName);
+            }
+
+            foreach (XMLAccount user in loadedProject.ScrumMasters)
+            {
+                ScrummasterList.Add(user.FirstName + nbsp + user.LastName);
+            }
+
         }
 
         public XMLProject LoadProject(string serialisedProjectFilePath)

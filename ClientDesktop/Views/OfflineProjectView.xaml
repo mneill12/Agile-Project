@@ -9,8 +9,69 @@
                           d:DesignHeight="560" d:DesignWidth="1280">
     <Grid x:Name="RootGrid">
         <DockPanel LastChildFill="True" Dock="Right" Width="1000" HorizontalAlignment="Right">
-            <TextBlock Foreground="AliceBlue" FontSize="20">Project Name: </TextBlock>
+            <Grid Height="50" VerticalAlignment="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Project.ProjectName}"></TextBlock>
+            </Grid>
         </DockPanel>
-        <DockPanel LastChildFill="True" Dock="Left" Width="220" HorizontalAlignment="Left"/>
+        <DockPanel LastChildFill="True" Dock="Left" Width="250" HorizontalAlignment="Left">
+        <StackPanel>
+                <Rectangle Margin="50"  Fill="White" Width="125"
+                    	Height="100">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Stretch="Fill"
+                    			Visual="{StaticResource appbar_people_profile}"/>
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+                <TextBlock Height="30" Foreground="AliceBlue" FontSize="20" FontWeight="DemiBold" Padding="30 0 0 0" Text="Product Owner"></TextBlock>
+                <TextBlock Height="30" Foreground="AliceBlue" FontSize="15" Padding="30 0 0 20" Text="{Binding ProductOwner}"></TextBlock>
+
+                <TextBlock Height="30" Foreground="AliceBlue" FontSize="20" FontWeight="DemiBold" Padding="30 0 0 0" Text="Project Manager"></TextBlock>
+                <TextBlock Height="30" Foreground="AliceBlue" FontSize="15" Padding="30 0 0 20" Text="{Binding ProjectManager}"></TextBlock>
+
+                <TextBlock Height="30" Foreground="AliceBlue" FontSize="20" FontWeight="DemiBold" Padding="30 0 0 0" Text="ScrumMasters"></TextBlock>
+                <ListView BorderThickness="0" Padding="20 0 0 20"  Background="Transparent" Foreground="White" x:Name="ScrumMasterListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding ScrummasterList}" HorizontalAlignment="Left" Width="220">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}">
+                            <Setter Property="VerticalAlignment" Value="Top"></Setter>
+                            <Setter Property="Focusable" Value="false"/>
+                            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+                            <Setter Property="FontSize" Value="15"></Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Width="220" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <TextBlock Height="30" Foreground="AliceBlue" FontSize="20" FontWeight="DemiBold" Padding="30 0 0 0" Text="Developers"></TextBlock>
+                <ListView BorderThickness="0" Padding="20 0 0 20"  Background="Transparent" Foreground="White" x:Name="DeveloperListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                    	ItemsSource="{Binding DeveloperList}" HorizontalAlignment="Left" Width="220">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}">
+                            <Setter Property="VerticalAlignment" Value="Top"></Setter>
+                            <Setter Property="Focusable" Value="false"/>
+                            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+                            <Setter Property="FontSize" Value="15"></Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Width="220" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </StackPanel>
+        </DockPanel>
     </Grid>
 </core:UserControlViewBase>
