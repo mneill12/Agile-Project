@@ -1,4 +1,4 @@
-﻿using Core.Common.Exceptions;
+using Core.Common.Exceptions;
 using CSC3045.Agile.Data.Contracts.Repository_Interfaces;
 using System.ServiceModel;
 using Core.Common.Contracts;

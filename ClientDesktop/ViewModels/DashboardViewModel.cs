@@ -161,6 +161,7 @@ namespace ClientDesktop.ViewModels
         private void ViewBurndown(object parameter)
         {
             _RegionManager.RequestNavigate(RegionNames.Content, typeof(SprintBurndownChartView).FullName);
+
         }
 
         [ImportingConstructor]

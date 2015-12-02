@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ServiceModel;
 using Core.Common.Exceptions;
-
+using System.ServiceModel;
+using System.Text;
+using System.Threading.Tasks;
 using CSC3045.Agile.Business.Entities;
 
 namespace CSC3045.Agile.Business.Contracts.Service_Contracts
