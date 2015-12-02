@@ -29,5 +29,9 @@ namespace CSC3045.Agile.Business.Contracts
         [OperationContract]
         [FaultContract(typeof(NotFoundException))]
         Project GetProjectInfo(int projectId);
+
+        [OperationContract]
+        [TransactionFlow(TransactionFlowOption.Allowed)]
+        void AddUserStoryToProject(int projectId, UserStory userStory);
     }
 }

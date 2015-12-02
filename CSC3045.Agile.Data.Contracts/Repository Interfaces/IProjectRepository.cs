@@ -10,6 +10,7 @@ namespace CSC3045.Agile.Data.Contracts.Repository_Interfaces
         ICollection<Project> GetProjectsForProjectManager(int projectManagerId);
         ICollection<Project> GetProjectsForProductOwner(int productOwnderId);
         ICollection<Project> GetProjectsForAccount(int accountId);
+        Project AddBacklogStoryToProject(Project project);
         Project AddProjectWithUsers(Project project);
         Project UpdateProjectWithUsers(Project project);
     }

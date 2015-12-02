@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.ServiceModel;
 using Core.Common.Contracts;
@@ -118,6 +119,20 @@ namespace CSC3045.Agile.Business.Services
 
                 return projectRepository.Get();
             });
+        }
+
+
+        public void AddUserStoryToProject(int projectId, UserStory userStory)
+        {
+            var projectRepository = _DataRepositoryFactory.GetDataRepository<IProjectRepository>();
+
+            Project newProject = projectRepository.Get(projectId);
+
+            newProject.BacklogStories.Add(userStory);
+
+
+
+            projectRepository.AddBacklogStoryToProject(newProject);
         }
     }
 }
