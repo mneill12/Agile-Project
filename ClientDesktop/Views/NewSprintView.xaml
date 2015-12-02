@@ -63,7 +63,7 @@
                 
             </Grid>
             <ListView SelectionMode="Multiple" BorderThickness="0" Background="Transparent" Foreground="White" x:Name="AllUsersListView" HorizontalContentAlignment="Stretch"
-            	ItemsSource="{Binding ListAllTeamMembers}" Margin="0,20,10,-78.8" HorizontalAlignment="Right" Width="607" Grid.Column="1">
+            	ItemsSource="{Binding ListDevelopers}" Margin="0,20,10,-78.8" HorizontalAlignment="Right" Width="607" Grid.Column="1">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Width="30">

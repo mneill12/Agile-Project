@@ -10,6 +10,10 @@ namespace CSC3045.Agile.Client.Contracts
     [ServiceContract]
     public interface ISprintService : IServiceContract
     {
+
+        [OperationContract]
+        ICollection<Sprint> GetSprintForProject(int projectId);
+
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
         Sprint AddSprint(Sprint sprint);
@@ -17,6 +21,14 @@ namespace CSC3045.Agile.Client.Contracts
         [OperationContract]
         [FaultContract(typeof(NotFoundException))]
         Sprint GetSprintInfo(int sprintId);
+
+        [OperationContract]
+        [FaultContract(typeof(NotFoundException))]
+        Sprint GetSprintStartDate(int sprintId);
+
+        [OperationContract]
+        [FaultContract(typeof(NotFoundException))]
+        Sprint GetSprintEndDate(int sprintId);
 
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]

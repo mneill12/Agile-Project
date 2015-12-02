@@ -14,6 +14,7 @@ using Core.Common.UI.Core;
 using CSC3045.Agile.Client.Contracts;
 using CSC3045.Agile.Client.Entities;
 using ClientDesktop;
+using Prism.Regions;
 
 
 namespace ClientDesktop.ViewModels
@@ -26,26 +27,27 @@ namespace ClientDesktop.ViewModels
         private string _SprintStartDate;
         private string _SprintEndDate;
 
-        private List<SprintAvailableTeamInfo> _ProductOwners;
-        private List<SprintAvailableTeamInfo> _ScrumMasters;
-        private List<SprintAvailableTeamInfo> _AllUsers;
+        private List<Account> _ProductOwners;
+        private List<Account> _ScrumMasters;
+        private List<Account> _Developers;
 
         private readonly IServiceFactory _ServiceFactory;
-
-        public event PropertyChangedEventHandler PropertyChanged;
+        private readonly IRegionManager _RegionManager;
+        
 
         [ImportingConstructor]
-        public NewSprintViewModel(IServiceFactory serviceFactory)
+        public NewSprintViewModel(IServiceFactory serviceFactory, IRegionManager regionManager)
         {
             _ServiceFactory = serviceFactory;
+            _RegionManager = regionManager;
 
             CreateSprint = new DelegateCommand<TextBox>(OnCreateSprint);
 
-            _ProductOwners = new List<SprintAvailableTeamInfo>();
+            _ProductOwners = new List<Account>();
 
-            _ScrumMasters = new List<SprintAvailableTeamInfo>();
+            _ScrumMasters = new List<Account>();
 
-            _AllUsers = new List<SprintAvailableTeamInfo>();
+            _Developers = new List<Account>();
         }
 
         public DelegateCommand<TextBox> CreateSprint { get; private set; }
@@ -84,14 +86,36 @@ namespace ClientDesktop.ViewModels
             }
         }
 
-        public List<SprintAvailableTeamInfo> ListAllTeamMembers
+        public List<Account> ProductOwners
         {
-            get { return _AllUsers; }
+            get { return _ProductOwners; }
             set
             {
-                if (_AllUsers == value) return;
-                _AllUsers = value;
-                OnPropertyChanged("ListAllTeamMembers");
+                if (_ProductOwners == value) return;
+                _ProductOwners = value;
+                OnPropertyChanged("ProductOwners");
+            }
+        }
+
+        public List<Account> Developers
+        {
+            get { return _Developers; }
+            set
+            {
+                if (_Developers == value) return;
+                _Developers = value;
+                OnPropertyChanged("Developers");
+            }
+        }
+
+        public List<Account> ScrumMasters
+        {
+            get { return _ScrumMasters; }
+            set
+            {
+                if (_ScrumMasters == value) return;
+                _ScrumMasters = value;
+                OnPropertyChanged("ScrumMasters");
             }
         }
 
@@ -100,41 +124,31 @@ namespace ClientDesktop.ViewModels
 
         protected override void OnViewLoaded()
         {
-            GetAvailableTeamMembers();
+            GetInitialUsers();
 
         }
 
-        protected void GetAvailableTeamMembers()
+        protected void GetInitialUsers()
         {
             WithClient(_ServiceFactory.CreateClient<IAccountService>(), accountClient =>
             {
-
                 var productOwners = accountClient.GetByUserRole(ViewModelConstants.ProductOwner);
                 var scrumMasters = accountClient.GetByUserRole(ViewModelConstants.Scrummaster);
-                var allUsers = accountClient.GetAllAccounts();
+                var developers = accountClient.GetByUserRole(ViewModelConstants.Developer);
 
-                if (allUsers != null)
+                if (null != productOwners && productOwners.Any())
                 {
-                    foreach (var a in allUsers)
-                    {
-                        _AllUsers.Add(new SprintAvailableTeamInfo(a.FirstName, a.LastName, a.LoginEmail));
-                    }
+                    ProductOwners.AddRange(productOwners);
                 }
 
-                if (productOwners != null)
+                if (scrumMasters != null && scrumMasters.Any())
                 {
-                    foreach (var a in productOwners)
-                    {
-                        _ProductOwners.Add(new SprintAvailableTeamInfo(a.FirstName, a.LastName, a.LoginEmail));
-                    }
+                    ScrumMasters.AddRange(scrumMasters);
                 }
 
-                if (scrumMasters != null)
+                if (developers != null && developers.Any())
                 {
-                    foreach (var a in scrumMasters)
-                    {
-                        _ScrumMasters.Add(new SprintAvailableTeamInfo(a.FirstName, a.LastName, a.LoginEmail));
-                    }
+                    Developers.AddRange(developers);
                 }
             });
         }
