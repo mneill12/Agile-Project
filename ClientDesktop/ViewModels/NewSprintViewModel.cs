@@ -27,6 +27,8 @@ namespace ClientDesktop.ViewModels
         private string _SprintStartDate;
         private string _SprintEndDate;
 
+        private int _currentProjectId
+
         private List<Account> _ProductOwners;
         private List<Account> _ScrumMasters;
         private List<Account> _Developers;
@@ -61,6 +63,17 @@ namespace ClientDesktop.ViewModels
                 if (_SprintName == value) return;
                 _SprintName = value;
                 OnPropertyChanged("SprintName");
+            }
+        }
+
+        public int currentProjectId
+        {
+            get { return _currentProjectId; }
+            set
+            {
+                if (_currentProjectId == value) return;
+                _currentProjectId = value;
+                OnPropertyChanged("ProjectId");
             }
         }
 
@@ -121,6 +134,13 @@ namespace ClientDesktop.ViewModels
 
         public event EventHandler<ErrorMessageEventArgs> ErrorOccured;
 
+
+        public override void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            var id = (int)navigationContext.Parameters["projectId"];
+            currentProjectId = id;
+            OnViewLoaded();
+        }
 
         protected override void OnViewLoaded()
         {

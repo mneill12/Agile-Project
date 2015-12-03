@@ -172,7 +172,12 @@ namespace ClientDesktop.ViewModels
 
         private void NewSprint(object parameter)
         {
-            _RegionManager.RequestNavigate(RegionNames.Content, typeof (NewSprintView).FullName);
+
+            NavigationParameters navigationParameters = new NavigationParameters();
+            navigationParameters.Add("projectId",
+                CurrentProjectId);
+
+            _RegionManager.RequestNavigate(RegionNames.Content, typeof (NewSprintView).FullName, navigationParameters);
         }
 
         [ImportingConstructor]
