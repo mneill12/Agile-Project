@@ -124,7 +124,7 @@ namespace ClientDesktop.ViewModels
         {
             var id = (int)navigationContext.Parameters["projectId"];
             currentProjectId = id;
-
+            OnViewLoaded();
         }
 
         protected override void OnViewLoaded()
