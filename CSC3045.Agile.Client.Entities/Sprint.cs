@@ -15,7 +15,7 @@ namespace CSC3045.Agile.Client.Entities
         private string _SprintName;
         private int _SprintNumber;
         private DateTime _StartDate;
-        private ICollection<Account> _TeamMembers;
+        private ICollection<Account> _SprintMembers;
 
         public int SprintId
         {
@@ -121,15 +121,15 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public ICollection<Account> TeamMembers
+        public ICollection<Account> SprintMembers
         {
-            get { return _TeamMembers; }
+            get { return _SprintMembers; }
             set
             {
-                if (_TeamMembers != value)
+                if (_SprintMembers != value)
                 {
-                    _TeamMembers = value;
-                    OnPropertyChanged(() => TeamMembers);
+                    _SprintMembers = value;
+                    OnPropertyChanged(() => SprintMembers);
                 }
             }
         }
