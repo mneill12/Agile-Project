@@ -28,7 +28,7 @@ namespace ClientDesktop.ViewModels
 
         private List<UserStory> _BacklogStories;
         private UserStory _SelectedUserStory;
-        private string _StoryNameText;
+        private string _StoryNumberText;
         private string _StoryDescText;
 
         private int currentProjectId;
@@ -45,12 +45,12 @@ namespace ClientDesktop.ViewModels
             UpdateStoryCommand = new DelegateCommand<object>(OnUpdateStory);
             RemoveStoryCommand = new DelegateCommand<object>(OnRemoveStory);
 
-            
+
         }
 
         public DelegateCommand<object> AddNewStoryCommand { get; private set; }
         public DelegateCommand<object> UpdateStoryCommand { get; private set; }
-        public DelegateCommand<object> RemoveStoryCommand { get; private set; } 
+        public DelegateCommand<object> RemoveStoryCommand { get; private set; }
 
         public List<UserStory> BacklogStories
         {
@@ -63,14 +63,14 @@ namespace ClientDesktop.ViewModels
             }
         }
 
-        public string StoryNameText
+        public string StoryNumberText
         {
-            get { return _StoryNameText; }
+            get { return _StoryNumberText; }
             set
             {
-                if (_StoryNameText == value) return;
-                _StoryNameText = value;
-                OnPropertyChanged("StoryNameText");
+                if (_StoryNumberText == value) return;
+                _StoryNumberText = value;
+                OnPropertyChanged("StoryNumberText");
             }
         }
 
@@ -92,8 +92,11 @@ namespace ClientDesktop.ViewModels
             {
                 if (_SelectedUserStory == value) return;
                 _SelectedUserStory = value;
-                StoryNameText = value.StoryName;
-                StoryDescText = value.Description;
+                if (SelectedUserStory != null)
+                {
+                    StoryNumberText = value.StoryNumber;
+                    StoryDescText = value.Description;
+                }
                 OnPropertyChanged("SelectedUserStory");
             }
         }
@@ -105,14 +108,6 @@ namespace ClientDesktop.ViewModels
 
         protected void GetUserStories()
         {
-
-            /*WithClient(_ServiceFactory.CreateClient<IProjectService>(), projectClient =>
-            {
-                Project project = projectClient.GetProjectInfo(1);
-                BacklogStories = project.BacklogStories.ToList();
-            });*/
-            
-
             WithClient(_ServiceFactory.CreateClient<IUserStoryService>(), userStoryClient =>
             {
                 ICollection<UserStory> stories = userStoryClient.GetAllStoriesForProject(1);
@@ -124,8 +119,15 @@ namespace ClientDesktop.ViewModels
         {
             if (SelectedUserStory != null)
             {
-                BacklogStories.Remove(SelectedUserStory);
+                int storyIndex = _BacklogStories.IndexOf(SelectedUserStory);
+                UserStory story = _BacklogStories.ElementAt(storyIndex);
+
+                WithClient(_ServiceFactory.CreateClient<IUserStoryService>(), userStoryClient =>
+                {
+                    userStoryClient.RemoveUserStory(story);
+                });
             }
+            GetUserStories();
         }
 
         protected void OnUpdateStory(object parameter)
@@ -134,28 +136,49 @@ namespace ClientDesktop.ViewModels
             {
                 int storyIndex = _BacklogStories.IndexOf(SelectedUserStory);
                 UserStory story = _BacklogStories.ElementAt(storyIndex);
-                story.StoryName = StoryNameText;
+                story.StoryNumber = StoryNumberText;
                 story.Description = StoryDescText;
 
-                StoryNameText = "";
+                WithClient(_ServiceFactory.CreateClient<IUserStoryService>(), userStoryClient =>
+                {
+                    userStoryClient.UpdateUserStoryById(story);
+                });
+
+                StoryNumberText = "";
                 StoryDescText = "";
+
+                GetUserStories();
             }
         }
 
         protected void OnAddNewStory(object parameter)
         {
+            Project project = null;
+
             WithClient(_ServiceFactory.CreateClient<IProjectService>(), projectClient =>
             {
-                var newUserStory = new UserStory
-                {
-                    StoryName = "New Story Name",
-                    Description = "New Story Description"
-                };
 
+                project = projectClient.GetProjectInfo(1);
+                //project.BacklogStories.Add(newUserStory);
+                //projectClient.UpdateProjectInfo(project);
+            });
+
+            var newUserStory = new UserStory
+            {
+                StoryNumber = "New Story Name",
+                Description = "New Story Description",
+                Project = project
+            };
+
+            WithClient(_ServiceFactory.CreateClient<IProjectService>(), projectClient =>
+            {
                 projectClient.AddUserStoryToProject(1, newUserStory);
             });
 
+
             GetUserStories();
         }
+
+        
     }
 }

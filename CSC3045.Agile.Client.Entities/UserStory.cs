@@ -14,7 +14,7 @@ namespace CSC3045.Agile.Client.Entities
         private ICollection<StoryTask> _AssociatedTasks { get; set; }
         private ICollection<AcceptanceCriteria> _AcceptanceCriteria { get; set; }
 
-        /*private Project _Project { get; set; }
+        private Project _Project { get; set; }
         private Sprint _Sprint { get; set; }
 
         public Project Project
@@ -41,7 +41,7 @@ namespace CSC3045.Agile.Client.Entities
                     OnPropertyChanged(() => Sprint);
                 }
             }
-        }*/
+        }
 
         public int UserStoryId
         {
@@ -56,7 +56,7 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public string StoryName
+        public string StoryNumber
         {
             get { return _StoryNumber; }
             set
@@ -64,7 +64,7 @@ namespace CSC3045.Agile.Client.Entities
                 if (_StoryNumber != value)
                 {
                     _StoryNumber = value;
-                    OnPropertyChanged(() => StoryName);
+                    OnPropertyChanged(() => StoryNumber);
                 }
             }
         }

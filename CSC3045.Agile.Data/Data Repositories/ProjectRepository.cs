@@ -87,7 +87,7 @@ namespace CSC3045.Agile.Data.Data_Repositories
                 updatedProject.ProjectStartDate = project.ProjectStartDate;
                 updatedProject.ProductOwner = entityContext.AccountSet.Single(a => a.AccountId == project.ProductOwner.AccountId);
                 updatedProject.ProjectManager = entityContext.AccountSet.Single(a => a.AccountId == project.ProjectManager.AccountId);
-                updatedProject.BacklogStories = project.BacklogStories.Select(s => entityContext.UserStorySet.Single(u => u.UserStoryId == s.UserStoryId)).ToList();
+                updatedProject.BacklogStories = project.BacklogStories;
                 updatedProject.Burndowns = project.Burndowns;
                 updatedProject.Sprints = project.Sprints;
                 updatedProject.ScrumMasters = project.ScrumMasters.Select(scrumMaster => entityContext.AccountSet.Single(a => a.AccountId == scrumMaster.AccountId)).ToList();
@@ -123,47 +123,45 @@ namespace CSC3045.Agile.Data.Data_Repositories
                     .Include(a => a.Developers)
                     .Include(a => a.ScrumMasters)
                     .Include(a => a.Sprints)
-                    //.Include(a => a.Burndowns)
+                    .Include(a => a.Burndowns)
                     .Include(a => a.BacklogStories)
                     .ToList();
         }
 
         protected override Project GetEntity(Csc3045AgileContext entityContext, int id)
         {
-            /*
-             * Include BacklogStories commented out as it is currently throwing an error 
-            */
             return entityContext.ProjectSet
                     .Include(a => a.AllUsers)
                     .Include(a => a.Developers)
                     .Include(a => a.ScrumMasters)
                     .Include(a => a.Sprints)
                     .Include(a => a.Burndowns)
-                    //.Include(a => a.BacklogStories)
+                    .Include(a => a.BacklogStories)
                     .FirstOrDefault(p => p.ProjectId == id);
         }
 
         #endregion
 
 
-        public Project AddBacklogStoryToProject(Project project)
+        public Project AddBacklogStoryToProject(int projectId)
         {
             using (var entityContext = new Csc3045AgileContext())
             {
-                var updatedProject = entityContext.ProjectSet.Single(p => p.ProjectId == project.ProjectId);
+                var updatedProject =
+                    entityContext.ProjectSet.Include(p => p.BacklogStories)
+                        .Single(p => p.ProjectId == projectId);
 
-                updatedProject.ProjectName = project.ProjectName;
-                updatedProject.ProjectStartDate = project.ProjectStartDate;
-                updatedProject.ProductOwner = entityContext.AccountSet.Single(a => a.AccountId == project.ProductOwner.AccountId);
-                updatedProject.ProjectManager = entityContext.AccountSet.Single(a => a.AccountId == project.ProjectManager.AccountId);
-                updatedProject.BacklogStories = project.BacklogStories;
-                updatedProject.Burndowns = project.Burndowns;
-                updatedProject.Sprints = project.Sprints;
-                updatedProject.ScrumMasters = project.ScrumMasters.Select(scrumMaster => entityContext.AccountSet.Single(a => a.AccountId == scrumMaster.AccountId)).ToList();
-                updatedProject.Developers = project.Developers.Select(developer => entityContext.AccountSet.Single(a => a.AccountId == developer.AccountId)).ToList();
-                updatedProject.AllUsers = project.AllUsers.Select(user => entityContext.AccountSet.Single(a => a.AccountId == user.AccountId)).ToList();
+                UserStory userStory = new UserStory()
+                {
+                    StoryNumber = "New Story Name",
+                    Description = "New Story Description"
+                };
+
+                updatedProject.BacklogStories.Add(userStory);
 
                 entityContext.SaveChanges();
+
+                Project project2 = Get(projectId);
 
                 return updatedProject;
             }
