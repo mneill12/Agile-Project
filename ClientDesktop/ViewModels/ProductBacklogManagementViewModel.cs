@@ -46,11 +46,13 @@ namespace ClientDesktop.ViewModels
             AddNewStoryCommand = new DelegateCommand<object>(OnAddNewStory);
             UpdateStoryCommand = new DelegateCommand<object>(OnUpdateStory);
             RemoveStoryCommand = new DelegateCommand<object>(OnRemoveStory);
+            NavigateDashboardCommand = new DelegateCommand<object>(NavigateDashboard);
         }
 
         public DelegateCommand<object> AddNewStoryCommand { get; private set; }
         public DelegateCommand<object> UpdateStoryCommand { get; private set; }
         public DelegateCommand<object> RemoveStoryCommand { get; private set; }
+        public DelegateCommand<object> NavigateDashboardCommand { get; set; }
 
         public List<UserStory> BacklogStories
         {
@@ -113,11 +115,15 @@ namespace ClientDesktop.ViewModels
             }
         }
 
+        private void NavigateDashboard(object parameter)
+        {
+            _RegionManager.RequestNavigate(RegionNames.Content, typeof(DashboardView).FullName);
+        }
+
         public override  void OnNavigatedTo(NavigationContext navigationContext)
         {
             var id = (int)navigationContext.Parameters["projectId"];
-            //needs changed to id
-            currentProjectId = 1;
+            currentProjectId = id;
 
         }
 

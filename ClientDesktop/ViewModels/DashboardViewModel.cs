@@ -30,6 +30,8 @@ namespace ClientDesktop.ViewModels
         private List<Project> _AllProjects;
         private int _CurrentProjectId;
 
+        private Project _SelectedProjectTab;
+
         public string FirstName
         {
             get
@@ -127,6 +129,18 @@ namespace ClientDesktop.ViewModels
             }
         }
 
+        public Project SelectedProjectTab
+        {
+            get { return _SelectedProjectTab; }
+            set
+            {
+                if (_SelectedProjectTab == value) return;
+                _SelectedProjectTab = value;
+                CurrentProjectId = value.ProjectId;
+                OnPropertyChanged("SelectedProjectTab");
+            }
+        }
+
         #endregion
 
         IServiceFactory _ServiceFactory;
@@ -151,7 +165,7 @@ namespace ClientDesktop.ViewModels
         {
             NavigationParameters navigationParameters = new NavigationParameters();
             navigationParameters.Add("projectId",
-                ServiceLocator.Current.GetInstance<DashboardViewModel>().CurrentProjectId);
+                CurrentProjectId);
 
             _RegionManager.RequestNavigate(RegionNames.Content, typeof (ProductBacklogManagementView).FullName,
                 navigationParameters);
