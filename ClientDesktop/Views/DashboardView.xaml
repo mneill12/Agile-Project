@@ -65,7 +65,7 @@
                     <Grid.Resources>
                         <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
                     </Grid.Resources>
-                    <TabControl x:Name="ProjectTabs" Controls:TabControlHelper.IsUnderlined="True" ItemsSource="{Binding AllProjects, Mode=TwoWay, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}">
+                    <TabControl x:Name="ProjectTabs" Controls:TabControlHelper.IsUnderlined="True" SelectedItem="{Binding SelectedProjectTab}" ItemsSource="{Binding AllProjects, Mode=TwoWay, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}">
                         <TabControl.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding ProjectName}"/>

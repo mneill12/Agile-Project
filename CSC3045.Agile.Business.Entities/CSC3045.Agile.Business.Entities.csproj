@@ -63,7 +63,6 @@
     <Compile Include="CurrentStatus.cs" />
     <Compile Include="Skill.cs" />
     <Compile Include="StoryTask.cs" />
-    <Compile Include="Backlog.cs" />
     <Compile Include="TaskBurndownPoint.cs" />
     <Compile Include="UserStory.cs" />
     <Compile Include="UserRole.cs" />

@@ -15,5 +15,32 @@ namespace CSC3045.Agile.Client.Proxies
         {
             return Channel.AddNewUserStory(userStory);
         }
+
+        public UserStory GetUserStoryById(int userStoryId)
+        {
+            return Channel.GetUserStoryById(userStoryId);
+        }
+
+        public ICollection<UserStory> GetAllUserStories()
+        {
+            return Channel.GetAllUserStories();
+        }
+
+        public void UpdateUserStoryById(UserStory userStory)
+        {
+            Channel.UpdateUserStoryById(userStory);
+        }
+
+
+        public ICollection<UserStory> GetAllStoriesForProject(int projectId)
+        {
+            return Channel.GetAllStoriesForProject(projectId);
+        }
+
+
+        public void RemoveUserStory(UserStory story)
+        {
+            Channel.RemoveUserStory(story);
+        }
     }
 }

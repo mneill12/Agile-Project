@@ -214,7 +214,7 @@ namespace CSC3045.Agile.Data
                 ScrumMasters = new List<Account>() { },
                 Developers = new List<Account>() {  },
                 AllUsers = new List<Account>() { },
-                Backlog = new Backlog()
+                BacklogStories = new List<UserStory>() { }
             });
 
             defaultProjects.Add(new Project
@@ -224,7 +224,7 @@ namespace CSC3045.Agile.Data
                 ScrumMasters = new List<Account>() { },
                 Developers = new List<Account>() { },
                 AllUsers = new List<Account>() { },
-                Backlog = new Backlog()
+                BacklogStories = new List<UserStory>() { }
             });
 
             IList<Sprint> defaultSprints = new List<Sprint>();
@@ -258,6 +258,32 @@ namespace CSC3045.Agile.Data
 
             IList<UserStory> defaultUserStories = new List<UserStory>
             {
+                new UserStory
+                {
+                    StoryNumber = "P1B1Story",
+                    Description = "Project1Backlog1Story",
+                    StoryPoints = 15
+                },
+                new UserStory
+                {
+                    StoryNumber = "P1B2Story",
+                    Description = "Project1Backlog1Story",
+                    StoryPoints = 35
+                },
+                   
+                new UserStory
+                {
+                    StoryNumber = "P2B1Story",
+                    Description = "Project2Backlog1Story",
+                    StoryPoints = 24
+                },
+                new UserStory
+                {
+                    StoryNumber = "P2B2Story",
+                    Description = "Project2Backlog2Story",
+                    StoryPoints = 14
+                },
+
                 new UserStory
                 {
                     Status = new CurrentStatus

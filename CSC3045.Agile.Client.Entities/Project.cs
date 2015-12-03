@@ -15,11 +15,13 @@ namespace CSC3045.Agile.Client.Entities
 
         private string _ProjectName;
         private DateTime _ProjectStartDate;
-        private Backlog _Backlog;
+        
         private ICollection<Sprint> _Sprints;
         private ICollection<Burndown> _Burndowns;
 
         private ICollection<Account> _AllUsers;
+
+        private ICollection<UserStory> _BacklogStories;
 
         public int ProjectId
         {
@@ -112,15 +114,15 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public Backlog Backlog
+        public ICollection<UserStory> BacklogStories
         {
-            get { return _Backlog; }
+            get { return _BacklogStories; }
             set
             {
-                if (_Backlog != value)
+                if (_BacklogStories != value)
                 {
-                    _Backlog = value;
-                    OnPropertyChanged(() => Backlog);
+                    _BacklogStories = value;
+                    OnPropertyChanged(() => BacklogStories);
                 }
             }
         }

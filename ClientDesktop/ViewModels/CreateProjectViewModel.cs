@@ -333,7 +333,7 @@ namespace ClientDesktop.ViewModels
                         ScrumMasters = scrumMasters,
                         Developers = developers,
                         AllUsers = allUsers,
-                        Backlog = new Backlog()
+                        BacklogStories = new List<UserStory>()
                     };
 
                     Project createdProject = null;
