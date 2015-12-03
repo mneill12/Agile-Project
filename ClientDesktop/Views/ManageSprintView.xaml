@@ -17,19 +17,20 @@
 
         <Grid Grid.Row="1" Height="406" Margin="0,0.429,0,-239" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="61*" />
-                <ColumnDefinition Width="99*"/>
-                <ColumnDefinition Width="160*" />
+                <ColumnDefinition Width="219*" />
+                <ColumnDefinition Width="25*"/>
+                <ColumnDefinition Width="396*"/>
+                <ColumnDefinition Width="640*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Text="Project Backlog" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White" TextAlignment="Center" FontSize="14" FontWeight="Bold" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,0.4" Grid.RowSpan="2" />
-            <TextBlock Grid.Row="0" Text="Sprint Backlog " FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White" TextAlignment="Center" FontSize="14" FontWeight="Bold"  Grid.Column="2" Margin="0,0,0,0.4" Grid.RowSpan="2" />
+            <TextBlock Grid.Row="0" Text="Project Backlog" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White" TextAlignment="Center" FontSize="14" FontWeight="Bold" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,0,0.2" Grid.RowSpan="2" />
+            <TextBlock Grid.Row="0" Text="Sprint Backlog " FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White" TextAlignment="Center" FontSize="14" FontWeight="Bold"  Grid.Column="3" Margin="0,0,0,0.2" Grid.RowSpan="2" />
 
             <ListView SelectionMode="Multiple" BorderThickness="0" Background="Transparent" Foreground="White" x:Name="ProductBacklogList" HorizontalContentAlignment="Stretch"
-            	ItemsSource="{Binding ProjectBackLog, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Width="607" Grid.Column="0" Grid.Row="1">
+            	ItemsSource="{Binding ProjectBackLog, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Width="607" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Margin="0,19.4,33,-19.8" >
                 <ListView.View>
                     <GridView>
                         <GridViewColumn>
@@ -39,13 +40,13 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="First Name" DisplayMemberBinding="{Binding FirstName}" Width="100"/>
+                        <GridViewColumn Header="Backlog Discription" DisplayMemberBinding="{Binding Description}" Width="100"/>
                     </GridView>
                 </ListView.View>
             </ListView>
 
             <ListView SelectionMode="Multiple" BorderThickness="0" Background="Transparent" Foreground="White" x:Name="SprintBacklogList" HorizontalContentAlignment="Stretch"
-            	ItemsSource="{Binding SprintBacklog, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Width="607" Grid.Column="1" Grid.Row="1">
+            	ItemsSource="{Binding SprintBacklog, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Width="607" Grid.Row="1" Grid.Column="3" Margin="0,19.4,23,-19.8" >
                 <ListView.View>
                     <GridView>
                         <GridViewColumn>
@@ -55,9 +56,7 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="First Name" DisplayMemberBinding="{Binding FirstName}" Width="100"/>
-                        <GridViewColumn Header="Surname" DisplayMemberBinding="{Binding LastName}" Width="100" />
-                        <GridViewColumn Header="Email Address" DisplayMemberBinding="{Binding LoginEmail}" Width="150"/>
+                        <GridViewColumn Header="Sprint Discription" DisplayMemberBinding="{Binding Description}" Width="100"/>
                     </GridView>
                 </ListView.View>
             </ListView>
