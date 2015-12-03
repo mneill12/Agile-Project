@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
+using System.Net;
+using System.Net.Mail;
+using System.Text;
 using System.Windows;
 using System.Windows.Data;
 using Core.Common.Contracts;
@@ -93,10 +96,41 @@ namespace ClientDesktop.ViewModels
             }
         }
 
-       
+        protected bool SendBurndownAsEmail(List<String> emailToAddress, String imageAttachmentFilePath)
+        {
+            try
+            {
+                MailMessage mm = new MailMessage();
+
+                StringBuilder emailBody = new StringBuilder();
+                emailBody.AppendLine("Attached is a burndown chart sent to you from CSC3045CS7.\n\n");
+                emailBody.AppendLine("Regards,");
+                emailBody.AppendLine("The JELLO Team.");
+
+                mm.From = new MailAddress("csc3045cs7@gmail.com");
+                foreach (String address in emailToAddress)
+                {
+                    mm.To.Add(address);
+                }
+                mm.Subject = "JELLO - Burndown Chart";
+                mm.Attachments.Add(new Attachment(imageAttachmentFilePath));
+                mm.Body = emailBody.ToString();
+
+                SmtpClient sC = new SmtpClient("smtp.gmail.com");
+                sC.Port = 587;
+                sC.Credentials = new NetworkCredential("csc3045cs7@gmail.com", "setphaserstoscrum");
+                sC.EnableSsl = true;
+                sC.Send(mm);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
     }
 
-  public class GraphElement
+    public class GraphElement
     {
         public DateTime X { get; set; }
         public double Y { get; set; }
