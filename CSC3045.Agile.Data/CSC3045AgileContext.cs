@@ -17,6 +17,7 @@ namespace CSC3045.Agile.Data
             : base("CSC3045GeneratedDB")
         {
             Database.SetInitializer(new Csc3045AgileCustomDatabaseInitialiser());
+            base.Configuration.ProxyCreationEnabled = false;
         }
 
         public DbSet<Account> AccountSet { get; set; }
@@ -93,6 +94,9 @@ namespace CSC3045.Agile.Data
                     q.MapLeftKey("ProjectId");
                     q.MapRightKey("AccountId");
                 });
+
+            modelBuilder.Entity<Project>()
+                .HasMany(q => q.BacklogStories);
 
             modelBuilder.Entity<Sprint>()
                 .HasKey(e => e.SprintId).Ignore(e => e.EntityId);
