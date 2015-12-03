@@ -40,9 +40,9 @@ namespace CSC3045.Agile.Client.Proxies
         }
 
 
-        public void AddUserStoryToProject(int projectId, UserStory userStory)
+        public void AddUserStoryToProject(int projectId)
         {
-            Channel.AddUserStoryToProject(projectId, userStory);
+            Channel.AddUserStoryToProject(projectId);
         }
     }
 }

@@ -159,8 +159,6 @@ namespace ClientDesktop.ViewModels
             {
 
                 project = projectClient.GetProjectInfo(1);
-                //project.BacklogStories.Add(newUserStory);
-                //projectClient.UpdateProjectInfo(project);
             });
 
             var newUserStory = new UserStory
@@ -172,7 +170,7 @@ namespace ClientDesktop.ViewModels
 
             WithClient(_ServiceFactory.CreateClient<IProjectService>(), projectClient =>
             {
-                projectClient.AddUserStoryToProject(1, newUserStory);
+                projectClient.AddUserStoryToProject(1);
             });
 
 
