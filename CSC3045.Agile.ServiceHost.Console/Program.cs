@@ -109,7 +109,6 @@ namespace CSC3045.Agile.ServiceHost.Console
 
             var accounts = accountService.GetAllAccounts();
 
-
             var sprints = sprintService.GetAllSprints();
              
             var userStories = userStoryService.GetAllUserStories();
@@ -129,7 +128,6 @@ namespace CSC3045.Agile.ServiceHost.Console
                     accounts.Single(a => a.AccountId == 7)
                 };
                 project1.AllUsers = accounts;
-                project1.Sprints = sprints;
 
 
                 project2.ProjectManager = accounts.Single(a => a.AccountId == 7);
