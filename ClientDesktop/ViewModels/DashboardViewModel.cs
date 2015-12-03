@@ -194,6 +194,7 @@ namespace ClientDesktop.ViewModels
             {
                 AvailableSkills = GlobalCommands.MyAccount.Skills.ToList();
             }
+            GetAllSprints();
 
             UpdateProjectsForAccount();
 

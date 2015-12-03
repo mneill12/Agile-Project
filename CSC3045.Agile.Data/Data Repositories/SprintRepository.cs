@@ -10,7 +10,7 @@ namespace CSC3045.Agile.Data.Data_Repositories
     // Sprint LINQ Entity Queries
     [Export(typeof (ISprintRepository))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class SprintRepository : DataRepositoryBase<Sprint>
+    public class SprintRepository : DataRepositoryBase<Sprint>, ISprintRepository
     {
         protected override Sprint AddEntity(Csc3045AgileContext entityContext, Sprint entity)
         {
@@ -38,6 +38,41 @@ namespace CSC3045.Agile.Data.Data_Repositories
                 .Include(a => a.SprintMembers.Select(b => b.UserRoles))
                 .Include(c => c.Burndowns.Select(d => d.BurndownPoints))
                 .FirstOrDefault();
+        }
+
+        public ICollection<Sprint> GetSprintForProject(int projectId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public ICollection<Sprint> GetSprintForScrumMaster(int scrumMasterId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public ICollection<Sprint> GetSprintForAccount(int accountId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public ICollection<Sprint> GetSprintStartDate(int sprintId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public ICollection<Sprint> GetSprintEndDate(int sprintId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Sprint AddSprintWithTeam(Sprint sprint)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Sprint UpdateSprintWithTeam(Sprint sprint)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
