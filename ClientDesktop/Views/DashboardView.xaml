@@ -131,8 +131,11 @@
                                         <ComboBox Width="250" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"
                                               Controls:TextBoxHelper.Watermark="Please select a sprint..."
                                               Margin="0, 10, 0, 0"
-                                              SelectedIndex="0" ItemsSource="{Binding Path=Sprints, Mode=TwoWay, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="SprintName">
+                                              SelectedIndex="0" ItemsSource="{Binding Path=Sprints, Mode=TwoWay, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="SprintName"
+                                              SelectedItem="{Binding SelectedSprint}">
                                         </ComboBox>
+                                        <Button Grid.Column="0" HorizontalAlignment="Left" Margin="5" Command="{Binding  ElementName=RootGrid, Path=DataContext.ManageProjectBacklogCommand}" Content="Manage Project Backlog (PO Only)" BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" />
+
 
                                         <Button Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Margin="5" Command="{Binding NavigateSprintDashboard}" Content="View Sprint Information"  BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" />
 

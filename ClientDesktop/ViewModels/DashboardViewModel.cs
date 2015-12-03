@@ -29,7 +29,7 @@ namespace ClientDesktop.ViewModels
         private List<UserRole> _AvailableRoles;
         private List<Skill> _AvailableSkills;
         private List<Project> _AllProjects;
-        private int _CurrentProjectId;
+        private Sprint _SelectedSprint;
 
         private Project _SelectedProjectTab;
 
@@ -110,14 +110,17 @@ namespace ClientDesktop.ViewModels
             }
         }
 
-        public int CurrentProjectId
+        public Sprint SelectedSprint
         {
-            get { return _CurrentProjectId; }
+            get { return _SelectedSprint; }
             set
             {
-                if (_CurrentProjectId == value) return;
-                _CurrentProjectId = value;
-                OnPropertyChanged("CurrentProjectId");
+                if (_SelectedSprint == value) return;
+                if (value != null)
+                {
+                    _SelectedSprint = value;
+                    OnPropertyChanged("SelectedSprint");
+                }
             }
         }
 
@@ -130,7 +133,6 @@ namespace ClientDesktop.ViewModels
                 if (value != null)
                 {
                     _SelectedProjectTab = value;
-                    CurrentProjectId = value.ProjectId;
                     OnPropertyChanged("SelectedProjectTab");
                 }
             }
@@ -143,6 +145,7 @@ namespace ClientDesktop.ViewModels
 
         public DelegateCommand<object> CreateProjectCommand { get; set; }
         public DelegateCommand<object> ManageProjectBacklogCommand { get; set; }
+        public DelegateCommand<object> ViewSprintCommand { get; set; }
         public DelegateCommand<object> RefreshProjectsCommand { get; set; }
         public DelegateCommand<object> ViewBurndownCommand { get; set; }
         public DelegateCommand<object> CreateNewSprintCommand { get; set; }
@@ -157,11 +160,24 @@ namespace ClientDesktop.ViewModels
             UpdateProjectsForAccount();
         }
 
+        private void ViewSprint(object parameter)
+        {
+            if (SelectedSprint != null)
+            {
+                NavigationParameters navigationParameters = new NavigationParameters();
+                navigationParameters.Add("sprintId",
+                    SelectedSprint.SprintId);
+
+                _RegionManager.RequestNavigate(RegionNames.Content, typeof(SprintView).FullName,
+                    navigationParameters);
+            }
+        }
+
         private void ManageProjectBacklog(object parameter)
         {
             NavigationParameters navigationParameters = new NavigationParameters();
             navigationParameters.Add("projectId",
-                CurrentProjectId);
+                SelectedProjectTab.ProjectId);
 
             _RegionManager.RequestNavigate(RegionNames.Content, typeof (ProductBacklogManagementView).FullName,
                 navigationParameters);
@@ -194,6 +210,7 @@ namespace ClientDesktop.ViewModels
             CreateProjectCommand = new DelegateCommand<object>(CreateProject);
             RefreshProjectsCommand = new DelegateCommand<object>(RefreshProjects);
             ManageProjectBacklogCommand = new DelegateCommand<object>(ManageProjectBacklog);
+            ViewSprintCommand = new DelegateCommand<object>(ViewSprint);
             ViewBurndownCommand = new DelegateCommand<object>(ViewBurndown);
             CreateNewSprintCommand = new DelegateCommand<object>(NewSprint);
         }
@@ -237,11 +254,6 @@ namespace ClientDesktop.ViewModels
                     List<Project> updatedProjectList = new List<Project>();
                     updatedProjectList.AddRange(allProjects);
                     AllProjects = updatedProjectList;
-
-                    if (CurrentProjectId == 0)
-                    {
-                        CurrentProjectId = AllProjects[0].ProjectId;
-                    }
 
                     // TODO: Set focus on created project after navigation after ProjectViewModel has been finished
                     //if (CurrentProjectId != 0)
