@@ -64,7 +64,7 @@ namespace CSC3045.Agile.Data.Data_Repositories
             using (var entityContext = new Csc3045AgileContext())
             return entityContext.StoryTaskSet
                .Include(a => a.Owner)
-               .Where(a => a.CurrentStatus.StoryStatusName.Equals(status))
+               .Where(a => a.CurrentStatus.CurrentStatusName.Equals(status))
                .ToList();
 
         } 

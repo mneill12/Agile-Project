@@ -201,7 +201,7 @@ namespace CSC3045.Agile.ServiceHost.Console
                         System.Console.WriteLine("Story Number:\t" + userStoryTest.StoryNumber);
                         System.Console.WriteLine("Description:'t" + userStoryTest.Description);
                         System.Console.WriteLine("Story Points:\t" + userStoryTest.StoryPoints);
-                        System.Console.WriteLine("Status:\t" + userStoryTest.Status.StoryStatusName);
+                        System.Console.WriteLine("Status:\t" + userStoryTest.Status.CurrentStatusName);
                         System.Console.WriteLine();
                         System.Console.WriteLine("\t Tasks:");
                         System.Console.WriteLine();
@@ -213,7 +213,7 @@ namespace CSC3045.Agile.ServiceHost.Console
                             System.Console.WriteLine("\tDescription:\t" + tsk.Description);
                             System.Console.WriteLine("\tHours:\t" + tsk.Hours);
                             System.Console.WriteLine("\tBlocked Status:\t" + tsk.IsBlocked);
-                            System.Console.WriteLine("\tStatus: " + tsk.CurrentStatus.StoryStatusName);
+                            System.Console.WriteLine("\tStatus: " + tsk.CurrentStatus.CurrentStatusName);
                             System.Console.WriteLine("\t===============================================");
                         }
 

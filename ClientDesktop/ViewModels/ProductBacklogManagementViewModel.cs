@@ -1,21 +1,12 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Linq;
-using System.ServiceModel;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Navigation;
 using ClientDesktop.Views;
-using Core.Common;
 using Core.Common.Contracts;
-using Core.Common.Core;
 using Core.Common.UI.Core;
 using CSC3045.Agile.Client.Contracts;
 using CSC3045.Agile.Client.Entities;
-using Microsoft.Practices.ServiceLocation;
 using Prism.Regions;
 
 namespace ClientDesktop.ViewModels
@@ -150,7 +141,7 @@ namespace ClientDesktop.ViewModels
 
                 WithClient(_ServiceFactory.CreateClient<IUserStoryService>(), userStoryClient =>
                 {
-                    userStoryClient.RemoveUserStory(story);
+                    userStoryClient.RemoveUserStory(story.UserStoryId);
                 });
             }
             GetUserStories();
@@ -168,7 +159,7 @@ namespace ClientDesktop.ViewModels
 
                 WithClient(_ServiceFactory.CreateClient<IUserStoryService>(), userStoryClient =>
                 {
-                    userStoryClient.UpdateUserStoryById(story);
+                    userStoryClient.UpdateUserStory(story);
                 });
 
                 StoryNumberText = "";
@@ -184,7 +175,6 @@ namespace ClientDesktop.ViewModels
 
             WithClient(_ServiceFactory.CreateClient<IProjectService>(), projectClient =>
             {
-
                 project = projectClient.GetProjectInfo(currentProjectId);
             });
 
@@ -198,11 +188,8 @@ namespace ClientDesktop.ViewModels
 
             WithClient(_ServiceFactory.CreateClient<IProjectService>(), projectClient =>
             {
-                projectClient.AddUserStoryToProject(currentProjectId);
+                projectClient.AddUserStoryToProject(project.ProjectId, newUserStory);
             });
-
-
-            GetUserStories();
         }
 
         

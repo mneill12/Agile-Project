@@ -30,7 +30,7 @@ namespace CSC3045.Agile.Client.Entities
         }
 
 
-        public StoryTask StoryTaskId
+        public StoryTask StoryTask
         {
             get { return _StoryTask; }
             set
@@ -51,7 +51,7 @@ namespace CSC3045.Agile.Client.Entities
                 if (_HoursRemaining != value)
                 {
                     _HoursRemaining = value;
-                    OnPropertyChanged(() => StoryTaskId);
+                    OnPropertyChanged(() => HoursRemaining);
                 }
             }
         }

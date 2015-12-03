@@ -62,7 +62,6 @@ namespace CSC3045.Agile.Data.Data_Repositories
                 project.ProductOwner = entityContext.AccountSet.Single(a => a.AccountId == project.ProductOwner.AccountId);
                 project.ProjectManager = entityContext.AccountSet.Single(a => a.AccountId == project.ProjectManager.AccountId);
                 project.BacklogStories = project.BacklogStories;
-                project.Burndowns = project.Burndowns;
                 project.Sprints = project.Sprints;
                 project.ScrumMasters = project.ScrumMasters.Select(scrumMaster => entityContext.AccountSet.Single(a => a.AccountId == scrumMaster.AccountId)).ToList();
                 project.Developers = project.Developers.Select(developer => entityContext.AccountSet.Single(a => a.AccountId == developer.AccountId)).ToList();
@@ -88,7 +87,6 @@ namespace CSC3045.Agile.Data.Data_Repositories
                 updatedProject.ProductOwner = entityContext.AccountSet.Single(a => a.AccountId == project.ProductOwner.AccountId);
                 updatedProject.ProjectManager = entityContext.AccountSet.Single(a => a.AccountId == project.ProjectManager.AccountId);
                 updatedProject.BacklogStories = project.BacklogStories;
-                updatedProject.Burndowns = project.Burndowns;
                 updatedProject.Sprints = project.Sprints;
                 updatedProject.ScrumMasters = project.ScrumMasters.Select(scrumMaster => entityContext.AccountSet.Single(a => a.AccountId == scrumMaster.AccountId)).ToList();
                 updatedProject.Developers = project.Developers.Select(developer => entityContext.AccountSet.Single(a => a.AccountId == developer.AccountId)).ToList();
@@ -97,6 +95,17 @@ namespace CSC3045.Agile.Data.Data_Repositories
                 entityContext.SaveChanges();
 
                 return updatedProject;
+            }
+        }
+
+        public void AddStoryToProject(int projectId, int userStoryId)
+        {
+            using (var entityContext = new Csc3045AgileContext())
+            {
+                var dbProject = entityContext.ProjectSet.Single(p => p.ProjectId == projectId);
+                var dbStory = entityContext.UserStorySet.Single(s => s.UserStoryId == userStoryId);
+                dbProject.BacklogStories.Add(dbStory);
+                entityContext.SaveChanges();
             }
         }
 
@@ -123,7 +132,6 @@ namespace CSC3045.Agile.Data.Data_Repositories
                     .Include(a => a.Developers)
                     .Include(a => a.ScrumMasters)
                     .Include(a => a.Sprints)
-                    .Include(a => a.Burndowns)
                     .Include(a => a.BacklogStories)
                     .ToList();
         }
@@ -135,7 +143,6 @@ namespace CSC3045.Agile.Data.Data_Repositories
                     .Include(a => a.Developers)
                     .Include(a => a.ScrumMasters)
                     .Include(a => a.Sprints)
-                    .Include(a => a.Burndowns)
                     .Include(a => a.BacklogStories)
                     .FirstOrDefault(p => p.ProjectId == id);
         }

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ServiceModel;
 using Core.Common.Contracts;
 using Core.Common.Exceptions;
-using Core.Common.Utils;
 using CSC3045.Agile.Business.Contracts;
 using CSC3045.Agile.Business.Entities;
 using CSC3045.Agile.Data.Contracts.Repository_Interfaces;
@@ -131,15 +128,12 @@ namespace CSC3045.Agile.Business.Services
 
         public void AddUserStoryToProject(int projectId, UserStory userStory)
         {
-            return ExecuteFaultHandledOperation(() =>
+            ExecuteFaultHandledOperation(() =>
             {
                 var projectRepository = _DataRepositoryFactory.GetDataRepository<IProjectRepository>();
 
-                return projectRepository.AddStoryToProject(projectId, userStory.UserStoryId);
+                projectRepository.AddStoryToProject(projectId, userStory.UserStoryId);
             });
-
-
-            throw new NotImplementedException();
         }
     }
 }

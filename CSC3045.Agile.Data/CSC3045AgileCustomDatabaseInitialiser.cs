@@ -266,7 +266,7 @@ namespace CSC3045.Agile.Data
                 {
                     Status = new CurrentStatus
                     {
-                        StoryStatusName = "Ready for Development"
+                        CurrentStatusName = "Ready for Development"
                     },
                     Description =
                         "As a user of the scrum client program I can register so that I can connect to the scrum management server",
@@ -308,7 +308,7 @@ namespace CSC3045.Agile.Data
                             Title = "TSK-001",
                             Description = "Setup database for server application, to include user management tables.",
                             Hours = 10,
-                            CurrentStatus = new CurrentStatus {StoryStatusName = "To-Do"},
+                            CurrentStatus = new CurrentStatus {CurrentStatusName = "To-Do"},
                             IsBlocked = false,
                             TaskBurndownPoint = tbp1
                         },
@@ -317,7 +317,7 @@ namespace CSC3045.Agile.Data
                             Title = "TSK-002",
                             Description = "Develop server application to accept client connections for user management.",
                             Hours = 8,
-                            CurrentStatus = new CurrentStatus {StoryStatusName = "BA-QA"},
+                            CurrentStatus = new CurrentStatus {CurrentStatusName = "BA-QA"},
                             IsBlocked = false,
                             TaskBurndownPoint = tbp2
                         },
@@ -327,7 +327,7 @@ namespace CSC3045.Agile.Data
                             Description =
                                 "Develop client application to make connection to server and call database CRUD methods.",
                             Hours = 12,
-                            CurrentStatus = new CurrentStatus {StoryStatusName = "Tech QA"},
+                            CurrentStatus = new CurrentStatus {CurrentStatusName = "Tech QA"},
                             //TaskBurndownPoint = new TaskBurndownPoint{ TaskBurndownPointId = };
                             IsBlocked = false,
                             TaskBurndownPoint = tbp3
