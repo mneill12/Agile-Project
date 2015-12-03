@@ -40,7 +40,7 @@ namespace CSC3045.Agile.Data
 
         public DbSet<ChatMessage> ChatMessageSet { get; set; }
 
-        public DbSet<CurrentStatus> StoryStatusSet { get; set; }
+        public DbSet<CurrentStatus> CurrentStatusSet { get; set; }
 
         public DbSet<StoryTask> StoryTaskSet { get; set; }
 
@@ -122,7 +122,7 @@ namespace CSC3045.Agile.Data
                 .HasKey(e => e.MessageId).Ignore(e => e.EntityId);
 
             modelBuilder.Entity<CurrentStatus>()
-                .HasKey(e => e.StoryStatusId).Ignore(e => e.EntityId);
+                .HasKey(e => e.CurrentStatusId).Ignore(e => e.EntityId);
 
             modelBuilder.Entity<StoryTask>()
                 .HasKey(e => e.StoryTaskId).Ignore(e => e.EntityId);

@@ -20,6 +20,9 @@ namespace CSC3045.Agile.Business.Entities
         [DataMember]
         public int HoursRemaining { get; set; }
 
+        [DataMember]
+        public Burndown Burndown { get; set; }
+
         #region IIdentifiableEntity members
 
         public int EntityId

@@ -5,9 +5,11 @@ namespace CSC3045.Agile.Client.Entities
 {
     public class Skill : ObjectBase
     {
-        private ICollection<Account> _Accounts;
         private int _SkillId;
         private string _SkillName;
+
+        //Relationships
+        private ICollection<Account> _Accounts;
 
         public int SkillId
         {

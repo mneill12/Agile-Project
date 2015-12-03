@@ -10,10 +10,11 @@ namespace CSC3045.Agile.Client.Entities
         private string _Description { get; set; }
         private int _StoryPoints { get; set; }
         private string _UserNotes { get; set; }
+
+        //Relationships
         private CurrentStatus _Status { get; set; }
         private ICollection<StoryTask> _AssociatedTasks { get; set; }
         private ICollection<AcceptanceCriteria> _AcceptanceCriteria { get; set; }
-
         private Project _Project { get; set; }
         private Sprint _Sprint { get; set; }
 

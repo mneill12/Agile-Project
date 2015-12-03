@@ -4,15 +4,18 @@ namespace CSC3045.Agile.Client.Entities
 {
     public class StoryTask : ObjectBase
     {
-        private CurrentStatus _CurrentStatus;
         private string _Description;
         private int _Hours;
         private bool _IsBlocked;
-        private Account _Owner;
         private int _StoryTaskId;
-        private TaskBurndownPoint _TaskBurndownPoint;
         private string _Title;
         private string _UserNotes;
+
+        //Relationships
+        private Account _Owner;
+        private CurrentStatus _CurrentStatus;
+        private UserStory _UserStory;
+        private TaskBurndownPoint _TaskBurndownPoint;
 
 
 
@@ -130,6 +133,19 @@ namespace CSC3045.Agile.Client.Entities
                 {
                     _UserNotes = value;
                     OnPropertyChanged(() => UserNotes);
+                }
+            }
+        }
+
+        public UserStory UserStory
+        {
+            get { return _UserStory; }
+            set
+            {
+                if (_UserStory != value)
+                {
+                    _UserStory = value;
+                    OnPropertyChanged(() => UserStory);
                 }
             }
         }

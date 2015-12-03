@@ -9,10 +9,10 @@ namespace CSC3045.Agile.Business.Entities
     public class CurrentStatus : EntityBase, IIdentifiableEntity
     {
         [DataMember]
-        public int StoryStatusId { get; set; }
+        public int CurrentStatusId { get; set; }
 
         [DataMember]
-        public string StoryStatusName { get; set; }
+        public string CurrentStatusName { get; set; }
 
         // Many to many declarationa
         public virtual ICollection<UserStory> AssociatedUserStories { get; set; }
@@ -22,8 +22,8 @@ namespace CSC3045.Agile.Business.Entities
 
         public int EntityId
         {
-            get { return StoryStatusId; }
-            set { StoryStatusId = value; }
+            get { return CurrentStatusId; }
+            set { CurrentStatusId = value; }
         }
 
         #endregion

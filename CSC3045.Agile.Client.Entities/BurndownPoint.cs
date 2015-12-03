@@ -10,6 +10,9 @@ namespace CSC3045.Agile.Client.Entities
         private int _HoursRemaining;
         private int _PointsRemaining;
 
+        //Relationships
+        private Burndown _Burndown;
+
         public int BurndownPointId
         {
             get { return _BurndownPointId; }
@@ -58,6 +61,19 @@ namespace CSC3045.Agile.Client.Entities
                 {
                     _HoursRemaining = value;
                     OnPropertyChanged(() => HoursRemaining);
+                }
+            }
+        }
+
+        public Burndown Burndown
+        {
+            get { return _Burndown; }
+            set
+            {
+                if (_Burndown != value)
+                {
+                    _Burndown = value;
+                    OnPropertyChanged(() => Burndown);
                 }
             }
         }

@@ -15,9 +15,6 @@ namespace CSC3045.Agile.Business.Entities
         public int SprintId { get; set; }
 
         [DataMember]
-        public Account ScrumMaster { get; set; }
-
-        [DataMember]
         public int SprintNumber { get; set; }
 
         [DataMember]
@@ -29,8 +26,19 @@ namespace CSC3045.Agile.Business.Entities
         [DataMember]
         public DateTime EndDate { get; set; }
 
+        //Relationships
+
+        [DataMember]
+        public Account ScrumMaster { get; set; }
+
         [DataMember]
         public ICollection<Account> SprintMembers { get; set; }
+
+        [DataMember]
+        public ICollection<UserStory> UserStories { get; set; }
+
+        [DataMember]
+        public Project Project { get; set; }
 
         #region IIdentifiableEntity members
 

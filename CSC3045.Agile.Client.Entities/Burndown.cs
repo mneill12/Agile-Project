@@ -6,7 +6,6 @@ namespace CSC3045.Agile.Client.Entities
     public class Burndown : ObjectBase
     {
         private int _BurndownId;
-        private string _BurndownName;
         private ICollection<BurndownPoint> _BurndownPoints;
 
         public int BurndownId
@@ -18,19 +17,6 @@ namespace CSC3045.Agile.Client.Entities
                 {
                     _BurndownId = value;
                     OnPropertyChanged(() => BurndownId);
-                }
-            }
-        }
-
-        public string BurndownName
-        {
-            get { return _BurndownName; }
-            set
-            {
-                if (_BurndownName != value)
-                {
-                    _BurndownName = value;
-                    OnPropertyChanged(() => BurndownName);
                 }
             }
         }

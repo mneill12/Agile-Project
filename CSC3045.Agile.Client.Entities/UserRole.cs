@@ -5,9 +5,11 @@ namespace CSC3045.Agile.Client.Entities
 {
     public class UserRole : ObjectBase
     {
-        private ICollection<Account> _Accounts;
         private int _UserRoleId;
         private string _UserRoleName;
+
+        //Relationships
+        private ICollection<Account> _Accounts;
 
         public int UserRoleId
         {

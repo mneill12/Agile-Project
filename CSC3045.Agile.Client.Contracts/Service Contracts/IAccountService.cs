@@ -10,6 +10,40 @@ namespace CSC3045.Agile.Client.Contracts
     [ServiceContract]
     public interface IAccountService : IServiceContract
     {
+        //CRUD
+
+        //Create
+        [OperationContract]
+        [FaultContract(typeof(NotFoundException))]
+        [TransactionFlow(TransactionFlowOption.Allowed)]
+        Account RegisterAccount(Account account);
+
+        //Read
+        [OperationContract]
+        [FaultContract(typeof(NotFoundException))]
+        Account GetAccountInfo(string loginEmail);
+
+        //Update
+        [OperationContract]
+        [TransactionFlow(TransactionFlowOption.Allowed)]
+        void UpdateAccountInfo(Account account);
+
+        //Relationships
+
+        [OperationContract]
+        [FaultContract(typeof(NotFoundException))]
+        IList<UserRole> GetAllUserRoles();
+
+        [OperationContract]
+        [FaultContract(typeof(NotFoundException))]
+        IList<Skill> GetAllSkills();
+
+        [OperationContract]
+        [FaultContract(typeof(NotFoundException))]
+        ICollection<StoryTask> GetOwnedTasks(int accountId);
+
+        //Custom
+
         [OperationContract]
         [FaultContract(typeof (NotFoundException))]
         ICollection<Account> GetAllAccounts();
@@ -20,32 +54,7 @@ namespace CSC3045.Agile.Client.Contracts
 
         [OperationContract]
         [FaultContract(typeof (NotFoundException))]
-        Account GetAccountInfo(string loginEmail);
-
-        [OperationContract]
-        [FaultContract(typeof (NotFoundException))]
         Account GetAccountInfoWithPasswordAndUserRoles(string loginEmail, string password);
-
-        [OperationContract]
-        [FaultContract(typeof (NotFoundException))]
-        [TransactionFlow(TransactionFlowOption.Allowed)]
-        Account RegisterAccount(Account account);
-
-        [OperationContract]
-        [TransactionFlow(TransactionFlowOption.Allowed)]
-        void UpdateAccountInfo(Account account);
-
-        [OperationContract]
-        [FaultContract(typeof (NotFoundException))]
-        IList<UserRole> GetAllUserRoles();
-
-        [OperationContract]
-        [FaultContract(typeof(NotFoundException))]
-        IList<Skill> GetAllSkills();
-
-        [OperationContract]
-        [FaultContract(typeof(NotFoundException))]
-        ICollection<StoryTask> GetOwnedTasks(int accountId);
 
         [OperationContract]
         [FaultContract(typeof(NotFoundException))]
