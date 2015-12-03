@@ -10,10 +10,6 @@ namespace CSC3045.Agile.Client.Proxies
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class SprintClient : ClientBase<ISprintService>, ISprintService
     {
-        public ICollection<Sprint> GetSprintForProject(int projectId)
-        {
-            return Channel.GetSprintForProject(projectId);
-        }
 
         public Sprint GetSprintInfo(int sprintId){
             return Channel.GetSprintInfo(sprintId);
@@ -33,6 +29,16 @@ namespace CSC3045.Agile.Client.Proxies
         public ICollection<Sprint> GetAllSprints()
         {
             return Channel.GetAllSprints();
+        }
+
+        public ICollection<Sprint> GetSprintsForProjectId(int projectId)
+        {
+            return Channel.GetSprintsForProjectId(projectId);
+        }
+
+        public ICollection<Sprint> GetSprintsForAccountId(int accountId)
+        {
+            return Channel.GetSprintsForAccountId(accountId);
         }
     }
 }

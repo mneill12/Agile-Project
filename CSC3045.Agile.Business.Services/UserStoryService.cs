@@ -46,7 +46,7 @@ namespace CSC3045.Agile.Business.Services
         }
 
         [OperationBehavior(TransactionScopeRequired = true)]
-        public void UpdateUserStoryById(UserStory userStory)
+        public void UpdateUserStory(UserStory userStory)
         {
             ExecuteFaultHandledOperation(() =>
             {
@@ -55,6 +55,17 @@ namespace CSC3045.Agile.Business.Services
                 UserStory updatedUserStory = userStoryRepository.Update(userStory);
             });
         }
+
+        public void RemoveUserStoryById(int userStoryId)
+        {
+            ExecuteFaultHandledOperation(() =>
+            {
+                var userStoryRepository = _DataRepositoryFactory.GetDataRepository<IUserStoryRepository>();
+
+                userStoryRepository.Remove(userStoryId);
+            });
+        }
+
 
         [OperationBehavior(TransactionScopeRequired = true)]
         public UserStory AddNewUserStory(UserStory userStory)

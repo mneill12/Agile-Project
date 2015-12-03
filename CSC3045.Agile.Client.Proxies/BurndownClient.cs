@@ -22,7 +22,7 @@ namespace CSC3045.Agile.Client.Proxies
             return Channel.GetTotalHoursRemainingForStory(storyId);
         }
 
-        public int GetTotalHoursRemainingForDay(System.DateTime date)
+        public int GetTotalHoursRemainingForDay(DateTime date)
         {
             return Channel.GetTotalHoursRemainingForDay(date);
         }

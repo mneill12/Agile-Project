@@ -29,17 +29,6 @@ namespace CSC3045.Agile.Business.Services
             _DataRepositoryFactory = dataRepositoryFactory;
         }
 
-        public ICollection<Sprint> GetSprintForProject(int projectId)
-        {
-            return ExecuteFaultHandledOperation(() =>
-            {
-                var sprintRepository = _DataRepositoryFactory.GetDataRepository<ISprintRepository>();
-
-                return sprintRepository.GetSprintForProject(projectId);
-            });
-        }
-
-
         public ICollection<Sprint> GetSprintForScrumMaster(int scrumMasterId)
         {
             return ExecuteFaultHandledOperation(() =>
@@ -138,6 +127,24 @@ namespace CSC3045.Agile.Business.Services
             });
         }
 
+        public ICollection<Sprint> GetSprintsForProjectId(int projectId)
+        {
+            return ExecuteFaultHandledOperation(() =>
+            {
+                var sprintRepository = _DataRepositoryFactory.GetDataRepository<ISprintRepository>();
 
+                return sprintRepository.GetSprintForProject(projectId);
+            });
+        }
+
+        public ICollection<Sprint> GetSprintsForAccountId(int accountId)
+        {
+            return ExecuteFaultHandledOperation(() =>
+            {
+                var sprintRepository = _DataRepositoryFactory.GetDataRepository<ISprintRepository>();
+
+                return sprintRepository.GetSprintForAccount(accountId);
+            });
+        }
     }
 }
