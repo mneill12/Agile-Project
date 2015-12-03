@@ -31,6 +31,7 @@ namespace ClientDesktop.ViewModels
         private UserStory _SelectedUserStory;
         private string _StoryNumberText;
         private string _StoryDescText;
+        private string _StoryPointsText;
 
         private int currentProjectId;
 
@@ -84,6 +85,17 @@ namespace ClientDesktop.ViewModels
             }
         }
 
+        public string StoryPointsText
+        {
+            get { return _StoryPointsText; }
+            set
+            {
+                if (_StoryPointsText == value) return;
+                _StoryPointsText = value;
+                OnPropertyChanged("StoryPointsText");
+            }
+        }
+
         public UserStory SelectedUserStory
         {
             get { return _SelectedUserStory; }
@@ -95,6 +107,7 @@ namespace ClientDesktop.ViewModels
                 {
                     StoryNumberText = value.StoryNumber;
                     StoryDescText = value.Description;
+                    StoryPointsText = value.StoryPoints.ToString();
                 }
                 OnPropertyChanged("SelectedUserStory");
             }
@@ -103,7 +116,8 @@ namespace ClientDesktop.ViewModels
         public override  void OnNavigatedTo(NavigationContext navigationContext)
         {
             var id = (int)navigationContext.Parameters["projectId"];
-            currentProjectId = id;
+            //needs changed to id
+            currentProjectId = 1;
 
         }
 
@@ -144,6 +158,7 @@ namespace ClientDesktop.ViewModels
                 UserStory story = _BacklogStories.ElementAt(storyIndex);
                 story.StoryNumber = StoryNumberText;
                 story.Description = StoryDescText;
+                story.StoryPoints = Int32.Parse(StoryPointsText);
 
                 WithClient(_ServiceFactory.CreateClient<IUserStoryService>(), userStoryClient =>
                 {
@@ -171,6 +186,7 @@ namespace ClientDesktop.ViewModels
             {
                 StoryNumber = "New Story Name",
                 Description = "New Story Description",
+                StoryPoints = 0,
                 Project = project
             };
 

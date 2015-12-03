@@ -238,23 +238,27 @@ namespace CSC3045.Agile.Data
                 new UserStory
                 {
                     StoryNumber = "P1B1Story",
-                    Description = "Project1Backlog1Story"
+                    Description = "Project1Backlog1Story",
+                    StoryPoints = 15
                 },
                 new UserStory
                 {
                     StoryNumber = "P1B2Story",
-                    Description = "Project1Backlog1Story"
+                    Description = "Project1Backlog1Story",
+                    StoryPoints = 35
                 },
                    
                 new UserStory
                 {
                     StoryNumber = "P2B1Story",
-                    Description = "Project2Backlog1Story"
+                    Description = "Project2Backlog1Story",
+                    StoryPoints = 24
                 },
                 new UserStory
                 {
                     StoryNumber = "P2B2Story",
-                    Description = "Project2Backlog2Story"
+                    Description = "Project2Backlog2Story",
+                    StoryPoints = 14
                 },
 
                 new UserStory

@@ -106,44 +106,56 @@ namespace CSC3045.Agile.ServiceHost.Console
             var userStories = userStoryService.GetAllUserStories();
 
             //Check if data has already been loaded before
-            if (project1.ProjectManager == null || project2.ProjectManager == null || project1.AllUsers.Count == 0 || project2.AllUsers.Count == 0)
+            if (project1.ProjectManager == null || project2.ProjectManager == null || project1.AllUsers.Count == 0 ||
+                project2.AllUsers.Count == 0)
             {
                 project1.ProjectManager = accounts.Single(a => a.AccountId == 1);
                 project1.ProductOwner = accounts.Single(a => a.AccountId == 2);
-                project1.ScrumMasters = new List<Account>() { accounts.Single(a => a.AccountId == 3) };
-                project1.Developers = new List<Account>() {
+                project1.ScrumMasters = new List<Account>() {accounts.Single(a => a.AccountId == 3)};
+                project1.Developers = new List<Account>()
+                {
                     accounts.Single(a => a.AccountId == 4),
                     accounts.Single(a => a.AccountId == 5),
                     accounts.Single(a => a.AccountId == 6),
                     accounts.Single(a => a.AccountId == 7)
                 };
                 project1.AllUsers = accounts;
-                project1.BacklogStories = new List<UserStory>()
-                {
-                    userStories.Single(s => s.UserStoryId == 2),
-                    userStories.Single(s => s.UserStoryId == 3)
-                };
-                
+
 
                 project2.ProjectManager = accounts.Single(a => a.AccountId == 7);
                 project2.ProductOwner = accounts.Single(a => a.AccountId == 6);
-                project2.ScrumMasters = new List<Account>() { accounts.Single(a => a.AccountId == 5) };
-                project2.Developers = new List<Account>() {
+                project2.ScrumMasters = new List<Account>() {accounts.Single(a => a.AccountId == 5)};
+                project2.Developers = new List<Account>()
+                {
                     accounts.Single(a => a.AccountId == 4),
                     accounts.Single(a => a.AccountId == 3),
                     accounts.Single(a => a.AccountId == 2),
                     accounts.Single(a => a.AccountId == 1)
                 };
                 project2.AllUsers = accounts;
+
+                projectService.UpdateProjectInfo(project1);
+                projectService.UpdateProjectInfo(project2);
+            }
+
+            if (project1.BacklogStories == null || project1.BacklogStories.Count == 0)
+            {
+                project1.BacklogStories = new List<UserStory>()
+                {
+                    userStories.Single(s => s.UserStoryId == 2),
+                    userStories.Single(s => s.UserStoryId == 3)
+                };
+            }
+
+            if (project2.BacklogStories == null || project2.BacklogStories.Count == 0)
+            {
                 project2.BacklogStories = new List<UserStory>()
                 {
                     userStories.Single(s => s.UserStoryId == 4),
                     userStories.Single(s => s.UserStoryId == 5)
                 };
-
-                projectService.UpdateProjectInfo(project1);
-                projectService.UpdateProjectInfo(project2);
             }
+
             // End load project sample data
         }
 
