@@ -194,7 +194,6 @@ namespace ClientDesktop.ViewModels
             {
                 AvailableSkills = GlobalCommands.MyAccount.Skills.ToList();
             }
-            GetAllSprints();
 
             UpdateProjectsForAccount();
 
@@ -243,6 +242,7 @@ namespace ClientDesktop.ViewModels
             }
         }
 
+        //ToDo: This is to test the sprint project, needs to be changed so sprints are actually utilised
         public void GetAllSprints()
         {
             ICollection<Sprint> allSprints = null;
