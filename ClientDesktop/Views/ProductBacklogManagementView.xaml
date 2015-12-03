@@ -70,9 +70,6 @@
             </Grid>
             
             <ListView Name="StoryListView" Margin="0,5,0,0" Grid.Row="2" ItemsSource="{Binding BacklogStories}" SelectedItem="{Binding SelectedUserStory, Mode=TwoWay}" >
-                <ListView.Style>
-                    <Style TargetType="{x:Type ListView}"></Style>
-                </ListView.Style>
                 <ListView.View>
                     <GridView>
                         <GridViewColumn>
