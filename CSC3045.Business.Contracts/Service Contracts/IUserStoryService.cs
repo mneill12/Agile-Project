@@ -34,5 +34,9 @@ namespace CSC3045.Agile.Business.Contracts
         [FaultContract(typeof(NotFoundException))]
         [TransactionFlow(TransactionFlowOption.Allowed)]
         UserStory AddNewUserStory(UserStory userStory);
+
+        [OperationContract]
+        [FaultContract(typeof (NotFoundException))]
+        void RemoveUserStory(UserStory story);
     }
 }

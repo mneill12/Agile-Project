@@ -32,5 +32,9 @@ namespace CSC3045.Agile.Client.Contracts
 
         [OperationContract]
         ICollection<UserStory> GetAllStoriesForProject(int projectId);
+
+        [OperationContract]
+        [FaultContract(typeof(NotFoundException))]
+        void RemoveUserStory(UserStory story);
     }
 }

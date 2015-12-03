@@ -81,5 +81,13 @@ namespace CSC3045.Agile.Business.Services
 
             return userStoryRepository.GetUserStoriesByProject(projectId);
         }
+
+
+        public void RemoveUserStory(UserStory story)
+        {
+            var userStoryRepository = _DataRepositoryFactory.GetDataRepository<IUserStoryRepository>();
+
+            userStoryRepository.Remove(story);
+        }
     }
 }
