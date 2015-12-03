@@ -10,6 +10,7 @@ namespace CSC3045.Agile.Business.Entities
     [DataContract]
     public class Project : EntityBase, IIdentifiableEntity
     {
+
         [DataMember]
         public int ProjectId { get; set; }
 
@@ -29,10 +30,11 @@ namespace CSC3045.Agile.Business.Entities
         public Backlog Backlog { get; set; }
 
         [DataMember]
-        public ICollection<Sprint> Sprints { get; set; }
+        public List<Burndown> Burndowns { get; set; }
 
         [DataMember]
-        public ICollection<Burndown> Burndowns { get; set; }
+        [InverseProperty("SprintFor")]
+        public ICollection<Sprint> Sprints { get; set; }
 
         [DataMember]
         [InverseProperty("UserFor")]

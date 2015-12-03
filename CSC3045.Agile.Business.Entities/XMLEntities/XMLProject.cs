@@ -36,6 +36,9 @@ namespace CSC3045.Agile.Business.Entities.XMLEntities
         public List<XMLBurndown> Burndowns { get; set; }
 
         [DataMember]
+        public DateTime ProjectSavedDate { get; set; }
+
+        [DataMember]
         [InverseProperty("UserFor")]
         public List<XMLAccount> AllUsers { get; set; }
 

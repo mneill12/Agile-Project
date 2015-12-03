@@ -71,6 +71,24 @@ namespace CSC3045.Agile.Business.Services
             });
         }
 
+        [OperationBehavior(TransactionScopeRequired = true)]
+        public void SaveProject(Project project)
+        {
+            ExecuteFaultHandledOperation(() =>
+            {
+                var projectRepository = _DataRepositoryFactory.GetDataRepository<IProjectRepository>();
+
+                var updatedProject = projectRepository.Update(project);
+
+                if (updatedProject == null)
+                {
+                    var ex = new NotFoundException(string.Format("Project with id {0} could not be updated or found", project.ProjectId));
+                    throw new FaultException<NotFoundException>(ex, ex.Message);
+                }
+            });
+           
+        }
+
         /// <summary>
         /// Updates the project by getting the latest project from the database and updating it in the same context
         /// </summary>

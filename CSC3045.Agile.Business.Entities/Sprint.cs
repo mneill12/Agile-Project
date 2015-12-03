@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Metadata.Edm;
 using System.Runtime.Serialization;
 using Core.Common.Contracts;
 using Core.Common.Core;
@@ -38,6 +39,7 @@ namespace CSC3045.Agile.Business.Entities
         [DataMember]
         public ICollection<Account> SprintMembers { get; set; }
 
+        public ICollection<Project> SprintFor { get; set; } 
         #region IIdentifiableEntity members
 
         public int EntityId

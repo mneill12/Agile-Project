@@ -96,6 +96,7 @@ namespace CSC3045.Agile.Business.Services
             xmlProject.ProjectId = project.ProjectId;
             xmlProject.ProjectName = project.ProjectName;
             xmlProject.ProjectStartDate = project.ProjectStartDate;
+            xmlProject.ProjectSavedDate = DateTime.Now;
 
             // Remap single complex types
             xmlProject.ProductOwner = RemapAccountEntity(project.ProductOwner);

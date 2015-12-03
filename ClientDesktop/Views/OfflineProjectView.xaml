@@ -9,19 +9,60 @@
                           d:DesignHeight="560" d:DesignWidth="1280">
     <Grid x:Name="RootGrid">
         <DockPanel LastChildFill="True" Dock="Right" Width="1000" HorizontalAlignment="Right">
-            <Grid Height="50" VerticalAlignment="Top">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50"></RowDefinition>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="200"></ColumnDefinition>
-                    <ColumnDefinition Width="200"></ColumnDefinition>
-                    <ColumnDefinition Width="200"></ColumnDefinition>
-                    <ColumnDefinition Width="200"></ColumnDefinition>
-                    <ColumnDefinition Width="200"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Project.ProjectName}"></TextBlock>
-            </Grid>
+            <StackPanel>
+                <Grid Height="50" VerticalAlignment="Top">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"></ColumnDefinition>
+                        <ColumnDefinition Width="150"></ColumnDefinition>
+                        <ColumnDefinition Width="250"></ColumnDefinition>
+                        <ColumnDefinition Width="150"></ColumnDefinition>
+                        <ColumnDefinition Width="250"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" FontSize="20" Foreground="AliceBlue" FontWeight="DemiBold" Text="{Binding Project.ProjectName}"></TextBlock>
+                    <TextBlock Grid.Row="0" Grid.Column="1" FontSize="20" Foreground="AliceBlue" Text="Start Date:"></TextBlock>
+                    <TextBlock Grid.Row="0" Grid.Column="2" FontSize="20" Foreground="AliceBlue" FontWeight="DemiBold" Text="{Binding ProjectStartDate}"></TextBlock>
+                    <TextBlock Grid.Row="0" Grid.Column="3" FontSize="20" Foreground="AliceBlue" Text="Saved Date:"></TextBlock>
+                    <TextBlock Grid.Row="0" Grid.Column="4" FontSize="20" Foreground="AliceBlue" Text="{Binding ProjectSavedDate}"></TextBlock>
+                </Grid>
+                <TabControl ItemsSource="{Binding SprintList}">
+                    <TabControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding SprintName}"/>
+                        </DataTemplate>
+                    </TabControl.ItemTemplate>
+                    <TabControl.ContentTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions >
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions >
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0" Grid.Row="0" Margin="5" Text="Start Date:" FontSize="15" VerticalAlignment="Center" Foreground="White"/>
+                                <TextBlock Grid.Column="1" Grid.Row="0" Margin="5" Text="{Binding StartDate}" FontSize="15" VerticalAlignment="Center" Foreground="White"/>
+                                <TextBlock Grid.Column="2" Grid.Row="0" Margin="5" Text="End Date: " FontSize="15" VerticalAlignment="Center" Foreground="White"/>
+                                <TextBlock Grid.Column="3" Grid.Row="0" Margin="5" Text="{Binding EndDate}" FontSize="15" VerticalAlignment="Center" Foreground="White"/>
+                                <TextBlock Grid.Column="4" Grid.Row="0" Margin="5" Text="Scrum Master:" FontSize="15" VerticalAlignment="Center" Foreground="White"/>
+                                <TextBlock Grid.Column="5" Grid.Row="0" Margin="5" Text="{Binding ScrumMaster.LoginEmail}" FontSize="15" VerticalAlignment="Center" Foreground="White"/>
+                            </Grid>
+                        </DataTemplate>
+                    </TabControl.ContentTemplate>
+                </TabControl>
+            </StackPanel>
         </DockPanel>
         <DockPanel LastChildFill="True" Dock="Left" Width="250" HorizontalAlignment="Left">
         <StackPanel>

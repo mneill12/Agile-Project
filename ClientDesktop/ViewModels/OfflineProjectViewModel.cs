@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.IO;
 using System.Linq;
@@ -29,9 +30,11 @@ namespace ClientDesktop.ViewModels
         public XMLProject Project { get; set; }
         public String ProductOwner { get; set; }
         public String ProjectManager { get; set; }
+        public String ProjectStartDate { get; set; }
+        public String ProjectSavedDate { get; set; }
         public List<String> DeveloperList { get; set; }
         public List<String> ScrummasterList { get; set; }
-
+        public List<XMLSprint> SprintList { get; set; }
             #endregion
 
         IServiceFactory _ServiceFactory;
@@ -52,10 +55,14 @@ namespace ClientDesktop.ViewModels
             XMLProject loadedProject = LoadProject(GlobalCommands.LoadedXMLFilePath);
             ScrummasterList = new List<string>();
             DeveloperList = new List<string>();
+            SprintList = new List<XMLSprint>();
 
             Project = loadedProject;
             ProductOwner = loadedProject.ProductOwner.FirstName + nbsp + loadedProject.ProductOwner.LastName;
             ProjectManager = loadedProject.ProjectManager.FirstName + nbsp + loadedProject.ProjectManager.LastName;
+            ProjectStartDate = String.Format("{0:M/d/yyyy}", loadedProject.ProjectStartDate);
+            ProjectSavedDate = String.Format("{0:M/d/yyyy}", loadedProject.ProjectSavedDate);
+            SprintList = loadedProject.Sprints;
 
             foreach (XMLAccount user in loadedProject.Developers)
             {

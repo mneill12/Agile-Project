@@ -24,6 +24,10 @@ namespace CSC3045.Agile.Business.Contracts
 
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
+        void SaveProject(Project project);
+
+        [OperationContract]
+        [TransactionFlow(TransactionFlowOption.Allowed)]
         void UpdateProjectInfo(Project project);
 
         [OperationContract]

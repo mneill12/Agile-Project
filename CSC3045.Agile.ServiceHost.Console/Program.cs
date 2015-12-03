@@ -142,6 +142,24 @@ namespace CSC3045.Agile.ServiceHost.Console
 
             var accounts = accountService.GetAllAccounts();
 
+            project1.Sprints.Add(new Sprint()
+            {
+                SprintName = "Sprint 1",
+                SprintNumber = 1,
+                StartDate = DateTime.Today,
+                EndDate = DateTime.Now.AddDays(7)
+            });
+
+            project1.Sprints.Add(new Sprint()
+            {
+                SprintName = "Sprint 2",
+                SprintNumber = 1,
+                StartDate = DateTime.Now.AddDays(7),
+                EndDate = DateTime.Now.AddDays(21)
+            });
+
+            projectService.SaveProject(project1);
+
             //Check if data has already been loaded before
             if (project1.ProjectManager == null || project2.ProjectManager == null || project1.AllUsers.Count == 0 || project2.AllUsers.Count == 0)
             {
@@ -155,6 +173,7 @@ namespace CSC3045.Agile.ServiceHost.Console
                     accounts.Single(a => a.AccountId == 7)
                 };
                 project1.AllUsers = accounts;
+             
 
                 project2.ProjectManager = accounts.Single(a => a.AccountId == 7);
                 project2.ProductOwner = accounts.Single(a => a.AccountId == 6);

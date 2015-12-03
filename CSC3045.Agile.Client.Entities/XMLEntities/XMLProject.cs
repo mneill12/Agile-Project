@@ -15,6 +15,7 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
 
         private string _ProjectName;
         private DateTime _ProjectStartDate;
+        private DateTime _ProjectSavedDate;
         private XMLBacklog _Backlog;
         private List<XMLSprint> _Sprints;
         private List<XMLBurndown> _Burndowns;
@@ -101,6 +102,18 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
                 if (_ProjectStartDate != value)
                 {
                     _ProjectStartDate = value;
+                }
+            }
+        }
+
+        public DateTime ProjectSavedDate
+        {
+            get { return _ProjectSavedDate; }
+            set
+            {
+                if (_ProjectSavedDate != value)
+                {
+                    _ProjectSavedDate = value;
                 }
             }
         }
