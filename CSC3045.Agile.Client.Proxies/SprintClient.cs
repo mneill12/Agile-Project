@@ -30,6 +30,9 @@ namespace CSC3045.Agile.Client.Proxies
             Channel.UpdateSprintInfo(sprint);
         }
 
-       
+        public ICollection<Sprint> GetAllSprints()
+        {
+            return Channel.GetAllSprints();
+        }
     }
 }

@@ -21,6 +21,10 @@ namespace CSC3045.Agile.Business.Contracts
         [TransactionFlow(TransactionFlowOption.Allowed)]
         void UpdateSprintInfo(Sprint sprint);
 
+        [OperationContract]
+        [TransactionFlow(TransactionFlowOption.Allowed)]
+        ICollection<Sprint> GetAllSprints();
+
 
     }
 }

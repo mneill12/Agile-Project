@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Linq;
 using System.ServiceModel;
 using Core.Common.Contracts;
 using Core.Common.Exceptions;
@@ -109,10 +110,6 @@ namespace CSC3045.Agile.Business.Services
             });
         }
 
-
-
-
-
         public Sprint GetSprintInfo(int sprintId)
         {
             return ExecuteFaultHandledOperation(() =>
@@ -131,14 +128,13 @@ namespace CSC3045.Agile.Business.Services
             });
         }
 
-
-        public IEnumerable<Sprint> GetAllSprints()
+        public ICollection<Sprint> GetAllSprints()
         {
             return ExecuteFaultHandledOperation(() =>
             {
                 var sprintRepository = _DataRepositoryFactory.GetDataRepository<ISprintRepository>();
                 
-                return sprintRepository.Get();
+                return sprintRepository.Get().ToList();
             });
         }
 
