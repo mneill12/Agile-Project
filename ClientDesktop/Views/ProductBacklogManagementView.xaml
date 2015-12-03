@@ -4,7 +4,6 @@
                           xmlns:core="CSC3045AgileCore"
                           xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
                           Height="590" Width="1280">
-    
     <Grid>
         
         <Grid.RowDefinitions>

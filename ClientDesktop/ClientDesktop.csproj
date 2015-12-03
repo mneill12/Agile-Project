@@ -186,6 +186,7 @@
     <Compile Include="Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\ManageSprintViewModel.cs" />
     <Compile Include="ViewModels\PlanningPoker\CreatePlanningPokerSessionViewModel.cs" />
     <Compile Include="ViewModels\CreateProjectViewModel.cs" />
     <Compile Include="ShellViewModel.cs" />
@@ -203,6 +204,9 @@
     <Compile Include="ViewModels\Tasks\TaskDashboardViewModel.cs" />
     <Compile Include="ViewModels\Tasks\TaskDetailsViewModel.cs" />
     <Compile Include="ViewModels\TopBarViewModel.cs" />
+    <Compile Include="Views\ManageSprintView.xaml.cs">
+      <DependentUpon>ManageSprintView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PlanningPoker\CreatePlanningPokerSessionView.xaml.cs">
       <DependentUpon>CreatePlanningPokerSessionView.xaml</DependentUpon>
     </Compile>
@@ -264,6 +268,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Shell.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ManageSprintView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
