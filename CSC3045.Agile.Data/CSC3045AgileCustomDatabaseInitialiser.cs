@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using CSC3045.Agile.Business.Entities;
 
 namespace CSC3045.Agile.Data
 {
-    internal class Csc3045AgileCustomDatabaseInitialiser : DropCreateDatabaseIfModelChanges<Csc3045AgileContext>
+    internal class Csc3045AgileCustomDatabaseInitialiser : DropCreateDatabaseAlways<Csc3045AgileContext>
     {
         protected override void Seed(Csc3045AgileContext context)
         {
@@ -226,6 +227,28 @@ namespace CSC3045.Agile.Data
                 Backlog = new Backlog()
             });
 
+            IList<Sprint> defaultSprints = new List<Sprint>();
+            defaultSprints.Add( new Sprint
+            {
+                SprintName    = "Mobile App Sprint 1",
+                StartDate = new DateTime(2015, 11, 1),
+                EndDate = new DateTime(2015, 11, 7)
+
+            });
+
+            defaultSprints.Add( new Sprint
+            {
+                SprintName    = "Mobile App Sprint 2",
+                StartDate = new DateTime(2015, 11, 10),
+                EndDate =   new DateTime(2015, 11, 17)
+
+            });
+
+            foreach (var sprint in defaultSprints)
+            {
+                context.SprintSet.Add(sprint);
+            }
+            
             foreach (var project in defaultProjects)
             {
                 context.ProjectSet.Add(project);
