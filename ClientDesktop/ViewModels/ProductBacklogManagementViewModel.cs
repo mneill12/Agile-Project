@@ -7,6 +7,7 @@ using System.Linq;
 using System.ServiceModel;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Navigation;
 using ClientDesktop.Views;
 using Core.Common;
 using Core.Common.Contracts;
@@ -44,8 +45,6 @@ namespace ClientDesktop.ViewModels
             AddNewStoryCommand = new DelegateCommand<object>(OnAddNewStory);
             UpdateStoryCommand = new DelegateCommand<object>(OnUpdateStory);
             RemoveStoryCommand = new DelegateCommand<object>(OnRemoveStory);
-
-
         }
 
         public DelegateCommand<object> AddNewStoryCommand { get; private set; }
@@ -101,6 +100,13 @@ namespace ClientDesktop.ViewModels
             }
         }
 
+        public override  void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            var id = (int)navigationContext.Parameters["projectId"];
+            currentProjectId = id;
+
+        }
+
         protected override void OnViewLoaded()
         {
             GetUserStories();
@@ -110,7 +116,7 @@ namespace ClientDesktop.ViewModels
         {
             WithClient(_ServiceFactory.CreateClient<IUserStoryService>(), userStoryClient =>
             {
-                ICollection<UserStory> stories = userStoryClient.GetAllStoriesForProject(1);
+                ICollection<UserStory> stories = userStoryClient.GetAllStoriesForProject(currentProjectId);
                 BacklogStories = stories.ToList();
             });
         }
@@ -158,7 +164,7 @@ namespace ClientDesktop.ViewModels
             WithClient(_ServiceFactory.CreateClient<IProjectService>(), projectClient =>
             {
 
-                project = projectClient.GetProjectInfo(1);
+                project = projectClient.GetProjectInfo(currentProjectId);
             });
 
             var newUserStory = new UserStory
@@ -170,7 +176,7 @@ namespace ClientDesktop.ViewModels
 
             WithClient(_ServiceFactory.CreateClient<IProjectService>(), projectClient =>
             {
-                projectClient.AddUserStoryToProject(1);
+                projectClient.AddUserStoryToProject(currentProjectId);
             });
 
 
