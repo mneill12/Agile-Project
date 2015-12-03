@@ -27,7 +27,7 @@ namespace ClientDesktop.ViewModels
         private string _SprintStartDate;
         private string _SprintEndDate;
 
-        private int _currentProjectId
+        private int _currentProjectId;
 
         private List<Account> _ProductOwners;
         private List<Account> _ScrumMasters;
