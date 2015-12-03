@@ -127,9 +127,12 @@ namespace ClientDesktop.ViewModels
             set
             {
                 if (_SelectedProjectTab == value) return;
-                _SelectedProjectTab = value;
-                CurrentProjectId = value.ProjectId;
-                OnPropertyChanged("SelectedProjectTab");
+                if (value != null)
+                {
+                    _SelectedProjectTab = value;
+                    CurrentProjectId = value.ProjectId;
+                    OnPropertyChanged("SelectedProjectTab");
+                }
             }
         }
 

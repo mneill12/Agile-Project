@@ -13,28 +13,34 @@ namespace CSC3045.Agile.Client.Contracts
     [ServiceContract]
     public interface IUserStoryService : IServiceContract
     {
+        //CRUD
+
+        //Create
+        [OperationContract]
+        [FaultContract(typeof(NotFoundException))]
+        [TransactionFlow(TransactionFlowOption.Allowed)]
+        UserStory AddNewUserStory(UserStory userStory);
+
+        //Read
         [OperationContract]
         [FaultContract(typeof(NotFoundException))]
         UserStory GetUserStoryById(int userStoryId);
+
+        //Update
+        [OperationContract]
+        [TransactionFlow(TransactionFlowOption.Allowed)]
+        void UpdateUserStory(UserStory userStory);
+
+        //Delete
+        [OperationContract]
+        [FaultContract(typeof(NotFoundException))]
+        void RemoveUserStory(int userStoryId);
 
         [OperationContract]
         [FaultContract(typeof(NotFoundException))]
         ICollection<UserStory> GetAllUserStories();
 
         [OperationContract]
-        [TransactionFlow(TransactionFlowOption.Allowed)]
-        void UpdateUserStoryById(UserStory userStory);
-
-        [OperationContract]
-        [FaultContract(typeof(NotFoundException))]
-        [TransactionFlow(TransactionFlowOption.Allowed)]
-        UserStory AddNewUserStory(UserStory userStory);
-
-        [OperationContract]
         ICollection<UserStory> GetAllStoriesForProject(int projectId);
-
-        [OperationContract]
-        [FaultContract(typeof(NotFoundException))]
-        void RemoveUserStory(UserStory story);
     }
 }
