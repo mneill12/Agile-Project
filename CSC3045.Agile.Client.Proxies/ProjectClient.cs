@@ -38,5 +38,11 @@ namespace CSC3045.Agile.Client.Proxies
         {
             return Channel.GetProjectInfo(projectId);
         }
+
+
+        public void AddUserStoryToProject(int projectId)
+        {
+            Channel.AddUserStoryToProject(projectId);
+        }
     }
 }

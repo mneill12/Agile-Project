@@ -18,9 +18,6 @@ namespace CSC3045.Agile.Business.Entities
         public Account ScrumMaster { get; set; }
 
         [DataMember]
-        public Backlog Backlog { get; set; }
-
-        [DataMember]
         public int SprintNumber { get; set; }
 
         [DataMember]

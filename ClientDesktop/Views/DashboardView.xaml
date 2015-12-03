@@ -65,7 +65,7 @@
                     <Grid.Resources>
                         <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
                     </Grid.Resources>
-                    <TabControl x:Name="ProjectTabs" Controls:TabControlHelper.IsUnderlined="True" ItemsSource="{Binding AllProjects, Mode=TwoWay, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}">
+                    <TabControl x:Name="ProjectTabs" Controls:TabControlHelper.IsUnderlined="True" SelectedItem="{Binding SelectedProjectTab}" ItemsSource="{Binding AllProjects, Mode=TwoWay, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}">
                         <TabControl.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding ProjectName}"/>
@@ -101,13 +101,15 @@
                                             <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
 
                                         <Button Grid.Column="0" HorizontalAlignment="Left" Margin="5" Command="{Binding  ElementName=RootGrid, Path=DataContext.ManageProjectBacklogCommand}" Content="Manage Project Backlog (PO Only)" BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" />
-                                        <Button Grid.Column="1" HorizontalAlignment="Left" Margin="5" Command="{Binding  ElementName=RootGrid, Path=DataContext.ManageProjectBacklogCommand}"  Content="Manage Project Backlog (PO Only)" BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" />
-                                        <Button Grid.Column="2" HorizontalAlignment="Left" Margin="5" Command="{Binding  ElementName=RootGrid, Path=DataContext.AddSprint}"  Content="Add Sprint (SM Only)"  BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" />
-                                        <Button Grid.Column="3" HorizontalAlignment="Left" Margin="5" Command="{Binding  ElementName=RootGrid, Path=DataContext.SaveProjectXML}" Content="Save Project XML"  BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" />
-                                        <Button Grid.Column="4" HorizontalAlignment="Left" Margin="5" Command="{Binding  ElementName=RootGrid, Path=DataContext.ViewBurndownCommand}" Content="Project Burndown"  BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" />
+                                        <Button Grid.Column="1" HorizontalAlignment="Left" Margin="5" Command="{Binding  ElementName=RootGrid, Path=DataContext.AddSprint}"  Content="Add Sprint (SM Only)"  BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" />
+                                        <Button Grid.Column="2" HorizontalAlignment="Left" Margin="5" Command="{Binding  ElementName=RootGrid, Path=DataContext.SaveProjectXML}" Content="Save Project XML"  BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" />
+                                        <Button Grid.Column="3" HorizontalAlignment="Left" Margin="5" Command="{Binding  ElementName=RootGrid, Path=DataContext.ViewBurndownCommand}" Content="Project Burndown"  BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" />
+                                        <Button Grid.Column="4" HorizontalAlignment="Left" Margin="5" Command="{Binding  ElementName=RootGrid, Path=DataContext.CreateNewSprintCommand}" Content="Create New Sprint"  BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" />
+
                                     </Grid>
 
                                     <TabControl Grid.Row="3" Grid.ColumnSpan="4" Grid.Column="0" Controls:TabControlHelper.IsUnderlined="True">

@@ -19,6 +19,7 @@ namespace ClientDesktop.ViewModels
     public class DashboardViewModel : ViewModelBase
     {
         //TODO: Move these to top bar or a region of its own, not needed as account info is stored globally
+
         #region DashboardView Bindings
 
         private string _FirstName;
@@ -30,12 +31,11 @@ namespace ClientDesktop.ViewModels
         private List<Project> _AllProjects;
         private int _CurrentProjectId;
 
+        private Project _SelectedProjectTab;
+
         public string FirstName
         {
-            get
-            {
-                return _FirstName;
-            }
+            get { return _FirstName; }
             set
             {
                 if (_FirstName == value) return;
@@ -46,10 +46,7 @@ namespace ClientDesktop.ViewModels
 
         public string Surname
         {
-            get
-            {
-                return _Surname;
-            }
+            get { return _Surname; }
             set
             {
                 if (_Surname == value) return;
@@ -60,10 +57,7 @@ namespace ClientDesktop.ViewModels
 
         public string EmailAddress
         {
-            get
-            {
-                return _EmailAddress;
-            }
+            get { return _EmailAddress; }
             set
             {
                 if (_EmailAddress == value) return;
@@ -127,19 +121,32 @@ namespace ClientDesktop.ViewModels
             }
         }
 
+        public Project SelectedProjectTab
+        {
+            get { return _SelectedProjectTab; }
+            set
+            {
+                if (_SelectedProjectTab == value) return;
+                _SelectedProjectTab = value;
+                CurrentProjectId = value.ProjectId;
+                OnPropertyChanged("SelectedProjectTab");
+            }
+        }
+
         #endregion
 
         IServiceFactory _ServiceFactory;
         IRegionManager _RegionManager;
 
         public DelegateCommand<object> CreateProjectCommand { get; set; }
-        public DelegateCommand<object> ManageProjectBacklogCommand { get; set; } 
+        public DelegateCommand<object> ManageProjectBacklogCommand { get; set; }
         public DelegateCommand<object> RefreshProjectsCommand { get; set; }
         public DelegateCommand<object> ViewBurndownCommand { get; set; }
+        public DelegateCommand<object> CreateNewSprintCommand { get; set; }
 
         private void CreateProject(object parameter)
         {
-            _RegionManager.RequestNavigate(RegionNames.Content, typeof(CreateProjectView).FullName);
+            _RegionManager.RequestNavigate(RegionNames.Content, typeof (CreateProjectView).FullName);
         }
 
         private void RefreshProjects(object parameter)
@@ -151,7 +158,7 @@ namespace ClientDesktop.ViewModels
         {
             NavigationParameters navigationParameters = new NavigationParameters();
             navigationParameters.Add("projectId",
-                ServiceLocator.Current.GetInstance<DashboardViewModel>().CurrentProjectId);
+                CurrentProjectId);
 
             _RegionManager.RequestNavigate(RegionNames.Content, typeof (ProductBacklogManagementView).FullName,
                 navigationParameters);
@@ -160,7 +167,12 @@ namespace ClientDesktop.ViewModels
 
         private void ViewBurndown(object parameter)
         {
-            _RegionManager.RequestNavigate(RegionNames.Content, typeof(SprintBurndownChartView).FullName);
+            _RegionManager.RequestNavigate(RegionNames.Content, typeof (SprintBurndownChartView).FullName);
+        }
+
+        private void NewSprint(object parameter)
+        {
+            _RegionManager.RequestNavigate(RegionNames.Content, typeof (NewSprintView).FullName);
         }
 
         [ImportingConstructor]
@@ -175,6 +187,7 @@ namespace ClientDesktop.ViewModels
             RefreshProjectsCommand = new DelegateCommand<object>(RefreshProjects);
             ManageProjectBacklogCommand = new DelegateCommand<object>(ManageProjectBacklog);
             ViewBurndownCommand = new DelegateCommand<object>(ViewBurndown);
+            CreateNewSprintCommand = new DelegateCommand<object>(NewSprint);
         }
 
         public event EventHandler<ErrorMessageEventArgs> ErrorOccured;
@@ -197,6 +210,7 @@ namespace ClientDesktop.ViewModels
             }
 
             UpdateProjectsForAccount();
+
         }
 
         public void UpdateProjectsForAccount()
@@ -207,7 +221,7 @@ namespace ClientDesktop.ViewModels
             {
                 WithClient(_ServiceFactory.CreateClient<IProjectService>(), projectClient =>
                 {
-                     allProjects = projectClient.GetProjectsForAccount(GlobalCommands.MyAccount.AccountId);
+                    allProjects = projectClient.GetProjectsForAccount(GlobalCommands.MyAccount.AccountId);
                 });
 
                 if (allProjects != null)
@@ -234,6 +248,25 @@ namespace ClientDesktop.ViewModels
                     //    CurrentProjectId = 0;
                     //}
                 }
+            }
+            catch (Exception ex)
+            {
+                if (ErrorOccured != null)
+                    ErrorOccured(this, new ErrorMessageEventArgs(ex.Message));
+            }
+        }
+
+        //ToDo: This is to test the sprint project, needs to be changed so sprints are actually utilised
+        public void GetAllSprints()
+        {
+            ICollection<Sprint> allSprints = null;
+            try
+            {
+                WithClient(_ServiceFactory.CreateClient<ISprintService>(), sprintClient =>
+                {
+                    allSprints = sprintClient.GetAllSprints();
+                });
+
             }
             catch (Exception ex)
             {
