@@ -12,13 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Core.Common.UI.Core;
 
 namespace ClientDesktop.Views
 {
     /// <summary>
     /// Interaction logic for ManageSprintView.xaml
     /// </summary>
-    public partial class ManageSprintView : Page
+    public partial class ManageSprintView : UserControlViewBase
     {
         public ManageSprintView()
         {
