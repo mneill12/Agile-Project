@@ -47,14 +47,11 @@ namespace CSC3045.Agile.Data.Data_Repositories
         {
             using (var entityContext = new Csc3045AgileContext())
             {
-                return entityContext.UserStorySet
-                    .Include(s => s.Status)
-                    .Include(s => s.AssociatedTasks.Select(p => p.CurrentStatus))
-                    .Include(s => s.AcceptanceCriteria.Select(p => p.Criteria)).ToList();
+                return entityContext.UserStorySet.ToList();
             }
         }
 
-        ICollection<UserStory> IUserStoryRepository.GetUserStoriesByStatus(CurrentStatus status)
+        public ICollection<UserStory> GetUserStoriesByStatus(CurrentStatus status)
         {
             using (var entityContext = new Csc3045AgileContext())
             {
@@ -77,6 +74,17 @@ namespace CSC3045.Agile.Data.Data_Repositories
                     .Include(s => s.AcceptanceCriteria.Select(p => p.Criteria))
                     .FirstOrDefault(s => s.UserStoryId == id);
             }
+        }
+
+        public ICollection<UserStory> GetUserStoriesByProject(int projectId)
+        {
+            using (var entityContext = new Csc3045AgileContext())
+            {
+                return entityContext.UserStorySet
+                    .Where(s => s.Project.ProjectId == projectId)
+                    .ToList();
+            }
+
         }
     }
 }
