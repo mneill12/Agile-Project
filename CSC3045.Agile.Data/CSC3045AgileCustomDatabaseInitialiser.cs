@@ -240,26 +240,30 @@ namespace CSC3045.Agile.Data
                 {
                     StoryNumber = "P1B1Story",
                     Description = "Project1Backlog1Story",
-                    StoryPoints = 15
+                    StoryPoints = 15,
+                    Status = new CurrentStatus {CurrentStatusName = "To-Do"}
                 },
                 new UserStory
                 {
                     StoryNumber = "P1B2Story",
                     Description = "Project1Backlog1Story",
-                    StoryPoints = 35
+                    StoryPoints = 35,
+                    Status = new CurrentStatus {CurrentStatusName = "To-Do"}
                 },
                    
                 new UserStory
                 {
                     StoryNumber = "P2B1Story",
                     Description = "Project2Backlog1Story",
-                    StoryPoints = 24
+                    StoryPoints = 24,
+                    Status = new CurrentStatus {CurrentStatusName = "To-Do"}
                 },
                 new UserStory
                 {
                     StoryNumber = "P2B2Story",
                     Description = "Project2Backlog2Story",
-                    StoryPoints = 14
+                    StoryPoints = 14,
+                    Status = new CurrentStatus {CurrentStatusName = "To-Do"}
                 },
 
                 new UserStory

@@ -126,8 +126,7 @@ namespace ClientDesktop.ViewModels
         public override void OnNavigatedTo(NavigationContext navigationContext)
         {
             var id = (int)navigationContext.Parameters["sprintId"];
-            CurrentSprintId = id;
-            OnViewLoaded();
+            //Get Sprint for ID and load into bindings
         }
 
 

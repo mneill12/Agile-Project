@@ -194,7 +194,7 @@ namespace ClientDesktop.ViewModels
 
             NavigationParameters navigationParameters = new NavigationParameters();
             navigationParameters.Add("projectId",
-                CurrentProjectId);
+                SelectedProjectTab.ProjectId);
 
             _RegionManager.RequestNavigate(RegionNames.Content, typeof (NewSprintView).FullName, navigationParameters);
         }
