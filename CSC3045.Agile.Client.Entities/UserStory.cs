@@ -5,14 +5,43 @@ namespace CSC3045.Agile.Client.Entities
 {
     public class UserStory : ObjectBase
     {
-        private ICollection<AcceptanceCriteria> _AcceptanceCriteria;
-        private ICollection<StoryTask> _AssociatedTasks;
-        private CurrentStatus _CurrentStatus;
-        private string _Description;
-        private string _StoryName;
-        private int _StoryPoints;
-        private string _UserNotes;
-        private int _UserStoryId;
+        private int _UserStoryId { get; set; }
+        private string _StoryNumber { get; set; }
+        private string _Description { get; set; }
+        private int _StoryPoints { get; set; }
+        private string _UserNotes { get; set; }
+        private CurrentStatus _Status { get; set; }
+        private ICollection<StoryTask> _AssociatedTasks { get; set; }
+        private ICollection<AcceptanceCriteria> _AcceptanceCriteria { get; set; }
+
+        private Project _Project { get; set; }
+        private Sprint _Sprint { get; set; }
+
+        public Project Project
+        {
+            get { return _Project; }
+            set
+            {
+                if (_Project != value)
+                {
+                    _Project = value;
+                    OnPropertyChanged(() => Project);
+                }
+            }
+        }
+
+        public Sprint Sprint
+        {
+            get { return _Sprint; }
+            set
+            {
+                if (_Sprint != value)
+                {
+                    _Sprint = value;
+                    OnPropertyChanged(() => Sprint);
+                }
+            }
+        }
 
         public int UserStoryId
         {
@@ -27,15 +56,15 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public string StoryName
+        public string StoryNumber
         {
-            get { return _StoryName; }
+            get { return _StoryNumber; }
             set
             {
-                if (_StoryName != value)
+                if (_StoryNumber != value)
                 {
-                    _StoryName = value;
-                    OnPropertyChanged(() => StoryName);
+                    _StoryNumber = value;
+                    OnPropertyChanged(() => StoryNumber);
                 }
             }
         }
@@ -81,12 +110,12 @@ namespace CSC3045.Agile.Client.Entities
 
         public CurrentStatus CurrentStatus
         {
-            get { return _CurrentStatus; }
+            get { return _Status; }
             set
             {
-                if (_CurrentStatus != value)
+                if (_Status != value)
                 {
-                    _CurrentStatus = value;
+                    _Status = value;
                     OnPropertyChanged(() => CurrentStatus);
                 }
             }

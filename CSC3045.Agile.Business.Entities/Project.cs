@@ -26,9 +26,6 @@ namespace CSC3045.Agile.Business.Entities
         public DateTime ProjectStartDate { get; set; }
 
         [DataMember]
-        public Backlog Backlog { get; set; }
-
-        [DataMember]
         public ICollection<Sprint> Sprints { get; set; }
 
         [DataMember]
@@ -45,6 +42,9 @@ namespace CSC3045.Agile.Business.Entities
         [DataMember]
         [InverseProperty("DeveloperFor")]
         public ICollection<Account> Developers { get; set; }
+
+        [DataMember]
+        public ICollection<UserStory> BacklogStories { get; set; } 
 
         #region IIdentifiableEntity members
 

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Data.Entity;
 using System.Linq;
@@ -60,7 +61,7 @@ namespace CSC3045.Agile.Data.Data_Repositories
                 project.ProjectStartDate = project.ProjectStartDate;
                 project.ProductOwner = entityContext.AccountSet.Single(a => a.AccountId == project.ProductOwner.AccountId);
                 project.ProjectManager = entityContext.AccountSet.Single(a => a.AccountId == project.ProjectManager.AccountId);
-                project.Backlog = project.Backlog;
+                project.BacklogStories = project.BacklogStories;
                 project.Burndowns = project.Burndowns;
                 project.Sprints = project.Sprints;
                 project.ScrumMasters = project.ScrumMasters.Select(scrumMaster => entityContext.AccountSet.Single(a => a.AccountId == scrumMaster.AccountId)).ToList();
@@ -86,7 +87,7 @@ namespace CSC3045.Agile.Data.Data_Repositories
                 updatedProject.ProjectStartDate = project.ProjectStartDate;
                 updatedProject.ProductOwner = entityContext.AccountSet.Single(a => a.AccountId == project.ProductOwner.AccountId);
                 updatedProject.ProjectManager = entityContext.AccountSet.Single(a => a.AccountId == project.ProjectManager.AccountId);
-                updatedProject.Backlog = project.Backlog;
+                updatedProject.BacklogStories = project.BacklogStories;
                 updatedProject.Burndowns = project.Burndowns;
                 updatedProject.Sprints = project.Sprints;
                 updatedProject.ScrumMasters = project.ScrumMasters.Select(scrumMaster => entityContext.AccountSet.Single(a => a.AccountId == scrumMaster.AccountId)).ToList();
@@ -123,6 +124,7 @@ namespace CSC3045.Agile.Data.Data_Repositories
                     .Include(a => a.ScrumMasters)
                     .Include(a => a.Sprints)
                     .Include(a => a.Burndowns)
+                    .Include(a => a.BacklogStories)
                     .ToList();
         }
 
@@ -134,9 +136,33 @@ namespace CSC3045.Agile.Data.Data_Repositories
                     .Include(a => a.ScrumMasters)
                     .Include(a => a.Sprints)
                     .Include(a => a.Burndowns)
+                    .Include(a => a.BacklogStories)
                     .FirstOrDefault(p => p.ProjectId == id);
         }
 
         #endregion
+
+
+        public Project AddBacklogStoryToProject(int projectId)
+        {
+            using (var entityContext = new Csc3045AgileContext())
+            {
+                var updatedProject =
+                    entityContext.ProjectSet.Include(p => p.BacklogStories)
+                        .Single(p => p.ProjectId == projectId);
+
+                UserStory userStory = new UserStory()
+                {
+                    StoryNumber = "New Story Name",
+                    Description = "New Story Description"
+                };
+
+                updatedProject.BacklogStories.Add(userStory);
+
+                entityContext.SaveChanges();
+
+                return updatedProject;
+            }
+        }
     }
 }
