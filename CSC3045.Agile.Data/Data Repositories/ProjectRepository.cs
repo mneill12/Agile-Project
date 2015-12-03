@@ -161,8 +161,6 @@ namespace CSC3045.Agile.Data.Data_Repositories
 
                 entityContext.SaveChanges();
 
-                Project project2 = Get(projectId);
-
                 return updatedProject;
             }
         }
