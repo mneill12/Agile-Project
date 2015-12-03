@@ -32,13 +32,11 @@ namespace CSC3045.Agile.ServiceHost.Console
             var hostBurndownService = new System.ServiceModel.ServiceHost(typeof (BurndownService));
             StartService(hostBurndownService, "BurndownService");
 
-<<<<<<< HEAD
             var hostSprintService = new System.ServiceModel.ServiceHost(typeof(SprintService));
             StartService(hostSprintService, "SprintService");
-=======
+
             var hostUserStoryService = new System.ServiceModel.ServiceHost(typeof(UserStoryService));
             StartService(hostUserStoryService, "UserStoryService");
->>>>>>> CSC_ProductBacklogManagement
 
             System.Console.WriteLine("Initialising CodeFirst Database");
 
