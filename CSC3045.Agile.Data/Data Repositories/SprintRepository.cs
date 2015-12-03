@@ -2,6 +2,7 @@
 using System.ComponentModel.Composition;
 using System.Data.Entity;
 using System.Linq;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using CSC3045.Agile.Business.Entities;
 using CSC3045.Agile.Data.Contracts.Repository_Interfaces;
 
@@ -28,7 +29,6 @@ namespace CSC3045.Agile.Data.Data_Repositories
         {
             return entityContext.SprintSet
                 .Include(a => a.SprintMembers.Select(b => b.UserRoles))
-                .Include(c => c.Burndowns.Select(d => d.BurndownPoints))
                 .ToList();
         }
 
@@ -36,7 +36,6 @@ namespace CSC3045.Agile.Data.Data_Repositories
         {
             return entityContext.SprintSet
                 .Include(a => a.SprintMembers.Select(b => b.UserRoles))
-                .Include(c => c.Burndowns.Select(d => d.BurndownPoints))
                 .FirstOrDefault();
         }
 
@@ -67,7 +66,23 @@ namespace CSC3045.Agile.Data.Data_Repositories
 
         public Sprint AddSprintWithTeam(Sprint sprint)
         {
-            throw new System.NotImplementedException();
+            using (var entityContext = new Csc3045AgileContext())
+            {
+                // You're not wrong....
+                sprint.SprintName = sprint.SprintName;
+                sprint.SprintId = sprint.SprintId;
+                sprint.EndDate = sprint.EndDate;
+                sprint.StartDate = sprint.StartDate;
+                sprint.SprintNumber = sprint.SprintNumber;
+
+                sprint.ScrumMaster = entityContext.AccountSet.Single(a => a.AccountId == sprint.ScrumMaster.AccountId);
+                sprint.SprintMembers = sprint.SprintMembers.Select(user => entityContext.AccountSet.Single(a => a.AccountId == user.AccountId)).ToList();
+
+                Sprint addedSprint = AddEntity(entityContext, sprint);
+                entityContext.SaveChanges();
+
+                return addedSprint;
+            }
         }
 
         public Sprint UpdateSprintWithTeam(Sprint sprint)

@@ -100,13 +100,17 @@ namespace CSC3045.Agile.ServiceHost.Console
             // Load project sample data
             ProjectService projectService = new ProjectService();
             AccountService accountService = new AccountService();
+            SprintService sprintService = new SprintService();
             UserStoryService userStoryService = new UserStoryService();
+
 
             var project1 = projectService.GetProjectInfo(1);
             var project2 = projectService.GetProjectInfo(2);
 
             var accounts = accountService.GetAllAccounts();
 
+            var sprints = sprintService.GetAllSprints();
+             
             var userStories = userStoryService.GetAllUserStories();
 
             //Check if data has already been loaded before
@@ -161,6 +165,9 @@ namespace CSC3045.Agile.ServiceHost.Console
             }
 
             // End load project sample data
+
+            System.Console.WriteLine("Sprints in project1: " + project1.Sprints.Count());
+            System.Console.WriteLine("Sprints in project2: " + project2.Sprints.Count());
         }
 
         //TODO: Move account and userrole repository tests out of servicehost
