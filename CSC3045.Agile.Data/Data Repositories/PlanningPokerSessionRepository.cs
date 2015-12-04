@@ -29,7 +29,7 @@ namespace CSC3045.Agile.Data.Data_Repositories
         {
             return entityContext.PlanningPokerSessionSet
                 .Include(a => a.InvitedAccountSet)
-                .Include(b => b.UserStories.Select(c => c.Status))
+                .Include(b => b.UserStories.Select(c => c.CurrentStatus))
                 .ToList();
         }
 
@@ -37,7 +37,7 @@ namespace CSC3045.Agile.Data.Data_Repositories
         {
             return entityContext.PlanningPokerSessionSet
                 .Include(a => a.InvitedAccountSet)
-                .Include(b => b.UserStories.Select(c => c.Status))
+                .Include(b => b.UserStories.Select(c => c.CurrentStatus))
                 .FirstOrDefault();
         }
 

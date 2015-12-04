@@ -236,7 +236,7 @@ namespace CSC3045.Agile.Business.Services
             {
                 UserStoryId = userStory.UserStoryId,
                 Description = userStory.Description,
-                Status = userStory.Status,
+                Status = userStory.CurrentStatus,
                 StoryPoints = userStory.StoryPoints,
                 StoryNumber = userStory.StoryNumber,
                 UserNotes = userStory.UserNotes

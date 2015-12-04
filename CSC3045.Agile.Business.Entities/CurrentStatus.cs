@@ -15,12 +15,6 @@ namespace CSC3045.Agile.Business.Entities
         [DataMember]
         public string CurrentStatusName { get; set; }
 
-        // Many to many declarations
-        [XmlIgnore]
-        public virtual ICollection<UserStory> AssociatedUserStories { get; set; }
-        [XmlIgnore]
-        public virtual ICollection<StoryTask> AssociatedStoryTasks { get; set; }
-
         #region IIdentifiableEntity members
 
         public int EntityId
