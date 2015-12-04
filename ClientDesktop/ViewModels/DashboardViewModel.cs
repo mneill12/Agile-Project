@@ -20,7 +20,7 @@ namespace ClientDesktop.ViewModels
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class DashboardViewModel : ViewModelBase
     {
-        //TODO: Move these to top bar or a region of its own, not needed as account info is stored globally
+        //TODO: Move these to top bar or a region of its own, not needed as account info is stored globally now
 
         #region DashboardView Bindings
 
