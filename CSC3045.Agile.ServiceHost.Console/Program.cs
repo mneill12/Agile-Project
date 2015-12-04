@@ -39,8 +39,8 @@ namespace CSC3045.Agile.ServiceHost.Console
             var hostUserStoryService = new System.ServiceModel.ServiceHost(typeof(UserStoryService));
             StartService(hostUserStoryService, "UserStoryService");
 
-            /*var hostStoryTaskService = new System.ServiceModel.ServiceHost(typeof(StoryTaskService));
-            StartService(hostStoryTaskService, "StoryTaskService");*/
+            var hostStoryTaskService = new System.ServiceModel.ServiceHost(typeof(StoryTaskService));
+            StartService(hostStoryTaskService, "StoryTaskService");
 
             System.Console.WriteLine("Initialising CodeFirst Database");
 
@@ -79,7 +79,7 @@ namespace CSC3045.Agile.ServiceHost.Console
             StopService(hostBurndownService, "BurndownService");
             StopService(hostSprintService, "SprintService");
             StopService(hostUserStoryService, "UserStoryService");
-            //StopService(hostStoryTaskService, "StoryTaskService");
+            StopService(hostStoryTaskService, "StoryTaskService");
         }
 
         private static void StartService(System.ServiceModel.ServiceHost host, string serviceDescription)
