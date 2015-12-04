@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Navigation;
 using ClientDesktop.Views;
 using Core.Common;
@@ -31,7 +33,44 @@ namespace ClientDesktop.ViewModels
         private List<Project> _AllProjects;
         private Sprint _SelectedSprint;
 
+        private bool _IsProductOwner;
+        private bool _IsProjectManager;
+        private bool _IsScrumMaster;
+
         private Project _SelectedProjectTab;
+
+        public bool IsProductOwner
+        {
+            get { return _IsProductOwner; }
+            set
+            {
+                if (_IsProductOwner == value) return;
+                _IsProductOwner = value;
+                OnPropertyChanged("IsProductOwner");
+            }
+        }
+
+        public bool IsProjectManager
+        {
+            get { return _IsProductOwner; }
+            set
+            {
+                if (_IsProjectManager == value) return;
+                _IsProjectManager = value;
+                OnPropertyChanged("IsProjectManager");
+            }
+        }
+
+        public bool IsScrumMaster
+        {
+            get { return _IsScrumMaster; }
+            set
+            {
+                if (_IsScrumMaster == value) return;
+                _IsScrumMaster = value;
+                OnPropertyChanged("IsScrumMaster");
+            }
+        }
 
         public string FirstName
         {
@@ -133,6 +172,7 @@ namespace ClientDesktop.ViewModels
                 if (value != null)
                 {
                     _SelectedProjectTab = value;
+                    CheckPermissions();
                     OnPropertyChanged("SelectedProjectTab");
                 }
             }
@@ -159,6 +199,43 @@ namespace ClientDesktop.ViewModels
         private void RefreshProjects(object parameter)
         {
             UpdateProjectsForAccount();
+        }
+
+        private void CheckPermissions()
+        {
+            IsProductOwner = isProductOwner();
+            IsProjectManager = isProjectManager();
+            IsScrumMaster = isScrumMaster();
+        }
+
+        private bool isProductOwner()
+        {
+            if (SelectedProjectTab.ProductOwner.AccountId == GlobalCommands.MyAccount.AccountId)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool isProjectManager()
+        {
+            if (SelectedProjectTab.ProjectManager.AccountId == GlobalCommands.MyAccount.AccountId)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool isScrumMaster()
+        {
+            if (SelectedProjectTab.ScrumMasters.Contains(GlobalCommands.MyAccount))
+            {
+                return true;
+            }
+
+            return false;
         }
 
         private void ViewSprint(object parameter)
