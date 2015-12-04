@@ -17,8 +17,6 @@ namespace ClientDesktop.ViewModels
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class ManageSprintViewModel : ViewModelBase
     {
-
-
         #region Private vars
         private readonly IServiceFactory _ServiceFactory;
         private readonly IRegionManager _RegionManager;
