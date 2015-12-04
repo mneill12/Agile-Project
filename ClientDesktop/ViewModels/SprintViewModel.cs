@@ -118,6 +118,17 @@ namespace ClientDesktop.ViewModels
             _RegionManager = regionManager;
         }
 
+        private void NavigateDashboard(object parameter)
+        {
+            _RegionManager.RequestNavigate(RegionNames.Content, typeof(DashboardView).FullName);
+        }
+
+        public override void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            var id = (int)navigationContext.Parameters["sprintId"];
+            //Get Sprint for ID and load into bindings
+        }
+
 
     }
 }

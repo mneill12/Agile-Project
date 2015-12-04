@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Xml.Serialization;
 using Core.Common.Core;
 
 namespace CSC3045.Agile.Client.Entities
@@ -6,7 +7,6 @@ namespace CSC3045.Agile.Client.Entities
     public class Burndown : ObjectBase
     {
         private int _BurndownId;
-        private string _BurndownName;
         private ICollection<BurndownPoint> _BurndownPoints;
 
         public int BurndownId
@@ -22,19 +22,7 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public string BurndownName
-        {
-            get { return _BurndownName; }
-            set
-            {
-                if (_BurndownName != value)
-                {
-                    _BurndownName = value;
-                    OnPropertyChanged(() => BurndownName);
-                }
-            }
-        }
-
+        [XmlIgnore]
         public ICollection<BurndownPoint> BurndownPoints
         {
             get { return _BurndownPoints; }

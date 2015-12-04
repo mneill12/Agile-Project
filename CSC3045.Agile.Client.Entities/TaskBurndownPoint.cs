@@ -10,8 +10,10 @@ namespace CSC3045.Agile.Client.Entities
     public class TaskBurndownPoint : ObjectBase
     {
         private int _TaskBurndownPointId;
-        private int _StoryTaskId;
         private Dictionary<DateTime, int> _HoursRemaining;
+
+        //Relationships
+        private StoryTask _StoryTask;
 
 
         public int TaskBurndownPointID
@@ -28,15 +30,15 @@ namespace CSC3045.Agile.Client.Entities
         }
 
 
-        public int StoryTaskId
+        public StoryTask StoryTask
         {
-            get { return _StoryTaskId; }
+            get { return _StoryTask; }
             set
             {
-                if (_StoryTaskId != value)
+                if (_StoryTask != value)
                 {
-                    _StoryTaskId = value;
-                    OnPropertyChanged(() => StoryTaskId);
+                    _StoryTask = value;
+                    OnPropertyChanged(() => StoryTask);
                 }
             }
         }
@@ -49,7 +51,7 @@ namespace CSC3045.Agile.Client.Entities
                 if (_HoursRemaining != value)
                 {
                     _HoursRemaining = value;
-                    OnPropertyChanged(() => StoryTaskId);
+                    OnPropertyChanged(() => HoursRemaining);
                 }
             }
         }

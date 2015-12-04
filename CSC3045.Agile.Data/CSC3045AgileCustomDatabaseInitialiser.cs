@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using CSC3045.Agile.Business.Entities;
 
@@ -213,8 +214,8 @@ namespace CSC3045.Agile.Data
                 ScrumMasters = new List<Account>() { },
                 Developers = new List<Account>() {  },
                 AllUsers = new List<Account>() { },
-                Backlog = new Backlog(),
-                Sprints = new List<Sprint>() { }
+                BacklogStories = new List<UserStory>() { },
+                Sprints = new List<Sprint>()
             });
 
             defaultProjects.Add(new Project
@@ -224,10 +225,10 @@ namespace CSC3045.Agile.Data
                 ScrumMasters = new List<Account>() { },
                 Developers = new List<Account>() { },
                 AllUsers = new List<Account>() { },
-                Backlog = new Backlog(),
-                Sprints = new List<Sprint>() { }
+                BacklogStories = new List<UserStory>() { },
+                Sprints = new List<Sprint>()
             });
-
+            
             foreach (var project in defaultProjects)
             {
                 context.ProjectSet.Add(project);
@@ -239,9 +240,39 @@ namespace CSC3045.Agile.Data
             {
                 new UserStory
                 {
+                    StoryNumber = "P1B1Story",
+                    Description = "Project1Backlog1Story",
+                    StoryPoints = 15,
+                    Status = new CurrentStatus {CurrentStatusName = "To-Do"}
+                },
+                new UserStory
+                {
+                    StoryNumber = "P1B2Story",
+                    Description = "Project1Backlog1Story",
+                    StoryPoints = 35,
+                    Status = new CurrentStatus {CurrentStatusName = "To-Do"}
+                },
+                   
+                new UserStory
+                {
+                    StoryNumber = "P2B1Story",
+                    Description = "Project2Backlog1Story",
+                    StoryPoints = 24,
+                    Status = new CurrentStatus {CurrentStatusName = "To-Do"}
+                },
+                new UserStory
+                {
+                    StoryNumber = "P2B2Story",
+                    Description = "Project2Backlog2Story",
+                    StoryPoints = 14,
+                    Status = new CurrentStatus {CurrentStatusName = "To-Do"}
+                },
+
+                new UserStory
+                {
                     Status = new CurrentStatus
                     {
-                        StoryStatusName = "Ready for Development"
+                        CurrentStatusName = "Ready for Development"
                     },
                     Description =
                         "As a user of the scrum client program I can register so that I can connect to the scrum management server",
@@ -283,7 +314,7 @@ namespace CSC3045.Agile.Data
                             Title = "TSK-001",
                             Description = "Setup database for server application, to include user management tables.",
                             Hours = 10,
-                            CurrentStatus = new CurrentStatus {StoryStatusName = "To-Do"},
+                            CurrentStatus = new CurrentStatus {CurrentStatusName = "To-Do"},
                             IsBlocked = false,
                             TaskBurndownPoint = tbp1
                         },
@@ -292,7 +323,7 @@ namespace CSC3045.Agile.Data
                             Title = "TSK-002",
                             Description = "Develop server application to accept client connections for user management.",
                             Hours = 8,
-                            CurrentStatus = new CurrentStatus {StoryStatusName = "BA-QA"},
+                            CurrentStatus = new CurrentStatus {CurrentStatusName = "BA-QA"},
                             IsBlocked = false,
                             TaskBurndownPoint = tbp2
                         },
@@ -302,7 +333,7 @@ namespace CSC3045.Agile.Data
                             Description =
                                 "Develop client application to make connection to server and call database CRUD methods.",
                             Hours = 12,
-                            CurrentStatus = new CurrentStatus {StoryStatusName = "Tech QA"},
+                            CurrentStatus = new CurrentStatus {CurrentStatusName = "Tech QA"},
                             //TaskBurndownPoint = new TaskBurndownPoint{ TaskBurndownPointId = };
                             IsBlocked = false,
                             TaskBurndownPoint = tbp3

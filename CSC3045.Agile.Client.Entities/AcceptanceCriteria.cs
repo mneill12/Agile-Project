@@ -5,19 +5,21 @@ namespace CSC3045.Agile.Client.Entities
 {
     public class AcceptanceCriteria : ObjectBase
     {
-        private int _acceptanceCriteriaId;
-        private ICollection<Criteria> _criteria;
-        private bool _isSatisfied;
-        private string _scenario;
+        private int _AcceptanceCriteriaId;
+        private bool _IsSatisfied;
+        private string _Scenario;
+
+        //Relationships
+        private ICollection<Criteria> _Criteria;
 
         public int AcceptanceCriteriaId
         {
-            get { return _acceptanceCriteriaId; }
+            get { return _AcceptanceCriteriaId; }
             set
             {
-                if (_acceptanceCriteriaId != value)
+                if (_AcceptanceCriteriaId != value)
                 {
-                    _acceptanceCriteriaId = value;
+                    _AcceptanceCriteriaId = value;
                     OnPropertyChanged(() => AcceptanceCriteriaId);
                 }
             }
@@ -25,12 +27,12 @@ namespace CSC3045.Agile.Client.Entities
 
         public string Scenario
         {
-            get { return _scenario; }
+            get { return _Scenario; }
             set
             {
-                if (_scenario != value)
+                if (_Scenario != value)
                 {
-                    _scenario = value;
+                    _Scenario = value;
                     OnPropertyChanged(() => Scenario);
                 }
             }
@@ -38,12 +40,12 @@ namespace CSC3045.Agile.Client.Entities
 
         public ICollection<Criteria> Criteria
         {
-            get { return _criteria; }
+            get { return _Criteria; }
             set
             {
-                if (_criteria != value)
+                if (_Criteria != value)
                 {
-                    _criteria = value;
+                    _Criteria = value;
                     OnPropertyChanged(() => Criteria);
                 }
             }
@@ -51,12 +53,12 @@ namespace CSC3045.Agile.Client.Entities
 
         public bool IsSatisfied
         {
-            get { return _isSatisfied; }
+            get { return _IsSatisfied; }
             set
             {
-                if (_isSatisfied != value)
+                if (_IsSatisfied != value)
                 {
-                    _isSatisfied = value;
+                    _IsSatisfied = value;
                     OnPropertyChanged(() => IsSatisfied);
                 }
             }

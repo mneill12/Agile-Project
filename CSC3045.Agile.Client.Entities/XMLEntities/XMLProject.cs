@@ -18,7 +18,7 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
         private DateTime _ProjectSavedDate;
         private XMLBacklog _Backlog;
         private List<XMLSprint> _Sprints;
-        private List<XMLBurndown> _Burndowns;
+        private XMLBurndown _Burndown;
 
         private List<XMLAccount> _AllUsers;
 
@@ -142,14 +142,14 @@ namespace CSC3045.Agile.Client.Entities.XMLEntities
             }
         }
 
-        public List<XMLBurndown> Burndowns
+        public XMLBurndown Burndown
         {
-            get { return _Burndowns; }
+            get { return _Burndown; }
             set
             {
-                if (_Burndowns != value)
+                if (_Burndown != value)
                 {
-                    _Burndowns = value;
+                    _Burndown = value;
                 }
             }
         }

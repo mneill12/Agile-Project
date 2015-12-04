@@ -58,8 +58,15 @@ namespace ClientDesktop.ViewModels
             SprintList = new List<XMLSprint>();
 
             Project = loadedProject;
-            ProductOwner = loadedProject.ProductOwner.FirstName + nbsp + loadedProject.ProductOwner.LastName;
-            ProjectManager = loadedProject.ProjectManager.FirstName + nbsp + loadedProject.ProjectManager.LastName;
+            if (null != loadedProject.ProductOwner)
+            {
+                ProductOwner = loadedProject.ProductOwner.FirstName + nbsp + loadedProject.ProductOwner.LastName;
+            }
+            if (null != loadedProject.ProjectManager)
+            {
+                ProjectManager = loadedProject.ProjectManager.FirstName + nbsp + loadedProject.ProjectManager.LastName;
+            }
+
             ProjectStartDate = String.Format("{0:M/d/yyyy}", loadedProject.ProjectStartDate);
             ProjectSavedDate = String.Format("{0:M/d/yyyy}", loadedProject.ProjectSavedDate);
             SprintList = loadedProject.Sprints;

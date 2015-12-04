@@ -2,6 +2,7 @@
 using System.ComponentModel.Composition;
 using System.Data.Entity;
 using System.Linq;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using CSC3045.Agile.Business.Entities;
 using CSC3045.Agile.Data.Contracts.Repository_Interfaces;
 
@@ -10,7 +11,7 @@ namespace CSC3045.Agile.Data.Data_Repositories
     // Sprint LINQ Entity Queries
     [Export(typeof (ISprintRepository))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class SprintRepository : DataRepositoryBase<Sprint>
+    public class SprintRepository : DataRepositoryBase<Sprint>, ISprintRepository
     {
         protected override Sprint AddEntity(Csc3045AgileContext entityContext, Sprint entity)
         {
@@ -28,7 +29,6 @@ namespace CSC3045.Agile.Data.Data_Repositories
         {
             return entityContext.SprintSet
                 .Include(a => a.SprintMembers.Select(b => b.UserRoles))
-                .Include(c => c.Burndowns.Select(d => d.BurndownPoints))
                 .ToList();
         }
 
@@ -36,8 +36,58 @@ namespace CSC3045.Agile.Data.Data_Repositories
         {
             return entityContext.SprintSet
                 .Include(a => a.SprintMembers.Select(b => b.UserRoles))
-                .Include(c => c.Burndowns.Select(d => d.BurndownPoints))
                 .FirstOrDefault();
+        }
+
+        public ICollection<Sprint> GetSprintForProject(int projectId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public ICollection<Sprint> GetSprintForScrumMaster(int scrumMasterId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public ICollection<Sprint> GetSprintForAccount(int accountId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public ICollection<Sprint> GetSprintStartDate(int sprintId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public ICollection<Sprint> GetSprintEndDate(int sprintId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Sprint AddSprintWithTeam(Sprint sprint)
+        {
+            using (var entityContext = new Csc3045AgileContext())
+            {
+                // You're not wrong....
+                sprint.SprintName = sprint.SprintName;
+                sprint.SprintId = sprint.SprintId;
+                sprint.EndDate = sprint.EndDate;
+                sprint.StartDate = sprint.StartDate;
+                sprint.SprintNumber = sprint.SprintNumber;
+
+                sprint.ScrumMaster = entityContext.AccountSet.Single(a => a.AccountId == sprint.ScrumMaster.AccountId);
+                sprint.SprintMembers = sprint.SprintMembers.Select(user => entityContext.AccountSet.Single(a => a.AccountId == user.AccountId)).ToList();
+
+                Sprint addedSprint = AddEntity(entityContext, sprint);
+                entityContext.SaveChanges();
+
+                return addedSprint;
+            }
+        }
+
+        public Sprint UpdateSprintWithTeam(Sprint sprint)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

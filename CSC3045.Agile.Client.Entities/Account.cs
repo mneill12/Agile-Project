@@ -6,13 +6,15 @@ namespace CSC3045.Agile.Client.Entities
     public class Account : ObjectBase
     {
         private int _AccountId;
-        private ICollection<PlanningPokerSession> _AssociatedPlanningPokerSessions;
-        private ICollection<Sprint> _AssociatedSprints;
-        private ICollection<Project> _AssocicatedProjects;
         private string _FirstName;
         private string _LastName;
         private string _LoginEmail;
         private string _Password;
+
+        //Relationships
+        private ICollection<PlanningPokerSession> _AssociatedPlanningPokerSessions;
+        private ICollection<Sprint> _AssociatedSprints;
+        private ICollection<Project> _AssocicatedProjects;
         private IList<UserRole> _UserRoles;
         private IList<Skill> _Skills;
 

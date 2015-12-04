@@ -9,6 +9,24 @@ namespace CSC3045.Agile.Client.Contracts
     [ServiceContract]
     public interface IProjectService : IServiceContract
     {
+        //CRUD
+
+        //Create
+        [OperationContract]
+        [TransactionFlow(TransactionFlowOption.Allowed)]
+        Project CreateProject(Project project);
+
+        //Read
+        [OperationContract]
+        [FaultContract(typeof(NotFoundException))]
+        Project GetProjectInfo(int projectId);
+
+        //Update
+        [OperationContract]
+        [TransactionFlow(TransactionFlowOption.Allowed)]
+        void UpdateProjectInfo(Project project);
+
+        //Custom
         [OperationContract]
         ICollection<Project> GetProjectsForProjectManager(int projectManagerId);
 
@@ -21,18 +39,6 @@ namespace CSC3045.Agile.Client.Contracts
 
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
-        Project CreateProject(Project project);
-
-        [OperationContract]
-        [TransactionFlow(TransactionFlowOption.Allowed)]
-        void SaveProject(Project project);
-
-        [OperationContract]
-        [TransactionFlow(TransactionFlowOption.Allowed)]
-        void UpdateProjectInfo(Project project);
-
-        [OperationContract]
-        [FaultContract(typeof(NotFoundException))]
-        Project GetProjectInfo(int projectId);
+        void AddUserStoryToProject(int projectId, UserStory userStory);
     }
 }

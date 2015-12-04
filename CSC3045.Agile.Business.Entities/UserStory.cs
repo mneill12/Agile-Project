@@ -32,6 +32,10 @@ namespace CSC3045.Agile.Business.Entities
         [DataMember]
         public ICollection<AcceptanceCriteria> AcceptanceCriteria { get; set; }
 
+        public virtual Project Project { get; set; }
+
+        public virtual Sprint Sprint { get; set; }
+
         // Many-to-many declarations
         public virtual ICollection<PlanningPokerSession> AssociatedPlanningPokersSessions { get; set; }
 

@@ -5,25 +5,43 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ServiceModel;
 using Core.Common.Exceptions;
-
 using CSC3045.Agile.Business.Entities;
 
-namespace CSC3045.Agile.Business.Contracts.Service_Contracts
+namespace CSC3045.Agile.Business.Contracts
 {
     [ServiceContract]
     public interface IUserStoryService
     {
-        [OperationContract]
-        [FaultContract(typeof(NotFoundException))]
-        UserStory GetUserStoryById(int userStoryId);
+        //CRUD
 
-        [OperationContract]
-        [TransactionFlow(TransactionFlowOption.Allowed)]
-        void UpdateUserStoryById(UserStory userStory);
-
+        //Create
         [OperationContract]
         [FaultContract(typeof(NotFoundException))]
         [TransactionFlow(TransactionFlowOption.Allowed)]
         UserStory AddNewUserStory(UserStory userStory);
+
+        //Read
+        [OperationContract]
+        [FaultContract(typeof(NotFoundException))]
+        UserStory GetUserStoryById(int userStoryId);
+
+        //Update
+        [OperationContract]
+        [TransactionFlow(TransactionFlowOption.Allowed)]
+        void UpdateUserStory(UserStory userStory);
+
+        //Delete
+        [OperationContract]
+        [FaultContract(typeof(NotFoundException))]
+        void RemoveUserStoryById(int userStoryId);
+
+        //Custom
+
+        [OperationContract]
+        [FaultContract(typeof(NotFoundException))]
+        ICollection<UserStory> GetAllUserStories();
+
+        [OperationContract]
+        ICollection<UserStory> GetAllStoriesForProject(int projectId);
     }
 }

@@ -6,16 +6,18 @@ namespace CSC3045.Agile.Client.Entities
 {
     public class Sprint : ObjectBase
     {
-        private Backlog _Backlog;
-        private ICollection<Burndown> _Burndowns;
         private DateTime _EndDate;
-        private Account _ScrumMaster;
-
         private int _SprintId;
         private string _SprintName;
         private int _SprintNumber;
         private DateTime _StartDate;
-        private ICollection<Account> _TeamMembers;
+
+        //Relationships
+        private Account _ScrumMaster;
+        private Project _Project;
+        private ICollection<Burndown> _Burndowns;
+        private ICollection<Account> _SprintMembers;
+        private ICollection<UserStory> _UserStories;
 
         public int SprintId
         {
@@ -39,19 +41,6 @@ namespace CSC3045.Agile.Client.Entities
                 {
                     _ScrumMaster = value;
                     OnPropertyChanged(() => ScrumMaster);
-                }
-            }
-        }
-
-        public Backlog Backlog
-        {
-            get { return _Backlog; }
-            set
-            {
-                if (_Backlog != value)
-                {
-                    _Backlog = value;
-                    OnPropertyChanged(() => Backlog);
                 }
             }
         }
@@ -108,6 +97,19 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
+        public Project Project
+        {
+            get { return _Project; }
+            set
+            {
+                if (_Project != value)
+                {
+                    _Project = value;
+                    OnPropertyChanged(() => Project);
+                }
+            }
+        }
+
         public ICollection<Burndown> Burndowns
         {
             get { return _Burndowns; }
@@ -121,15 +123,28 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public ICollection<Account> TeamMembers
+        public ICollection<Account> SprintMembers
         {
-            get { return _TeamMembers; }
+            get { return _SprintMembers; }
             set
             {
-                if (_TeamMembers != value)
+                if (_SprintMembers != value)
                 {
-                    _TeamMembers = value;
-                    OnPropertyChanged(() => TeamMembers);
+                    _SprintMembers = value;
+                    OnPropertyChanged(() => SprintMembers);
+                }
+            }
+        }
+
+        public ICollection<UserStory> UserStories
+        {
+            get { return _UserStories; }
+            set
+            {
+                if (_UserStories != value)
+                {
+                    _UserStories = value;
+                    OnPropertyChanged(() => UserStories);
                 }
             }
         }

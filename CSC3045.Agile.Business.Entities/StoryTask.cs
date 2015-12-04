@@ -12,9 +12,6 @@ namespace CSC3045.Agile.Business.Entities
         public int StoryTaskId { get; set; }
 
         [DataMember]
-        public Account Owner { get; set; }
-
-        [DataMember]
         public string Title { get; set; }
 
         [DataMember]
@@ -24,17 +21,25 @@ namespace CSC3045.Agile.Business.Entities
         public int Hours { get; set; }
 
         [DataMember]
+        public bool IsBlocked { get; set; }
+
+        [DataMember]
+        public string UserNotes { get; set; }
+
+        //Relationships
+
+        [DataMember]
+        public Account Owner { get; set; }
+
+        [DataMember]
+        public UserStory UserStory { get; set; }
+
+        [DataMember]
         [XmlIgnore]
         public TaskBurndownPoint TaskBurndownPoint { get; set; }
 
         [DataMember]
         public CurrentStatus CurrentStatus { get; set; }
-
-        [DataMember]
-        public bool IsBlocked { get; set; }
-
-        [DataMember]
-        public string UserNotes { get; set; }
 
         #region IIdentifiableEntity members
 

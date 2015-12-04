@@ -1,10 +1,11 @@
-﻿using Core.Common.Exceptions;
+using System.Collections.Generic;
+using Core.Common.Exceptions;
 using CSC3045.Agile.Data.Contracts.Repository_Interfaces;
 using System.ServiceModel;
 using Core.Common.Contracts;
 using System.ComponentModel.Composition;
 using CSC3045.Agile.Business.Entities;
-using CSC3045.Agile.Business.Contracts.Service_Contracts;
+using CSC3045.Agile.Business.Contracts;
 
 namespace CSC3045.Agile.Business.Services
 {
@@ -25,6 +26,8 @@ namespace CSC3045.Agile.Business.Services
             _DataRepositoryFactory = dataRepositoryFactory;
         }
 
+
+
         public UserStory GetUserStoryById(int userStoryId)
         {
             return ExecuteFaultHandledOperation(() =>
@@ -43,7 +46,7 @@ namespace CSC3045.Agile.Business.Services
         }
 
         [OperationBehavior(TransactionScopeRequired = true)]
-        public void UpdateUserStoryById(UserStory userStory)
+        public void UpdateUserStory(UserStory userStory)
         {
             ExecuteFaultHandledOperation(() =>
             {
@@ -52,6 +55,17 @@ namespace CSC3045.Agile.Business.Services
                 UserStory updatedUserStory = userStoryRepository.Update(userStory);
             });
         }
+
+        public void RemoveUserStoryById(int userStoryId)
+        {
+            ExecuteFaultHandledOperation(() =>
+            {
+                var userStoryRepository = _DataRepositoryFactory.GetDataRepository<IUserStoryRepository>();
+
+                userStoryRepository.Remove(userStoryId);
+            });
+        }
+
 
         [OperationBehavior(TransactionScopeRequired = true)]
         public UserStory AddNewUserStory(UserStory userStory)
@@ -62,6 +76,29 @@ namespace CSC3045.Agile.Business.Services
 
                 return userStoryRepository.Add(userStory);
             });
+        }
+
+
+        public ICollection<UserStory> GetAllUserStories()
+        {
+            var userStoryRepository = _DataRepositoryFactory.GetDataRepository<IUserStoryRepository>();
+
+            return userStoryRepository.GetUserStories();
+        }
+
+        public ICollection<UserStory> GetAllStoriesForProject(int projectId)
+        {
+            var userStoryRepository = _DataRepositoryFactory.GetDataRepository<IUserStoryRepository>();
+
+            return userStoryRepository.GetUserStoriesByProject(projectId);
+        }
+
+
+        public void RemoveUserStory(UserStory story)
+        {
+            var userStoryRepository = _DataRepositoryFactory.GetDataRepository<IUserStoryRepository>();
+
+            userStoryRepository.Remove(story);
         }
     }
 }

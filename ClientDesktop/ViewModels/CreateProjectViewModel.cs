@@ -9,11 +9,9 @@ using System.Windows.Data;
 using ClientDesktop.Views;
 using Core.Common;
 using Core.Common.Contracts;
-using Core.Common.Core;
 using Core.Common.UI.Core;
 using CSC3045.Agile.Client.Contracts;
 using CSC3045.Agile.Client.Entities;
-using Microsoft.Practices.ServiceLocation;
 using Prism.Regions;
 
 namespace ClientDesktop.ViewModels
@@ -333,7 +331,7 @@ namespace ClientDesktop.ViewModels
                         ScrumMasters = scrumMasters,
                         Developers = developers,
                         AllUsers = allUsers,
-                        Backlog = new Backlog()
+                        BacklogStories = new List<UserStory>()
                     };
 
                     Project createdProject = null;
@@ -362,5 +360,6 @@ namespace ClientDesktop.ViewModels
                 }
             }
         }
+
     }
 }

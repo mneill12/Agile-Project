@@ -16,12 +16,6 @@ namespace CSC3045.Agile.Business.Entities
         public int SprintId { get; set; }
 
         [DataMember]
-        public Account ScrumMaster { get; set; }
-
-        [DataMember]
-        public Backlog Backlog { get; set; }
-
-        [DataMember]
         public int SprintNumber { get; set; }
 
         [DataMember]
@@ -33,13 +27,23 @@ namespace CSC3045.Agile.Business.Entities
         [DataMember]
         public DateTime EndDate { get; set; }
 
+        //Relationships
+
         [DataMember]
-        public ICollection<Burndown> Burndowns { get; set; }
+        public Account ScrumMaster { get; set; }
 
         [DataMember]
         public ICollection<Account> SprintMembers { get; set; }
 
+
         public ICollection<Project> SprintFor { get; set; } 
+
+        [DataMember]
+        public ICollection<UserStory> UserStories { get; set; }
+
+        [DataMember]
+        public Project Project { get; set; }
+
         #region IIdentifiableEntity members
 
         public int EntityId

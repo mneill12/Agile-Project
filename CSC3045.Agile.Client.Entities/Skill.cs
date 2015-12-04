@@ -6,6 +6,7 @@ namespace CSC3045.Agile.Client.Entities
 {
     public class Skill : ObjectBase
     {
+
         [XmlIgnore]
         private ICollection<Account> _Accounts;
         private int _SkillId;

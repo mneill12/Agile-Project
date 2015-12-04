@@ -7,19 +7,20 @@ namespace CSC3045.Agile.Client.Entities
     public class Project : ObjectBase
     {
         private int _ProjectId;
-        private Account _ProjectManager;
-        private Account _ProductOwner;
-
-        private ICollection<Account> _ScrumMasters;
-        private ICollection<Account> _Developers;
-
         private string _ProjectName;
         private DateTime _ProjectStartDate;
-        private Backlog _Backlog;
-        private ICollection<Sprint> _Sprints;
-        private ICollection<Burndown> _Burndowns;
 
+        //Relationships
+        private Account _ProjectManager;
+        private Account _ProductOwner;
+        private Burndown _Burndown;
+        private ICollection<Sprint> _Sprints;
+        private ICollection<UserStory> _BacklogStories;
+
+        //Many to many relationships
         private ICollection<Account> _AllUsers;
+        private ICollection<Account> _ScrumMasters;
+        private ICollection<Account> _Developers;
 
         public int ProjectId
         {
@@ -112,15 +113,15 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public Backlog Backlog
+        public ICollection<UserStory> BacklogStories
         {
-            get { return _Backlog; }
+            get { return _BacklogStories; }
             set
             {
-                if (_Backlog != value)
+                if (_BacklogStories != value)
                 {
-                    _Backlog = value;
-                    OnPropertyChanged(() => Backlog);
+                    _BacklogStories = value;
+                    OnPropertyChanged(() => BacklogStories);
                 }
             }
         }
@@ -138,15 +139,15 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
-        public ICollection<Burndown> Burndowns
+        public Burndown Burndown
         {
-            get { return _Burndowns; }
+            get { return _Burndown; }
             set
             {
-                if (_Burndowns != value)
+                if (_Burndown != value)
                 {
-                    _Burndowns = value;
-                    OnPropertyChanged(() => Burndowns);
+                    _Burndown = value;
+                    OnPropertyChanged(() => Burndown);
                 }
             }
         }

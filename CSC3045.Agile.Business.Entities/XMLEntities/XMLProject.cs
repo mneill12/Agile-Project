@@ -33,7 +33,7 @@ namespace CSC3045.Agile.Business.Entities.XMLEntities
         public List<XMLSprint> Sprints { get; set; }
 
         [DataMember]
-        public List<XMLBurndown> Burndowns { get; set; }
+        public XMLBurndown Burndown { get; set; }
 
         [DataMember]
         public DateTime ProjectSavedDate { get; set; }

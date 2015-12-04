@@ -29,19 +29,29 @@ namespace CSC3045.Agile.Business.Entities
         [DataMember]
         public string LastName { get; set; }
 
+        //Relationships
+
+        //One Account has many roles
         [DataMember]
         public ICollection<UserRole> UserRoles { get; set; }
 
+        //One Account has many skills
         [DataMember]
         public ICollection<Skill> Skills { get; set; }
 
         // Multi-Many-To-Many Entity Join Table Association
 
+        //Many users can be be on many projects
         public ICollection<Project> UserFor { get; set; }
 
+        //Many developers can be on many projects
         public ICollection<Project> DeveloperFor { get; set; }
 
+        //Many scrum masters can be on many projects
         public ICollection<Project> ScrumMasterFor { get; set; }
+
+        //Many scrum masters can be on many projects
+        public ICollection<Project> SprintScrumMasterFor { get; set; }
 
         #region IIdentifiableEntity members
 

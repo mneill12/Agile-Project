@@ -17,28 +17,38 @@ namespace CSC3045.Agile.Business.Services
         [Import] private IBusinessEngineFactory _BusinessEngineFactory;
         [Import] private IDataRepositoryFactory _DataRepositoryFactory;
 
-       /* public BurndownService()
+        public BurndownService()
         {
-            
         }
 
+        /// <summary>
+        /// Used for testing, this service has the data repository initialized through dependency injection
+        /// </summary>
+        /// <param name="dataRepositoryFactory"></param>
         public BurndownService(IDataRepositoryFactory dataRepositoryFactory)
         {
             _DataRepositoryFactory = dataRepositoryFactory;
         }
 
+        /// <summary>
+        /// Used for testing, this service has the business engine initialized through dependency injection
+        /// </summary>
+        /// <param name="businessEngineFactory"></param>
         public BurndownService(IBusinessEngineFactory businessEngineFactory)
         {
             _BusinessEngineFactory = businessEngineFactory;
         }
 
-        public BurndownService(IDataRepositoryFactory dateDataRepositoryFactory,
-            IBusinessEngineFactory businessEngineFactory)
+        /// <summary>
+        /// Used for testing, this service has the data repository & business engine initialized through dependency injection
+        /// </summary>
+        /// <param name="dataRepositoryFactory"></param>
+        /// <param name="businessEngineFactory"></param>
+        public BurndownService(IDataRepositoryFactory dataRepositoryFactory, IBusinessEngineFactory businessEngineFactory)
         {
-            _DataRepositoryFactory = dateDataRepositoryFactory;
+            _DataRepositoryFactory = dataRepositoryFactory;
             _BusinessEngineFactory = businessEngineFactory;
         }
-        */
 
         public IEnumerable<Entities.TaskBurndownPoint> GetTaskBurndownPointsForStoryTask(int storyTaskId)
         {

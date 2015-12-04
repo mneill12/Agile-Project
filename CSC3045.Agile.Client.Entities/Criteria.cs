@@ -4,18 +4,18 @@ namespace CSC3045.Agile.Client.Entities
 {
     public class Criteria : ObjectBase
     {
-        private int _criteriaId;
-        private string _criteriaOutline;
-        private string _criteriaType;
+        private int _CriteriaId;
+        private string _CriteriaOutline;
+        private string _CriteriaType;
 
         public int CriteriaId
         {
-            get { return _criteriaId; }
+            get { return _CriteriaId; }
             set
             {
-                if (_criteriaId != value)
+                if (_CriteriaId != value)
                 {
-                    _criteriaId = value;
+                    _CriteriaId = value;
                     OnPropertyChanged(() => CriteriaId);
                 }
             }
@@ -23,12 +23,12 @@ namespace CSC3045.Agile.Client.Entities
 
         public string CriteriaType
         {
-            get { return _criteriaType; }
+            get { return _CriteriaType; }
             set
             {
-                if (_criteriaType != value)
+                if (_CriteriaType != value)
                 {
-                    _criteriaType = value;
+                    _CriteriaType = value;
                     OnPropertyChanged(() => CriteriaType);
                 }
             }
@@ -36,12 +36,12 @@ namespace CSC3045.Agile.Client.Entities
 
         public string CriteriaOutline
         {
-            get { return _criteriaOutline; }
+            get { return _CriteriaOutline; }
             set
             {
-                if (_criteriaOutline != value)
+                if (_CriteriaOutline != value)
                 {
-                    _criteriaOutline = value;
+                    _CriteriaOutline = value;
                     OnPropertyChanged(() => CriteriaOutline);
                 }
             }

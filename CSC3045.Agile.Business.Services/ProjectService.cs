@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ServiceModel;
 using Core.Common.Contracts;
 using Core.Common.Exceptions;
-using Core.Common.Utils;
 using CSC3045.Agile.Business.Contracts;
 using CSC3045.Agile.Business.Entities;
 using CSC3045.Agile.Data.Contracts.Repository_Interfaces;
@@ -135,6 +133,24 @@ namespace CSC3045.Agile.Business.Services
                 var projectRepository = _DataRepositoryFactory.GetDataRepository<IProjectRepository>();
 
                 return projectRepository.Get();
+            });
+        }
+
+
+        public void AddUserStoryToProject(int projectId)
+        {
+            var projectRepository = _DataRepositoryFactory.GetDataRepository<IProjectRepository>();
+
+            projectRepository.AddBacklogStoryToProject(projectId);
+        }
+
+        public void AddUserStoryToProject(int projectId, UserStory userStory)
+        {
+            ExecuteFaultHandledOperation(() =>
+            {
+                var projectRepository = _DataRepositoryFactory.GetDataRepository<IProjectRepository>();
+
+                projectRepository.AddStoryToProject(projectId, userStory.UserStoryId);
             });
         }
     }

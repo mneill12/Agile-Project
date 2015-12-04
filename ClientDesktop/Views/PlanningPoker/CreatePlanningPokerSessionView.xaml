@@ -1,0 +1,119 @@
+﻿<core:UserControlViewBase x:Class="ClientDesktop.Views.CreatePlanningPokerSessionView"
+                          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                          xmlns:core="CSC3045AgileCore"
+                          xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+                          Height="590" Width="1280">
+    <core:UserControlViewBase.Resources>
+        <core:MultiValueConverter x:Key="MultiValueConverter" />
+    </core:UserControlViewBase.Resources>
+    <Grid Background="Transparent" VerticalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="340" />
+            <RowDefinition Height="1*" />
+
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Column 1 -->
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="10 0 0 0" Text="Create a Planning Poker Session" VerticalAlignment="Center" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White" TextAlignment="Left" FontSize="20" FontWeight="Bold" />
+
+        <TextBlock Grid.Column="2" FontSize="15" Padding="10" FontFamily="pack://application:,,,/Resources/#AquaWax" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right" Text="BACK" Foreground="White" Margin="0,0,50,0"/>
+
+        <Button Grid.Row="0" Grid.Column="2" Command="{Binding NavigateDashboardCommand}" x:Name="BackButton" DockPanel.Dock="Left" Style="{DynamicResource MetroCircleButtonStyle}" Height="40" Width="40" FontFamily="Segoe UI Symbol" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0">
+            <Rectangle Width="20" Height="15">
+                <Rectangle.Fill>
+                    <VisualBrush Stretch="Fill">
+                        <VisualBrush.Visual>
+                            <Canvas Width="48" Height="48" Clip="F1 M 0,0L 48,0L 48,48L 0,48L 0,0" UseLayoutRounding="False">
+                                <Path Width="25" Height="18" Canvas.Left="12" Canvas.Top="15" Stretch="Fill" Fill="{DynamicResource BlackBrush}" Data="F1 M 12,22L 12,26L 28.25,26L 21,33L 27.5,33L 37,24L 27.5,15L 21,15L 28.25,22L 12,22 Z " />
+                            </Canvas>
+                        </VisualBrush.Visual>
+                    </VisualBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Button.LayoutTransform>
+                <ScaleTransform ScaleX="-1" />
+            </Button.LayoutTransform>
+        </Button>
+
+        <TextBlock Grid.Row="2" Grid.Column="0"  Grid.ColumnSpan="3" Margin="10 0 0 0" Text="Select Session Date and Time" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White" TextAlignment="Left" FontSize="20" FontWeight="Bold"/>
+        <DatePicker Grid.Row="3" Grid.Column="0" Margin="10" SelectedDate="{Binding PlanningPokerSessionDate, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" controls:TextBoxHelper.Watermark="Select session date..." />
+        <DatePicker Grid.Row="4" Grid.Column="0" Margin="10" SelectedDate="{Binding PlanningPokerSessionStartTime, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" controls:TextBoxHelper.Watermark="Select session start time..." />
+
+
+        <!-- Column 1 End -->
+
+        <!-- Column 2 -->
+        <TextBlock Grid.Row="2" Grid.Column="1" Margin="10 0 0 0" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White" TextAlignment="Left" FontSize="20" FontWeight="Bold" ><Run Language="en-gb" Text="Invite Team"/></TextBlock>
+        <TextBox Grid.Row="3" Grid.Column="1" Margin="10,10,10,10" Width="auto" controls:TextBoxHelper.Watermark="Filter by email address...." Name="DeveloperSearchTxt" Text="{Binding DeveloperSearchText}" Grid.ColumnSpan="2"/>
+        <Button Grid.Row="4" Grid.Column="1" Margin="5" Command="{Binding SearchDeveloperCommand}" Content="Search" FontFamily="pack://application:,,,/Resources/#AquaWax" BorderBrush="White" BorderThickness="1" Padding="5" Background="Black" Foreground="White" />
+        <ListView  Grid.Row="5" Grid.Column="1" Margin="10" SelectionMode="Multiple" BorderThickness="0" Background="Transparent" Foreground="White" x:Name="DevelopersListView" HorizontalContentAlignment="Stretch"
+            	ItemsSource="{Binding Developers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="&#xF007;" FontFamily="pack://application:,,,/Resources/#FontAwesome" Foreground="White" TextAlignment="Left" FontSize="20" VerticalAlignment="Center" Grid.Row="1"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="First Name" DisplayMemberBinding="{Binding FirstName}" Width="100"/>
+                    <GridViewColumn Header="Surname" DisplayMemberBinding="{Binding LastName}" Width="100" />
+                    <GridViewColumn Header="Email Address" DisplayMemberBinding="{Binding LoginEmail}" Width="150"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+
+
+        <!-- Column 2 End -->
+
+        <!-- Column 3 -->
+        <Button Grid.Row="6" Grid.Column="2" Margin="5" Name="CreateProjectButton" FontSize="10" FontFamily="pack://application:,,,/Resources/#AquaWax" BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White"
+                        Command="{Binding CreateProjectCommand}" Content="Create Session and Invite Team" >
+            <Button.CommandParameter>
+                <MultiBinding Converter="{StaticResource MultiValueConverter}">
+                    <Binding ElementName="ScrumMastersListView" Path="SelectedItems"/>
+                    <Binding ElementName="DevelopersListView" Path="SelectedItems"/>
+                </MultiBinding>
+            </Button.CommandParameter>
+        </Button>
+
+
+        <TextBlock Grid.Row="2" Grid.Column="2" Margin="10 0 0 0" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White" TextAlignment="Left" FontSize="20" FontWeight="Bold" ><Run Language="en-gb" Text="Select User Stories for Estimation"/></TextBlock>
+        <TextBox Grid.Row="3" Grid.Column="2" Margin="10,10,10,10" Width="auto" controls:TextBoxHelper.Watermark="Filter by ticket number..." Name="UserStorySearchTxt" Text="{Binding UserStorySearchText}"/>
+        <Button Grid.Row="4" Grid.Column="2" Margin="5" Command="{Binding SearchUserStoryCommand}" Content="Search" FontFamily="pack://application:,,,/Resources/#AquaWax" BorderBrush="White" BorderThickness="1" Padding="5" Background="Black" Foreground="White" />
+        <ListView  Grid.Row="5" Grid.Column="2" Margin="10" SelectionMode="Multiple" BorderThickness="0" Background="Transparent" Foreground="White" x:Name="UserStoryListView" HorizontalContentAlignment="Stretch"
+            	ItemsSource="{Binding UserStories, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="&#xF007;" FontFamily="pack://application:,,,/Resources/#FontAwesome" Foreground="White" TextAlignment="Left" FontSize="20" VerticalAlignment="Center" Grid.Row="1"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="User Story" DisplayMemberBinding="{Binding StoryNumber}" Width="100"/>
+                    <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="100" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+
+
+        <!-- Column 3 End -->
+    </Grid>
+</core:UserControlViewBase>

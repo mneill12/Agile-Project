@@ -13,26 +13,26 @@ namespace CSC3045.Agile.Data.Data_Repositories
     {
         protected override CurrentStatus AddEntity(Csc3045AgileContext entityContext, CurrentStatus entity)
         {
-            return entityContext.StoryStatusSet.Add(entity);
+            return entityContext.CurrentStatusSet.Add(entity);
         }
 
         protected override CurrentStatus UpdateEntity(Csc3045AgileContext entityContext, CurrentStatus entity)
         {
-            return (from e in entityContext.StoryStatusSet
-                where e.StoryStatusId == entity.StoryStatusId
+            return (from e in entityContext.CurrentStatusSet
+                    where e.CurrentStatusId == entity.CurrentStatusId
                 select e).FirstOrDefault();
         }
 
         protected override IEnumerable<CurrentStatus> GetEntities(Csc3045AgileContext entityContext)
         {
-            return from e in entityContext.StoryStatusSet
-                select e;
+            return from e in entityContext.CurrentStatusSet
+                   select e;
         }
 
         protected override CurrentStatus GetEntity(Csc3045AgileContext entityContext, int id)
         {
-            var query = (from e in entityContext.StoryStatusSet
-                where e.StoryStatusId == id
+            var query = (from e in entityContext.CurrentStatusSet
+                         where e.CurrentStatusId == id
                 select e);
 
             var results = query.FirstOrDefault();

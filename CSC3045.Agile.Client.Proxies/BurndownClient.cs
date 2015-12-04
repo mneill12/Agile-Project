@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ServiceModel;
 using CSC3045.Agile.Client.Contracts;
-using CSC3045.Agile.Client.Contracts;
 using CSC3045.Agile.Client.Entities;
 
 namespace CSC3045.Agile.Client.Proxies
@@ -23,7 +22,7 @@ namespace CSC3045.Agile.Client.Proxies
             return Channel.GetTotalHoursRemainingForStory(storyId);
         }
 
-        public int GetTotalHoursRemainingForDay(System.DateTime date)
+        public int GetTotalHoursRemainingForDay(DateTime date)
         {
             return Channel.GetTotalHoursRemainingForDay(date);
         }

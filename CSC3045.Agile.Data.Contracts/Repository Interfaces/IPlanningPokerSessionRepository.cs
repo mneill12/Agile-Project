@@ -6,5 +6,8 @@ namespace CSC3045.Agile.Data.Contracts.Repository_Interfaces
     // Interface for custom methods of PlanningPokerSessionRepository
     public interface IPlanningPokerSessionRepository : IDataRepository<PlanningPokerSession>
     {
+        PlanningPokerSession GetByAttendeeId(int accountId);
+
+        PlanningPokerSession GetByScrumMasterId(int scrumMasterId);
     }
 }

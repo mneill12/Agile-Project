@@ -17,12 +17,10 @@ namespace CSC3045.Agile.Data
             : base("CSC3045GeneratedDB")
         {
             Database.SetInitializer(new Csc3045AgileCustomDatabaseInitialiser());
-            Configuration.ProxyCreationEnabled = false;
+            base.Configuration.ProxyCreationEnabled = false;
         }
 
         public DbSet<Account> AccountSet { get; set; }
-
-        public DbSet<Backlog> BacklogSet { get; set; }
 
         public DbSet<Project> ProjectSet { get; set; }
 
@@ -40,7 +38,9 @@ namespace CSC3045.Agile.Data
 
         public DbSet<PlanningPokerSession> PlanningPokerSessionSet { get; set; }
 
-        public DbSet<CurrentStatus> StoryStatusSet { get; set; }
+        public DbSet<ChatMessage> ChatMessageSet { get; set; }
+
+        public DbSet<CurrentStatus> CurrentStatusSet { get; set; }
 
         public DbSet<StoryTask> StoryTaskSet { get; set; }
 
@@ -62,9 +62,6 @@ namespace CSC3045.Agile.Data
 
             modelBuilder.Entity<Account>()
                 .HasKey(e => e.AccountId).Ignore(e => e.EntityId);
-
-            modelBuilder.Entity<Backlog>()
-                .HasKey(e => e.BacklogId).Ignore(e => e.EntityId);
 
             modelBuilder.Entity<Project>()
                 .HasKey(e => e.ProjectId).Ignore(e => e.EntityId);
@@ -100,17 +97,20 @@ namespace CSC3045.Agile.Data
                     q.MapRightKey("AccountId");
                 });
 
-            // 03/12/2015 - The day I agreed 
+              // 03/12/2015 - The day I agreed 
+              modelBuilder.Entity<Project>()
+                  .HasMany((q => q.Sprints))
+                  .WithMany(q => q.SprintFor)
+                  .Map(q =>
+                  {
+                      q.ToTable("Sprints");
+                      q.MapLeftKey("ProjectId");
+                      q.MapRightKey("SprintId");
+                  });
+    
             modelBuilder.Entity<Project>()
-                .HasMany((q => q.Sprints))
-                .WithMany(q => q.SprintFor)
-                .Map(q =>
-                {
-                    q.ToTable("Sprints");
-                    q.MapLeftKey("ProjectId");
-                    q.MapRightKey("SprintId");
-                });
-
+                .HasMany(q => q.BacklogStories);
+                
             modelBuilder.Entity<Sprint>()
                 .HasKey(e => e.SprintId).Ignore(e => e.EntityId);
 
@@ -129,8 +129,11 @@ namespace CSC3045.Agile.Data
             modelBuilder.Entity<PlanningPokerSession>()
                 .HasKey(e => e.PlanningPokerSessionId).Ignore(e => e.EntityId);
 
+            modelBuilder.Entity<ChatMessage>()
+                .HasKey(e => e.MessageId).Ignore(e => e.EntityId);
+
             modelBuilder.Entity<CurrentStatus>()
-                .HasKey(e => e.StoryStatusId).Ignore(e => e.EntityId);
+                .HasKey(e => e.CurrentStatusId).Ignore(e => e.EntityId);
 
             modelBuilder.Entity<StoryTask>()
                 .HasKey(e => e.StoryTaskId).Ignore(e => e.EntityId);

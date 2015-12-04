@@ -101,9 +101,7 @@ namespace CSC3045.Agile.Business.Services
             // Remap single complex types
             xmlProject.ProductOwner = RemapAccountEntity(project.ProductOwner);
             xmlProject.ProjectManager = RemapAccountEntity(project.ProjectManager);
-            xmlProject.Backlog = RemapBacklogEntity(project.Backlog);
 
-            
             // Remap collections of account types
             xmlProject.ScrumMasters = new List<XMLAccount>();
             foreach (Account scrumMaster in project.ScrumMasters)
@@ -129,13 +127,7 @@ namespace CSC3045.Agile.Business.Services
                 xmlProject.Sprints.Add(RemapSprintEntity(sprint));
             }
 
-            xmlProject.Burndowns = new List<XMLBurndown>();
-            foreach (Burndown burndown in project.Burndowns)
-            {
-                xmlProject.Burndowns.Add(RemapBurndownEntity(burndown));
-            }
-
-        
+            xmlProject.Burndown = RemapBurndownEntity(project.Burndown);
             return xmlProject;
         }
 
@@ -170,23 +162,6 @@ namespace CSC3045.Agile.Business.Services
             return xmlAccount;
         }
 
-        private XMLBacklog RemapBacklogEntity(Backlog backlog)
-        {
-            
-            if (null == backlog) return new XMLBacklog();
-
-            XMLBacklog xmlBacklog = new XMLBacklog {BacklogId = backlog.BacklogId};
-            if (null == backlog.UserStories) return xmlBacklog;
-            
-            foreach (UserStory story in backlog.UserStories)
-            {
-                xmlBacklog.UserStories.Add(RemapUserStoryEntity(story));
-            }
-
-
-            return xmlBacklog;
-        }
-
         private XMLAcceptanceCriteria RemapAcceptanceCriteriaEntity(AcceptanceCriteria acceptanceCriteria)
         {
             if (null == acceptanceCriteria) return null;
@@ -211,12 +186,19 @@ namespace CSC3045.Agile.Business.Services
         {
             if (null == burndown) return new XMLBurndown();
 
-            XMLBurndown xmlBurndown = new XMLBurndown {BurndownName = burndown.BurndownName, BurndownId = burndown.BurndownId};
+            XMLBurndown xmlBurndown = new XMLBurndown { BurndownId = burndown.BurndownId};
 
             if (null == burndown.BurndownPoints) return xmlBurndown;
             foreach (BurndownPoint burndownPoint in burndown.BurndownPoints)
             {
-                xmlBurndown.BurndownPoints.Add(burndownPoint);
+                xmlBurndown.BurndownPoints.Add(new BurndownPoint()
+                {
+                    Burndown = burndown, 
+                    BurndownPointDate = burndownPoint.BurndownPointDate,
+                    BurndownPointId = burndownPoint.BurndownPointId,
+                    HoursRemaining = burndownPoint.HoursRemaining,
+                    PointsRemaining = burndownPoint.PointsRemaining
+                });
             }
 
             return xmlBurndown;
@@ -233,17 +215,8 @@ namespace CSC3045.Agile.Business.Services
                 SprintNumber = sprint.SprintNumber,
                 EndDate = sprint.EndDate,
                 StartDate = sprint.StartDate,
-                ScrumMaster = RemapAccountEntity(sprint.ScrumMaster),
-                Backlog = RemapBacklogEntity(sprint.Backlog)
+                ScrumMaster = RemapAccountEntity(sprint.ScrumMaster)
             };
-
-            if (null != sprint.Burndowns)
-            {
-                foreach (Burndown burndown in sprint.Burndowns)
-                {
-                    xmlSprint.Burndowns.Add(RemapBurndownEntity(burndown));
-                }
-            }
 
             if (null == sprint.SprintMembers) return xmlSprint;
             foreach (Account member in sprint.SprintMembers)
