@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using ClientDesktop.Views;
 using Core.Common.Contracts;
 using Core.Common.UI.Core;
 using Core.Common.Utils;
@@ -27,8 +28,8 @@ namespace ClientDesktop.ViewModels
         private List<UserStory> _BacklogUserStories;
         private List<UserStory> _SprintUserStories;
         #endregion
-
-
+                                          
+        public DelegateCommand<object> NavigateDashboardCommand { get; private set; }
         public int currentProjectId
         {
             get { return _CurrentProjectId; }
@@ -64,11 +65,11 @@ namespace ClientDesktop.ViewModels
 
         public List<UserStory> SprintUserStories
         {
-            get { return _BacklogUserStories; }
+            get { return _SprintUserStories; }
             set
             {
-                if (_BacklogUserStories == value) return;
-                _BacklogUserStories = value;
+                if (_SprintUserStories == value) return;
+                _SprintUserStories = value;
                 OnPropertyChanged("SprintUserStories");
             }
         }
@@ -78,6 +79,7 @@ namespace ClientDesktop.ViewModels
         {
             _ServiceFactory = serviceFactory;
             _RegionManager = regionManager;
+            NavigateDashboardCommand = new DelegateCommand<object>(NavigateDashboard);
         }
 
         protected override void OnViewLoaded()
@@ -87,11 +89,17 @@ namespace ClientDesktop.ViewModels
 
         public override void OnNavigatedTo(NavigationContext navigationContext)
         {
+
             var projectId = (int)navigationContext.Parameters["projectId"];
            // var sprintId = (int)navigationContext.Parameters["sprintId"];
             currentProjectId = projectId;
-          //  currentSprintId = sprintId;
+   
             OnViewLoaded();
+        }
+
+        private void NavigateDashboard(object parameter)
+        {
+            _RegionManager.RequestNavigate(RegionNames.Content, typeof(DashboardView).FullName);
         }
       
         public void GetUserStoriesForProject()
@@ -103,18 +111,5 @@ namespace ClientDesktop.ViewModels
             });
         }
         
-        /*
-        public void GetUserStoriesForSprint()
-        {
-            WithClient(_ServiceFactory.CreateClient<ISprintService>(), sprintClient =>
-            {
-                ICollection<UserStory> stories = sprintClient.GetSprintInfo(currentSprintId).UserStories;
-                SprintUserStories = stories.ToList();
-            });
-        }
-         */
-          
-        
-
     }
 }

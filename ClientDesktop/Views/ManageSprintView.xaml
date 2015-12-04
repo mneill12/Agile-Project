@@ -65,7 +65,7 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Backlog Discription" DisplayMemberBinding="{Binding Description}" Width="100"/>
+                        <GridViewColumn Header="Backlog Discription" DisplayMemberBinding="{Binding Description}" />
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -81,14 +81,14 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Sprint Discription" DisplayMemberBinding="{Binding Description}" Width="100"/>
+                        <GridViewColumn Header="Sprint Discription" DisplayMemberBinding="{Binding Description}" />
                     </GridView>
                 </ListView.View>
             </ListView>
         </Grid>
 
-        <Button Grid.Row="2" Name="CreateSprintButton" FontSize="10" Margin="30,18.143,30,47.571" Height="30" FontFamily="pack://application:,,,/Resources/#AquaWax" BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" Content="Assign To Sprint Backlog"
-                        Command="{Binding CreateSprint}" Grid.RowSpan="2">
+        <Button Grid.Row="2" Name="CreateSprintButton" FontSize="10" Height="30" FontFamily="pack://application:,,,/Resources/#AquaWax" BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" Content="Assign To Sprint Backlog"
+                        Command="{Binding NavigateDashboardCommand}" Width ="200">
             <Button.CommandParameter>
                 <MultiBinding Converter="{StaticResource MultiValueConverter}">
                     <Binding ElementName="ProductBacklogList" Path="SelectedItems"/>
