@@ -110,7 +110,7 @@
                                         <Button Grid.Column="3" HorizontalAlignment="Left" Margin="5" Command="{Binding  ElementName=RootGrid, Path=DataContext.ViewBurndownCommand}" Content="Project Burndown"  BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" />
                                         <Button Grid.Column="4" HorizontalAlignment="Left" Margin="5" Command="{Binding  ElementName=RootGrid, Path=DataContext.CreateNewSprintCommand}" Content="Create New Sprint"  BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" />
                                         <Button Grid.Column="5" HorizontalAlignment="Left" Margin="5" Command="{Binding  ElementName=RootGrid, Path=DataContext.JoinPlanningPoker}" Content="Join Poker Session"  BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" />
-                                        <Button Grid.Column="6" HorizontalAlignment="Left" Margin="5" Command="{Binding  ElementName=RootGrid, Path=DataContext.CreatePlanningPoker}" Content="Create Poker Session"  BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" />
+                                        <Button Grid.Column="6" HorizontalAlignment="Left" Margin="5" Command="{Binding  ElementName=RootGrid, Path=DataContext.CreatePlanningPokerCommand}" Content="Create Poker Session"  BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" />
 
                                     </Grid>
 

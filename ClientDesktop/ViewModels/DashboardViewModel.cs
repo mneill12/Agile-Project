@@ -149,6 +149,7 @@ namespace ClientDesktop.ViewModels
         public DelegateCommand<object> RefreshProjectsCommand { get; set; }
         public DelegateCommand<object> ViewBurndownCommand { get; set; }
         public DelegateCommand<object> CreateNewSprintCommand { get; set; }
+        public DelegateCommand<object> CreatePlanningPokerCommand { get; set; }
 
         private void CreateProject(object parameter)
         {
@@ -175,13 +176,16 @@ namespace ClientDesktop.ViewModels
 
         private void ManageProjectBacklog(object parameter)
         {
-            NavigationParameters navigationParameters = new NavigationParameters();
-            navigationParameters.Add("projectId",
-                SelectedProjectTab.ProjectId);
+            //Only a project owner can manage the project backlog
+            if (GlobalCommands.MyAccount.UserRoles.Select(u => u.UserRoleName).Where(u => u == "Product Owner").Any())
+            {
+                NavigationParameters navigationParameters = new NavigationParameters();
+                navigationParameters.Add("projectId",
+                    SelectedProjectTab.ProjectId);
 
-            _RegionManager.RequestNavigate(RegionNames.Content, typeof (ProductBacklogManagementView).FullName,
-                navigationParameters);
-
+                _RegionManager.RequestNavigate(RegionNames.Content, typeof(ProductBacklogManagementView).FullName,
+                    navigationParameters);
+            }
         }
 
         private void ViewBurndown(object parameter)
@@ -191,12 +195,24 @@ namespace ClientDesktop.ViewModels
 
         private void NewSprint(object parameter)
         {
+            //Only a scrum master can create a new sprint
+            if (GlobalCommands.MyAccount.UserRoles.Select(u => u.UserRoleName).Where(u => u == "Scrum Master").Any())
+            {
+                NavigationParameters navigationParameters = new NavigationParameters();
+                navigationParameters.Add("projectId",
+                    SelectedProjectTab.ProjectId);
 
-            NavigationParameters navigationParameters = new NavigationParameters();
-            navigationParameters.Add("projectId",
-                SelectedProjectTab.ProjectId);
+                _RegionManager.RequestNavigate(RegionNames.Content, typeof (NewSprintView).FullName,
+                    navigationParameters);
+            }
+        }
 
-            _RegionManager.RequestNavigate(RegionNames.Content, typeof (NewSprintView).FullName, navigationParameters);
+        private void CreatePlanningPokerSession(object parameter)
+        {
+            //Only a scrum master can create a new planning poker session
+            if (GlobalCommands.MyAccount.UserRoles.Select(u => u.UserRoleName).Where(u => u == "Scrum Master").Any())
+            {
+            }
         }
 
         [ImportingConstructor]
@@ -213,6 +229,7 @@ namespace ClientDesktop.ViewModels
             ViewSprintCommand = new DelegateCommand<object>(ViewSprint);
             ViewBurndownCommand = new DelegateCommand<object>(ViewBurndown);
             CreateNewSprintCommand = new DelegateCommand<object>(NewSprint);
+            CreatePlanningPokerCommand = new DelegateCommand<object>(CreatePlanningPokerSession);
         }
 
         public event EventHandler<ErrorMessageEventArgs> ErrorOccured;
