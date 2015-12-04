@@ -63,6 +63,7 @@ namespace CSC3045.Agile.Business.Services
             });
         }
 
+        [OperationBehavior(TransactionScopeRequired = true)]
         public StoryTask UpdateTask(StoryTask storyTask)
         {
             return ExecuteFaultHandledOperation(() =>
