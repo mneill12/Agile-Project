@@ -6,7 +6,7 @@ using CSC3045.Agile.Business.Entities;
 
 namespace CSC3045.Agile.Data
 {
-    internal class Csc3045AgileCustomDatabaseInitialiser : DropCreateDatabaseIfModelChanges<Csc3045AgileContext>
+    internal class Csc3045AgileCustomDatabaseInitialiser : DropCreateDatabaseAlways<Csc3045AgileContext>
     {
         protected override void Seed(Csc3045AgileContext context)
         {
@@ -146,6 +146,13 @@ namespace CSC3045.Agile.Data
                 defaultRoles[2]
             };
 
+            var developerUserRoleSetWithScrumMasterAndProductOwner = new HashSet<UserRole>
+            {
+                defaultRoles[0],
+                defaultRoles[1],
+                defaultRoles[2]
+            };
+
             IList<Account> defaultAccounts = new List<Account>(); // Plaintext password: 4nt1t7!
 
             defaultAccounts.Add(new Account
@@ -154,7 +161,7 @@ namespace CSC3045.Agile.Data
                 Password = "kYt8nwSk+rRitvhmseNKSrjyB06QKHlrQljre3t8O9I=",
                 FirstName = "Joe",
                 LastName = "Flynn",
-                UserRoles = developerUserRoleSet
+                UserRoles = developerUserRoleSetWithScrumMasterAndProductOwner
             });
 
             defaultAccounts.Add(new Account
