@@ -12,7 +12,7 @@ namespace CSC3045.Agile.Client.Entities
         private string _UserNotes { get; set; }
 
         //Relationships
-        private CurrentStatus _Status { get; set; }
+        private CurrentStatus _CurrentStatus { get; set; }
         private ICollection<StoryTask> _AssociatedTasks { get; set; }
         private ICollection<AcceptanceCriteria> _AcceptanceCriteria { get; set; }
         private Project _Project { get; set; }
@@ -111,12 +111,12 @@ namespace CSC3045.Agile.Client.Entities
 
         public CurrentStatus CurrentStatus
         {
-            get { return _Status; }
+            get { return _CurrentStatus; }
             set
             {
-                if (_Status != value)
+                if (_CurrentStatus != value)
                 {
-                    _Status = value;
+                    _CurrentStatus = value;
                     OnPropertyChanged(() => CurrentStatus);
                 }
             }

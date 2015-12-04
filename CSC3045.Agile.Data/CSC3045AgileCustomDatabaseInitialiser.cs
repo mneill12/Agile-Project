@@ -94,7 +94,16 @@ namespace CSC3045.Agile.Data
                 HoursRemaining = hoursDictionary3,            
  
             });
-               
+
+            IList<CurrentStatus> statuesList = new List<CurrentStatus>();
+
+            statuesList.Add(new CurrentStatus{CurrentStatusName = "To-Do"});
+            statuesList.Add(new CurrentStatus { CurrentStatusName = "In Progress" });
+            statuesList.Add(new CurrentStatus { CurrentStatusName = "QA" });
+            statuesList.Add(new CurrentStatus { CurrentStatusName = "Done" });
+
+            context.CurrentStatusSet.AddRange(statuesList);
+
             IList<UserRole> defaultRoles = new List<UserRole>();
 
             defaultRoles.Add(new UserRole
@@ -119,7 +128,6 @@ namespace CSC3045.Agile.Data
             });
 
             context.UserRoleSet.AddRange(defaultRoles);
-
 
             var developerUserRoleSet = new HashSet<UserRole>
             {
@@ -241,14 +249,14 @@ namespace CSC3045.Agile.Data
                     StoryNumber = "P1B1Story",
                     Description = "Project1Backlog1Story",
                     StoryPoints = 15,
-                    Status = new CurrentStatus {CurrentStatusName = "To-Do"}
+                    CurrentStatus = context.CurrentStatusSet.Local[0]
                 },
                 new UserStory
                 {
                     StoryNumber = "P1B2Story",
                     Description = "Project1Backlog1Story",
                     StoryPoints = 35,
-                    Status = new CurrentStatus {CurrentStatusName = "To-Do"}
+                    CurrentStatus = context.CurrentStatusSet.Local[0]
                 },
                    
                 new UserStory
@@ -256,22 +264,19 @@ namespace CSC3045.Agile.Data
                     StoryNumber = "P2B1Story",
                     Description = "Project2Backlog1Story",
                     StoryPoints = 24,
-                    Status = new CurrentStatus {CurrentStatusName = "To-Do"}
+                    CurrentStatus = context.CurrentStatusSet.Local[0]
                 },
                 new UserStory
                 {
                     StoryNumber = "P2B2Story",
                     Description = "Project2Backlog2Story",
                     StoryPoints = 14,
-                    Status = new CurrentStatus {CurrentStatusName = "To-Do"}
+                    CurrentStatus = context.CurrentStatusSet.Local[0]
                 },
 
                 new UserStory
                 {
-                    Status = new CurrentStatus
-                    {
-                        CurrentStatusName = "Ready for Development"
-                    },
+                    CurrentStatus = context.CurrentStatusSet.Local[1],
                     Description =
                         "As a user of the scrum client program I can register so that I can connect to the scrum management server",
                     StoryNumber = "CSC-001",
@@ -312,7 +317,7 @@ namespace CSC3045.Agile.Data
                             Title = "TSK-001",
                             Description = "Setup database for server application, to include user management tables.",
                             Hours = 10,
-                            CurrentStatus = new CurrentStatus {CurrentStatusName = "To-Do"},
+                            CurrentStatus = context.CurrentStatusSet.Local[0],
                             IsBlocked = false,
                             TaskBurndownPoint = tbp1
                         },
@@ -321,7 +326,7 @@ namespace CSC3045.Agile.Data
                             Title = "TSK-002",
                             Description = "Develop server application to accept client connections for user management.",
                             Hours = 8,
-                            CurrentStatus = new CurrentStatus {CurrentStatusName = "BA-QA"},
+                            CurrentStatus = context.CurrentStatusSet.Local[1],
                             IsBlocked = false,
                             TaskBurndownPoint = tbp2
                         },
@@ -331,7 +336,7 @@ namespace CSC3045.Agile.Data
                             Description =
                                 "Develop client application to make connection to server and call database CRUD methods.",
                             Hours = 12,
-                            CurrentStatus = new CurrentStatus {CurrentStatusName = "Tech QA"},
+                            CurrentStatus = context.CurrentStatusSet.Local[2],
                             //TaskBurndownPoint = new TaskBurndownPoint{ TaskBurndownPointId = };
                             IsBlocked = false,
                             TaskBurndownPoint = tbp3
@@ -342,7 +347,7 @@ namespace CSC3045.Agile.Data
                             Description =
                                 "Develop encryption strategy and methods to obfuscate usernames and encrypt passwords.",
                             Hours = 9,
-                            CurrentStatus = new CurrentStatus {StoryStatusName = "Done"},
+                            CurrentStatus = CurrentStatus = context.CurrentStatusSet.Local[3],
                             IsBlocked = false
                         },
                         new StoryTask
@@ -350,7 +355,7 @@ namespace CSC3045.Agile.Data
                             Title = "TSK-005",
                             Description = "Develop UI Registration Screen",
                             Hours = 12,
-                            CurrentStatus = new CurrentStatus {StoryStatusName = "User Acceptance Testing"},
+                            CurrentStatus = CurrentStatus = context.CurrentStatusSet.Local[1],
                             IsBlocked = false
                         },
                         new StoryTask
@@ -358,7 +363,7 @@ namespace CSC3045.Agile.Data
                             Title = "TSK-006",
                             Description = "Create unit and integration tests for user management operations.",
                             Hours = 14,
-                            CurrentStatus = new CurrentStatus {StoryStatusName = "Done"},
+                            CurrentStatus = CurrentStatus = context.CurrentStatusSet.Local[3],
                             IsBlocked = false
                         }*/
                     }

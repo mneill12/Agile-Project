@@ -118,21 +118,13 @@ namespace CSC3045.Agile.Business.Services
             });
         }
 
-
-        public void AddUserStoryToProject(int projectId)
-        {
-            var projectRepository = _DataRepositoryFactory.GetDataRepository<IProjectRepository>();
-
-            projectRepository.AddBacklogStoryToProject(projectId);
-        }
-
         public void AddUserStoryToProject(int projectId, UserStory userStory)
         {
             ExecuteFaultHandledOperation(() =>
             {
                 var projectRepository = _DataRepositoryFactory.GetDataRepository<IProjectRepository>();
 
-                projectRepository.AddStoryToProject(projectId, userStory.UserStoryId);
+                projectRepository.AddStoryToProject(projectId, userStory);
             });
         }
     }

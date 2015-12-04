@@ -102,6 +102,7 @@ namespace ClientDesktop.ViewModels
                     StoryDescText = value.Description;
                     StoryPointsText = value.StoryPoints.ToString();
                 }
+
                 OnPropertyChanged("SelectedUserStory");
             }
         }
@@ -141,7 +142,7 @@ namespace ClientDesktop.ViewModels
 
                 WithClient(_ServiceFactory.CreateClient<IUserStoryService>(), userStoryClient =>
                 {
-                    userStoryClient.RemoveUserStory(story.UserStoryId);
+                    userStoryClient.RemoveUserStoryById(story.UserStoryId);
                 });
             }
             GetUserStories();
@@ -186,10 +187,14 @@ namespace ClientDesktop.ViewModels
                 Project = project
             };
 
+            newUserStory.CleanAll();
+
             WithClient(_ServiceFactory.CreateClient<IProjectService>(), projectClient =>
             {
                 projectClient.AddUserStoryToProject(project.ProjectId, newUserStory);
             });
+
+            GetUserStories();
         }
 
         

@@ -201,7 +201,7 @@ namespace CSC3045.Agile.ServiceHost.Console
                         System.Console.WriteLine("Story Number:\t" + userStoryTest.StoryNumber);
                         System.Console.WriteLine("Description:'t" + userStoryTest.Description);
                         System.Console.WriteLine("Story Points:\t" + userStoryTest.StoryPoints);
-                        System.Console.WriteLine("Status:\t" + userStoryTest.Status.CurrentStatusName);
+                        System.Console.WriteLine("Status:\t" + userStoryTest.CurrentStatus.CurrentStatusName);
                         System.Console.WriteLine();
                         System.Console.WriteLine("\t Tasks:");
                         System.Console.WriteLine();
@@ -271,7 +271,7 @@ namespace CSC3045.Agile.ServiceHost.Console
             using (var db = new Csc3045AgileContext())
             {
                 return db.UserStorySet
-                    .Include(s => s.Status)
+                    .Include(s => s.CurrentStatus)
                     .Include(s => s.AssociatedTasks.Select(p => p.CurrentStatus))
                     .Include(s => s.AcceptanceCriteria.Select(p => p.Criteria)).ToList();
             }

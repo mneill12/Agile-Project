@@ -26,9 +26,9 @@ namespace CSC3045.Agile.Client.Proxies
             Channel.UpdateUserStory(userStory);
         }
 
-        public void RemoveUserStory(int userStoryId)
+        public void RemoveUserStoryById(int userStoryId)
         {
-            Channel.RemoveUserStory(userStoryId);
+            Channel.RemoveUserStoryById(userStoryId);
         }
 
         public ICollection<UserStory> GetAllUserStories()

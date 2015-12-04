@@ -24,7 +24,7 @@ namespace CSC3045.Agile.Business.Entities
         public string UserNotes { get; set; }
 
         [DataMember]
-        public CurrentStatus Status { get; set; }
+        public CurrentStatus CurrentStatus { get; set; }
 
         [DataMember]
         public ICollection<StoryTask> AssociatedTasks { get; set; }

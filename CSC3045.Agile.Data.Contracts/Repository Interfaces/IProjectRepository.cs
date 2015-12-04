@@ -13,6 +13,6 @@ namespace CSC3045.Agile.Data.Contracts.Repository_Interfaces
         Project AddBacklogStoryToProject(int projectId);
         Project AddProjectWithUsers(Project project);
         Project UpdateProjectWithUsers(Project project);
-        void AddStoryToProject(int projectId, int userStoryId);
+        void AddStoryToProject(int projectId, UserStory userStory);
     }
 }
