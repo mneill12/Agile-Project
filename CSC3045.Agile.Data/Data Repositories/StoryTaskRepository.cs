@@ -35,11 +35,11 @@ namespace CSC3045.Agile.Data.Data_Repositories
         {
             return entityContext.StoryTaskSet
                 .Include(a => a.Owner)
-                .FirstOrDefault();
+                .FirstOrDefault(t => t.StoryTaskId == id);
         }
 
         // Get StoryTasks by Owner
-        public IEnumerable<StoryTask> GetTasksByOwner(int accountId)
+        public ICollection<StoryTask> GetTasksByOwner(int accountId)
         {
             using (var entityContext = new Csc3045AgileContext())
             return entityContext.StoryTaskSet
@@ -49,7 +49,7 @@ namespace CSC3045.Agile.Data.Data_Repositories
         }
 
         // Get blocked tasks
-        public IEnumerable<StoryTask> GetBlockedTasks()
+        public ICollection<StoryTask> GetBlockedTasks()
         {
             using (var entityContext = new Csc3045AgileContext())
             return entityContext.StoryTaskSet
@@ -59,7 +59,7 @@ namespace CSC3045.Agile.Data.Data_Repositories
         }
 
         // Get tasks by status
-        public IEnumerable<StoryTask> GetTasksByStatus(string status)
+        public ICollection<StoryTask> GetTasksByStatus(string status)
         {
             using (var entityContext = new Csc3045AgileContext())
             return entityContext.StoryTaskSet
@@ -67,6 +67,45 @@ namespace CSC3045.Agile.Data.Data_Repositories
                .Where(a => a.CurrentStatus.CurrentStatusName.Equals(status))
                .ToList();
 
-        } 
+        }
+
+        public ICollection<StoryTask> UpdateTaskCollection(ICollection<StoryTask> updatedTasks)
+        {
+            ICollection<StoryTask> updatedStoryTasks = new List<StoryTask>();
+
+            using (var entityContext = new Csc3045AgileContext())
+            {
+                foreach (var updatedTask in updatedTasks)
+                {
+                    updatedStoryTasks.Add(UpdateEntity(entityContext, updatedTask));
+                }
+            }
+
+            return updatedStoryTasks;
+        }
+
+        public StoryTask UpdateOwnerShip(int id, int accountId)
+        {
+            using (var entityContext = new Csc3045AgileContext())
+            {
+                var storyTask = entityContext.StoryTaskSet
+                .Include(a => a.Owner)
+                .FirstOrDefault(t => t.StoryTaskId == id);
+
+                if (storyTask != null && storyTask.Owner == null)
+                {
+                    var account = entityContext.AccountSet
+                    .FirstOrDefault(a => a.AccountId == accountId);
+
+                    storyTask.Owner = account;
+
+                    entityContext.SaveChanges();
+                    return storyTask;
+                }
+
+                return null;
+            }
+
+        }
     }
 }

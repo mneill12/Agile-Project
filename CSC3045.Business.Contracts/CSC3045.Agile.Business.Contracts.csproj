@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Service Contracts\IStoryTaskService.cs" />
     <Compile Include="Service Contracts\IXMLSerialisationService.cs" />
     <Compile Include="Service Contracts\IBurndownService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

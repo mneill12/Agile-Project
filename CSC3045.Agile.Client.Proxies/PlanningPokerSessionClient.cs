@@ -1,6 +1,7 @@
 ﻿using CSC3045.Agile.Client.Entities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
@@ -10,6 +11,8 @@ using CSC3045.Agile.Client.Contracts;
 
 namespace CSC3045.Agile.Client.Proxies
 {
+    [Export(typeof(IPlanningPokerSessionService))]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     class PlanningPokerSessionClient : ClientBase<IPlanningPokerSessionService>, IPlanningPokerSessionService
     {
         public void CreatePlanningPokerSession(PlanningPokerSession planningPokerSession)

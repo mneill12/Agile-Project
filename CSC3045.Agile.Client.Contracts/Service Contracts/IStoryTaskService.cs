@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.ServiceModel;
 using Core.Common.Exceptions;
-using CSC3045.Agile.Business.Entities;
+using CSC3045.Agile.Client.Entities;
 
-namespace CSC3045.Agile.Business.Contracts
+namespace CSC3045.Agile.Client.Contracts
 {
     [ServiceContract]
     public interface IStoryTaskService
