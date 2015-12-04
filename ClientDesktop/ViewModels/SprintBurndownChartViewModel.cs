@@ -7,6 +7,7 @@ using System.Net.Mail;
 using System.Text;
 using System.Windows;
 using System.Windows.Data;
+using ClientDesktop.Views;
 using Core.Common.Contracts;
 using Core.Common.UI.Core;
 using CSC3045.Agile.Client.Contracts;
@@ -30,6 +31,7 @@ namespace ClientDesktop.ViewModels
         {
             _ServiceFactory = serviceFactory;
             _RegionManager = regionManager;
+            NavigateDashboardCommand = new DelegateCommand<object>(NavigateDashboard);
             ChangeGraphData = new DelegateCommand<object>(GetSprintBurndownData);
 
             BurndownData = new ObservableCollection<GraphElement>();
@@ -79,11 +81,20 @@ namespace ClientDesktop.ViewModels
         private readonly DelegateCommand<GraphElement> _GraphData;
         public DelegateCommand<GraphElement> graphData { get { return _GraphData; } }
         public DelegateCommand<object> ChangeGraphData { get; private set; }
+        public DelegateCommand<object> NavigateDashboardCommand { get; set; }
+
+        private void NavigateDashboard(object parameter)
+        {
+            _RegionManager.RequestNavigate(RegionNames.Content, typeof(DashboardView).FullName);
+        }
 
         #endregion delegateCommands
 
         protected void GetSprintBurndownData(object obj)
         {
+
+            BurndownData.Clear();
+
             WithClient(_ServiceFactory.CreateClient<IBurndownService>(), burndownClient =>
             {                                          
                 RawBurndownData = burndownClient.GetHourDateMapForSprintId(int.Parse(_SprintId));

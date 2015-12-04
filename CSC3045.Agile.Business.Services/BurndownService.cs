@@ -156,17 +156,17 @@ namespace CSC3045.Agile.Business.Services
             }
             else if (sprintId == 3)
             {
-                totalHourMap.Add(new DateTime(2015, 10, 5), 75);
-                totalHourMap.Add(new DateTime(2015, 10, 6), 60);
-                totalHourMap.Add(new DateTime(2015, 10, 7), 59);
-                totalHourMap.Add(new DateTime(2015, 10, 8), 55);
-                totalHourMap.Add(new DateTime(2015, 10, 9), 40);
+                totalHourMap.Add(new DateTime(2015, 11, 16), 75);
+                totalHourMap.Add(new DateTime(2015, 11, 17), 60);
+                totalHourMap.Add(new DateTime(2015, 11, 18), 59);
+                totalHourMap.Add(new DateTime(2015, 11, 19), 55);
+                totalHourMap.Add(new DateTime(2015, 11, 20), 40);
 
-                totalHourMap.Add(new DateTime(2015, 10, 12), 35);
-                totalHourMap.Add(new DateTime(2015, 10, 13), 30);
-                totalHourMap.Add(new DateTime(2015, 10, 14), 30);
-                totalHourMap.Add(new DateTime(2015, 10, 15), 10);
-                totalHourMap.Add(new DateTime(2015, 10, 16), 0);
+                totalHourMap.Add(new DateTime(2015, 11, 23), 35);
+                totalHourMap.Add(new DateTime(2015, 11, 24), 30);
+                totalHourMap.Add(new DateTime(2015, 11, 25), 30);
+                totalHourMap.Add(new DateTime(2015, 11, 26), 10);
+                totalHourMap.Add(new DateTime(2015, 11, 27), 0);
 
                 return totalHourMap;
             }

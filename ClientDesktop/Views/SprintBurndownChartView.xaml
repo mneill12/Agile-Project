@@ -20,14 +20,32 @@
             </Style>
         </StackPanel.Resources>
         
-        <Grid Height="600" Width="1000"  VerticalAlignment="Center">
+        <Grid  VerticalAlignment="Center" Width ="800" Height="400">
             <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
                 <RowDefinition Height="10*" />
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
 
-            <sparrow:SparrowChart Background="Azure" Grid.Row="0">
+            <Button Grid.Row="0"  Command="{Binding NavigateDashboardCommand}" x:Name="BackButton" DockPanel.Dock="Left" Style="{DynamicResource MetroCircleButtonStyle}" Height="40" Width="40" FontFamily="Segoe UI Symbol" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0">
+                <Rectangle Width="20" Height="15">
+                    <Rectangle.Fill>
+                        <VisualBrush Stretch="Fill">
+                            <VisualBrush.Visual>
+                                <Canvas Width="48" Height="48" Clip="F1 M 0,0L 48,0L 48,48L 0,48L 0,0" UseLayoutRounding="False">
+                                    <Path Width="25" Height="18" Canvas.Left="12" Canvas.Top="15" Stretch="Fill" Fill="{DynamicResource BlackBrush}" Data="F1 M 12,22L 12,26L 28.25,26L 21,33L 27.5,33L 37,24L 27.5,15L 21,15L 28.25,22L 12,22 Z " />
+                                </Canvas>
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Button.LayoutTransform>
+                    <ScaleTransform ScaleX="-1" />
+                </Button.LayoutTransform>
+            </Button>
+
+            <sparrow:SparrowChart  Grid.Row="1">
             <sparrow:SparrowChart.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -40,18 +58,14 @@
             <sparrow:SparrowChart.XAxis>
                     <sparrow:DateTimeXAxis Header = "Date" Visibility="Visible" AxisLineStyle="{StaticResource axisLineStyle}" />
             </sparrow:SparrowChart.XAxis >
-            <sparrow:SparrowChart.YAxis >
+                <sparrow:SparrowChart.YAxis >
                     <sparrow:LinearYAxis  Header ="Hours" AxisLineStyle="{StaticResource axisLineStyle}"  />
-            </sparrow:SparrowChart.YAxis>
-            <sparrow:SparrowChart.Legend>
-                <sparrow:Legend Header="H" LegendPosition="Outside" HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="#FFFCFDFE" Padding="5" Margin="10" Dock="Right">
-                </sparrow:Legend>
-            </sparrow:SparrowChart.Legend>
-            <sparrow:LineSeries PointsSource="{Binding BurndownData}" XPath="X" YPath="Y"/>
+                </sparrow:SparrowChart.YAxis>
+                <sparrow:LineSeries PointsSource="{Binding BurndownData}" XPath="X" YPath="Y"/>
         </sparrow:SparrowChart>
 
-        <TextBox controls:TextBoxHelper.ClearTextButton="True" controls:TextBoxHelper.Watermark="SprintId" Grid.Row="1"  Text ="{Binding SprintId}" Name="SprintIdBox" Height="20"></TextBox>
-        <Button Width="100" Height="30" FontFamily="pack://application:,,,/Resources/#AquaWax"  BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" FontSize="10" Command="{Binding ChangeGraphData, Mode=OneTime}" CommandParameter="{Binding ElementName=SprintIdBox}" Grid.Row="2"  >Get Chart</Button>
+        <TextBox controls:TextBoxHelper.ClearTextButton="True" controls:TextBoxHelper.Watermark="SprintId" Grid.Row="2"  Text ="{Binding SprintId}" Name="SprintIdBox" Height="20"></TextBox>
+        <Button  Grid.Row ="3"  Width="100" Height="30" FontFamily="pack://application:,,,/Resources/#AquaWax"  BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" FontSize="10" Command="{Binding ChangeGraphData, Mode=OneTime}" CommandParameter="{Binding ElementName=SprintIdBox}"  >Get Chart</Button>
 
        
     </Grid>
