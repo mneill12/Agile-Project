@@ -44,5 +44,11 @@ namespace CSC3045.Agile.Client.Proxies
         {
             return Channel.GetProjectInfo(projectId);
         }
+
+        public void SaveToXML(Project project)
+        {
+            Channel.SaveToXML(project);
+        }
+
     }
 }

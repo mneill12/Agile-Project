@@ -37,31 +37,5 @@ namespace CSC3045.Agile.Client.Entities
                 }
             }
         }
-
-        public ICollection<UserStory> AssociatedUserStories
-        {
-            get { return _AssociatedUserStories; }
-            set
-            {
-                if (_AssociatedUserStories != value)
-                {
-                    _AssociatedUserStories = value;
-                    OnPropertyChanged(() => AssociatedUserStories);
-                }
-            }
-        }
-
-        public ICollection<StoryTask> AssociatedStoryTasks
-        {
-            get { return _AssociatedStoryTasks; }
-            set
-            {
-                if (_AssociatedStoryTasks != value)
-                {
-                    _AssociatedStoryTasks = value;
-                    OnPropertyChanged(() => AssociatedStoryTasks);
-                }
-            }
-        }
     }
 }

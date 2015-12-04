@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using System.Xml.Serialization;
 using Core.Common.Contracts;
 using Core.Common.Core;
 
@@ -34,6 +35,7 @@ namespace CSC3045.Agile.Business.Entities
         public UserStory UserStory { get; set; }
 
         [DataMember]
+        [XmlIgnore]
         public TaskBurndownPoint TaskBurndownPoint { get; set; }
 
         [DataMember]

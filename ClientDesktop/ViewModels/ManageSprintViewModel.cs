@@ -23,5 +23,6 @@ namespace ClientDesktop.ViewModels
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class ManageSprintViewModel : ViewModelBase
     {
+
     }
 }

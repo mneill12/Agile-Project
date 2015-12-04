@@ -20,12 +20,10 @@ namespace CSC3045.Agile.Business.Contracts
         [FaultContract(typeof(NotFoundException))]
         Project GetProjectInfo(int projectId);
 
-        //Update
+        //Custom
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
         void UpdateProjectInfo(Project project);
-
-        //Custom
 
         [OperationContract]
         ICollection<Project> GetProjectsForProjectManager(int projectManagerId);
@@ -40,5 +38,8 @@ namespace CSC3045.Agile.Business.Contracts
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
         void AddUserStoryToProject(int projectId, UserStory userStory);
+
+        [OperationContract]
+        void SaveToXML(Project project);
     }
 }

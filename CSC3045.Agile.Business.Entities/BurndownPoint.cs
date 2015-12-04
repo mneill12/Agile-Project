@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using System.Xml.Serialization;
 using Core.Common.Contracts;
 using Core.Common.Core;
 
@@ -21,6 +22,7 @@ namespace CSC3045.Agile.Business.Entities
         public int HoursRemaining { get; set; }
 
         [DataMember]
+        [XmlIgnore]
         public Burndown Burndown { get; set; }
 
         #region IIdentifiableEntity members

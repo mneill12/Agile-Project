@@ -34,7 +34,7 @@ namespace CSC3045.Agile.Client.Contracts
         //Delete
         [OperationContract]
         [FaultContract(typeof(NotFoundException))]
-        void RemoveUserStory(int userStoryId);
+        void RemoveUserStoryById(int userStoryId);
 
         [OperationContract]
         [FaultContract(typeof(NotFoundException))]

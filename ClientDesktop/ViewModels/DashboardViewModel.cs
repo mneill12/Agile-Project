@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Navigation;
 using ClientDesktop.Views;
 using Core.Common;
@@ -31,7 +33,44 @@ namespace ClientDesktop.ViewModels
         private List<Project> _AllProjects;
         private Sprint _SelectedSprint;
 
+        private bool _IsProductOwner;
+        private bool _IsProjectManager;
+        private bool _IsScrumMaster;
+
         private Project _SelectedProjectTab;
+
+        public bool IsProductOwner
+        {
+            get { return _IsProductOwner; }
+            set
+            {
+                if (_IsProductOwner == value) return;
+                _IsProductOwner = value;
+                OnPropertyChanged("IsProductOwner");
+            }
+        }
+
+        public bool IsProjectManager
+        {
+            get { return _IsProductOwner; }
+            set
+            {
+                if (_IsProjectManager == value) return;
+                _IsProjectManager = value;
+                OnPropertyChanged("IsProjectManager");
+            }
+        }
+
+        public bool IsScrumMaster
+        {
+            get { return _IsScrumMaster; }
+            set
+            {
+                if (_IsScrumMaster == value) return;
+                _IsScrumMaster = value;
+                OnPropertyChanged("IsScrumMaster");
+            }
+        }
 
         public string FirstName
         {
@@ -133,6 +172,7 @@ namespace ClientDesktop.ViewModels
                 if (value != null)
                 {
                     _SelectedProjectTab = value;
+                    CheckPermissions();
                     OnPropertyChanged("SelectedProjectTab");
                 }
             }
@@ -149,6 +189,8 @@ namespace ClientDesktop.ViewModels
         public DelegateCommand<object> RefreshProjectsCommand { get; set; }
         public DelegateCommand<object> ViewBurndownCommand { get; set; }
         public DelegateCommand<object> CreateNewSprintCommand { get; set; }
+        public DelegateCommand<object> SaveProjectXMLCommand { get; set; } 
+        public DelegateCommand<object> CreatePlanningPokerCommand { get; set; }
 
         private void CreateProject(object parameter)
         {
@@ -158,6 +200,43 @@ namespace ClientDesktop.ViewModels
         private void RefreshProjects(object parameter)
         {
             UpdateProjectsForAccount();
+        }
+
+        private void CheckPermissions()
+        {
+            IsProductOwner = isProductOwner();
+            IsProjectManager = isProjectManager();
+            IsScrumMaster = isScrumMaster();
+        }
+
+        private bool isProductOwner()
+        {
+            if (SelectedProjectTab.ProductOwner.AccountId == GlobalCommands.MyAccount.AccountId)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool isProjectManager()
+        {
+            if (SelectedProjectTab.ProjectManager.AccountId == GlobalCommands.MyAccount.AccountId)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool isScrumMaster()
+        {
+            if (SelectedProjectTab.ScrumMasters.Contains(GlobalCommands.MyAccount))
+            {
+                return true;
+            }
+
+            return false;
         }
 
         private void ViewSprint(object parameter)
@@ -175,13 +254,16 @@ namespace ClientDesktop.ViewModels
 
         private void ManageProjectBacklog(object parameter)
         {
-            NavigationParameters navigationParameters = new NavigationParameters();
-            navigationParameters.Add("projectId",
-                SelectedProjectTab.ProjectId);
+            //Only a project owner can manage the project backlog
+            if (GlobalCommands.MyAccount.UserRoles.Select(u => u.UserRoleName).Where(u => u == "Product Owner").Any())
+            {
+                NavigationParameters navigationParameters = new NavigationParameters();
+                navigationParameters.Add("projectId",
+                    SelectedProjectTab.ProjectId);
 
-            _RegionManager.RequestNavigate(RegionNames.Content, typeof (ProductBacklogManagementView).FullName,
-                navigationParameters);
-
+                _RegionManager.RequestNavigate(RegionNames.Content, typeof(ProductBacklogManagementView).FullName,
+                    navigationParameters);
+            }
         }
 
         private void ViewBurndown(object parameter)
@@ -191,12 +273,24 @@ namespace ClientDesktop.ViewModels
 
         private void NewSprint(object parameter)
         {
+            //Only a scrum master can create a new sprint
+            if (GlobalCommands.MyAccount.UserRoles.Select(u => u.UserRoleName).Where(u => u == "Scrum Master").Any())
+            {
+                NavigationParameters navigationParameters = new NavigationParameters();
+                navigationParameters.Add("projectId",
+                    SelectedProjectTab.ProjectId);
 
-            NavigationParameters navigationParameters = new NavigationParameters();
-            navigationParameters.Add("projectId",
-                SelectedProjectTab.ProjectId);
+                _RegionManager.RequestNavigate(RegionNames.Content, typeof (NewSprintView).FullName,
+                    navigationParameters);
+            }
+        }
 
-            _RegionManager.RequestNavigate(RegionNames.Content, typeof (NewSprintView).FullName, navigationParameters);
+        private void CreatePlanningPokerSession(object parameter)
+        {
+            //Only a scrum master can create a new planning poker session
+            if (GlobalCommands.MyAccount.UserRoles.Select(u => u.UserRoleName).Where(u => u == "Scrum Master").Any())
+            {
+            }
         }
 
         [ImportingConstructor]
@@ -213,9 +307,20 @@ namespace ClientDesktop.ViewModels
             ViewSprintCommand = new DelegateCommand<object>(ViewSprint);
             ViewBurndownCommand = new DelegateCommand<object>(ViewBurndown);
             CreateNewSprintCommand = new DelegateCommand<object>(NewSprint);
+            SaveProjectXMLCommand = new DelegateCommand<object>(SaveProjectXML);
+            CreatePlanningPokerCommand = new DelegateCommand<object>(CreatePlanningPokerSession);
         }
 
         public event EventHandler<ErrorMessageEventArgs> ErrorOccured;
+
+        public void SaveProjectXML(object sender)
+        {
+            WithClient(_ServiceFactory.CreateClient<IProjectService>(), projectClient =>
+            {
+                projectClient.SaveToXML(SelectedProjectTab);
+            });
+
+        }
 
         protected override void OnViewLoaded()
         {

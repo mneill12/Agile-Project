@@ -37,5 +37,7 @@ namespace ClientDesktop.Views
         {
             set { DataContext = value; }
         }
+
+
     }
 }

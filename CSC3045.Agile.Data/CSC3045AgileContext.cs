@@ -97,9 +97,20 @@ namespace CSC3045.Agile.Data
                     q.MapRightKey("AccountId");
                 });
 
+              // 03/12/2015 - The day I agreed 
+              modelBuilder.Entity<Project>()
+                  .HasMany((q => q.Sprints))
+                  .WithMany(q => q.SprintFor)
+                  .Map(q =>
+                  {
+                      q.ToTable("Sprints");
+                      q.MapLeftKey("ProjectId");
+                      q.MapRightKey("SprintId");
+                  });
+    
             modelBuilder.Entity<Project>()
                 .HasMany(q => q.BacklogStories);
-
+                
             modelBuilder.Entity<Sprint>()
                 .HasKey(e => e.SprintId).Ignore(e => e.EntityId);
 

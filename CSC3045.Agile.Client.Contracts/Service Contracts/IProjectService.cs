@@ -27,7 +27,6 @@ namespace CSC3045.Agile.Client.Contracts
         void UpdateProjectInfo(Project project);
 
         //Custom
-
         [OperationContract]
         ICollection<Project> GetProjectsForProjectManager(int projectManagerId);
 
@@ -41,5 +40,8 @@ namespace CSC3045.Agile.Client.Contracts
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
         void AddUserStoryToProject(int projectId, UserStory userStory);
+
+        [OperationContract]
+        void SaveToXML(Project project);
     }
 }

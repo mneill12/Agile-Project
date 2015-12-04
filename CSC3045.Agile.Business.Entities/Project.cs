@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
+using System.Xml.Serialization;
 using Core.Common.Contracts;
 using Core.Common.Core;
 
@@ -10,6 +11,7 @@ namespace CSC3045.Agile.Business.Entities
     [DataContract]
     public class Project : EntityBase, IIdentifiableEntity
     {
+
         [DataMember]
         public int ProjectId { get; set; }
 
@@ -31,11 +33,10 @@ namespace CSC3045.Agile.Business.Entities
         [DataMember]
         public Burndown Burndown { get; set; }
 
-        //One project can have many sprints
         [DataMember]
+        [InverseProperty("SprintFor")]
         public ICollection<Sprint> Sprints { get; set; }
 
-        [DataMember]
         public ICollection<UserStory> BacklogStories { get; set; }
 
         //Many to many relationships

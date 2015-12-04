@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using System.Xml.Serialization;
 using Core.Common.Contracts;
 using Core.Common.Core;
 

@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 using System.Xml;
+using System.Xml.Serialization;
 using Core.Common.Contracts;
 using Core.Common.Core;
 
@@ -48,6 +49,9 @@ namespace CSC3045.Agile.Business.Entities
 
         //Many scrum masters can be on many projects
         public ICollection<Project> ScrumMasterFor { get; set; }
+
+        //Many scrum masters can be on many projects
+        public ICollection<Project> SprintScrumMasterFor { get; set; }
 
         #region IIdentifiableEntity members
 

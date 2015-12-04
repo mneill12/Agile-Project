@@ -190,6 +190,7 @@
     <Compile Include="ViewModels\PlanningPoker\CreatePlanningPokerSessionViewModel.cs" />
     <Compile Include="ViewModels\CreateProjectViewModel.cs" />
     <Compile Include="ShellViewModel.cs" />
+    <Compile Include="ViewModels\OfflineProjectViewModel.cs" />
     <Compile Include="ViewModels\Tasks\CreateTaskViewModel.cs" />
     <Compile Include="ViewModels\DashboardViewModel.cs" />
     <Compile Include="ViewModels\EditAccountViewModel.cs" />
@@ -205,7 +206,10 @@
     <Compile Include="ViewModels\Tasks\TaskDetailsViewModel.cs" />
     <Compile Include="ViewModels\TopBarViewModel.cs" />
     <Compile Include="Views\ManageSprintView.xaml.cs">
-      <DependentUpon>ManageSprintView.xaml</DependentUpon>
+    <DependentUpon>ManageSprintView.xaml</DependentUpon>
+     </Compile>
+    <Compile Include="Views\OfflineProjectView.xaml.cs">
+      <DependentUpon>OfflineProjectView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PlanningPoker\CreatePlanningPokerSessionView.xaml.cs">
       <DependentUpon>CreatePlanningPokerSessionView.xaml</DependentUpon>
@@ -275,6 +279,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\OfflineProjectView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      </Page>
     <Page Include="Views\PlanningPoker\CreatePlanningPokerSessionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

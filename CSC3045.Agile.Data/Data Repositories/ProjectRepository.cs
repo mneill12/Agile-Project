@@ -98,16 +98,24 @@ namespace CSC3045.Agile.Data.Data_Repositories
             }
         }
 
-        public void AddStoryToProject(int projectId, int userStoryId)
+        public void AddStoryToProject(int projectId, UserStory userStory)
         {
             using (var entityContext = new Csc3045AgileContext())
             {
-                var dbProject = entityContext.ProjectSet.Single(p => p.ProjectId == projectId);
-                var dbStory = entityContext.UserStorySet.Single(s => s.UserStoryId == userStoryId);
-                dbProject.BacklogStories.Add(dbStory);
+                var dbProject = entityContext.ProjectSet.Include(p => p.BacklogStories).Single(p => p.ProjectId == projectId);
+
+                if (userStory.CurrentStatus != null)
+                {
+                    userStory.CurrentStatus = entityContext.CurrentStatusSet.First(c => c.CurrentStatusName == userStory.CurrentStatus.CurrentStatusName);
+                }
+
+                dbProject.BacklogStories.Add(userStory);
+
+                entityContext.Entry(dbProject).State = EntityState.Modified;
                 entityContext.SaveChanges();
             }
         }
+
 
         #endregion
 
@@ -171,5 +179,7 @@ namespace CSC3045.Agile.Data.Data_Repositories
                 return updatedProject;
             }
         }
+
+       
     }
 }

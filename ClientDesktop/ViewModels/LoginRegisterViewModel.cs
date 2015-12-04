@@ -38,6 +38,22 @@ namespace ClientDesktop.ViewModels
         private bool _RegisterIsProductOwner;
         private ICollection<UserRole> _UserRoles;
 
+        private String _ChosenFilePath;
+
+        public string ChosenFilePath
+        {
+            get
+            {
+                return _ChosenFilePath;
+            }
+            set
+            {
+                if (_ChosenFilePath == value) return;
+                _ChosenFilePath = value;
+                OnPropertyChanged("ChosenFilePath");
+            }
+        }
+
         public string AuthenticatedUser{
             get
             {
@@ -202,13 +218,15 @@ namespace ClientDesktop.ViewModels
 
         private readonly DelegateCommand<PasswordBox> _RegisterAccount;
         private readonly DelegateCommand<PasswordBox> _AccountLogin;
-        private readonly DelegateCommand<TextBox> _XMLFilePath; 
+        private readonly DelegateCommand<TextBox> _XMLFilePath;
+        private readonly DelegateCommand<TextBox> _UploadXMLDocument; 
 
         public DelegateCommand<PasswordBox> RegisterAccount { get { return _RegisterAccount; } }
         public DelegateCommand<PasswordBox> AccountLogin { get { return _AccountLogin; } }
         public DelegateCommand<TextBox> XMLFilePath { get { return _XMLFilePath; } }
+        public DelegateCommand<TextBox> UploadXMLDocument { get { return _UploadXMLDocument; } }
 
-        #endregion
+            #endregion
 
         [Import]
         public DashboardViewModel DashboardViewModel { get; private set; }
@@ -226,6 +244,7 @@ namespace ClientDesktop.ViewModels
             _RegisterAccount = new DelegateCommand<PasswordBox>(OnRegisterAccount);
             _AccountLogin = new DelegateCommand<PasswordBox>(OnAccountLogin);
             _XMLFilePath = new DelegateCommand<TextBox>(XMLButtonClick);
+            _UploadXMLDocument = new DelegateCommand<TextBox>(UploadXMLDocumentClick);
 
         }
 
@@ -325,26 +344,38 @@ namespace ClientDesktop.ViewModels
         }
 
 
-        protected void XMLButtonClick(TextBox sender)
+        protected void XMLButtonClick(object sender)
         {
             // Create OpenFileDialog 
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
 
             // Set filter for file extension and default file extension 
-            dlg.DefaultExt = ".png";
-            dlg.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif";
-
+            dlg.DefaultExt = ".xml";
+            dlg.Filter = "XML Files (*.xml)|*.xml";
 
             // Display OpenFileDialog by calling ShowDialog method 
             Nullable<bool> result = dlg.ShowDialog();
-
 
             // Get the selected file name and display in a TextBox 
             if (result == true)
             {
                 // Open document 
                 string filename = dlg.FileName;
+                ChosenFilePath = filename;
             }
+        }
+
+        protected void UploadXMLDocumentClick(TextBox sender)
+        {
+            if (string.IsNullOrEmpty(_ChosenFilePath) || string.IsNullOrEmpty(sender.Text))
+            {
+                MessageBox.Show("You haven't selected a file!", "XML Upload Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            GlobalCommands.LoadedXMLFilePath = sender.Text;
+            _RegionManager.RequestNavigate(RegionNames.Content, typeof(OfflineProjectView).FullName);
+
         }
 
         protected void OnRegisterAccount(PasswordBox passwordBox)

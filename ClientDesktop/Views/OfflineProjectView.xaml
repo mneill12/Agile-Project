@@ -1,0 +1,118 @@
+﻿<core:UserControlViewBase x:Class="ClientDesktop.Views.OfflineProjectView"
+                          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                          xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+                          xmlns:core="CSC3045AgileCore"
+                          mc:Ignorable="d"
+                          d:DesignHeight="560" d:DesignWidth="1280">
+    <Grid x:Name="RootGrid">
+        <DockPanel LastChildFill="True" Dock="Right" Width="1000" HorizontalAlignment="Right">
+            <StackPanel>
+                <Grid Height="50" VerticalAlignment="Top">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"></ColumnDefinition>
+                        <ColumnDefinition Width="150"></ColumnDefinition>
+                        <ColumnDefinition Width="250"></ColumnDefinition>
+                        <ColumnDefinition Width="150"></ColumnDefinition>
+                        <ColumnDefinition Width="250"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" FontSize="20" Foreground="AliceBlue" FontWeight="DemiBold" Text="{Binding Project.ProjectName}"></TextBlock>
+                    <TextBlock Grid.Row="0" Grid.Column="1" FontSize="20" Foreground="AliceBlue" Text="Start Date:"></TextBlock>
+                    <TextBlock Grid.Row="0" Grid.Column="2" FontSize="20" Foreground="AliceBlue" FontWeight="DemiBold" Text="{Binding ProjectStartDate}"></TextBlock>
+                    <TextBlock Grid.Row="0" Grid.Column="3" FontSize="20" Foreground="AliceBlue" Text="Saved Date:"></TextBlock>
+                    <TextBlock Grid.Row="0" Grid.Column="4" FontSize="20" Foreground="AliceBlue" Text="{Binding ProjectSavedDate}"></TextBlock>
+                </Grid>
+                <TabControl ItemsSource="{Binding SprintList}">
+                    <TabControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding SprintName}"/>
+                        </DataTemplate>
+                    </TabControl.ItemTemplate>
+                    <TabControl.ContentTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions >
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions >
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0" Grid.Row="0" Margin="5" Text="Start Date:" FontSize="15" VerticalAlignment="Center" Foreground="White"/>
+                                <TextBlock Grid.Column="1" Grid.Row="0" Margin="5" Text="{Binding StartDate}" FontSize="15" VerticalAlignment="Center" Foreground="White"/>
+                                <TextBlock Grid.Column="2" Grid.Row="0" Margin="5" Text="End Date: " FontSize="15" VerticalAlignment="Center" Foreground="White"/>
+                                <TextBlock Grid.Column="3" Grid.Row="0" Margin="5" Text="{Binding EndDate}" FontSize="15" VerticalAlignment="Center" Foreground="White"/>
+                                <TextBlock Grid.Column="4" Grid.Row="0" Margin="5" Text="Scrum Master:" FontSize="15" VerticalAlignment="Center" Foreground="White"/>
+                                <TextBlock Grid.Column="5" Grid.Row="0" Margin="5" Text="{Binding ScrumMaster.LoginEmail}" FontSize="15" VerticalAlignment="Center" Foreground="White"/>
+                            </Grid>
+                        </DataTemplate>
+                    </TabControl.ContentTemplate>
+                </TabControl>
+            </StackPanel>
+        </DockPanel>
+        <DockPanel LastChildFill="True" Dock="Left" Width="250" HorizontalAlignment="Left">
+        <StackPanel>
+                <Rectangle Margin="50"  Fill="White" Width="125"
+                    	Height="100">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Stretch="Fill"
+                    			Visual="{StaticResource appbar_people_profile}"/>
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+                <TextBlock Height="30" Foreground="AliceBlue" FontSize="20" FontWeight="DemiBold" Padding="30 0 0 0" Text="Product Owner"></TextBlock>
+                <TextBlock Height="30" Foreground="AliceBlue" FontSize="15" Padding="30 0 0 20" Text="{Binding ProductOwner}"></TextBlock>
+
+                <TextBlock Height="30" Foreground="AliceBlue" FontSize="20" FontWeight="DemiBold" Padding="30 0 0 0" Text="Project Manager"></TextBlock>
+                <TextBlock Height="30" Foreground="AliceBlue" FontSize="15" Padding="30 0 0 20" Text="{Binding ProjectManager}"></TextBlock>
+
+                <TextBlock Height="30" Foreground="AliceBlue" FontSize="20" FontWeight="DemiBold" Padding="30 0 0 0" Text="ScrumMasters"></TextBlock>
+                <ListView BorderThickness="0" Padding="20 0 0 20"  Background="Transparent" Foreground="White" x:Name="ScrumMasterListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding ScrummasterList}" HorizontalAlignment="Left" Width="220">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}">
+                            <Setter Property="VerticalAlignment" Value="Top"></Setter>
+                            <Setter Property="Focusable" Value="false"/>
+                            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+                            <Setter Property="FontSize" Value="15"></Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Width="220" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <TextBlock Height="30" Foreground="AliceBlue" FontSize="20" FontWeight="DemiBold" Padding="30 0 0 0" Text="Developers"></TextBlock>
+                <ListView BorderThickness="0" Padding="20 0 0 20"  Background="Transparent" Foreground="White" x:Name="DeveloperListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                    	ItemsSource="{Binding DeveloperList}" HorizontalAlignment="Left" Width="220">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}">
+                            <Setter Property="VerticalAlignment" Value="Top"></Setter>
+                            <Setter Property="Focusable" Value="false"/>
+                            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+                            <Setter Property="FontSize" Value="15"></Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Width="220" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </StackPanel>
+        </DockPanel>
+    </Grid>
+</core:UserControlViewBase>

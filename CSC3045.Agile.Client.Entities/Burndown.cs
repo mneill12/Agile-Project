@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Xml.Serialization;
 using Core.Common.Core;
 
 namespace CSC3045.Agile.Client.Entities
@@ -21,6 +22,7 @@ namespace CSC3045.Agile.Client.Entities
             }
         }
 
+        [XmlIgnore]
         public ICollection<BurndownPoint> BurndownPoints
         {
             get { return _BurndownPoints; }

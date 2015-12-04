@@ -56,10 +56,10 @@ namespace CSC3045.Agile.Data.Data_Repositories
             using (var entityContext = new Csc3045AgileContext())
             {
                 return entityContext.UserStorySet
-                    .Include(s => s.Status)
+                    .Include(s => s.CurrentStatus)
                     .Include(s => s.AssociatedTasks.Select(p => p.CurrentStatus))
                     .Include(s => s.AcceptanceCriteria.Select(p => p.Criteria))
-                    .Where(s => s.Status == status)
+                    .Where(s => s.CurrentStatus == status)
                     .ToList();
             }
         }
@@ -69,7 +69,7 @@ namespace CSC3045.Agile.Data.Data_Repositories
             using (var entityContext = new Csc3045AgileContext())
             {
                 return entityContext.UserStorySet
-                    .Include(s => s.Status)
+                    .Include(s => s.CurrentStatus)
                     .Include(s => s.AssociatedTasks.Select(p => p.CurrentStatus))
                     .Include(s => s.AcceptanceCriteria.Select(p => p.Criteria))
                     .FirstOrDefault(s => s.UserStoryId == id);

@@ -73,6 +73,14 @@
     <Compile Include="TaskBurndownPoint.cs" />
     <Compile Include="UserRole.cs" />
     <Compile Include="UserStory.cs" />
+    <Compile Include="XMLEntities\XMLUserStory.cs" />
+    <Compile Include="XMLEntities\XMLStoryTask.cs" />
+    <Compile Include="XMLEntities\XMLSprint.cs" />
+    <Compile Include="XMLEntities\XMLBurndown.cs" />
+    <Compile Include="XMLEntities\XMLBacklog.cs" />
+    <Compile Include="XMLEntities\XMLAcceptanceCriteria.cs" />
+    <Compile Include="XMLEntities\XMLAccount.cs" />
+    <Compile Include="XMLEntities\XMLProject.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core.Common.Contracts\Core.Common.Contracts.csproj">

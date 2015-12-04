@@ -87,6 +87,23 @@
             </Grid>
         <TextBlock Grid.Row="0" FontFamily="pack://application:,,,/Resources/#AquaWax" Foreground="White" TextAlignment="Left" FontSize="20" FontWeight="Bold" Margin="862,18,49,165.857" Grid.RowSpan="2" ><Run Language="en-gb" Text="Select Sprint Team"/></TextBlock>
 
+        <Button Grid.Row="0" Command="{Binding NavigationDashboardCommand}" x:Name="BackButton" DockPanel.Dock="Left" Style="{DynamicResource MetroCircleButtonStyle}" Height="40" Width="40" FontFamily="Segoe UI Symbol" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0">
+            <Rectangle Width="20" Height="15">
+                <Rectangle.Fill>
+                    <VisualBrush Stretch="Fill">
+                        <VisualBrush.Visual>
+                            <Canvas Width="48" Height="48" Clip="F1 M 0,0L 48,0L 48,48L 0,48L 0,0" UseLayoutRounding="False">
+                                <Path Width="25" Height="18" Canvas.Left="12" Canvas.Top="15" Stretch="Fill" Fill="{DynamicResource BlackBrush}" Data="F1 M 12,22L 12,26L 28.25,26L 21,33L 27.5,33L 37,24L 27.5,15L 21,15L 28.25,22L 12,22 Z " />
+                            </Canvas>
+                        </VisualBrush.Visual>
+                    </VisualBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Button.LayoutTransform>
+                <ScaleTransform ScaleX="-1" />
+            </Button.LayoutTransform>
+        </Button>
+
     </Grid>
 
 

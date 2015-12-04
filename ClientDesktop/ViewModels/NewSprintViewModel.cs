@@ -3,20 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
-using System.Globalization;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.ServiceModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
 using Core.Common;
 using Core.Common.Contracts;
 using Core.Common.UI.Core;
 using CSC3045.Agile.Client.Contracts;
 using CSC3045.Agile.Client.Entities;
 using ClientDesktop;
-using CSC3045.Agile.Client.Proxies;
+using ClientDesktop.Views;
 using Prism.Regions;
 
 
@@ -51,6 +46,8 @@ namespace ClientDesktop.ViewModels
 
             CreateSprint = new DelegateCommand<object>(OnCreateSprint);
 
+            NavigationDashboardCommand = new DelegateCommand<object>(NavigateDashboard);
+
             _ProductOwners = new List<Account>();
 
             _ScrumMasters = new List<Account>();
@@ -65,6 +62,8 @@ namespace ClientDesktop.ViewModels
         }
 
         public DelegateCommand<object> CreateSprint { get; private set; }
+
+        public DelegateCommand<object> NavigationDashboardCommand { get; private set; }
 
         public string SprintName
         {
@@ -195,6 +194,11 @@ namespace ClientDesktop.ViewModels
             getDevelopers();
             GetInitialUsers();
         }
+
+        private void NavigateDashboard(object parameter)
+        {
+            _RegionManager.RequestNavigate(RegionNames.Content, typeof(DashboardView).FullName);
+        }
         protected void GetInitialUsers()
         {
             WithClient(_ServiceFactory.CreateClient<IAccountService>(), accountClient =>
@@ -217,15 +221,21 @@ namespace ClientDesktop.ViewModels
 
         protected void OnCreateSprint(object par)
         {
-            var values = (object[])par;
-            if (values != null && SprintName != null )
-            {
-                //Get Selected Users
-                IList selectedDevelopers = values[0] as IList;
-                selectedDevelopers = selectedDevelopers.Cast<Account>().ToList();
 
+            var values = (object[])par;
+
+            IList selectedDevelopers = values[0] as IList;
+            selectedDevelopers = selectedDevelopers.Cast<Account>().ToList();
+
+            if (values != null && SprintName != null && selectedDevelopers.Count > 0 )
+            {
+                //Get Selected Users then add them
                 List<Account> sprintMembers= new List<Account>();
-                sprintMembers.AddRange(Developers);
+
+                foreach (Account developer in selectedDevelopers)
+                {
+                    sprintMembers.Add(developer);
+                }
                 sprintMembers.AddRange(ScrumMasters);
 
                 Sprint localSprint = new Sprint
@@ -246,6 +256,9 @@ namespace ClientDesktop.ViewModels
                 {
                     sprintClient.AddSprint(localSprint);
                 });
+
+                //Navigate back to dashbaord
+                _RegionManager.RequestNavigate(RegionNames.Content, typeof(DashboardView).FullName);
 
             }
             else
