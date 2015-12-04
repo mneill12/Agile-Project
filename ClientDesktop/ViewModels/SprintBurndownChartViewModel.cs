@@ -2,16 +2,23 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
+using System.Drawing;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using ClientDesktop.Views;
 using Core.Common.Contracts;
 using Core.Common.UI.Core;
 using CSC3045.Agile.Client.Contracts;
 using Prism.Regions;
+using System.Drawing.Imaging;
+using System.IO;
+using Point = System.Windows.Point;
+using Size = System.Windows.Size;
 
 namespace ClientDesktop.ViewModels
 {
@@ -33,6 +40,7 @@ namespace ClientDesktop.ViewModels
             _RegionManager = regionManager;
             NavigateDashboardCommand = new DelegateCommand<object>(NavigateDashboard);
             ChangeGraphData = new DelegateCommand<object>(GetSprintBurndownData);
+            SendEmailCommand = new DelegateCommand<object>(SendBurndownAsEmail);
 
             BurndownData = new ObservableCollection<GraphElement>();
         }
@@ -81,7 +89,9 @@ namespace ClientDesktop.ViewModels
         private readonly DelegateCommand<GraphElement> _GraphData;
         public DelegateCommand<GraphElement> graphData { get { return _GraphData; } }
         public DelegateCommand<object> ChangeGraphData { get; private set; }
+        public DelegateCommand<object> SendChart { get; private set; }
         public DelegateCommand<object> NavigateDashboardCommand { get; set; }
+        public DelegateCommand<object> SendEmailCommand { get; set; }
 
         private void NavigateDashboard(object parameter)
         {
@@ -107,10 +117,14 @@ namespace ClientDesktop.ViewModels
             }
         }
 
-        protected bool SendBurndownAsEmail(List<String> emailToAddress, String imageAttachmentFilePath)
+        public static void SendBurndownAsEmail(object obj)
         {
             try
             {
+                List<String> emailToAddress = new List<String>();
+                emailToAddress.Add("mneill12@qub.ac.uk");
+                emailToAddress.Add("mmccann71@qub.ac.uk");
+
                 MailMessage mm = new MailMessage();
 
                 StringBuilder emailBody = new StringBuilder();
@@ -124,7 +138,6 @@ namespace ClientDesktop.ViewModels
                     mm.To.Add(address);
                 }
                 mm.Subject = "JELLO - Burndown Chart";
-                mm.Attachments.Add(new Attachment(imageAttachmentFilePath));
                 mm.Body = emailBody.ToString();
 
                 SmtpClient sC = new SmtpClient("smtp.gmail.com");
@@ -132,14 +145,20 @@ namespace ClientDesktop.ViewModels
                 sC.Credentials = new NetworkCredential("csc3045cs7@gmail.com", "setphaserstoscrum");
                 sC.EnableSsl = true;
                 sC.Send(mm);
-                return true;
             }
             catch (Exception e)
             {
-                return false;
+              
             }
         }
+
+       
+
     }
+
+
+
+
 
     public class GraphElement
     {
@@ -152,4 +171,6 @@ namespace ClientDesktop.ViewModels
             Y = y;           
         }      
     }
+
+  
 }

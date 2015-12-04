@@ -26,6 +26,7 @@
                 <RowDefinition Height="10*" />
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
 
             <Button Grid.Row="0"  Command="{Binding NavigateDashboardCommand}" x:Name="BackButton" DockPanel.Dock="Left" Style="{DynamicResource MetroCircleButtonStyle}" Height="40" Width="40" FontFamily="Segoe UI Symbol" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0">
@@ -66,6 +67,7 @@
 
         <TextBox controls:TextBoxHelper.ClearTextButton="True" controls:TextBoxHelper.Watermark="SprintId" Grid.Row="2"  Text ="{Binding SprintId}" Name="SprintIdBox" Height="20"></TextBox>
         <Button  Grid.Row ="3"  Width="100" Height="30" FontFamily="pack://application:,,,/Resources/#AquaWax"  BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" FontSize="10" Command="{Binding ChangeGraphData, Mode=OneTime}" CommandParameter="{Binding ElementName=SprintIdBox}"  >Get Chart</Button>
+            <Button  Grid.Row ="4"  Width="100" Height="30" FontFamily="pack://application:,,,/Resources/#AquaWax"  BorderBrush="White" BorderThickness="1" Padding="10" Background="Black" Foreground="White" FontSize="10" Command="{Binding SendEmailCommand}"  >Send Chart As Email</Button>
 
        
     </Grid>
