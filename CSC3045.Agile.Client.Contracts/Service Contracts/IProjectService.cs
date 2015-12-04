@@ -40,5 +40,8 @@ namespace CSC3045.Agile.Client.Contracts
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
         void AddUserStoryToProject(int projectId, UserStory userStory);
+
+        [OperationContract]
+        void SaveToXML(Project project);
     }
 }

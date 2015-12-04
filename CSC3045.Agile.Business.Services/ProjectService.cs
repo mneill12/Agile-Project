@@ -145,5 +145,11 @@ namespace CSC3045.Agile.Business.Services
                 projectRepository.AddStoryToProject(projectId, userStory);
             });
         }
+
+        public void SaveToXML(Project project)
+        {
+            XMLSerialisationService xmlSerialisationService = new XMLSerialisationService();
+            xmlSerialisationService.SerialiseProject(project);
+        }
     }
 }

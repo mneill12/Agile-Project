@@ -149,6 +149,7 @@ namespace ClientDesktop.ViewModels
         public DelegateCommand<object> RefreshProjectsCommand { get; set; }
         public DelegateCommand<object> ViewBurndownCommand { get; set; }
         public DelegateCommand<object> CreateNewSprintCommand { get; set; }
+        public DelegateCommand<object> SaveProjectXMLCommand { get; set; } 
 
         private void CreateProject(object parameter)
         {
@@ -213,9 +214,19 @@ namespace ClientDesktop.ViewModels
             ViewSprintCommand = new DelegateCommand<object>(ViewSprint);
             ViewBurndownCommand = new DelegateCommand<object>(ViewBurndown);
             CreateNewSprintCommand = new DelegateCommand<object>(NewSprint);
+            SaveProjectXMLCommand = new DelegateCommand<object>(SaveProjectXML);
         }
 
         public event EventHandler<ErrorMessageEventArgs> ErrorOccured;
+
+        public void SaveProjectXML(object sender)
+        {
+            WithClient(_ServiceFactory.CreateClient<IProjectService>(), projectClient =>
+            {
+                projectClient.SaveToXML(SelectedProjectTab);
+            });
+
+        }
 
         protected override void OnViewLoaded()
         {

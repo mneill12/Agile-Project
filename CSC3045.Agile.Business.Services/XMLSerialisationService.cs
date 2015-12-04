@@ -104,27 +104,39 @@ namespace CSC3045.Agile.Business.Services
 
             // Remap collections of account types
             xmlProject.ScrumMasters = new List<XMLAccount>();
-            foreach (Account scrumMaster in project.ScrumMasters)
+            if (null != project.ScrumMasters)
             {
-                xmlProject.ScrumMasters.Add(RemapAccountEntity(scrumMaster));
+                foreach (Account scrumMaster in project.ScrumMasters)
+                {
+                    xmlProject.ScrumMasters.Add(RemapAccountEntity(scrumMaster));
+                }
             }
 
             xmlProject.Developers = new List<XMLAccount>();
-            foreach (Account developer in project.Developers)
+            if (null != project.Developers)
             {
-                xmlProject.Developers.Add(RemapAccountEntity(developer));
+                foreach (Account developer in project.Developers)
+                {
+                    xmlProject.Developers.Add(RemapAccountEntity(developer));
+                }
             }
 
             xmlProject.AllUsers = new List<XMLAccount>();
-            foreach (Account user in project.AllUsers)
+            if (null != project.AllUsers)
             {
-                xmlProject.AllUsers.Add(RemapAccountEntity(user));
+                foreach (Account user in project.AllUsers)
+                {
+                    xmlProject.AllUsers.Add(RemapAccountEntity(user));
+                }
             }
 
             xmlProject.Sprints = new List<XMLSprint>();
-            foreach (Sprint sprint in project.Sprints)
+            if (null != project.Sprints)
             {
-                xmlProject.Sprints.Add(RemapSprintEntity(sprint));
+                foreach (Sprint sprint in project.Sprints)
+                {
+                    xmlProject.Sprints.Add(RemapSprintEntity(sprint));
+                }
             }
 
             xmlProject.Burndown = RemapBurndownEntity(project.Burndown);
