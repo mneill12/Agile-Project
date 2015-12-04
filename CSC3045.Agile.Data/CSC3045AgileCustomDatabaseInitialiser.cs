@@ -146,6 +146,13 @@ namespace CSC3045.Agile.Data
                 defaultRoles[2]
             };
 
+            var developerUserRoleSetWithScrumMasterAndProductOwner = new HashSet<UserRole>
+            {
+                defaultRoles[0],
+                defaultRoles[1],
+                defaultRoles[2]
+            };
+
             IList<Account> defaultAccounts = new List<Account>(); // Plaintext password: 4nt1t7!
 
             defaultAccounts.Add(new Account
@@ -154,7 +161,7 @@ namespace CSC3045.Agile.Data
                 Password = "kYt8nwSk+rRitvhmseNKSrjyB06QKHlrQljre3t8O9I=",
                 FirstName = "Joe",
                 LastName = "Flynn",
-                UserRoles = developerUserRoleSet
+                UserRoles = developerUserRoleSetWithScrumMasterAndProductOwner
             });
 
             defaultAccounts.Add(new Account
