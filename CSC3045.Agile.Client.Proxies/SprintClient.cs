@@ -14,8 +14,7 @@ namespace CSC3045.Agile.Client.Proxies
         public Sprint GetSprintInfo(int sprintId){
             return Channel.GetSprintInfo(sprintId);
         }
-       
-        
+      
         public Sprint AddSprint(Sprint sprint)
         {
             return Channel.AddSprint(sprint);

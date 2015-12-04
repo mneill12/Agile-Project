@@ -44,9 +44,7 @@
                 <ScaleTransform ScaleX="-1" />
             </Button.LayoutTransform>
         </Button>
-
-
-
+        
         <TextBox Margin="10" Grid.Row="1" Grid.Column="0" controls:TextBoxHelper.ClearTextButton="True" controls:TextBoxHelper.Watermark="Enter project name..." Name="ProjectNameTextBox" FontSize="14"
                          Text="{Binding ProjectName}" />
 

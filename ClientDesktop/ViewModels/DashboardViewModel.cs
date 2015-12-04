@@ -191,6 +191,9 @@ namespace ClientDesktop.ViewModels
         public DelegateCommand<object> CreateNewSprintCommand { get; set; }
         public DelegateCommand<object> SaveProjectXMLCommand { get; set; } 
         public DelegateCommand<object> CreatePlanningPokerCommand { get; set; }
+        public DelegateCommand<object> ManageSprintBacklogCommand { get; set; }
+
+        
 
         private void CreateProject(object parameter)
         {
@@ -293,6 +296,19 @@ namespace ClientDesktop.ViewModels
             }
         }
 
+        private void ManageSprintBacklog(object parameter)
+        {
+            if (GlobalCommands.MyAccount.UserRoles.Select(u => u.UserRoleName).Where(u => u == "Scrum Master").Any())
+            {
+                NavigationParameters navigationParameters = new NavigationParameters();
+                navigationParameters.Add("projectId",
+                    SelectedProjectTab.ProjectId);
+
+                _RegionManager.RequestNavigate(RegionNames.Content, typeof(ManageSprintView).FullName,
+                    navigationParameters);
+            }
+        }
+
         [ImportingConstructor]
         public DashboardViewModel(IServiceFactory serviceFactory, IRegionManager regionManager)
         {
@@ -309,6 +325,7 @@ namespace ClientDesktop.ViewModels
             CreateNewSprintCommand = new DelegateCommand<object>(NewSprint);
             SaveProjectXMLCommand = new DelegateCommand<object>(SaveProjectXML);
             CreatePlanningPokerCommand = new DelegateCommand<object>(CreatePlanningPokerSession);
+            ManageSprintBacklogCommand = new DelegateCommand<object>(ManageSprintBacklog);
         }
 
         public event EventHandler<ErrorMessageEventArgs> ErrorOccured;
